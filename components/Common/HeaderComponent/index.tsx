@@ -12,7 +12,7 @@ export default function HeaderComponent({ data }: any) {
   useEffect(() => {
     console.log(
       '<!-- ----------------------------------------------------- -->\n' +
-      '<!-- Code by AMA, http://ama.work (2025)                   -->\n' +
+      '<!-- Code by Carlos Salvador, http://cachosalvador.com (2025)                   -->\n' +
       '<!-- ----------------------------------------------------- -->');
   }, [])
 
@@ -24,7 +24,7 @@ export default function HeaderComponent({ data }: any) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, delay: 0.5 }}
     >
-      <h4>AMA's header</h4>
+      <h4>Carlos Salvador's header</h4>
     </motion.header>
   )
 }

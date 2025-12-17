@@ -5,7 +5,6 @@ export const seo = `
     title,
     description,
     image{
-        ${imageData},
-        ${imageSize}
+        ${imageData}
     }
 `

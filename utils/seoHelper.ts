@@ -11,15 +11,14 @@ export const BASE_URL = new URL(
 export const buildUrl = (path = "/") => new URL(path, BASE_URL).toString();
 
 // 🌍 Global site metadata
-export const siteTitle = "Conti, Cert.";
+export const siteTitle = "Stuart Collection";
 export const siteDescription =
-	"Conti Cert es un estudio de interiorismo con base en Barcelona fundado por Andrea Conti e Isa Cert en 2011.";
+	"Stuart Collection";
 
 // 🔗 Social & canonical links
-export const linkInstagram = "https://www.instagram.com/conticert/";
-export const canonicalStudio = buildUrl("/studio");
+export const linkInstagram = "https://www.instagram.com/";
 export const canonicalHome = buildUrl("/");
-export const canonicalAbout = buildUrl("/about"); // example if needed
+
 
 // 🖼️ Images & favicons
 export const BASE_IMAGE_URL = buildUrl("/images/cc_ama_fbshare_1200x800.jpg");

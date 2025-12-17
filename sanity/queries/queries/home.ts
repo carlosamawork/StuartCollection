@@ -7,15 +7,7 @@ export async function getHome() {
     return client.fetch(
         groq`*[_type == "home"][0]{
                 hero{
-                    title,
-                    listOfImages[]{
-                        imageDesktop{
-                            ${image}
-                        },
-                        imageMobile{
-                            ${image}
-                        }
-                    }
+                    title
                 }
             }`
     )

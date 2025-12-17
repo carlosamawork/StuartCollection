@@ -5,8 +5,8 @@ export default function WelcomeComponent() {
 
   return (
     <div className={s.welcome}>
-      <h1>AMA</h1>
-      <h2><a href="mailto:info@ama.work">info[at]ama.work</a></h2>
+      <h1>Carlos Salvador</h1>
+      <h2><a href="mailto:carlosisalvador@gmail.com">carlosisalvador[at]gmail.com</a></h2>
     </div>
   )
 }
