@@ -18,7 +18,12 @@ export default defineField({
             options: {
                 hotspot: true,
             },
-        })
+        }),
+        defineField({
+            name: 'ctaButton',
+            title: 'CTA Button',
+            type: 'ctaButton',
+        }),
     ],
     preview: {
         select: {

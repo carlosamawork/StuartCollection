@@ -11,8 +11,10 @@ const annotations = [
 
 // Document types
 import page from './documents/page'
+import person from './documents/team'
+import pressArticle from './documents/press'
 
-const documents = [ page,]
+const documents = [ page, person, pressArticle]
 
 // Singleton document types
 import home from './singletons/home'
@@ -31,9 +33,16 @@ import linkExternal from './objects/global/linkExternal'
 import linkInternal from './objects/global/linkInternal'
 import linkSocial from './objects/global/linkSocial'
 
+// Home
+import visit from './objects/module/home/visit'
+import collection from './objects/module/home/collection'
+import support from './objects/module/home/support'
+import featuredSlider from './objects/module/home/featuredSlider'
+import heroHome from './objects/module/home/hero'
+import press from './objects/module/home/press'
+
 import links from './objects/global/links'
 import notFoundPage from './objects/global/notFoundPage'
-import heroHome from './objects/hero/home'
 import heroPage from './objects/hero/page'
 import menu from './objects/global/menu'
 import seo from './objects/seo/seo'
@@ -82,6 +91,11 @@ const objects = [
   twoColumns,
   tileGroup,
   mediaList,
+  visit,
+  collection,
+  support,
+  featuredSlider,
+  press,
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]
