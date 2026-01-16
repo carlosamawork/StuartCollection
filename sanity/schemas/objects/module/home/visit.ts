@@ -18,7 +18,7 @@ export default defineType({
     defineField({
       name: 'meta',
       title: 'Meta (small text)',
-      description: 'Ej: horarios, cierre, notas cortas',
+      description: 'e.g. schedules, closures, short notes',
       type: 'body.paragraphs',
     }),
     defineField({
@@ -45,7 +45,7 @@ export default defineType({
           title: 'Type',
           type: 'string',
           initialValue: 'video',
-          options: {list: [{title: 'Video', value: 'video'}, {title: 'Image', value: 'image'}]},
+          options: {list: [{title: 'Internal Video', value: 'internal-video'}, {title: 'Youtube/Vimeo Video', value: 'youtube-vimeo-video'}, {title: 'Image', value: 'image'}]},
         }),
 
         defineField({
@@ -53,7 +53,13 @@ export default defineType({
           title: 'Video',
           type: 'module.video',
           options: {hotspot: true},
-          hidden: ({parent}) => parent?.type !== 'video',
+          hidden: ({parent}) => parent?.type !== 'internal-video',
+        }),
+        defineField({
+          name: 'externalVideoUrl',
+          title: 'External Video URL (Youtube/Vimeo)',
+          type: 'string',
+          hidden: ({parent}) => parent?.type !== 'youtube-vimeo-video',
         }),
 
         // Alternativa: imagen
@@ -70,16 +76,6 @@ export default defineType({
           title: 'Caption',
           type: 'string',
         }),
-      ],
-    }),
-
-    defineField({
-      name: 'options',
-      title: 'Options',
-      type: 'object',
-      options: {collapsible: true, collapsed: true},
-      fields: [
-        defineField({name: 'invert', title: 'Invert columns', type: 'boolean', initialValue: false}),
       ],
     }),
   ],

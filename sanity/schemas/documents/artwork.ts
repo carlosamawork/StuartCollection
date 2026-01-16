@@ -4,8 +4,8 @@ import {defineField} from 'sanity'
 import {validateSlug} from '../../utils/validateSlug'
 
 export default defineField({
-  name: 'page',
-  title: 'Page',
+  name: 'artwork',
+  title: 'Artwork',
   type: 'document',
   icon: DocumentIcon,
   groups: [
@@ -39,6 +39,13 @@ export default defineField({
       options: {source: 'title'},
       // @ts-ignore - TODO - fix this TS error
       validation: validateSlug,
+      group: 'editorial',
+    }),
+    defineField({
+      name: 'featuredImage',
+      title: 'Featured Image',
+      type: 'image',
+      options: {hotspot: true},
       group: 'editorial',
     }),
     // Body

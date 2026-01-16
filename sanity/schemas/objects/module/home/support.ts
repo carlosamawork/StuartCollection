@@ -69,29 +69,6 @@ export default defineType({
                 }),
             ],
         }),
-
-        defineField({
-            name: 'options',
-            title: 'Options',
-            type: 'object',
-            options: { collapsible: true, collapsed: true },
-            fields: [
-                defineField({
-                    name: 'overlay',
-                    title: 'Dark overlay',
-                    type: 'boolean',
-                    initialValue: true,
-                }),
-                defineField({
-                    name: 'overlayOpacity',
-                    title: 'Overlay opacity (0-1)',
-                    type: 'number',
-                    initialValue: 0.55,
-                    hidden: ({ parent }) => !parent?.overlay,
-                    validation: (Rule) => Rule.min(0).max(1),
-                }),
-            ],
-        }),
     ],
 
     preview: {

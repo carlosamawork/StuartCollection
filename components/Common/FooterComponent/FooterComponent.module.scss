@@ -2,17 +2,53 @@
 @use "./styles/mixins/breakpoints.scss" as *;
 
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+    background-color: var(--colors-background-bg-navy-strong);
+    
+    color: var(--colors-foreground-fg-inverted-1);
 
-    background-color: $body-bg;
+    .topHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px 32px 64px;
+    
+        .logo{
+            font-size: var(--font-size-font-size-medium);
+            line-height: var(--line-height-line-height-medium);
+            letter-spacing: 1px;
+            font-weight: 400;
+            a{
+                color: var(--colors-foreground-fg-inverted-1);
+                text-decoration: none;
+            }
+        }
+    
+        .logoSanDiego{
+            svg{
+            width: 169px;
+            height: auto;
+            }
+        }
+    }
 
-    text-align: center;
-    border-top: 1px solid $secondary;
-    h4 {
-        margin: 1em;
-        @include media-breakpoint-up(md) {
+    .text{
+        border-bottom: 1px solid var(--colors-foreground-fg-inverted-1);
+        padding: 16px 32px 64px;
+        h3{
+            font-size: var(--font-size-font-size-xlarge);
+            line-height: var(--line-height-line-height-xlarge);
+            font-weight: 300;
+            margin: 0;
+        }
+    }
+
+    .footerBottom{
+        padding: 48px 32px;
+        text-align: right;
+        p{
+            font-size: var(--font-size-font-size-p);
+            font-weight: 300;
+            line-height: var(--line-height-line-height-p);
         }
     }
 }

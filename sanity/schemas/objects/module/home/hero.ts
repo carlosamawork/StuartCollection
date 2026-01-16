@@ -1,15 +1,14 @@
 import { defineField } from 'sanity'
 
 export default defineField({
-    name: 'hero.general',
-    title: 'General hero',
+    name: 'hero.home',
+    title: 'Hero',
     type: 'object',
     fields: [
-        // Title
         defineField({
-            name: 'title',
-            title: 'Title',
-            type: 'string',
+            name: 'subtitle',
+            title: 'Subtitle',
+            type: 'body.paragraphs',
         }),
         defineField({
             name: 'image',
@@ -18,6 +17,11 @@ export default defineField({
             options: {
                 hotspot: true,
             },
+        }),
+        defineField({
+            name: 'videoUrl',
+            title: 'Video URL',
+            type: 'string'
         }),
         defineField({
             name: 'ctaButton',
@@ -34,7 +38,7 @@ export default defineField({
             const { title, media } = selection
             return {
                 title: title || 'General Hero',
-                media: media || 'https://via.placeholder.com/150',
+                media: media,
             }
         }
     },

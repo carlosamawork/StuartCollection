@@ -83,16 +83,6 @@
  *   before using this function.
  * - If an invalid key is provided, the function will return null.
  */
-@function font-size($key, $device: desktop) {
-  @if $device == desktop {
-    @return map.get($fontSizeDesktop, $key);
-  } @else if $device == mobile {
-    @return map.get($fontSizeMobile, $key);
-  } @else {
-    @warn "Unknown device `#{$device}` for font-size()";
-    @return null;
-  }
-}
 
 @mixin no-select() {
   -webkit-touch-callout: none;

@@ -20,12 +20,20 @@ export default defineField({
     },
   ],
   fields: [
-    // Hero
     defineField({
-      name: 'hero',
-      title: 'Hero',
-      type: 'hero.home',
-      group: 'editorial',
+      name: 'modules',
+      title: 'Modules',
+      type: 'array',
+      of: [
+        {type: 'hero.home'},
+        {type: 'module.featuredSlider'},
+        {type: 'module.collection'},
+        {type: 'module.press'},
+        {type: 'module.support'},
+        {type: 'module.visit'},
+        {type: 'module.announcement'},
+      ],
+      group: 'editorial'
     }),
     // SEO
     defineField({

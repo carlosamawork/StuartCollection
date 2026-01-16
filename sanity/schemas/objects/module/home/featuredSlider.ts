@@ -7,15 +7,15 @@ export default defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'eyebrow',
-      title: 'Eyebrow (opcional)',
+      name: 'title',
+      title: 'Title',
       type: 'string',
     }),
     defineField({
       name: 'slides',
       title: 'Slides',
       type: 'array',
-      validation: (Rule) => Rule.min(1).error('Añade al menos 1 slide'),
+      validation: (Rule) => Rule.min(7).error('Add minimum 7 slides'),
       of: [
         {
           name: 'featuredSlide',
@@ -73,7 +73,7 @@ export default defineType({
     }),
   ],
   preview: {
-    select: {title: 'eyebrow', slides: 'slides'},
+    select: {title: 'title', slides: 'slides'},
     prepare({title, slides}) {
       const count = slides?.length || 0
       return {

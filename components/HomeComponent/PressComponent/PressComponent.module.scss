@@ -1,0 +1,95 @@
+.press{
+    padding: 0px 32px;
+
+    .topContent{
+        padding: 56px 0;
+        border-top: 1px solid var(--colors-foreground-fg-3);
+        display: flex;
+        align-items: end;
+        gap: 16px;
+
+        .title{
+            margin: 0;
+            font-size: var(--font-size-font-size-3xlarge);
+            font-weight: 500;
+            line-height: 1; 
+        }
+
+        .ctaButton{
+            margin-bottom: 2px;
+            a{
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-weight: 500;
+            }  
+        }
+
+
+    }
+
+    .pressContent{
+        display: grid;
+        gap: 32px;
+        margin-bottom: 56px;
+
+        &.columns2{
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.columns3{
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &.columns4{
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .pressItem{
+            position: relative;
+
+            .image{
+                position: relative;
+                aspect-ratio: 384 / 245;
+                overflow: hidden;
+                border-radius: 8px;
+
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            .itemTitle{
+                margin: 0 0 8px 0;
+                font-size: var(--font-size-font-size-medium);
+                font-weight: 500;
+            }
+
+            .itemPublication{
+                margin: 0 0 16px 0;
+                font-size: var(--font-size-font-size-p);
+                font-weight: 300;
+            }
+
+            .ctaButton{
+                a{
+                    color: var(--colors-foreground-fg-1);
+                    border: var(--colors-foreground-fg-1) 1px solid;
+                    border-radius: 8px;
+                    transition: all 0.3s ease;
+                    font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    padding: 8px 16px;
+                }
+
+                a:hover{
+                    border-radius: 16px;
+                }
+            }
+        }
+    }
+}

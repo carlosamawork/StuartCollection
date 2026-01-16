@@ -37,9 +37,6 @@ export default defineField({
       },
     },
     {
-      type: 'module.callout',
-    },
-    {
       type: 'ctaButton',
     },
   ],

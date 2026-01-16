@@ -14,37 +14,19 @@ $breakpoints: (
  * Typography
  */
 
-$AMAFont: "FTAktual", Times, sans-serif;
+$AMAFont: "Roboto", Times, sans-serif;
 
 $font-family-base: $AMAFont;
 
-$font-size-base: 62.5%; /*https://snook.ca/archives/html_and_css/font-size-with-rem*/
+$font-size-base: 16px; /*https://snook.ca/archives/html_and_css/font-size-with-rem*/
 $line-height-base: 1.5;
-
-$fontSizeDesktop: (
-  "xs": 14px,
-  "sm": 16px,
-  "md": 20px,
-  "lg": 25px,
-  "xl": 35px,
-  "xxl": 75px
-);
-
-$fontSizeMobile: (
-  "xs": 10px,
-  "sm": 14px,
-  "md": 16px,
-  "lg": 18px,
-  "xl": 20px,
-  "xxl": 35px
-);
 
 
 /**
  * Colors
  */
-$base: #f6f6f6;
-$secondary: #1c1c20;
+$base: rgba(247, 242, 234, 1);
+$secondary: rgba(39, 39, 40, 1);
 
 $highlight: $secondary;
 

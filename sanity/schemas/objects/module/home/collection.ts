@@ -8,14 +8,14 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Título',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
 
     defineField({
       name: 'titleLink',
-      title: 'Link del título',
+      title: 'Title Link',
       type: 'object',
       fields: [
         defineField({
@@ -25,7 +25,7 @@ export default defineType({
         }),
         defineField({
           name: 'blank',
-          title: 'Abrir en nueva pestaña',
+          title: 'Open in new tab',
           type: 'boolean',
           initialValue: false,
         }),
@@ -35,13 +35,13 @@ export default defineType({
 
     defineField({
       name: 'subtitle',
-      title: 'Subtítulo',
+      title: 'Subtitle',
       type: 'body.paragraphs',
     }),
 
     defineField({
       name: 'description',
-      title: 'Descripción',
+      title: 'Description',
       type: 'body.paragraphs',
     }),
     defineField({

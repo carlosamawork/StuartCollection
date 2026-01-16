@@ -36,7 +36,7 @@ export default defineField({
               title: 'Item content (modules)',
               type: 'array',
               of: [
-                {type: 'module.hero'},
+                {type: 'hero.general'},
                 {type: 'module.image'},
                 {type: 'module.video'},
                 {type: 'module.slider'},

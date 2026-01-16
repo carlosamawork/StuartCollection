@@ -15,6 +15,14 @@ import Analytics from '@/components/Common/Analytics/google';
 import FacebookPixel from '@/components/Common/Analytics/facebook';
 import PinterestTag from '@/components/Common/Analytics/pinterest';
 import Hotjar from '@/components/Common/Analytics/hotjar';
+import { Roboto } from 'next/font/google'
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['100','300','400','500','700','900'],
+  style: ['normal','italic'],
+  display: 'swap'
+})
 
 
 const RawHTML = ({ html }: any) => <div className="credits" dangerouslySetInnerHTML={{ __html: html }} />;
@@ -27,7 +35,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body className={roboto.className}>
         <RawHTML html="<!-- ----------------------------------------------------- -->
         <!-- Code by AMA, http://ama.work (2025) -->
         <!-- ----------------------------------------------------- -->" />

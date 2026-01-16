@@ -13,8 +13,9 @@ const annotations = [
 import page from './documents/page'
 import person from './documents/team'
 import pressArticle from './documents/press'
+import artwork from './documents/artwork'
 
-const documents = [ page, person, pressArticle]
+const documents = [ page, person, pressArticle, artwork]
 
 // Singleton document types
 import home from './singletons/home'
@@ -24,14 +25,17 @@ const singletons = [home, settings]
 
 // Block content
 import body from './blocks/bodytitles'
+import bodyparagraphs from './blocks/bodyparagraphs'
+import bodycaption from './blocks/bodycaption'
 
-const blocks = [body]
+const blocks = [body, bodyparagraphs, bodycaption]
 
 // Object types
 import footer from './objects/global/footer'
 import linkExternal from './objects/global/linkExternal'
 import linkInternal from './objects/global/linkInternal'
 import linkSocial from './objects/global/linkSocial'
+import ctaButton from './objects/global/ctaButton'
 
 // Home
 import visit from './objects/module/home/visit'
@@ -40,6 +44,7 @@ import support from './objects/module/home/support'
 import featuredSlider from './objects/module/home/featuredSlider'
 import heroHome from './objects/module/home/hero'
 import press from './objects/module/home/press'
+import announcement from './objects/module/home/announcement'
 
 import links from './objects/global/links'
 import notFoundPage from './objects/global/notFoundPage'
@@ -96,6 +101,8 @@ const objects = [
   support,
   featuredSlider,
   press,
+  ctaButton,
+  announcement,
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]

@@ -9,11 +9,9 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: var(--colors-foreground-fg-1);
 	-webkit-tap-highlight-color: transparent;
-
-	font-weight: normal;
-	font-weight: 500;
+	font-weight: 300;
 }
 
 html,
@@ -21,7 +19,7 @@ body {
 	font-family: $font-family-base;
 	font-size: $font-size-base;
 	line-height: $line-height-base;
-	color: $secondary;
+	color: var(--colors-foreground-fg-1);
 	background-color: $body-bg;
 
 	margin: 0;
@@ -32,6 +30,9 @@ body {
 	height: auto;
 
 	position: relative;
+
+	font-weight: 300;
+	overscroll-behavior: none;
 }
 
 ::selection {
@@ -88,5 +89,11 @@ img {
 		&.loaded {
 			opacity: 1;
 		}
+	}
+}
+
+.ctaButton{
+	a{
+		padding: 8px 16px;
 	}
 }
