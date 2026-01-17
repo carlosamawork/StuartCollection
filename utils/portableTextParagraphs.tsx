@@ -27,11 +27,11 @@ export const portableBodyComponents = (): PortableTextComponents => {
       em: ({ children }) => <em>{children}</em>,
 
       annotationLinkExternal: ({ value, children }) => {
-        const { href, newWindow } = value;
+        const { url, newWindow } = value;
 
         return (
           <a
-            href={href}
+            href={url}
             target={newWindow ? "_blank" : "_self"}
             rel="noopener noreferrer"
           >
