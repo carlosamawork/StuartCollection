@@ -41,11 +41,21 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
+    defineField({
+      name: 'asideMenu',
+      title: 'Show aside menu',
+      type: 'boolean',
+      initialValue: false,
+      group: 'editorial',
+    }),
     // Body
     defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'body.paragraphs',
+      name: 'modules',
+      title: 'Content (modules)',
+      type: 'array',
+      of: [
+        {type: 'module.section'},
+      ],
       group: 'editorial',
     }),
     // SEO

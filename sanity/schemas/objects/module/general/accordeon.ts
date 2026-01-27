@@ -8,9 +8,10 @@ export default defineField({
   icon: ChevronDownIcon,
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title (optional)',
-      type: 'string',
+      name: 'fullWidth',
+      title: 'Full width',
+      type: 'boolean',
+      initialValue: false,
     }),
 
     defineField({
@@ -45,7 +46,9 @@ export default defineField({
                 {type: 'module.tileGroup'},
                 {type: 'module.mediaList'},
                 {type: 'module.jumbotron'},
-                {type: 'body.paragraphs'},
+                {type: 'module.textParagraphs'},
+                {type: 'module.textTitles'},
+                {type: 'module.callout'},
                 // Igual que tabs: evita incluir module.accordion aquí para no hacer recursión
               ],
               validation: (Rule) => Rule.min(1).error('Add at least 1 module in this item'),
@@ -74,12 +77,6 @@ export default defineField({
       options: {collapsible: true, collapsed: true},
       fields: [
         defineField({
-          name: 'allowMultiple',
-          title: 'Allow multiple open',
-          type: 'boolean',
-          initialValue: false,
-        }),
-        defineField({
           name: 'openFirst',
           title: 'Open first by default',
           type: 'boolean',
@@ -92,12 +89,13 @@ export default defineField({
   preview: {
     select: {
       title: 'title',
-      count: 'items.length',
+      items: 'items',
     },
-    prepare({title, count}) {
+    prepare({ title, items }) {
+      const count = Array.isArray(items) ? items.length : 0
       return {
         title: title || 'Accordion',
-        subtitle: `${count || 0} items`,
+        subtitle: `${count} items`,
         media: ChevronDownIcon,
       }
     },

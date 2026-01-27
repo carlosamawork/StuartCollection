@@ -1,18 +1,21 @@
 import HomeComponent from '@/components/HomeComponent';
+import PageComponent from '@/components/PageComponent';
 import { getDefaultSEO } from '@/sanity/queries/common/defaultSEO';
 import { getHome, getHomeSEO } from '@/sanity/queries/queries/home';
+import { getPage, getPageSEO } from '@/sanity/queries/queries/page';
 import { BASE_IMAGE_HEIGHT, BASE_IMAGE_URL, BASE_IMAGE_WIDTH, BASE_URL, buildUrl, getFavicons, siteDescription, siteTitle } from '@/utils/seoHelper';
 
 export const revalidate = 1 // revalidate to work set to 1, then we change it to 10
 
-export async function generateMetadata() {
-  const page = await getHomeSEO();
+export async function generateMetadata({params}: {params: {slug: string}}) {
+  const { slug } = await params
+  const page = await getPageSEO(slug);
   const defaultSEO = await getDefaultSEO();
 
   if (!page) {
     return {
       metadataBase: BASE_URL,
-      title: `${page.seo?.title || siteTitle}`,
+      title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
       description: page.seo?.description || siteDescription,
       robots: {
         index: false,
@@ -35,14 +38,14 @@ export async function generateMetadata() {
 
   return {
     metadataBase: BASE_URL,
-    title: `${page.seo?.title || siteTitle}`,
+    title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
     description: page.seo?.description || siteDescription,
     generator: 'Next.js',
     applicationName: 'Stuart Collection by Cacho Salvador',
     openGraph: {
-      title: `${page.seo?.title || siteTitle}`,
+      title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
       description: page.seo?.description || siteDescription,
-      url: buildUrl("/"),
+      url: buildUrl(`/${slug}/`),
       siteName: siteTitle,
       images: [
         {
@@ -67,7 +70,7 @@ export async function generateMetadata() {
     },
     icons: getFavicons(),
     alternates: {
-      canonical: buildUrl("/")
+      canonical: buildUrl(`/${slug}/`),
     },
     twitter: {
       card: 'summary_large_image',
@@ -80,11 +83,13 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Home() {
-  const data = await getHome();
+export default async function Page({params}: {params: {slug: string}}) {
+    const { slug } = await params
+  const data = await getPage(slug);
+  console.log("Page data:", data);
   return (
     <main>
-      <HomeComponent data={data} />
+      <PageComponent data={data} />
     </main>
   )
 }

@@ -68,6 +68,10 @@ import separator from './objects/module/general/separator'
 import twoColumns from './objects/module/general/twocolumns'
 import tileGroup from './objects/module/general/tileGroup'
 import mediaList from './objects/module/general/mediaList'
+import textParagraphs from './objects/module/general/textParagraphs'
+import textTitles from './objects/module/general/textTitles'
+import callout from './objects/module/general/callout'
+import people from './objects/module/general/people'
 
 const objects = [
   footer,
@@ -103,6 +107,10 @@ const objects = [
   press,
   ctaButton,
   announcement,
+  textParagraphs,
+  textTitles,
+  callout,
+  people,
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]

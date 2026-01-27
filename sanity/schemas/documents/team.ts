@@ -49,7 +49,7 @@ export default defineField({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {source: 'title'},
+      options: {source: 'name'},
       // @ts-ignore - TODO - fix this TS error
       validation: validateSlug,
       group: 'editorial',
@@ -61,25 +61,18 @@ export default defineField({
       type: 'body.paragraphs',
       group: 'editorial',
     }),
-    // SEO
-    defineField({
-      name: 'seo',
-      title: 'SEO',
-      type: 'seo.page',
-      group: 'seo',
-    }),
   ],
   preview: {
     select: {
       active: 'active',
-      seoImage: 'seo.image',
-      title: 'title',
+      featuredImage: 'featuredImage',
+      title: 'name',
     },
     prepare(selection) {
-      const {seoImage, title} = selection
+      const {featuredImage, title} = selection
 
       return {
-        media: seoImage,
+        media: featuredImage,
         title,
       }
     },

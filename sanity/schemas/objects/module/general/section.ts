@@ -23,20 +23,13 @@ export default defineField({
             }).error('Only letters, numbers, hyphens, and underscores are allowed. No spaces.'),
     }),
     defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      initialValue: 'normal',
+      name: 'topImage',
+      title: 'Top Image',
+      type: 'image',
       options: {
-        layout: 'radio',
-        list: [
-          {title: 'Normal', value: 'normal'},
-          {title: 'Collapse', value: 'collapse'},
-        ],
+        hotspot: true,
       },
-      validation: (Rule) => Rule.required(),
     }),
-
     defineField({
       name: 'defaultOpen',
       title: 'Open by default',
@@ -46,7 +39,7 @@ export default defineField({
     }),
 
     defineField({
-      name: 'content',
+      name: 'modules',
       title: 'Content (modules)',
       type: 'array',
       validation: (Rule) => Rule.min(1).error('Add at least 1 module'),
@@ -61,8 +54,10 @@ export default defineField({
         {type: 'module.mediaList'},
         {type: 'module.tabs'},
         {type: 'module.accordion'},
-        {type: 'body.titles'},
-        {type: 'body.paragraphs'},
+        {type: 'module.textTitles'},
+        {type: 'module.textParagraphs'},
+        {type: 'module.callout'},
+        {type: 'module.people'},
         // añade aquí el resto de tus módulos “permitidos”
         // (si quieres literalmente “todos”, mete la lista completa de tu builder)
       ],
@@ -73,9 +68,11 @@ export default defineField({
     select: {
       title: 'title',
       variant: 'variant',
-      count: 'content.length',
+      modules: 'modules',
     },
-    prepare({title, variant, count}) {
+    prepare({title, variant, modules}) {
+      const count = Array.isArray(modules) ? modules.length : 0
+
       return {
         title: title || 'Section',
         subtitle: `${variant || 'normal'} · ${count || 0} modules`,

@@ -1,0 +1,31 @@
+.separator{
+
+    &.content{
+        width: 68%;
+    }
+
+    &.full{
+        width: 100%;
+    }
+
+    &.line{
+        border-top: 1px solid var(--colors-foreground-fg-2);
+        margin: 56px 0 0;
+    }
+
+    &.space{
+        height: 48px;
+    }
+
+    &.lineSpace{
+        border-top: 1px solid var(--colors-foreground-fg-3);
+        margin: 56px 0;
+    }
+
+}
+
+.anchorMenu{
+    font-size: var(--font-size-font-size-3xlarge);
+    font-weight: 500;
+    margin-bottom: 32px;
+}

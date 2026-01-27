@@ -17,8 +17,14 @@ export default defineField({
     defineField({
       name: 'body',
       title: 'Body',
-      type: 'body.paragraphs',
-      validation: (Rule) => Rule.required(),
+      type: 'array',
+      of: [
+        {type: 'module.textParagraphs'},
+        {type: 'module.callout'},
+        {type: 'module.image'},
+        {type: 'module.video'},
+      ],
+      validation: (Rule) => Rule.min(1).error('Add at least 1 block'),
     }),
 
     defineField({

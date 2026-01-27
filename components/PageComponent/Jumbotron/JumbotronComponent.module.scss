@@ -1,0 +1,47 @@
+.jumbotron{
+    border: 1px solid var(--colors-background-bg-navy-strong);
+    border-radius: 16px;
+    margin-top: 56px;
+
+    &.blue{
+        background-color: var(--colors-background-bg-blue-soft);
+
+    }
+
+    &.darkBlue{
+        background-color: var(--colors-background-bg-navy-soft);
+        color: white;
+    }
+
+    &.yellow{
+        background-color: var(--colors-background-bg-yellow-soft);
+    }
+
+    &.cream{
+        background-color: var(--colors-core-ucsd-gold-200);
+    }
+
+    &.black{
+        background-color: var(--colors-background-bg-black);
+        color: white;
+    }
+
+    &.white{
+        background-color: var(--colors-background-bg-white);
+    }
+
+    .title{
+        h2{
+            padding: 32px;
+            font-size: var(--font-size-font-size-3xlarge);
+            font-weight: 500;
+            width: 68%;
+        }
+        
+        border-bottom: 1px solid var(--colors-background-bg-navy-strong);
+    }
+
+    .body{
+        padding: 32px;
+    }
+}

@@ -24,12 +24,13 @@ export default defineType({
   ],
   preview: {
     select: {
-      count: 'listOfPeople.length',
+      count: 'listOfPeople',
     },
     prepare({count}) {
+      const peopleCount = count?.length || 0
       return {
         title: 'People',
-        subtitle: `${count || 0} people`,
+        subtitle: `${peopleCount} people`,
         media: ImagesIcon,
       }
     },

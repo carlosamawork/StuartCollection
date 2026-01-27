@@ -1,0 +1,115 @@
+.personDetailModal{
+    padding: 32px 24px;
+    border-top: 1px solid var(--colors-foreground-fg-1);
+    border-bottom: 1px solid var(--colors-foreground-fg-1);
+
+    .closeButton{
+        margin-left: auto;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .personDetail{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+
+        .personDetailHeader{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 32px;
+
+            .personDetailText{
+                h2{
+                    font-size: var(--font-size-font-size-medium);
+                    margin: 0;
+                    font-weight: 500;
+                    margin: 0 0 8px;
+                }
+
+                p{
+                    margin: 0 0 8px;
+                    font-size: var(--font-size-font-size-p);
+                }
+            }
+        }
+
+        .personDetailImage{
+            grid-column: span 1;
+            aspect-ratio: 200 / 258;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .personDetailInfo{
+            grid-column: span 2;
+            align-self: end;
+
+            h2{
+                font-size: var(--font-size-font-size-2xlarge);
+                margin: 0;
+                font-weight: 500;
+            }
+
+            .personDetailBio{
+                margin-top: 16px;
+                p{
+                    margin-bottom: 16px;
+                    line-height: var(--line-height-line-height-large);
+                }
+            }
+        }
+    }
+
+}
+
+.people{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+
+    .personCard{
+        padding: 16px;
+        border: 1px solid transparent;
+        cursor: pointer;
+
+        &:hover{
+            border: 1px solid var(--colors-foreground-fg-1);
+            border-radius: 8px;
+
+        }
+
+        &.active {
+            border: 1px solid var(--colors-foreground-fg-1);
+            border-radius: 8px;
+        }
+
+        .personImage{
+            width: 100%;
+            aspect-ratio: 237 / 286;
+
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .personInfo{
+            margin-top: 8px;
+
+            .personNameRole{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            h3{
+                font-size: var(--font-size-font-size-medium);
+                margin: 0;
+                font-weight: 500;
+            }
+        }
+    }
+}

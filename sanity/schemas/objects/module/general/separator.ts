@@ -17,7 +17,6 @@ export default defineField({
         list: [
           { title: 'Line', value: 'line' },
           { title: 'Space', value: 'space' },
-          { title: 'Line + Space', value: 'lineSpace' },
         ],
       },
     }), 
@@ -33,17 +32,8 @@ export default defineField({
         list: [
           { title: 'Full', value: 'full' },
           { title: 'Content', value: 'content' }, // ancho del contenedor
-          { title: 'Custom', value: 'custom' },
         ],
       },
-    }),
-
-    defineField({
-      name: 'customWidth',
-      title: 'Custom width (px)',
-      type: 'number',
-      hidden: ({ parent }) => parent?.variant === 'space' || parent?.width !== 'custom',
-      validation: (Rule) => Rule.min(20).max(2000),
     }),
 
     defineField({
@@ -52,8 +42,13 @@ export default defineField({
       type: 'string',
       description: 'If set, allows linking to this separator (#id).',
     }),
+    defineField({
+      name: 'anchorOnMenu',
+      title: 'Anchor on Menu (optional)',
+      type: 'string',
+      description: 'If set, allows linking to this separator from the page submenu.',
+    }),
   ],
-
   preview: {
     select: {
       variant: 'variant',

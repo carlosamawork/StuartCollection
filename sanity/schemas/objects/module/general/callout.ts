@@ -11,32 +11,23 @@ export default defineField({
     defineField({
       name: 'text',
       title: 'Text',
-      type: 'text',
-      rows: 2,
-      validation: (Rule) => [
-        Rule.required(),
-        Rule.max(70).warning(`Callout length shouldn't be more than 70 characters.`),
-      ],
-    }),
-    // Link
-    defineField({
-      name: 'links',
-      title: 'Link',
-      type: 'array',
-      of: [{type: 'linkInternal'}, {type: 'linkExternal'}],
-      validation: (Rule) => Rule.max(1),
+      type: 'body.paragraphs',
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {
     select: {
       text: 'text',
-      url: 'url',
     },
     prepare(selection) {
-      const {text, url} = selection
+      const { text } = selection
+            const firstBlock = text?.[0]
+            const firstText = firstBlock?.children
+                ?.map((child: any) => child.text)
+                .join('')
       return {
         subtitle: 'Callout',
-        title: text,
+        title: firstText || 'No content',
         media: BulbOutlineIcon,
       }
     },
