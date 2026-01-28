@@ -36,7 +36,7 @@ export default defineField({
               title: 'Tab content (modules)',
               type: 'array',
               of: [
-                {type: 'hero.general'},
+                {type: 'module.jumbotron'},
                 {type: 'module.image'},
                 {type: 'module.video'},
                 {type: 'module.slider'},
@@ -44,8 +44,12 @@ export default defineField({
                 {type: 'module.twoColumns'},
                 {type: 'module.tileGroup'},
                 {type: 'module.mediaList'},
-                {type: 'module.jumbotron'},
-                {type: 'body.paragraphs'},
+                {type: 'module.tabs'},
+                {type: 'module.accordion'},
+                {type: 'module.textTitles'},
+                {type: 'module.textParagraphs'},
+                {type: 'module.callout'},
+                {type: 'module.iframe'},
                 // 👇 aquí metes TODOS los módulos que quieras permitir dentro de un tab
                 // IMPORTANTE: normalmente NO incluir 'module.tabs' aquí para evitar tabs dentro de tabs (recursión)
               ],

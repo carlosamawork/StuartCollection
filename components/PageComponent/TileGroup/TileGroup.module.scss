@@ -1,0 +1,119 @@
+.tileGroup {
+    margin: 56px 0 24px;
+
+    .groupTitle {
+        font-size: var(--font-size-font-size-3xlarge);
+        line-height: var(--line-height-line-height-3xlarge);
+        font-weight: 500;
+        margin-bottom: 32px;
+    }
+
+    .tileGrid {
+        display: grid;
+        gap: 32px;
+
+        &.col-1 {
+            grid-template-columns: repeat(1, 1fr);
+        }
+
+        &.col-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        &.col-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &.col-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        &.col-5 {
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        &.col-6 {
+            grid-template-columns: repeat(6, 1fr);
+        }
+
+        .tileItem {
+            width: 100%;
+
+            a {
+                width: 100%;
+
+                .tileImage {
+                    aspect-ratio: 269 / 201;
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 16px;
+                    overflow: hidden;
+                    border-radius: 8px;
+                }
+
+
+            }
+
+            .tileContent {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h6 {
+                    font-size: var(--font-size-font-size-medium);
+                    line-height: var(--line-height-line-height-medium);
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+
+        }
+    }
+
+    .tileList {
+        .tileItem:first-child {
+            border-top: 1px solid var(--colors-foreground-fg-2);
+        }
+        
+        .tileItem {
+            width: 68%;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--colors-foreground-fg-2);
+
+            a {
+                width: 100%;
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                justify-content: space-between;
+
+                .tileImage {
+                    aspect-ratio: 72 / 72;
+                    position: relative;
+                    width: 72px;
+                    
+                    overflow: hidden;
+                    border-radius: 8px;
+                }
+
+
+            }
+
+            .tileContent {
+                width: calc(100% - 96px);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h6 {
+                    font-size: var(--font-size-font-size-medium);
+                    line-height: var(--line-height-line-height-medium);
+                    font-weight: 500;
+                    margin: 0;
+                }
+            }
+
+        }
+    }
+
+}

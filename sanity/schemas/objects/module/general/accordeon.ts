@@ -37,7 +37,7 @@ export default defineField({
               title: 'Item content (modules)',
               type: 'array',
               of: [
-                {type: 'hero.general'},
+                {type: 'module.jumbotron'},
                 {type: 'module.image'},
                 {type: 'module.video'},
                 {type: 'module.slider'},
@@ -45,10 +45,12 @@ export default defineField({
                 {type: 'module.twoColumns'},
                 {type: 'module.tileGroup'},
                 {type: 'module.mediaList'},
-                {type: 'module.jumbotron'},
-                {type: 'module.textParagraphs'},
+                {type: 'module.tabs'},
+                {type: 'module.accordion'},
                 {type: 'module.textTitles'},
+                {type: 'module.textParagraphs'},
                 {type: 'module.callout'},
+                {type: 'module.iframe'},
                 // Igual que tabs: evita incluir module.accordion aquí para no hacer recursión
               ],
               validation: (Rule) => Rule.min(1).error('Add at least 1 module in this item'),

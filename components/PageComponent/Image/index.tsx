@@ -8,11 +8,10 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function ImageComponent({data}: {data: any}) {
-    console.log('Image data:', data)
   return (
     <>
         <div 
-            className={`${s.imageWrapper}`}
+            className={`${s.imageWrapper} ${data.width ? s[data.width] : ''}`}
         >
             {data.image && (
                 <LazyImage

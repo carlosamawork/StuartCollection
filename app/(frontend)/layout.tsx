@@ -37,7 +37,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <RawHTML html="<!-- ----------------------------------------------------- -->
-        <!-- Code by AMA, http://ama.work (2025) -->
+        <!-- Code by Cacho Salvador, http://cachosalvador.com (2026) -->
         <!-- ----------------------------------------------------- -->" />
         <WebProvider>
           <HeaderComponent />

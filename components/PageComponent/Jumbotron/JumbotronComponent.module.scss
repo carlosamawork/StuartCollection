@@ -3,14 +3,28 @@
     border-radius: 16px;
     margin-top: 56px;
 
+    &.boxed{
+        width: 68%;
+
+        p{
+            width: 100% !important;
+        }
+    }
+
     &.blue{
         background-color: var(--colors-background-bg-blue-soft);
 
     }
 
     &.darkBlue{
-        background-color: var(--colors-background-bg-navy-soft);
+        background-color: var(--colors-background-bg-navy-strong);
         color: white;
+        .title{ 
+            border-bottom: 1px solid white;
+        }
+        a{
+            color: white;
+        }
     }
 
     &.yellow{
@@ -24,6 +38,12 @@
     &.black{
         background-color: var(--colors-background-bg-black);
         color: white;
+        .title{ 
+            border-bottom: 1px solid white;
+        }
+        a{
+            color: white;
+        }
     }
 
     &.white{
@@ -33,7 +53,7 @@
     .title{
         h2{
             padding: 32px;
-            font-size: var(--font-size-font-size-3xlarge);
+            font-size: var(--font-size-font-size-2xlarge);
             font-weight: 500;
             width: 68%;
         }
@@ -43,5 +63,9 @@
 
     .body{
         padding: 32px;
+
+        a{
+            text-decoration: underline;
+        }
     }
 }

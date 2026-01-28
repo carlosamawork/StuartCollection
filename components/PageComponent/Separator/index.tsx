@@ -8,7 +8,6 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function SeparatorComponent({data}: {data: any}) {
-    console.log('Separator data:', data)
   return (
     <>
     <div 

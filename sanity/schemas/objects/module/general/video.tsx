@@ -8,17 +8,42 @@ export default defineField({
   icon: DocumentVideoIcon,
   fields: [
     defineField({
-        name: 'title',
-        title: 'Title',
-        type: 'string',
-        validation: (Rule) => Rule.required(),
+      name: 'type',
+      title: 'Type',
+      type: 'string',
+      initialValue: 'video',
+      options: {
+        list: [
+          {title: 'Internal Video', value: 'internal-video'},
+          {title: 'Youtube/Vimeo Video', value: 'youtube-vimeo-video'},
+        ],
+      },
+    }),
+    defineField({
+      name: 'width',
+      title: 'Width',
+      type: 'string',
+      initialValue: 'content',
+      options: {
+        list: [
+          {title: 'Full width', value: 'full'},
+          {title: 'Content', value: 'content'},
+        ],
+      },
+    }),
+    // Internal video
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      hidden: ({parent}) => parent?.type !== 'internal-video',
     }),
     defineField({
       name: 'image',
       title: 'Thumbnail',
       type: 'image',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
+      hidden: ({parent}) => parent?.type !== 'internal-video',
     }),
     // Image
     defineField({
@@ -30,7 +55,7 @@ export default defineField({
   ],
   preview: {
     select: {
-      title: 'title',
+      title: 'type',
     },
     prepare(selection) {
       const {title} = selection

@@ -15,8 +15,8 @@ import ImageComponent from '../Image'
 import JumbotronComponent from '../Jumbotron'
 
 export default function AccordeonComponent({data}: {data: any}) {
-  console.log('Accordeon data:', data)
-  return (
+  
+    return (
     <div className={s.accordeon}>
       <div className={s.accordeonItems}>
         {data.items &&

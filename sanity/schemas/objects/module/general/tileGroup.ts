@@ -40,14 +40,6 @@ export default defineField({
               title: 'Image',
               type: 'image',
               options: {hotspot: true},
-              fields: [
-                defineField({
-                  name: 'alt',
-                  title: 'Alt text',
-                  type: 'string',
-                  validation: (Rule) => Rule.required(),
-                }),
-              ],
               validation: (Rule) => Rule.required(),
             }),
 
@@ -114,12 +106,13 @@ export default defineField({
   preview: {
     select: {
       title: 'title',
-      count: 'tiles.length',
+      count: 'tiles',
     },
     prepare({title, count}) {
+      const tileCount = Array.isArray(count) ? count.length : 0
       return {
         title: title || 'Tile group',
-        subtitle: `${count || 0} tiles`,
+        subtitle: `${tileCount} tiles`,
         media: DashboardIcon,
       }
     },

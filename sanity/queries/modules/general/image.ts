@@ -5,5 +5,6 @@ export const imageQuery = `
         ${image}
     },
     caption,
-    enableLightbox
+    enableLightbox,
+    width
 `

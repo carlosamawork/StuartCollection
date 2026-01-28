@@ -9,7 +9,7 @@ import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function TextParagraphsComponent({data}: {data: any}) {
   return (
-    <div className={s.textParagraphs}>
+    <div className={`${s.textParagraphs} ${s[data.width]}`}>
         <div className={s.bodyParagraphs}>
             {data.body &&
             data.body.map((textRow: any, index: number) => {

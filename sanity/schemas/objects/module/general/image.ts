@@ -30,30 +30,16 @@ export default defineField({
     }),
 
     defineField({
-      name: 'includeMainInLightbox',
-      title: 'Include main image in lightbox gallery',
-      type: 'boolean',
-      initialValue: true,
-      hidden: ({parent}) => !parent?.enableLightbox,
-    }),
-
-    defineField({
-      name: 'lightboxImages',
-      title: 'Lightbox images (slider)',
-      type: 'array',
-      of: [
-        defineField({
-          name: 'lightboxImage',
-          type: 'image',
-          options: {hotspot: true},
-          fields: [
-            defineField({name: 'caption', title: 'Caption (optional)', type: 'body.captions'}),
-          ],
-        }),
-      ],
-      hidden: ({parent}) => !parent?.enableLightbox,
-      description:
-        'If empty, lightbox can still open with only the main image (if included).',
+      name: 'width',
+      title: 'Image width',
+      type: 'string',
+      initialValue: 'full',
+      options: {
+        list: [
+          {title: 'Full width', value: 'full'},
+          {title: 'Content', value: 'content'},
+        ],
+      },
     }),
   ],
 
@@ -62,12 +48,11 @@ export default defineField({
       media: 'image',
       caption: 'caption',
       enableLightbox: 'enableLightbox',
-      count: 'lightboxImages.length',
     },
-    prepare({media, caption, enableLightbox, count}) {
+    prepare({media, caption, enableLightbox}) {
       return {
         title: 'Image module',
-        subtitle: `${caption || '—'}${enableLightbox ? ` · Lightbox (${count || 0})` : ''}`,
+        subtitle: `${caption || '—'}${enableLightbox ? ` · Lightbox` : ''}`,
         media,
       }
     },

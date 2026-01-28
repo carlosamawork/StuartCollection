@@ -61,7 +61,6 @@ import accordeon from './objects/module/general/accordeon'
 import tabs from './objects/module/general/tabs'
 import section from './objects/module/general/section'
 import jumbotron from './objects/module/general/jumbotron'
-import hero from './objects/module/general/hero'
 import image from './objects/module/general/image'
 import slider from './objects/module/general/slider'
 import separator from './objects/module/general/separator'
@@ -72,6 +71,8 @@ import textParagraphs from './objects/module/general/textParagraphs'
 import textTitles from './objects/module/general/textTitles'
 import callout from './objects/module/general/callout'
 import people from './objects/module/general/people'
+import iframe from './objects/module/general/iframe'
+
 
 const objects = [
   footer,
@@ -93,7 +94,6 @@ const objects = [
   tabs,
   section,
   jumbotron,
-  hero,
   image,
   slider,
   separator,
@@ -111,6 +111,7 @@ const objects = [
   textTitles,
   callout,
   people,
+  iframe,
 ]
 
 export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]

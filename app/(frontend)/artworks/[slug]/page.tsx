@@ -9,49 +9,48 @@ export const revalidate = 1 // revalidate to work set to 1, then we change it to
 
 export async function generateMetadata({params}: {params: {slug: string}}) {
   const { slug } = await params
-  const page = await getPageSEO(slug);
   const defaultSEO = await getDefaultSEO();
 
-  if (!page) {
-    return {
-      metadataBase: BASE_URL,
-      title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
-      description: page.seo?.description || siteDescription,
-      robots: {
-        index: false,
-        follow: true,
-        nocache: false,
-        googleBot: {
-          index: false,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-      alternates: {
-        canonical: BASE_URL.origin,
-      },
-    }
-  }
+//   if (!page) {
+//     return {
+//       metadataBase: BASE_URL,
+//       title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
+//       description: defaultSEO.description || siteDescription,
+//       robots: {
+//         index: false,
+//         follow: true,
+//         nocache: false,
+//         googleBot: {
+//           index: false,
+//           follow: true,
+//           'max-video-preview': -1,
+//           'max-image-preview': 'large',
+//           'max-snippet': -1,
+//         },
+//       },
+//       alternates: {
+//         canonical: BASE_URL.origin,
+//       },
+//     }
+//   }
 
 
   return {
     metadataBase: BASE_URL,
-    title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
-    description: page.seo?.description || siteDescription,
+    title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
+    description: defaultSEO.description || siteDescription,
     generator: 'Next.js',
     applicationName: 'Stuart Collection by Cacho Salvador',
     openGraph: {
-      title: `Stuart Collection | ${page.seo?.title || siteTitle}`,
-      description: page.seo?.description || siteDescription,
+      title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
+      description: defaultSEO.description || siteDescription,
       url: buildUrl(`/${slug}/`),
       siteName: siteTitle,
       images: [
         {
-          url: page.seo?.image?.imageUrl || BASE_IMAGE_URL,
-          width: page.seo?.image?.metadata?.dimensions?.width || BASE_IMAGE_WIDTH,
-          height: page.seo?.image?.metadata?.dimensions?.height || BASE_IMAGE_HEIGHT,
+          url: defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
+          width: defaultSEO.image?.metadata?.dimensions?.width || BASE_IMAGE_WIDTH,
+          height: defaultSEO.image?.metadata?.dimensions?.height || BASE_IMAGE_HEIGHT,
         },
       ],
       type: 'website',
@@ -74,10 +73,10 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${page.seo?.title || siteTitle}`,
-      description: page.seo?.description || siteDescription,
+      title: `${defaultSEO.title || siteTitle}`,
+      description: defaultSEO.description || siteDescription,
       images: [
-        page.seo?.image?.imageUrl || BASE_IMAGE_URL,
+        defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
       ],
     },
   }
@@ -85,11 +84,10 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
 
 export default async function Page({params}: {params: {slug: string}}) {
   const { slug } = await params
-  const data = await getPage(slug);
 
   return (
     <main>
-      <PageComponent data={data} />
+      
     </main>
   )
 }

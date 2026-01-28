@@ -9,10 +9,12 @@ import SeparatorComponent from './Separator'
 import TitleParagraphsComponent from './TitleParagraphs'
 import AccordeonComponent from './Accordeon/AccordeonComponent'
 import ImageComponent from './Image'
-import Video from '@/sanity/schemas/objects/module/general/video'
-import VideoEmbed from '../Common/VideoEmbed'
 import JumbotronComponent from './Jumbotron'
 import PeopleComponent from './People'
+import TileGroupComponent from './TileGroup'
+import VideoComponent from './Video'
+import IframeComponent from './Iframe'
+import TwoColumnsComponent from './TwoColumns'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
@@ -35,10 +37,8 @@ export default function PageComponent({data}: {data: any}) {
     )
   }, [activeSection])
 
-  console.log('Separator Section:', separatorsMenu)
-
   return (
-    <div className={s.pageComponent}>
+    <div className={`${s.pageComponent}`}>
       {activeSection?.topImage && topImage && (
         <div className={s.topImageContainer}>
           <LazyImage
@@ -110,7 +110,7 @@ export default function PageComponent({data}: {data: any}) {
             {activeSection && activeSection?.modules &&
               activeSection?.modules.map((mod: any, index: number) => (
                 <div key={mod.id || index} className={s.moduleItem}>
-                    {mod._type === 'module.titleParagraphs' && <TitleParagraphsComponent data={mod} key={activeSection?.id}/>}
+                    {mod._type === 'module.textTitles' && <TitleParagraphsComponent data={mod} key={activeSection?.id}/>}
                     {/* Render module content based on its type */}
                     {mod._type === 'module.textParagraphs' && <TextParagraphsComponent data={mod} key={activeSection?.id}/>}
                     {/* Add other module types as needed */}
@@ -125,6 +125,14 @@ export default function PageComponent({data}: {data: any}) {
                     {mod._type === 'module.jumbotron' && <JumbotronComponent data={mod} key={activeSection?.id} />}
                     {/* Add other module types as needed */}
                     {mod._type === 'module.people' && <PeopleComponent data={mod} key={activeSection?.id} />}
+                    {/* Add other module types as needed */}
+                    {mod._type === 'module.tileGroup' && <TileGroupComponent data={mod} key={activeSection?.id} />}
+                    {/* Add other module types as needed */}
+                    {mod._type === 'module.video' && <VideoComponent data={mod} key={activeSection?.id} />}
+                    {/* Add other module types as needed */}
+                    {mod._type === 'module.iframe' && <IframeComponent data={mod} key={activeSection?.id} />}
+                    {/* Add other module types as needed */}
+                    {mod._type === 'module.twoColumns' && <TwoColumnsComponent data={mod} key={activeSection?.id} />}
                 </div>
               ))}
           </div>

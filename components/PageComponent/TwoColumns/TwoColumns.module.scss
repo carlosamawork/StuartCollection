@@ -1,0 +1,42 @@
+.twoColumns{
+    margin: 56px 0;
+    .columns{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+
+        .leftColumn.top{
+            align-self: start;
+        }
+
+        .leftColumn.center{
+            align-self: center;
+        }
+
+        .leftColumn.bottom{
+            align-self: end;
+        }
+
+        .rightColumn.top{
+            align-self: start;
+        }
+
+        .rightColumn.center{
+            align-self: center;
+        }
+
+        .rightColumn.bottom{
+            align-self: end;
+        }
+
+        .imageWrapper{
+            width: 100%;
+            overflow:hidden;
+            border-radius: 16px;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}

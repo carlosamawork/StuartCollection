@@ -5,6 +5,18 @@ export default defineField({
     title: 'Module: Text paragraphs',
     type: 'object',
     fields: [
+        defineField({
+            name: 'width',
+            title: 'Width',
+            type: 'string',
+            initialValue: 'content',
+            options: {
+                list: [
+                    { title: 'Full width', value: 'full' },
+                    { title: 'Content', value: 'content' },
+                ],
+            },
+        }),
         // Title
         defineField({
             name: 'body',

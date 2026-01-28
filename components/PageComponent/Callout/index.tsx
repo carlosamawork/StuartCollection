@@ -8,21 +8,20 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function CalloutComponent({data}: {data: any}) {
-    console.log('Callout data:', data)
-  return (
-    <div className={s.callOut}>
-        <div className={s.bodyCallOut}>
-            {data.text &&
-            data.text.map((textRow: any, index: number) => {
-                return (
-                <PortableText
-                    key={textRow._key}
-                    value={[textRow]}
-                    components={portableBodyComponents()}
-                />
-                )
-            })}
+    return (
+        <div className={s.callOut}>
+            <div className={s.bodyCallOut}>
+                {data.text &&
+                data.text.map((textRow: any, index: number) => {
+                    return (
+                    <PortableText
+                        key={textRow._key}
+                        value={[textRow]}
+                        components={portableBodyComponents()}
+                    />
+                    )
+                })}
+            </div>
         </div>
-    </div>
-  )
+    )
 }

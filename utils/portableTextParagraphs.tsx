@@ -51,17 +51,20 @@ export const portableBodyComponents = (): PortableTextComponents => {
     },
 
     list: {
-      bullet: ({ children }) => (
-        <ul className="list-bullet">
-          {children}
-        </ul>
-      ),
+      bullet: ({ children, value }) => {
+        const level = value?.level ?? 1;
+        return (
+          <ul className={`list-bullet list-bullet--level-${level}`}>
+            {children}
+          </ul>
+        );
+      },
     },
-
     listItem: {
-      bullet: ({ children }) => (
-        <li>{children}</li>
-      ),
+      bullet: ({ children, value }) => {
+        const level = value?.level ?? 1;
+        return <li className={`list-item list-item--level-${level}`}>{children}</li>;
+      },
     },
 
     types: {

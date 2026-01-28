@@ -1,6 +1,6 @@
 'use client'
 import LazyVideo from '@/components/Common/LazyVideo'
-import s from './TextParagraphs.module.scss'
+import s from './TitleParagraphs.module.scss'
 import LazyImage from '@/components/Common/LazyImage'
 import {PortableText} from 'next-sanity'
 import {portableBlockComponents} from '@/utils/portableText'
@@ -8,9 +8,8 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function TitleParagraphsComponent({data}: {data: any}) {
-    console.log('TextParagraphs data:', data)
   return (
-    <>
+    <div className={s.titleParagraphs}>
         {data.body &&
         data.body.map((textRow: any, index: number) => {
             return (
@@ -21,6 +20,6 @@ export default function TitleParagraphsComponent({data}: {data: any}) {
             />
             )
         })}
-    </>
+    </div>
   )
 }

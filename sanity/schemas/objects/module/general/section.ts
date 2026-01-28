@@ -58,6 +58,7 @@ export default defineField({
         {type: 'module.textParagraphs'},
         {type: 'module.callout'},
         {type: 'module.people'},
+        {type: 'module.iframe'},
         // añade aquí el resto de tus módulos “permitidos”
         // (si quieres literalmente “todos”, mete la lista completa de tu builder)
       ],
