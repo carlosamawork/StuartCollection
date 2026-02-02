@@ -3,11 +3,7 @@ import annotationLinkEmail from './annotations/linkEmail'
 import annotationLinkExternal from './annotations/linkExternal'
 import annotationLinkInternal from './annotations/linkInternal'
 
-const annotations = [
-  annotationLinkEmail,
-  annotationLinkExternal,
-  annotationLinkInternal,
-]
+const annotations = [annotationLinkEmail, annotationLinkExternal, annotationLinkInternal]
 
 // Document types
 import page from './documents/page'
@@ -15,7 +11,16 @@ import person from './documents/team'
 import pressArticle from './documents/press'
 import artwork from './documents/artwork'
 
-const documents = [ page, person, pressArticle, artwork]
+const documents = [page, person, pressArticle, artwork]
+
+// Categories types
+
+import category from './taxonomies/categories'
+import theme from './taxonomies/themes'
+import location from './taxonomies/locations'
+import artists from './taxonomies/artists'
+
+const taxonomies = [category, theme, location, artists]
 
 // Singleton document types
 import home from './singletons/home'
@@ -27,8 +32,9 @@ const singletons = [home, settings]
 import body from './blocks/bodytitles'
 import bodyparagraphs from './blocks/bodyparagraphs'
 import bodycaption from './blocks/bodycaption'
+import bodySimpletext from './blocks/bodySimpleText'
 
-const blocks = [body, bodyparagraphs, bodycaption]
+const blocks = [body, bodyparagraphs, bodycaption, bodySimpletext]
 
 // Object types
 import footer from './objects/global/footer'
@@ -55,7 +61,6 @@ import seoHome from './objects/seo/home'
 import seoPage from './objects/seo/page'
 import seoDescription from './objects/seo/description'
 import video from './objects/module/general/video'
-import category from './taxonomies/categories'
 
 import accordeon from './objects/module/general/accordeon'
 import tabs from './objects/module/general/tabs'
@@ -73,6 +78,13 @@ import callout from './objects/module/general/callout'
 import people from './objects/module/general/people'
 import iframe from './objects/module/general/iframe'
 
+// Artwork modules
+import artworkArtist from './objects/module/artwork/artist'
+import artworkVisit from './objects/module/artwork/visit'
+import artworkSocial from './objects/module/artwork/social'
+import artworkVideos from './objects/module/artwork/videos'
+import artworkImages from './objects/module/artwork/images'
+import artworkTextAccordeon from './objects/module/artwork/textAccordeon'
 
 const objects = [
   footer,
@@ -88,7 +100,6 @@ const objects = [
   seoHome,
   seoPage,
   seoDescription,
-  category,
   video,
   accordeon,
   tabs,
@@ -112,6 +123,19 @@ const objects = [
   callout,
   people,
   iframe,
+  artworkArtist,
+  artworkVisit,
+  artworkSocial,
+  artworkVideos,
+  artworkImages,
+  artworkTextAccordeon,
 ]
 
-export const schemaTypes = [...annotations, ...singletons, ...objects, ...blocks, ...documents]
+export const schemaTypes = [
+  ...annotations,
+  ...singletons,
+  ...objects,
+  ...blocks,
+  ...documents,
+  ...taxonomies,
+]
