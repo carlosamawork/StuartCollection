@@ -91,8 +91,10 @@ export default function FooterComponent() {
         </div>
       </Container>
       <div className={s.textContainer}>
-        <Container className={s.text}>
-          <h3>Encounter, Exploration, and Dialogue for the UCSD Campus and Community.</h3>
+        <Container>
+          <div className={s.text}>
+            <h3>Encounter, Exploration, and Dialogue for the UCSD Campus and Community.</h3>
+          </div>
         </Container>
       </div>
       <Container>
