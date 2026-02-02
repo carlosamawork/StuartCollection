@@ -21,20 +21,41 @@ export default defineField({
       title: 'Text',
       type: 'body.paragraphs',
     }),
-    // Image
+    // Images
     defineField({
-      name: 'artists',
-      title: 'Artists',
-      type: 'array',
-      of: [
-        {
-          name: 'artist',
-          title: 'Artist',
-          type: 'reference',
-          to: [{type: 'artist'}],
-        },
+      name: 'images',
+      title: 'Images',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'customizeArtistsImages',
+          title: 'Customize artist images?',
+          description: `Otherwise portraits of artists will populate automatically from "Editorial>Artist(s)" field.`,
+          type: 'boolean',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'images',
+          title: 'Artists images',
+          description: 'Select custom images or artists to show their images',
+          type: 'array',
+          of: [
+            {
+              name: 'artist',
+              title: 'Artist',
+              type: 'reference',
+              to: [{type: 'artist'}],
+            },
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {hotspot: true},
+            },
+          ],
+          hidden: ({parent}) => parent?.customizeArtistsImages !== true,
+        }),
       ],
-      validation: (Rule) => Rule.min(1).error('Add at least 1 artist'),
     }),
     // Accordion
     defineField({

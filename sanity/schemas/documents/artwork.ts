@@ -1,4 +1,4 @@
-import {DocumentIcon} from '@sanity/icons'
+import {GroqIcon} from '@sanity/icons'
 import {defineField} from 'sanity'
 
 import {validateSlug} from '../../utils/validateSlug'
@@ -7,7 +7,7 @@ export default defineField({
   name: 'artwork',
   title: 'Artwork',
   type: 'document',
-  icon: DocumentIcon,
+  icon: GroqIcon,
   groups: [
     {
       default: true,
@@ -34,6 +34,22 @@ export default defineField({
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+      group: 'editorial',
+    }),
+    // Artist(s)
+    defineField({
+      name: 'artists',
+      title: 'Artist(s)',
+      type: 'array',
+      of: [
+        {
+          name: 'artist',
+          title: 'Artist',
+          type: 'reference',
+          to: [{type: 'artist'}],
+        },
+      ],
+      validation: (Rule) => Rule.min(1).error('Add at least 1 artist'),
       group: 'editorial',
     }),
     // Slug
@@ -83,6 +99,14 @@ export default defineField({
     defineField({
       name: 'featuredImage',
       title: 'Featured Image',
+      type: 'image',
+      options: {hotspot: true},
+      group: 'editorial',
+    }),
+    // Thumbnail
+    defineField({
+      name: 'thumbnail',
+      title: 'Thumbnail',
       type: 'image',
       options: {hotspot: true},
       group: 'editorial',

@@ -20,7 +20,7 @@ export default defineField({
       name: 'items',
       title: 'Images',
       type: 'array',
-      of: [{type: 'image'}],
+      of: [{type: 'image', options: {hotspot: true}}],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
     }),
   ],

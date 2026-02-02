@@ -1,13 +1,13 @@
 import {defineField, defineType} from 'sanity'
 
 // Install lucide.dev icons with "npm install lucide-react"
-import {PinIcon} from '@sanity/icons'
+import {UserIcon} from '@sanity/icons'
 
 export default defineType({
   name: 'artist',
   title: 'Artists',
   type: 'document',
-  icon: PinIcon,
+  icon: UserIcon,
   fields: [
     defineField({
       name: 'name',
@@ -18,15 +18,14 @@ export default defineType({
       name: 'image',
       title: 'Image',
       type: 'image',
+      options: {hotspot: true},
     }),
   ],
   // Customize the preview so parents are visualized in the studio
   preview: {
     select: {
-      name: 'name',
+      media: 'image',
+      title: 'name',
     },
-    prepare: ({name}) => ({
-      title: name,
-    }),
   },
 })

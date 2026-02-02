@@ -11,6 +11,7 @@ import theme from './themeStructure'
 import location from './locationStructure'
 import artwork from './artworkStructure'
 import artist from './artistStructure'
+import trail from './trailStructure'
 
 /**
  * Desk structure overrides
@@ -57,6 +58,7 @@ export const structure: StructureResolver = (S, context) =>
       home(S, context),
       pages(S, context),
       artwork(S, context),
+      trail(S, context),
       S.divider(),
       category(S, context),
       theme(S, context),

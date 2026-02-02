@@ -10,11 +10,11 @@ import page from './documents/page'
 import person from './documents/team'
 import pressArticle from './documents/press'
 import artwork from './documents/artwork'
+import trail from './documents/trail'
 
-const documents = [page, person, pressArticle, artwork]
+const documents = [page, person, pressArticle, artwork, trail]
 
 // Categories types
-
 import category from './taxonomies/categories'
 import theme from './taxonomies/themes'
 import location from './taxonomies/locations'
