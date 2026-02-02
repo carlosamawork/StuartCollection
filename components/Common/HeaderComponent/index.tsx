@@ -88,38 +88,37 @@ export default function HeaderComponent({data}: any) {
             </svg>
           </Link>
         </div>
+      </div>
+      <div className={s.menuHeader}>
+        <nav className={s.mainNav}>
+          <ul>
+            <li>
+              <Link href="/about">About</Link>
+            </li>
+            <li>
+              <Link href="/the-collection">The Collection</Link>
+            </li>
+            <li>
+              <Link href="/visit">Visit</Link>
+            </li>
+            <li>
+              <Link href="/media">Media</Link>
+            </li>
+            <li>
+              <Link href="/contact">Contact</Link>
+            </li>
+          </ul>
+        </nav>
+        <div className={s.dateHeader}>
+          <p>
+            <strong>Open today</strong>
+          </p>
+          <p>10AM – 6PM | 77ºF</p>
         </div>
-        <div className={s.menuHeader}>
-          <nav className={s.mainNav}>
-            <ul>
-              <li>  
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/the-collection">The Collection</Link>
-              </li>
-              <li>
-                <Link href="/visit">Visit</Link>
-              </li>
-              <li>
-                <Link href="/media">Media</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
-              </li>
-            </ul>
-          </nav>
-          <div className={s.dateHeader}>
-            <p><strong>Open today</strong></p>
-            <p>10AM – 6PM | 77ºF</p>
-          </div>
-          <div className={s.supportHeader}>
-            <Link href="/support-us" className="buttonOutlineSmall">
-              Support
-            </Link>
-          </div>
-        </div>
-      
+        <Link className="buttonOutlineSmall" href="/support-us">
+          Support
+        </Link>
+      </div>
     </motion.header>
   )
 }

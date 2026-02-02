@@ -79,7 +79,7 @@ export default function SupportComponent({data}: {data: any}) {
                   >
                     <p>{card.link.label}</p>
                     <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.16667 10.8333L0 9.66667L8 1.66667L0.833333 1.66667L0.833333 0L10.8333 0L10.8333 10H9.16667L9.16667 2.83333L1.16667 10.8333Z" fill="white" fill-opacity="0.6"/>
+                        <path d="M1.16667 10.8333L0 9.66667L8 1.66667L0.833333 1.66667L0.833333 0L10.8333 0L10.8333 10H9.16667L9.16667 2.83333L1.16667 10.8333Z" fill="white" fillOpacity="0.6"/>
                     </svg>
                   </Link>
                 </div>
