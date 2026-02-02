@@ -1,16 +1,18 @@
-.textParagraphs{
-    width: 68%;
+@use "@/styles/common/variables" as *;
+
+.textParagraphs {
+    max-width: $max_page_width_sm;
     margin-bottom: 24px;
 
-    &.full{
+    &.full {
         width: 100%;
     }
 
-    p{
+    p {
         margin-bottom: 16px;
     }
 
-    ul{
+    ul {
         list-style-type: disc;
     }
 }

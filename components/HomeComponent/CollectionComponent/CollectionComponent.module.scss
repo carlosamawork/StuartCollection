@@ -1,65 +1,63 @@
-.collection{
-    
-    padding: 0px 32px;
-
-    .collectionContent{
+.collection {
+    .collectionContent {
         padding: 56px 0;
         border-top: 1px solid var(--colors-foreground-fg-3);
         display: grid;
         grid-template-columns: 1fr 1fr;
 
-        .titleCollection{
+        .titleCollection {
             position: sticky;
             top: 56px;
             align-self: start;
-            h2{
+
+            h2 {
                 margin: 0;
                 font-size: var(--font-size-font-size-3xlarge);
                 font-weight: 500;
             }
-            
-            .subtitle{
-                a{
-                   font-size: var(--font-size-font-size-large); 
-                   font-weight: 500;
+
+            .subtitle {
+                a {
+                    font-size: var(--font-size-font-size-large);
+                    font-weight: 500;
                 }
             }
         }
 
-        .artwork{
-            h3{
+        .artwork {
+            h3 {
                 margin: 32px 0 16px 0;
                 font-size: var(--font-size-font-size-large);
                 font-weight: 500;
             }
 
-            .artworkImage{
+            .artworkImage {
                 margin-bottom: 16px;
-                overflow:hidden;
+                overflow: hidden;
                 border-radius: 8px;
-                img{
+
+                img {
                     object-fit: cover;
                 }
             }
 
-            .ctaButton{
+            .ctaButton {
                 margin-top: 16px;
                 justify-self: start;
                 align-self: end;
-                a{
-                    color: var( --colors-foreground-fg-1);
-                    border: var( --colors-foreground-fg-1) 1px solid;
+
+                a {
+                    color: var(--colors-foreground-fg-1);
+                    border: var(--colors-foreground-fg-1) 1px solid;
                     border-radius: 8px;
                     transition: all 0.3s ease;
                     font-weight: 500;
                 }
 
-                a:hover{
+                a:hover {
                     border-radius: 16px;
                 }
             }
-
         }
     }
-
 }

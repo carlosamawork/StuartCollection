@@ -1,21 +1,23 @@
-.announcement{
-    padding: 0 32px 56px 32px;
+.announcement {
+    padding-bottom: 56px;
 
-    .announcementContent{
+    .announcementContent {
         border: 1px solid var(--colors-background-bg-navy-strong);
         background-color: var(--colors-background-bg-blue-soft);
         border-radius: 16px;
-        .titleAnnouncement{
+
+        .titleAnnouncement {
             padding: 32px;
             border-bottom: 1px solid var(--colors-background-bg-navy-strong);
-            h2{
+
+            h2 {
                 margin: 0;
                 font-size: var(--font-size-font-size-large);
                 font-weight: 500;
             }
         }
 
-        .bodyAnnouncement{
+        .bodyAnnouncement {
             padding: 112px 32px;
         }
     }

@@ -2,12 +2,12 @@
 *******************    VARIABLES                            *************************
 *************************************************************************************/
 $breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1500px
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1500px,
 );
 
 /**
@@ -18,9 +18,9 @@ $AMAFont: "Roboto", Times, sans-serif;
 
 $font-family-base: $AMAFont;
 
-$font-size-base: 16px; /*https://snook.ca/archives/html_and_css/font-size-with-rem*/
+$font-size-base: 16px;
+/*https://snook.ca/archives/html_and_css/font-size-with-rem*/
 $line-height-base: 1.5;
-
 
 /**
  * Colors
@@ -59,3 +59,6 @@ $offset_d: 2rem;
 
 $gutter_m: 1rem;
 $gutter_d: 1rem;
+
+$max_page_width_sm: 592px;
+$max_page_width: 1523px;

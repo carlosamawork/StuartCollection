@@ -1,70 +1,71 @@
-.jumbotron{
+@use "@/styles/common/variables" as *;
+
+.jumbotron {
     border: 1px solid var(--colors-background-bg-navy-strong);
     border-radius: 16px;
     margin-top: 56px;
 
-    &.boxed{
-        width: 68%;
+    &.boxed {
+        max-width: $max_page_width_sm;
 
-        p{
+        p {
             width: 100% !important;
         }
     }
 
-    &.blue{
+    &.blue {
         background-color: var(--colors-background-bg-blue-soft);
-
     }
 
-    &.darkBlue{
+    &.darkBlue {
         background-color: var(--colors-background-bg-navy-strong);
         color: white;
-        .title{ 
+        .title {
             border-bottom: 1px solid white;
         }
-        a{
+        a {
             color: white;
         }
     }
 
-    &.yellow{
+    &.yellow {
         background-color: var(--colors-background-bg-yellow-soft);
     }
 
-    &.cream{
+    &.cream {
         background-color: var(--colors-core-ucsd-gold-200);
     }
 
-    &.black{
+    &.black {
         background-color: var(--colors-background-bg-black);
         color: white;
-        .title{ 
+        .title {
             border-bottom: 1px solid white;
         }
-        a{
+        a {
             color: white;
         }
     }
 
-    &.white{
+    &.white {
         background-color: var(--colors-background-bg-white);
     }
 
-    .title{
-        h2{
+    .title {
+        h2 {
             padding: 32px;
             font-size: var(--font-size-font-size-2xlarge);
             font-weight: 500;
-            width: 68%;
+            max-width: $max_page_width_sm;
         }
-        
+
         border-bottom: 1px solid var(--colors-background-bg-navy-strong);
     }
 
-    .body{
+    .body {
         padding: 32px;
 
-        a{
+        a {
             text-decoration: underline;
         }
     }

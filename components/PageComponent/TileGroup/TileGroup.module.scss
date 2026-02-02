@@ -1,3 +1,5 @@
+@use "@/styles/common/variables" as *;
+
 .tileGroup {
     margin: 56px 0 24px;
 
@@ -50,8 +52,6 @@
                     overflow: hidden;
                     border-radius: 8px;
                 }
-
-
             }
 
             .tileContent {
@@ -66,7 +66,6 @@
                     margin: 0;
                 }
             }
-
         }
     }
 
@@ -74,9 +73,9 @@
         .tileItem:first-child {
             border-top: 1px solid var(--colors-foreground-fg-2);
         }
-        
+
         .tileItem {
-            width: 68%;
+            max-width: $max_page_width_sm;
             padding: 12px 0;
             border-bottom: 1px solid var(--colors-foreground-fg-2);
 
@@ -91,12 +90,10 @@
                     aspect-ratio: 72 / 72;
                     position: relative;
                     width: 72px;
-                    
+
                     overflow: hidden;
                     border-radius: 8px;
                 }
-
-
             }
 
             .tileContent {
@@ -112,8 +109,6 @@
                     margin: 0;
                 }
             }
-
         }
     }
-
 }

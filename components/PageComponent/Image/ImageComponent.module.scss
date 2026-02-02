@@ -1,16 +1,17 @@
-.imageWrapper{
+@use "@/styles/common/variables" as *;
 
-    &.content{
-        width: 68%;
+.imageWrapper {
+    &.content {
+        max-width: $max_page_width_sm;
     }
-    &.full{
+    &.full {
         width: 100%;
     }
-    
-    overflow:hidden;
+
+    overflow: hidden;
     border-radius: 16px;
     margin-bottom: 24px;
-    img{
+    img {
         width: 100%;
     }
 }

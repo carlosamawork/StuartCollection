@@ -5,8 +5,8 @@ import LazyImage from '@/components/Common/LazyImage'
 import s from './FeaturedSliderComponent.module.scss'
 import {PortableText} from 'next-sanity'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
-import { useRef } from "react";
-import type { Swiper as SwiperType } from "swiper";
+import {useRef} from 'react'
+import type {Swiper as SwiperType} from 'swiper'
 
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Navigation, Pagination} from 'swiper/modules'
@@ -16,6 +16,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import Link from 'next/link'
+import Container from '@/components/Common/ui/Container'
 
 function applySecondClasses(swiper: any, total: number, s: Record<string, string>) {
   if (!total) return
@@ -46,48 +47,50 @@ function applySecondClasses(swiper: any, total: number, s: Record<string, string
 
 export default function FeaturedSliderComponent({data}: {data: any}) {
   const uid = useId()
-  const swiperRef = useRef<SwiperType | null>(null);
+  const swiperRef = useRef<SwiperType | null>(null)
   const prevClass = `featuredPrev_${uid.replace(/:/g, '')}`
   const nextClass = `featuredNext_${uid.replace(/:/g, '')}`
   const paginationClass = `featuredPagination_${uid.replace(/:/g, '')}`
 
   return (
     <div className={s.featuredSlider}>
-      <div className={s.topContent}>
-        {data.title && <h2 className={s.title}>{data.title}</h2>}
+      <Container>
+        <div className={s.topContent}>
+          {data.title && <h2 className={s.title}>{data.title}</h2>}
 
-        {/* Arrows + dots fuera del Swiper */}
-        <div className={s.arrowsAndDots}>
-          <button className={`${s.arrow} ${s.prev} ${prevClass}`} aria-label="Previous slide">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M7.41 10.59L2.83 6L7.41 1.41L6 0L0 6L6 12L7.41 10.59Z" fill="#272728" />
-            </svg>
-          </button>
+          {/* Arrows + dots fuera del Swiper */}
+          <div className={s.arrowsAndDots}>
+            <button className={`${s.arrow} ${s.prev} ${prevClass}`} aria-label="Previous slide">
+              <svg
+                width="8"
+                height="12"
+                viewBox="0 0 8 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7.41 10.59L2.83 6L7.41 1.41L6 0L0 6L6 12L7.41 10.59Z" fill="#272728" />
+              </svg>
+            </button>
 
-          <div className={`${s.dots} ${paginationClass}`} />
+            <div className={`${s.dots} ${paginationClass}`} />
 
-          <button className={`${s.arrow} ${s.next} ${nextClass}`} aria-label="Next slide">
-            <svg
-              width="8"
-              height="12"
-              viewBox="0 0 8 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 1.41L4.58 6L4.0127e-07 10.59L1.41 12L7.41 6L1.41 0L0 1.41Z"
-                fill="#272728"
-              />
-            </svg>
-          </button>
+            <button className={`${s.arrow} ${s.next} ${nextClass}`} aria-label="Next slide">
+              <svg
+                width="8"
+                height="12"
+                viewBox="0 0 8 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 1.41L4.58 6L4.0127e-07 10.59L1.41 12L7.41 6L1.41 0L0 1.41Z"
+                  fill="#272728"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-      </div>
+      </Container>
 
       <div className={s.slider}>
         <Swiper
@@ -113,49 +116,48 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
           onSlideChange={(swiper) => applySecondClasses(swiper, data.slides.length, s)}
           onSetTranslate={(swiper) => applySecondClasses(swiper, data.slides.length, s)} // opcional, más “en vivo”
           onSwiper={(swiper) => {
-            swiperRef.current = swiper;
+            swiperRef.current = swiper
 
-            const run = () => applySecondClasses(swiper, data.slides.length, s);
+            const run = () => applySecondClasses(swiper, data.slides.length, s)
 
             // ✅ el más fiable para loop
-            swiper.on("realIndexChange", () => requestAnimationFrame(run));
+            swiper.on('realIndexChange', () => requestAnimationFrame(run))
 
             // ✅ por si vienes de drag o animaciones largas
-            swiper.on("slideChangeTransitionEnd", () => requestAnimationFrame(run));
+            swiper.on('slideChangeTransitionEnd', () => requestAnimationFrame(run))
 
             // inicial
-            requestAnimationFrame(run);
+            requestAnimationFrame(run)
           }}
           className={s.swiper}
         >
           {data?.slides?.map((slide: any, index: number) => (
             <SwiperSlide key={index} className={s.swiperSlide}>
               <Link
-                        href={slide.link.href}
-                        target={slide.link.blank ? '_blank' : '_self'}
-                        rel={slide.link.blank ? 'noopener noreferrer' : undefined}
-                      >
-              {/* Wrap para poder escalar fácil el "card" */}
-              <div className={s.slideCard}>
-                <div className={s.media}>
-                  <LazyImage
-                    src={slide.image.imageUrl}
-                    alt={slide.image.alt || `Slide Image ${index + 1}`}
-                    width={slide.image.metadata.dimensions.width}
-                    height={slide.image.metadata.dimensions.height}
-                    fill={true}
-                  />
-                </div>
+                href={slide.link.href}
+                target={slide.link.blank ? '_blank' : '_self'}
+                rel={slide.link.blank ? 'noopener noreferrer' : undefined}
+              >
+                {/* Wrap para poder escalar fácil el "card" */}
+                <div className={s.slideCard}>
+                  <div className={s.media}>
+                    <LazyImage
+                      src={slide.image.imageUrl}
+                      alt={slide.image.alt || `Slide Image ${index + 1}`}
+                      width={slide.image.metadata.dimensions.width}
+                      height={slide.image.metadata.dimensions.height}
+                      fill={true}
+                    />
+                  </div>
 
-                <div className={s.content}>
-                  {slide.title && <h3 className={s.slideTitle}>{slide.title}</h3>}
-                  {slide.subtitle && <h4 className={s.slideSubtitle}>{slide.subtitle}</h4>}
+                  <div className={s.content}>
+                    {slide.title && <h3 className={s.slideTitle}>{slide.title}</h3>}
+                    {slide.subtitle && <h4 className={s.slideSubtitle}>{slide.subtitle}</h4>}
 
-                  {slide.description && <p className={s.slideDescription}>{slide.description}</p>}
+                    {slide.description && <p className={s.slideDescription}>{slide.description}</p>}
 
-                  {slide.link?.href && (
-                    <div className={`ctaButton ${s.ctaButton}`}>
-                      
+                    {slide.link?.href && (
+                      <div className={`ctaButton ${s.ctaButton}`}>
                         <svg
                           width="8"
                           height="12"
@@ -168,11 +170,10 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
                             fill="#272728"
                           />
                         </svg>
-                     </div> 
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                
-              </div>
               </Link>
             </SwiperSlide>
           ))}
