@@ -7,6 +7,14 @@ export default defineField({
   type: 'object',
   icon: ImagesIcon,
   fields: [
+    // Title
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'Images',
+    }),
     // Images
     defineField({
       name: 'items',
@@ -18,11 +26,12 @@ export default defineField({
   ],
   preview: {
     select: {
+      title: 'title',
       array: 'items',
     },
-    prepare({array}) {
+    prepare({title, array}) {
       return {
-        title: 'Section: Images',
+        title: `Section: ${title || 'Images'}`,
         subtitle: `${Array.isArray(array) ? array.length : 0} items`,
       }
     },

@@ -7,6 +7,14 @@ export default defineField({
   type: 'object',
   icon: BookmarkIcon,
   fields: [
+    // Title
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'Social',
+    }),
     // Description
     defineField({
       name: 'description',
@@ -79,12 +87,13 @@ export default defineField({
   ],
   preview: {
     select: {
+      title: 'title',
       items: 'items',
       links: 'links',
     },
-    prepare({items, links}) {
+    prepare({title, items, links}) {
       return {
-        title: 'Section: Social',
+        title: `Section: ${title || 'Social'}`,
         subtitle: `${Array.isArray(items) ? items.length : 0} items, ${Array.isArray(links) ? links.length : 0} links`,
       }
     },

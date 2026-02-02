@@ -7,6 +7,14 @@ export default defineField({
   type: 'object',
   icon: VideoIcon,
   fields: [
+    // Title
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'Videos',
+    }),
     // Description
     defineField({
       name: 'description',
@@ -32,11 +40,12 @@ export default defineField({
   ],
   preview: {
     select: {
+      title: 'title',
       array: 'items',
     },
-    prepare({array}) {
+    prepare({title, array}) {
       return {
-        title: 'Section: Videos',
+        title: `Section: ${title || 'Videos'}`,
         subtitle: `${Array.isArray(array) ? array.length : 0} items`,
       }
     },

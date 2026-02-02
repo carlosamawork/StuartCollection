@@ -7,6 +7,14 @@ export default defineField({
   type: 'object',
   icon: UserIcon,
   fields: [
+    // Title
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'The Artist',
+    }),
     // Body
     defineField({
       name: 'text',
@@ -36,9 +44,12 @@ export default defineField({
     }),
   ],
   preview: {
-    prepare() {
+    select: {
+      title: 'title',
+    },
+    prepare({title}) {
       return {
-        title: 'Section: The Artist(s)',
+        title: `Section: ${title || 'The Artist(s)'}`,
       }
     },
   },

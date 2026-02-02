@@ -7,20 +7,22 @@ export default defineField({
   icon: MarkerIcon,
   type: 'object',
   fields: [
-    {
-      name: 'enabled',
-      type: 'boolean',
-      title: 'Data taken from details tab',
-      initialValue: true,
-      validation: (rule) =>
-        rule.custom((value) => (value === true ? true : 'This field must be checked')),
-    },
+    // Title
+    defineField({
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: (Rule) => Rule.required(),
+      initialValue: 'Visit',
+    }),
   ],
-
   preview: {
-    prepare() {
+    select: {
+      title: 'title',
+    },
+    prepare({title}) {
       return {
-        title: 'Section: Visit',
+        title: `Section: ${title || 'Visit'}`,
       }
     },
   },
