@@ -40,7 +40,7 @@ export default function PageComponent({data}: {data: any}) {
 
   return (
     <div className={`${s.pageComponent}`}>
-      <Container fullWidth>
+      <Container size="fullWidth">
         {activeSection?.topImage && topImage && (
           <div className={s.topImageContainer}>
             <LazyImage
