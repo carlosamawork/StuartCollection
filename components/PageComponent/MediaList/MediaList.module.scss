@@ -1,0 +1,42 @@
+@use "@/styles/common/variables" as *;
+
+.mediaList {
+    margin: 56px 0 56px;
+    width: 100%;
+}
+
+.mediaItem {
+    width: 100%;
+
+    &.content {
+        max-width: $max_page_width_sm;
+    }
+}
+
+.itemsGrid{
+    display: grid;
+    gap: 24px;
+
+    &.columns-1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    &.columns-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.columns-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &.columns-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .mediaItem{
+        overflow: hidden;
+        border-radius: 8px;
+    }
+}
+
+

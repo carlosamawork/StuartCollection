@@ -12,63 +12,35 @@ export default defineField({
       title: 'Title (optional)',
       type: 'string',
     }),
-
-    defineField({
-      name: 'items',
-      title: 'Items',
-      type: 'array',
-      validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
-      of: [
-        {type: 'module.image'},
-        {type: 'module.video'},
-      ],
-    }),
-
-    defineField({
-      name: 'layout',
-      title: 'Layout',
-      type: 'string',
-      initialValue: 'grid',
-      options: {
-        layout: 'radio',
-        list: [
-          {title: 'Grid', value: 'grid'},
-          {title: 'Stack (vertical)', value: 'stack'},
-        ],
-      },
-    }),
-
     defineField({
       name: 'columns',
       title: 'Columns (grid)',
       type: 'number',
       initialValue: 2,
       hidden: ({parent}) => parent?.layout !== 'grid',
-      validation: (Rule) => Rule.min(1).max(6),
+      validation: (Rule) => Rule.min(1).max(4),
+    }),
+    defineField({
+      name: 'items',
+      title: 'Items',
+      type: 'array',
+      validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
+      of: [
+        {type: 'module.video'},
+        {type: 'module.image'},
+      ],
     }),
 
-    defineField({
-      name: 'gap',
-      title: 'Gap',
-      type: 'string',
-      initialValue: 'md',
-      options: {
-        layout: 'radio',
-        list: [
-          {title: 'S', value: 'sm'},
-          {title: 'M', value: 'md'},
-          {title: 'L', value: 'lg'},
-        ],
-      },
-    }),
+    
   ],
 
   preview: {
     select: {
       title: 'title',
-      count: 'items.length',
+      items: 'items',
     },
-    prepare({title, count}) {
+    prepare({title, items}) {
+      const count = items?.length;
       return {
         title: title || 'Media list',
         subtitle: `${count || 0} items`,

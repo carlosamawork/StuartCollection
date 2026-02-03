@@ -18,7 +18,7 @@ export function ButtonLink({href, children, className, variant, color, size}: Bu
   })
 
   return (
-    <Link href={href}>
+    <Link href={href} className={s.link}>
       <div className={`${s.button} ${styleClasses} ${className ?? ''}`}>{children}</div>
     </Link>
   )

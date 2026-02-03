@@ -1,3 +1,5 @@
+import { Button } from "@/components/Common/ui/Buttons/components/Button";
+import { ButtonLink } from "@/components/Common/ui/Buttons/components/ButtonLink";
 import { PortableTextComponents } from "@portabletext/react";
 
 export const portableBodyComponents = (): PortableTextComponents => {
@@ -72,16 +74,15 @@ export const portableBodyComponents = (): PortableTextComponents => {
         const { title, url, newWindow } = value;
 
         return (
-          <a
+          <ButtonLink
             href={url}
-            target={newWindow ? "_blank" : "_self"}
+            size="sm"
             className="cta-button"
-            rel="noopener noreferrer"
           >
             {title}
-          </a>
+          </ButtonLink>
         );
-      },
+      }
     },
   };
 };

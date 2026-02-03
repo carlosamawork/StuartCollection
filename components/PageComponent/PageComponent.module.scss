@@ -15,6 +15,10 @@
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 32px;
+
+    &.noAsideMenu {
+      grid-template-columns: 1fr;
+    }
   }
 
   .asideMenuContainer {
@@ -74,6 +78,7 @@
   }
 
   .contentContainer {
+    min-width: 0;
     .moduleTitle {
       border-bottom: 1px solid var(--colors-foreground-fg-1);
 

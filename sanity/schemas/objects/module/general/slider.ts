@@ -25,18 +25,6 @@ export default defineField({
               options: {hotspot: true},
               validation: (Rule) => Rule.required(),
             }),
-
-            defineField({
-              name: 'caption',
-              title: 'Caption',
-              type: 'body.captions',
-            }),
-
-            defineField({
-              name: 'link',
-              title: 'Link (optional)',
-              type: 'url',
-            }),
           ],
           preview: {
             select: {media: 'image', caption: 'caption'},
@@ -75,8 +63,11 @@ export default defineField({
   ],
 
   preview: {
-    select: {count: 'slides.length'},
-    prepare({count}) {
+    select: {
+      slides: 'slides'
+    },
+    prepare({slides}) {
+      const count = slides?.length;
       return {
         title: 'Slider',
         subtitle: `${count || 0} slides`,

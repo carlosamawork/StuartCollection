@@ -12,6 +12,8 @@ import { tileGroupQuery } from "./tileGroup"
 import { videoQuery } from "./video"
 import { iframQuery } from "./iframe"
 import { twoColumnsQuery } from "./twoColumns"
+import { sliderQuery } from "./slider"
+import { mediaListQuery } from "./mediaList"
 
 export const sectionQuery = `
     title,
@@ -57,6 +59,12 @@ export const sectionQuery = `
         },
         _type == "module.twoColumns" => {
             ${twoColumnsQuery}
+        },
+        _type == "module.slider" => {
+            ${sliderQuery}
+        },
+        _type == "module.mediaList" => {
+            ${mediaListQuery}
         },
     }
 `

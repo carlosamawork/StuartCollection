@@ -1,7 +1,13 @@
 @use "@/styles/common/variables" as *;
 
+.link{
+    text-decoration: none !important;
+}
+
 .button {
     border-radius: 8px;
+
+    
 }
 
 .buttonSize {

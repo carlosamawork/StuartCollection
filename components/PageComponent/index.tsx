@@ -16,6 +16,9 @@ import VideoComponent from './Video'
 import IframeComponent from './Iframe'
 import TwoColumnsComponent from './TwoColumns'
 import Container from '@/components/Common/ui/Container'
+import { m } from 'framer-motion'
+import SliderComponent from './Slider'
+import MediaListComponent from './MediaList'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
@@ -55,7 +58,7 @@ export default function PageComponent({data}: {data: any}) {
         )}
       </Container>
       <Container>
-        <div className={s.content}>
+        <div className={`${s.content} ${!data.asideMenu ? s.noAsideMenu : ''}`}>
           {data.asideMenu && (
             <aside className={s.asideMenuContainer}>
               <nav className={s.menuNav}>
@@ -166,6 +169,12 @@ export default function PageComponent({data}: {data: any}) {
                     {/* Add other module types as needed */}
                     {mod._type === 'module.twoColumns' && (
                       <TwoColumnsComponent data={mod} key={activeSection?.id} />
+                    )}
+                    {mod._type === 'module.slider' && (
+                      <SliderComponent data={mod} key={activeSection?.id} />
+                    )}
+                    {mod._type === 'module.mediaList' && (
+                      <MediaListComponent data={mod} key={activeSection?.id} />
                     )}
                   </div>
                 ))}
