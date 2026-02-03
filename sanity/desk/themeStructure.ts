@@ -4,8 +4,8 @@ import {TagsIcon} from '@sanity/icons'
 
 export default defineStructure<ListItemBuilder>((S) =>
   S.listItem()
-    .title('Categories')
+    .title('Themes')
     .icon(TagsIcon)
-    .schemaType('category')
-    .child(S.documentTypeList('category')),
+    .schemaType('theme')
+    .child(S.documentTypeList('theme')),
 )

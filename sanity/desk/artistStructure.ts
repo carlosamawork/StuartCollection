@@ -1,11 +1,11 @@
 import {ListItemBuilder} from 'sanity/desk'
 import defineStructure from '../utils/defineStructure'
-import {TagsIcon} from '@sanity/icons'
+import {UserIcon} from '@sanity/icons'
 
 export default defineStructure<ListItemBuilder>((S) =>
   S.listItem()
-    .title('Categories')
-    .icon(TagsIcon)
-    .schemaType('category')
-    .child(S.documentTypeList('category')),
+    .title('Artists')
+    .icon(UserIcon)
+    .schemaType('artist')
+    .child(S.documentTypeList('artist')),
 )

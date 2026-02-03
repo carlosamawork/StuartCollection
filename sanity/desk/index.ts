@@ -7,6 +7,11 @@ import home from './homeStructure'
 import pages from './pageStructure'
 import settings from './settingStructure'
 import category from './categoryStructure'
+import theme from './themeStructure'
+import location from './locationStructure'
+import artwork from './artworkStructure'
+import artist from './artistStructure'
+import trail from './trailStructure'
 
 /**
  * Desk structure overrides
@@ -42,7 +47,7 @@ const hiddenDocTypes = (listItem: ListItemBuilder) => {
     'category',
     'postTag',
     'orderPosts',
-    'orderProducts'
+    'orderProducts',
   ].includes(id)
 }
 
@@ -52,8 +57,13 @@ export const structure: StructureResolver = (S, context) =>
     .items([
       home(S, context),
       pages(S, context),
+      artwork(S, context),
+      trail(S, context),
       S.divider(),
       category(S, context),
+      theme(S, context),
+      location(S, context),
+      artist(S, context),
       S.divider(),
       settings(S, context),
       S.divider(),
