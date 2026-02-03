@@ -1,51 +1,54 @@
-@use "./styles/common/variables.scss" as *;
-@use "./styles/mixins/breakpoints.scss" as *;
+@use './styles/common/variables.scss' as *;
+@use './styles/mixins/breakpoints.scss' as *;
 
-.hero{
-    padding: 32px;
+.hero {
+  padding: 32px 0;
+  position: relative;
+
+  .media {
+    width: 100%;
+    height: calc(100vh - 225px);
+    border-radius: 20px;
+    overflow: hidden;
     position: relative;
-    .media{
-        width: 100%;
-        height: calc(100vh - 225px);
-        border-radius: 20px;
-        overflow: hidden;
-        position: relative;
-        video, img{
-            width: 100%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-height: 100%;
-            object-fit: cover;
-        }
-    }
 
-    .content{
-        font-weight: 300;
+    video,
+    img {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .content {
+    font-weight: 300;
+    color: var(--colors-foreground-fg-inverted-1);
+    position: absolute;
+    bottom: 58px;
+    left: 58px;
+    width: calc(100% - 116px);
+    display: grid;
+    grid-template-columns: 73% auto;
+    gap: 32px;
+
+    .ctaButton {
+      justify-self: end;
+      align-self: end;
+
+      a {
         color: var(--colors-foreground-fg-inverted-1);
-        position: absolute;
-        bottom: 58px;
-        left: 58px;
-        width: calc(100% - 116px);
-        display: grid;
-        grid-template-columns: 73% auto;
-        gap: 32px;
+        border: var(--colors-foreground-fg-inverted-1) 1px solid;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
 
-        .ctaButton{
-            justify-self: end;
-            align-self: end;
-            a{
-                color: var(--colors-foreground-fg-inverted-1);
-                border: var(--colors-foreground-fg-inverted-1) 1px solid;
-                border-radius: 8px;
-                transition: all 0.3s ease;
-            }
-
-            a:hover{
-                border-radius: 16px;
-            }
-        }
-
+      a:hover {
+        border-radius: 16px;
+      }
     }
+  }
 }

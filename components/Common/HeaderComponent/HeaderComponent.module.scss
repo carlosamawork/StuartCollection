@@ -2,67 +2,64 @@
 @use "./styles/mixins/breakpoints.scss" as *;
 
 .header {
-  .topHeader{
+  .topHeader {
     padding: 24px 32px;
     border-bottom: 1px solid var(--colors-foreground-fg-1);
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .logo{
+    .logo {
       font-size: var(--font-size-font-size-medium);
       line-height: var(--line-height-line-height-medium);
       letter-spacing: 1px;
       font-weight: 400;
     }
 
-    .logoSanDiego{
-      svg{
+    .logoSanDiego {
+      svg {
         width: 169px;
         height: auto;
       }
     }
   }
 
-  .menuHeader{
+  .menuHeaderContainer {
     padding: 12px 32px;
     border-bottom: 1px solid var(--colors-foreground-fg-1);
+  }
+
+  .menuHeader {
     display: grid;
     grid-template-columns: 1fr auto auto;
     align-items: center;
-    .mainNav{
+
+    .mainNav {
       padding-right: 32px;
-      ul{
+
+      ul {
         display: flex;
         gap: 32px;
         justify-content: space-between;
         align-items: center;
 
-        li{
+        li {
           font-size: var(--font-size-font-size-p);
           font-weight: 300;
         }
       }
     }
 
-    .dateHeader{
+    .dateHeader {
       padding-left: 32px;
       padding-right: 32px;
       border-left: 1px solid var(--colors-foreground-fg-1);
-      p{
+
+      p {
         font-size: var(--font-size-font-size-p-small);
         font-weight: 300;
       }
     }
 
-    .supportHeader{
-      padding: 12px 20px;
-      background-color: var(--colors-foreground-fg-1);
-      border-radius: 8px;
-      a{
-        color: var(--colors-foreground-fg-inverted-1);
-      }
-      
-    }
   }
 }

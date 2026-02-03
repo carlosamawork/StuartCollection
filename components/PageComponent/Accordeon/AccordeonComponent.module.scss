@@ -1,76 +1,80 @@
-.accordeon{
-    .accordeonTitle{
+@use "@/styles/common/variables" as *;
 
+.accordeon {
+    .accordeonTitle {
     }
 
-    .accordeonItems{
-
-        .accordeonItem{
-
-            .icon{
-                &.fullWidth{
-                    svg{
+    .accordeonItems {
+        .accordeonItem {
+            .icon {
+                &.fullWidth {
+                    svg {
                         width: 24px;
                         height: 24px;
                     }
                 }
 
-                svg{
+                svg {
                     width: 14px;
                     height: 14px;
                 }
             }
-            .iconOpen { display: none; }
-            .iconClosed { display: block; }
+            .iconOpen {
+                display: none;
+            }
+            .iconClosed {
+                display: block;
+            }
 
             &[open] {
-                .iconOpen { display: block; }
-                .iconClosed { display: none; }
+                .iconOpen {
+                    display: block;
+                }
+                .iconClosed {
+                    display: none;
+                }
             }
         }
 
-        .noTitle{
+        .noTitle {
             border-bottom: 1px solid var(--colors-foreground-fg-2);
-            summary{
+            summary {
                 cursor: pointer;
-                ::marker{
+                ::marker {
                     display: none;
                 }
 
-                h3{
+                h3 {
                     font-size: var(--font-size-font-size-3xlarge);
                     font-weight: 500;
                 }
-                
+
                 padding: 24px 0;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-
             }
         }
 
-        .withTitle{
+        .withTitle {
             border-bottom: 1px solid var(--colors-foreground-fg-2);
-            width: 68%;
-            summary{
+            max-width: $max_page_width_sm;
+            summary {
                 cursor: pointer;
-                ::marker{
+                ::marker {
                     display: none;
                 }
 
-                h3{
+                h3 {
                     font-size: var(--font-size-font-size-large);
                     font-weight: 500;
                 }
-                
+
                 padding: 24px 0;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-
             }
         }
-        
     }
 }

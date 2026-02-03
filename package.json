@@ -77,6 +77,16 @@
     "semi": false,
     "printWidth": 100,
     "bracketSpacing": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.scss",
+        "options": {
+          "singleQuote": false,
+          "parser": "scss",
+          "tabWidth": 4
+        }
+      }
+    ]
   }
 }

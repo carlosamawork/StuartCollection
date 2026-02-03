@@ -1,15 +1,17 @@
-.videoWrapper{
+@use "@/styles/common/variables" as *;
+
+.videoWrapper {
     width: 100%;
 
-    &.content{
-        width: 68%;
+    &.content {
+        max-width: $max_page_width_sm;
     }
 }
 
-.caption{
+.caption {
     width: 100%;
 
-    &.content{
-        width: 68%;
+    &.content {
+        max-width: $max_page_width_sm;
     }
 }

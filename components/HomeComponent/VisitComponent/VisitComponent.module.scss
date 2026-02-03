@@ -1,55 +1,57 @@
-.visit{
-    padding: 0px 32px;
+.visit {
 
-    .visitContent{
+    .visitContent {
         padding: 56px 0;
         border-top: 1px solid var(--colors-foreground-fg-3);
         display: grid;
         grid-template-columns: 1fr 1fr;
 
-        .titleVisit{
+        .titleVisit {
             position: sticky;
             top: 56px;
             align-self: start;
-            h2{
+
+            h2 {
                 margin: 0;
                 font-size: var(--font-size-font-size-3xlarge);
                 font-weight: 500;
             }
-            
-            .subtitle{
+
+            .subtitle {
                 width: 50%;
-                a{
-                   font-size: var(--font-size-font-size-large); 
-                   font-weight: 500;
+
+                a {
+                    font-size: var(--font-size-font-size-large);
+                    font-weight: 500;
                 }
             }
 
-            .ctaButton{
+            .ctaButton {
                 margin-top: 16px;
                 justify-self: start;
                 align-self: end;
-                a{
-                    color: var( --colors-foreground-fg-inverted-1);
-                    border: var( --colors-foreground-fg-1) 1px solid;
+
+                a {
+                    color: var(--colors-foreground-fg-inverted-1);
+                    border: var(--colors-foreground-fg-1) 1px solid;
                     background-color: var(--colors-foreground-fg-1);
                     border-radius: 8px;
                     transition: all 0.3s ease;
                     font-weight: 500;
                 }
 
-                a:hover{
+                a:hover {
                     border-radius: 16px;
                 }
             }
         }
 
-        .contentVisit{
-            .body{
+        .contentVisit {
+            .body {
                 margin-bottom: 24px;
             }
 
-            .caption{
+            .caption {
                 margin-top: 8px;
             }
         }

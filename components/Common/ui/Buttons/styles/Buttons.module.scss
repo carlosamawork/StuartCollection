@@ -1,0 +1,43 @@
+@use "@/styles/common/variables" as *;
+
+.button {
+    border-radius: 8px;
+}
+
+.buttonSize {
+    &-sm {
+        padding: 8px 12px;
+    }
+
+    &-md {
+        padding: 8px 160px;
+    }
+
+    &-lg {
+        padding: 12px 20px;
+    }
+}
+
+.buttonStyle {
+    &-default-filled {
+        color: var(--colors-foreground-fg-inverted-1);
+        background-color: var(--colors-foreground-fg-1);
+    }
+
+    &-default-outlined {
+        color: var(--colors-foreground-fg-1);
+        background-color: transparent;
+        border: 1px solid;
+    }
+
+    &-inverted-filled {
+        color: var(--colors-foreground-fg-1);
+        background-color: var(--colors-background-bg-white);
+    }
+
+    &-inverted-outlined {
+        color: var(--colors-foreground-fg-inverted-1);
+        background-color: transparent;
+        border: 1px solid;
+    }
+}
