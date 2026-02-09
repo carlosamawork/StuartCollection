@@ -34,6 +34,57 @@ export default defineType({
       type: 'menuSettings',
       group: 'navigation',
     }),
+    defineField({
+      name: 'hours',
+      title: 'Opening hours',
+      type: 'array',
+      of: [{
+        type: 'object',
+        name: 'hoursItem',
+        fields: [
+          defineField({
+            name: 'day',
+            title: 'Day',
+            type: 'string',
+          }),
+          defineField({
+            name: 'open',
+            title: 'Open',
+            type: 'string',
+          }),
+          defineField({
+            name: 'close',
+            title: 'Close',
+            type: 'string',
+          }),
+        ],
+      }],
+      group: 'navigation',
+    }),
+    defineField({
+      name: 'directions',
+      title: 'Directions',
+      type: 'body.paragraphs',
+      group: 'navigation',
+    }),
+    defineField({
+      name: 'connect',
+      title: 'Connect',
+      type: 'body.paragraphs',
+      group: 'navigation',
+    }),
+    defineField({
+      name: 'email',
+      title: 'Email',
+      type: 'string',
+      group: 'navigation',
+    }),
+    defineField({
+      name: 'telephone',
+      title: 'Telephone',
+      type: 'string',
+      group: 'navigation',
+    }),
     // Footer
     defineField({
       name: 'footer',

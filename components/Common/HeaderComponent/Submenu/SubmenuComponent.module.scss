@@ -1,0 +1,76 @@
+@use "./styles/common/variables.scss" as *;
+@use "./styles/mixins/breakpoints.scss" as *;
+
+.submenuWrapper{
+    width: 100%;
+    padding: 40px 0px;
+    display: flex;
+    justify-content: space-between;
+
+    .submenuContent{
+        width: 280px;
+
+        h6{
+            margin-bottom: 8px;
+        }
+    }
+
+    .submenuAdditionalContent{
+        
+        display: flex;
+        gap: 32px;
+
+        .element{
+            min-width: 280px;
+
+            h6{
+                margin-bottom: 8px;
+
+            }
+
+            li{
+                margin-bottom: 8px;
+            }
+
+            p{
+                margin-bottom: 8px;
+            }
+        }
+    }
+
+
+    .section{
+        margin-bottom: 8px;
+        a{
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-content: center;
+            gap: 8px;
+
+            svg{
+                align-self: center;
+            }
+        }
+    }
+    
+}
+
+.submenuBottom{
+    border-top: 1px solid var(--colors-foreground-fg-1);
+}
+
+.contactInfo{
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    p{
+        padding: 16px;
+        text-align: center;
+    }
+
+    p:first-child{
+        border-right: 1px solid var(--colors-foreground-fg-1);
+    }
+
+}

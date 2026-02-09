@@ -16,6 +16,8 @@ import FacebookPixel from '@/components/Common/Analytics/facebook';
 import PinterestTag from '@/components/Common/Analytics/pinterest';
 import Hotjar from '@/components/Common/Analytics/hotjar';
 import { Roboto } from 'next/font/google'
+import { get } from 'http';
+import { getHeader } from '@/sanity/queries/common/header';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -33,6 +35,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
 
+  const headerData = await getHeader();
+
   return (
     <html lang="en">
       <body className={roboto.className}>
@@ -40,7 +44,7 @@ export default async function RootLayout({
         <!-- Code by Cacho Salvador, http://cachosalvador.com (2026) -->
         <!-- ----------------------------------------------------- -->" />
         <WebProvider>
-          <HeaderComponent />
+          <HeaderComponent data={headerData} />
 
           {children}
           

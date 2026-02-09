@@ -2,13 +2,17 @@
 
 import Link from 'next/link'
 import s from './HeaderComponent.module.scss'
-import {useEffect, useMemo, useRef, useState} from 'react'
-import {motion} from 'framer-motion'
+import {useEffect, useRef, useState} from 'react'
+import {motion, AnimatePresence} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {ButtonLink} from '@/components/Common/ui/Buttons/components/ButtonLink'
+import SubmenuComponent from './Submenu'
 
 export default function HeaderComponent({data}: any) {
   const headerRef = useRef<HTMLElement>(null)
+
+  const [activeItem, setActiveItem] = useState<any>(null)
+  const [submenuOpen, setSubmenuOpen] = useState(false)
 
   useEffect(() => {
     console.log(
@@ -18,16 +22,29 @@ export default function HeaderComponent({data}: any) {
     )
   }, [])
 
+  const openSubmenu = (item: any) => {
+    setActiveItem(item)
+    setSubmenuOpen(true)
+  }
+
+  const closeSubmenu = () => {
+    setSubmenuOpen(false)
+    setActiveItem(null)
+  }
+
   return (
     <motion.header
-      className={`${s.header}`}
+      className={s.header}
       ref={headerRef}
       initial={{opacity: 0}}
       animate={{opacity: 1}}
       transition={{duration: 0.3, delay: 0.5}}
+      // ✅ al salir de TODO el header (menu + submenu), cerramos
+      onMouseLeave={closeSubmenu}
     >
-      <div className={s.topHeader}>
-        <Container>
+      {/* ... top header igual ... */}
+      <div >
+        <Container className={s.topHeader}>
           <div className={s.logo}>
             <Link href="/">STUART COLLECTION</Link>
           </div>
@@ -97,38 +114,100 @@ export default function HeaderComponent({data}: any) {
           </div>
         </Container>
       </div>
+
       <div className={s.menuHeaderContainer}>
         <Container className={s.menuHeader}>
           <nav className={s.mainNav}>
             <ul>
-              <li>
-                <Link href="/about">About</Link>
-              </li>
-              <li>
-                <Link href="/the-collection">The Collection</Link>
-              </li>
-              <li>
-                <Link href="/visit">Visit</Link>
-              </li>
-              <li>
-                <Link href="/media">Media</Link>
-              </li>
-              <li>
-                <Link href="/contact">Contact</Link>
-              </li>
+              {data?.menu?.links?.map((link: any, index: number) => {
+                const label = link.title || link.reference?.title || 'Untitled'
+
+                // ✅ solo abre submenu si ese item tiene contenido de submenu
+                const hasSubmenu = Boolean(
+                  link?.submenu?.length ||
+                  link?.children?.length ||
+                  link?._type === 'linkWithSubmenu',
+                )
+
+                if (link._type === 'linkInternal') {
+                  return (
+                    <li
+                      key={index}
+                      onMouseEnter={() => openSubmenu(link)}
+                      className={s.linkInternal}
+                      // opcional: si quieres que al pasar por un item sin submenu se cierre
+                    >
+                      <Link href={`/${link.slug}`}>
+                        {label}
+                        <svg
+                          width="10"
+                          height="7"
+                          viewBox="0 0 10 7"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M8.825 0L5 3.81667L1.175 0L0 1.175L5 6.175L10 1.175L8.825 0Z"
+                            fill="#272728"
+                          />
+                        </svg>
+                      </Link>
+                    </li>
+                  )
+                }
+
+                if (link._type === 'linkExternal') {
+                  return (
+                    <li key={index} onMouseEnter={() => hasSubmenu && openSubmenu(link)}>
+                      <a
+                        href={link.url}
+                        target={link.newWindow ? '_blank' : '_self'}
+                        rel={link.newWindow ? 'noopener noreferrer' : undefined}
+                      >
+                        {label}
+                      </a>
+                    </li>
+                  )
+                }
+
+                return null
+              })}
             </ul>
           </nav>
+
+          {/* ... resto igual ... */}
           <div className={s.dateHeader}>
             <p>
               <strong>Open today</strong>
             </p>
             <p>10AM – 6PM | 77ºF</p>
           </div>
+
           <ButtonLink href="/support-us" size="lg">
             Support
           </ButtonLink>
         </Container>
       </div>
+
+      {/* ✅ Submenu animado y con contenido del item hover */}
+      <AnimatePresence>
+        {submenuOpen && (
+          <motion.div
+            className={s.submenuHeader}
+            initial={{opacity: 0, y: -8}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -8}}
+            transition={{duration: 0.2}}
+            // ✅ mantener abierto mientras estás encima del submenu
+            onMouseEnter={() => setSubmenuOpen(true)}
+          >
+            <SubmenuComponent 
+              data={activeItem} 
+              additionalContent={data}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }

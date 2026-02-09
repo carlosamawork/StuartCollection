@@ -8,7 +8,13 @@ export const getHeader = async () => {
           links[]{
             ...,
             _type == "linkInternal" => {
-              "slug": page->slug.current
+              "slug": reference->slug.current,
+              "sections": reference->modules[]{
+                _type == "module.section" => {
+                  title,
+                  id,
+                }
+              }
             },
             _type == "linkExternal" => {
               title,
@@ -16,7 +22,17 @@ export const getHeader = async () => {
               newWindow
             }
           }
-        }
+        },
+        "openingHours": hours[]{
+          day,
+          open,
+          close
+        },
+        directions,
+        connect,
+        telephone,
+        email
+
     }`
   )
 };
