@@ -19,6 +19,7 @@ import Container from '@/components/Common/ui/Container'
 import { m } from 'framer-motion'
 import SliderComponent from './Slider'
 import MediaListComponent from './MediaList'
+import TabsComponent from './Tabs'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
@@ -175,6 +176,9 @@ export default function PageComponent({data}: {data: any}) {
                     )}
                     {mod._type === 'module.mediaList' && (
                       <MediaListComponent data={mod} key={activeSection?.id} />
+                    )}
+                    {mod._type === 'module.tabs' && (
+                      <TabsComponent data={mod} key={activeSection?.id} />
                     )}
                   </div>
                 ))}

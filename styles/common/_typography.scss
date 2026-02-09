@@ -21,38 +21,47 @@ a {
 ******************************************/
 
 %h1 {
-	font-size: font-size("xxl", "mobile");
+	font-size: var(--font-size-font-size-4xlarge);
+    line-height: var(--line-height-line-height-4xlarge);
+    font-weight: 500;
 	@include media-breakpoint-up(md) {
-		font-size: font-size("xxl", "desktop");
+		font-size: var(--font-size-font-size-4xlarge);
+        line-height: var(--line-height-line-height-4xlarge);
+        font-weight: 500;
 	}
 }
 
 %h2 {
-	font-size: font-size("xl", "mobile");
-	line-height: 1.16;
+	font-size: var(--font-size-font-size-3xlarge);
+	line-height: var(--line-height-line-height-3xlarge);
+    font-weight: 500;
 	@include media-breakpoint-up(md) {
-		font-size: font-size("xl", "desktop");
-		line-height: 1.2;
+		font-size: var(--font-size-font-size-3xlarge);
+		line-height: var(--line-height-line-height-3xlarge);
+        font-weight: 500;
 	}
 }
 
 %h3 {
-	font-size: font-size("lg", "mobile");
-	line-height: 1.2;
+	font-size: var(--font-size-font-size-2xlarge);
+	line-height: var(--line-height-line-height-2xlarge);
+    font-weight: 500;
 	@include media-breakpoint-up(md) {
-		font-size: font-size("lg", "desktop");
+		font-size: var(--font-size-font-size-2xlarge);
+		line-height: var(--line-height-line-height-2xlarge);
+        font-weight: 500;
 	}
 }
 
-%h3 {
-	font-size: font-size("md", "mobile");
-	line-height: 1.2;
-	@include media-breakpoint-up(md) {
-		font-size: font-size("md", "desktop");
-	}
-}
 %h4 {
-	@extend %h3;
+	font-size: var(--font-size-font-size-xlarge);
+	line-height: var(--line-height-line-height-xlarge);
+    font-weight: 500;
+	@include media-breakpoint-up(md) {
+		font-size: var(--font-size-font-size-xlarge);
+		line-height: var(--line-height-line-height-xlarge);
+        font-weight: 500;
+	}
 }
 
 %p {

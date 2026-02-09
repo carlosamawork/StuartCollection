@@ -14,6 +14,7 @@ import { iframQuery } from "./iframe"
 import { twoColumnsQuery } from "./twoColumns"
 import { sliderQuery } from "./slider"
 import { mediaListQuery } from "./mediaList"
+import { tabsQuery } from "./tabs"
 
 export const sectionQuery = `
     title,
@@ -66,5 +67,9 @@ export const sectionQuery = `
         _type == "module.mediaList" => {
             ${mediaListQuery}
         },
+        _type == "module.tabs" => {
+            ${tabsQuery}
+        },
+        // 👇 aquí metes TODOS los módulos que quieras permitir dentro de una sección
     }
 `

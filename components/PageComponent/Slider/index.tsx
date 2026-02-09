@@ -30,7 +30,6 @@ type SliderData = {
 }
 
 export default function SliderComponent({ data }: { data: SliderData }) {
-    console.log('Slider data:', data);
   const options = data?.options ?? {}
   const slides = data?.slides ?? []
 

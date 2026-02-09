@@ -5,7 +5,7 @@ export const twoColumnsQuery = `
     imageSide,
     textAlignY,
     image{
-      ${image}
+        ${image}
     },
     body
 `;

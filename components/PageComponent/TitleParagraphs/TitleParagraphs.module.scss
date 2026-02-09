@@ -2,7 +2,11 @@
 
 .titleParagraphs {
     margin: 56px 0 24px;
-    max-width: $max_page_width_sm;
+    width: 100%;
+
+    &.content {
+        max-width: $max_page_width_sm;
+    }
 
     h1 {
         font-size: var(--font-size-font-size-4xlarge);

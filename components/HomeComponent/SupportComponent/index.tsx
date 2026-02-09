@@ -9,7 +9,6 @@ import VideoEmbed from '@/components/Common/VideoEmbed'
 import Container from '@/components/Common/ui/Container'
 
 export default function SupportComponent({data}: {data: any}) {
-  console.log('Support data:', data)
   return (
     <Container>
       <div className={s.support}>

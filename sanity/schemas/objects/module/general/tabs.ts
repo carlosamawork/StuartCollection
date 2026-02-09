@@ -55,48 +55,55 @@ export default defineField({
               ],
               validation: (Rule) => Rule.min(1).error('Add at least 1 module in this tab'),
             }),
+            defineField({
+              name: 'imageTab',
+              title: 'Tab image (optional)',
+              type: 'image',
+              options: {hotspot: true},
+            })
           ],
           preview: {
             select: {
               title: 'label',
-              count: 'content.length',
+              count: 'content',
             },
             prepare({title, count}) {
+              const moduleCount = count.length || 0
               return {
                 title: title || 'Tab',
-                subtitle: `${count || 0} modules`,
+                subtitle: `${moduleCount} modules`,
               }
             },
           },
         }),
       ],
     }),
-
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      initialValue: 'default',
-      options: {
-        layout: 'radio',
-        list: [
-          {title: 'Default', value: 'default'},
-          {title: 'Pills', value: 'pills'},
-          {title: 'Underline', value: 'underline'},
-        ],
-      },
-    }),
+    // defineField({
+    //   name: 'variant',
+    //   title: 'Variant',
+    //   type: 'string',
+    //   initialValue: 'default',
+    //   options: {
+    //     layout: 'radio',
+    //     list: [
+    //       {title: 'Default', value: 'default'},
+    //       {title: 'Pills', value: 'pills'},
+    //       {title: 'Underline', value: 'underline'},
+    //     ],
+    //   },
+    // }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      count: 'tabs.length',
+      count: 'tabs',
     },
     prepare({title, count}) {
+      const tabCount = count.length || 0
       return {
         title: title || 'Tabs',
-        subtitle: `${count || 0} tabs`,
+        subtitle: `${tabCount} tabs`,
         media: VersionsIcon,
       }
     },

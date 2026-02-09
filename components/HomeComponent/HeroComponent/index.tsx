@@ -7,7 +7,6 @@ import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 import Container from '@/components/Common/ui/Container'
 
 export default function HeroComponent({data}: {data: any}) {
-  console.log('Hero data:', data)
   return (
     <Container>
       <div className={s.hero}>

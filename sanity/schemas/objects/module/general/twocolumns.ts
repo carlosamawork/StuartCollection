@@ -49,7 +49,6 @@ export default defineField({
       title: 'Image',
       type: 'image',
       options: {hotspot: true},
-      validation: (Rule) => Rule.required(),
     }),
 
     defineField({

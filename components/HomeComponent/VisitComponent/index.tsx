@@ -9,7 +9,6 @@ import VideoEmbed from '@/components/Common/VideoEmbed'
 import Container from '@/components/Common/ui/Container'
 
 export default function VisitComponent({data}: {data: any}) {
-  console.log('Visit data:', data)
   return (
     <Container>
       <div className={s.visit}>

@@ -8,16 +8,16 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function TwoColumnsComponent({data}: {data: any}) {
-    console.log('TwoColumnsComponent data:', data);
-  return (
+
+    return (
     <div className={s.twoColumns}>
         <div className={s.title}>
             {data.title && <h2>{data.title}</h2>}
         </div>
-        <div className={s.columns}>
+        <div className={`${s.columns} ${s[data.imageSide == 'left' ? 'imageLeft' : 'imageRight']}`}>
             <div className={`${s.leftColumn} ${s[data.textAlignY || 'top']}`}>
                 {data.imageSide == 'left' &&
-                    data.image && (
+                    data.image && data.image.imageUrl && (
                     <div className={s.imageWrapper}>
                         <LazyImage
                             src={data.image.imageUrl}
@@ -44,7 +44,7 @@ export default function TwoColumnsComponent({data}: {data: any}) {
             </div>
             <div className={`${s.rightColumn} ${s[data.textAlignY || 'top']}`}>
                 {data.imageSide == 'right' &&
-                    data.image && (
+                    data.image && data.image.imageUrl &&(
                     <div className={s.imageWrapper}>
                         <LazyImage
                             src={data.image.imageUrl}

@@ -120,25 +120,21 @@ export default function LazyVideo({
 
   // Si NO es HLS → MP4 normal
   if (!isHlsSource(videoSrc)) {
-    console.log("[LazyVideo] MP4 normal:", videoSrc);
     video.src = videoSrc;
     return;
   }
 
-  console.log("[LazyVideo] HLS detectado:", videoSrc);
 
   const isSafari = isSafariBrowser();
 
   // ✅ Solo Safari usa HLS nativo
   if (isSafari && video.canPlayType("application/vnd.apple.mpegurl")) {
-    console.log("[LazyVideo] HLS nativo (Safari)");
     video.src = videoSrc;
     return;
   }
 
   // 🌐 Chrome / Firefox / Edge → SIEMPRE hls.js
   if (Hls.isSupported()) {
-    console.log("[LazyVideo] HLS via hls.js (no Safari)");
     const hls = new Hls({
       capLevelToPlayerSize: true,
     });

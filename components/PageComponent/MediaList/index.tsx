@@ -8,7 +8,6 @@ import Link from 'next/link'
 import VideoEmbed from '@/components/Common/VideoEmbed'
 
 export default function MediaListComponent({data}: {data: any}) {
-    console.log('MediaList data:', data);
     return (
         <div className={`${s.mediaList}`}>
             {data.title && <h2 className={s.title}>{data.title}</h2>}

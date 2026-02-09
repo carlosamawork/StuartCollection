@@ -8,7 +8,6 @@ import Link from 'next/link'
 import Container from '@/components/Common/ui/Container'
 
 export default function PressComponent({data}: {data: any}) {
-  console.log('Press data:', data)
   return (
     <Container>
       <div className={s.press}>
