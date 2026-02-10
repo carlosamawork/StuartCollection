@@ -1,8 +1,9 @@
 export const textAccordeonQuery = `
     options{
-        openfirst
+        openFirst
     },
-    items[]->{
+    items[]{
         label,
+        content
     }
 `

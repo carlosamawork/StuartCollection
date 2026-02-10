@@ -53,6 +53,16 @@ export default defineField({
               options: {hotspot: true},
             },
           ],
+          validation: (Rule) =>
+            Rule.custom((value, context) => {
+              const {parent} = context
+              if (parent?.customizeArtistsImages) {
+                if (!value || value.length === 0) {
+                  return 'Please add at least one image or artist'
+                }
+              }
+              return true
+            }),
           hidden: ({parent}) => parent?.customizeArtistsImages !== true,
         }),
       ],

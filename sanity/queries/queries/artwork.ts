@@ -2,9 +2,11 @@ import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
 import {image} from '../fragments/image'
-import {location} from '../modules/artwork/location'
+import {location} from '../fragments/location'
 import {textAccordeonQuery} from '../modules/artwork/textAccordeon'
 import {artistQuery} from '../modules/artwork/artist'
+import {socialQuery} from '../modules/artwork/social'
+import {videosQuery} from '../modules/artwork/videos'
 import {imagesQuery} from '../modules/artwork/images'
 import {visitQuery} from '../modules/artwork/visit'
 import {textParagraphsQuery} from '../modules/general/textParagraphs'
@@ -18,11 +20,19 @@ export async function getArtwork(slug: string) {
             artists[]->{
                 name,
             },
-            themes[]->{
-                title,
+            featuredImage{
+                ${image}
             },
-            year,
-    
+            "details": {
+                themes[]->{
+                    title,
+                },
+                year,
+                visitDescription,
+                location->{
+                    ${location}
+                },
+            },     
             "body_modules": body[]{
                 _type,
                 _type == "module.textParagraphs" => {
@@ -36,7 +46,7 @@ export async function getArtwork(slug: string) {
                 },
             },   
             "sections": sections[]{
-                _key,
+                _type,
                 _type == "module.artwork.images" => {
                     ${imagesQuery}
                 },
@@ -47,30 +57,16 @@ export async function getArtwork(slug: string) {
                     ${visitQuery}
                 },
                 _type == "module.artwork.videos" => {
-                    ${visitQuery}
+                    ${videosQuery}
                 },
                 _type == "module.artwork.social" => {
-                    ${visitQuery}
+                    ${socialQuery}
                 },
-            },   
+            },
         }`,
     {slug},
   )
 }
-
-// featuredImage{
-//     ${image}
-// },
-// visitDescription,
-// location->{
-//     ${location}
-// },
-// "details": {
-//     themes[]->{
-//         title,
-//     },
-//     year,
-// },
 
 export async function getArtworkSEO(slug: string) {
   return client.fetch(
