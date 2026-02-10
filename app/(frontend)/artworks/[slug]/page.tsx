@@ -1,56 +1,71 @@
-import HomeComponent from '@/components/HomeComponent';
-import PageComponent from '@/components/PageComponent';
-import { getDefaultSEO } from '@/sanity/queries/common/defaultSEO';
-import { getHome, getHomeSEO } from '@/sanity/queries/queries/home';
-import { getPage, getPageSEO } from '@/sanity/queries/queries/page';
-import { BASE_IMAGE_HEIGHT, BASE_IMAGE_URL, BASE_IMAGE_WIDTH, BASE_URL, buildUrl, getFavicons, siteDescription, siteTitle } from '@/utils/seoHelper';
+import ArtworkComponent from '@/components/ArtworkComponent'
+import HomeComponent from '@/components/HomeComponent'
+import PageComponent from '@/components/PageComponent'
+import {getDefaultSEO} from '@/sanity/queries/common/defaultSEO'
+import {getArtwork, getArtworkSEO} from '@/sanity/queries/queries/artwork'
+import {
+  BASE_IMAGE_HEIGHT,
+  BASE_IMAGE_URL,
+  BASE_IMAGE_WIDTH,
+  BASE_URL,
+  buildUrl,
+  getFavicons,
+  siteDescription,
+  siteTitle,
+} from '@/utils/seoHelper'
 
 export const revalidate = 1 // revalidate to work set to 1, then we change it to 10
 
 export async function generateMetadata({params}: {params: {slug: string}}) {
-  const { slug } = await params
-  const defaultSEO = await getDefaultSEO();
+  const {slug} = await params
+  const page = await getArtworkSEO(slug)
+  const defaultSEO = await getDefaultSEO()
 
-//   if (!page) {
-//     return {
-//       metadataBase: BASE_URL,
-//       title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
-//       description: defaultSEO.description || siteDescription,
-//       robots: {
-//         index: false,
-//         follow: true,
-//         nocache: false,
-//         googleBot: {
-//           index: false,
-//           follow: true,
-//           'max-video-preview': -1,
-//           'max-image-preview': 'large',
-//           'max-snippet': -1,
-//         },
-//       },
-//       alternates: {
-//         canonical: BASE_URL.origin,
-//       },
-//     }
-//   }
-
+  if (!page) {
+    return {
+      metadataBase: BASE_URL,
+      title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
+      description: defaultSEO.description || siteDescription,
+      robots: {
+        index: false,
+        follow: true,
+        nocache: false,
+        googleBot: {
+          index: false,
+          follow: true,
+          'max-video-preview': -1,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+        },
+      },
+      alternates: {
+        canonical: BASE_URL.origin,
+      },
+    }
+  }
 
   return {
     metadataBase: BASE_URL,
-    title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
-    description: defaultSEO.description || siteDescription,
+    title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
+    description: page.seo?.description || defaultSEO.description || siteDescription,
     generator: 'Next.js',
     applicationName: 'Stuart Collection by Cacho Salvador',
     openGraph: {
-      title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
-      description: defaultSEO.description || siteDescription,
-      url: buildUrl(`/${slug}/`),
+      title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
+      description: page.seo?.description || defaultSEO.description || siteDescription,
+      url: buildUrl(`/artworks/${slug}/`),
       siteName: siteTitle,
       images: [
         {
-          url: defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
-          width: defaultSEO.image?.metadata?.dimensions?.width || BASE_IMAGE_WIDTH,
-          height: defaultSEO.image?.metadata?.dimensions?.height || BASE_IMAGE_HEIGHT,
+          url: page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
+          width:
+            page.seo?.image?.metadata?.dimensions?.width ||
+            defaultSEO.image?.metadata?.dimensions?.width ||
+            BASE_IMAGE_WIDTH,
+          height:
+            page.seo?.image?.metadata?.dimensions?.height ||
+            defaultSEO.image?.metadata?.dimensions?.height ||
+            BASE_IMAGE_HEIGHT,
         },
       ],
       type: 'website',
@@ -69,25 +84,24 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     },
     icons: getFavicons(),
     alternates: {
-      canonical: buildUrl(`/${slug}/`),
+      canonical: buildUrl(`/artworks/${slug}/`),
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${defaultSEO.title || siteTitle}`,
-      description: defaultSEO.description || siteDescription,
-      images: [
-        defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
-      ],
+      title: `${page.seo?.title || defaultSEO.title || siteTitle}`,
+      description: page.seo?.description || defaultSEO.description || siteDescription,
+      images: [page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL],
     },
   }
 }
 
-export default async function Page({params}: {params: {slug: string}}) {
-  const { slug } = await params
+export default async function Artwork({params}: {params: {slug: string}}) {
+  const {slug} = await params
+  const data = await getArtwork(slug)
 
   return (
     <main>
-      
+      <ArtworkComponent data={data} />
     </main>
   )
 }

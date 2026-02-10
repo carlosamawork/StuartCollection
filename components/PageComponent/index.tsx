@@ -16,7 +16,7 @@ import VideoComponent from './Video'
 import IframeComponent from './Iframe'
 import TwoColumnsComponent from './TwoColumns'
 import Container from '@/components/Common/ui/Container'
-import { m } from 'framer-motion'
+import {m} from 'framer-motion'
 import SliderComponent from './Slider'
 import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
@@ -25,6 +25,7 @@ export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
   const [topImage, setTopImage] = useState(false)
   const [separatorsMenu, setSeparatorsMenu] = useState<any | null>(null)
+  console.log('PageComponent DATA', data)
 
   useEffect(() => {
     const defaultModule =
