@@ -20,6 +20,7 @@ import {m} from 'framer-motion'
 import SliderComponent from './Slider'
 import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
+import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
@@ -100,10 +101,21 @@ export default function PageComponent({data}: {data: any}) {
           )}
 
           <article className={s.contentContainer}>
-            <div className={s.breadcrumbs}>
-              <Link href="/">Home</Link> / <a href={`/${data.slug}/`}>{data.title}</a> /{' '}
-              <Link href={`#${activeSection?.id || ''}`}>{activeSection?.title || 'Section'}</Link>
-            </div>
+            <Breadcrumbs
+              breadcrumbs={[
+                {label: 'Home', href: '/'},
+                {label: data.title, href: `/${data.slug}/`},
+                ...(activeSection?.title
+                  ? [
+                      {
+                        label: activeSection?.title,
+                        href: `#${activeSection?.id}`,
+                      },
+                    ]
+                  : []),
+              ]}
+              showLastSlash={false}
+            />
             <div className={s.moduleTitle}>
               <h1>{activeSection?.title}</h1>
               {separatorsMenu && separatorsMenu.length > 0 && (

@@ -2,90 +2,92 @@
 @use "./styles/mixins/breakpoints.scss" as *;
 
 .header {
-  .topHeader {
-    padding: 24px 32px;
-    border-bottom: 1px solid var(--colors-foreground-fg-1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo {
-      font-size: var(--font-size-font-size-medium);
-      line-height: var(--line-height-line-height-medium);
-      letter-spacing: 1px;
-      font-weight: 400;
+    .topHeaderContainer {
+        padding: 24px 0;
+        border-bottom: 1px solid var(--colors-foreground-fg-1);
     }
 
-    .logoSanDiego {
-      svg {
-        width: 169px;
-        height: auto;
-      }
-    }
-  }
-
-  .menuHeaderContainer {
-    padding: 12px 0px;
-    border-bottom: 1px solid var(--colors-foreground-fg-1);
-  }
-
-  .menuHeader {
-    display: grid;
-    grid-template-columns: 1fr auto auto;
-    align-items: center;
-
-    .mainNav {
-      padding-right: 32px;
-
-      ul {
+    .topHeader {
         display: flex;
-        gap: 32px;
         justify-content: space-between;
         align-items: center;
 
-        li {
-          font-size: var(--font-size-font-size-p);
-          font-weight: 300;
+        .logo {
+            font-size: var(--font-size-font-size-medium);
+            line-height: var(--line-height-line-height-medium);
+            letter-spacing: 1px;
+            font-weight: 400;
         }
 
-        .linkInternal{
-          a{
-              display: flex;
-              align-items: baseline;
-              gap: 4px;
-  
-              svg {
-                transition: transform 0.3s ease;
-              }
-  
-              &:hover svg {
-                transform: rotate(180deg);
-              }
-          }
+        .logoSanDiego {
+            svg {
+                width: 169px;
+                height: auto;
+            }
         }
-      }
     }
 
-    .dateHeader {
-      padding-left: 32px;
-      padding-right: 32px;
-      border-left: 1px solid var(--colors-foreground-fg-1);
-
-      p {
-        font-size: var(--font-size-font-size-p-small);
-        font-weight: 300;
-      }
+    .menuHeaderContainer {
+        padding: 12px 0px;
+        border-bottom: 1px solid var(--colors-foreground-fg-1);
     }
 
-  }
+    .menuHeader {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
 
-  .submenuHeader{
-    position: absolute;
-    top: 161px;
-    left: 0;
-    width: 100%;
-    z-indeX: 9999;
-    background: $body-bg;
-    border-bottom: 1px solid var(--colors-foreground-fg-2);
-  }
+        .mainNav {
+            padding-right: 32px;
+
+            ul {
+                display: flex;
+                gap: 32px;
+                justify-content: space-between;
+                align-items: center;
+
+                li {
+                    font-size: var(--font-size-font-size-p);
+                    font-weight: 300;
+                }
+
+                .linkInternal {
+                    a {
+                        display: flex;
+                        align-items: baseline;
+                        gap: 4px;
+
+                        svg {
+                            transition: transform 0.3s ease;
+                        }
+
+                        &:hover svg {
+                            transform: rotate(180deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .dateHeader {
+            padding-left: 32px;
+            padding-right: 32px;
+            border-left: 1px solid var(--colors-foreground-fg-1);
+
+            p {
+                font-size: var(--font-size-font-size-p-small);
+                font-weight: 300;
+            }
+        }
+    }
+
+    .submenuHeader {
+        position: absolute;
+        top: 161px;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        background: $body-bg;
+        border-bottom: 1px solid var(--colors-foreground-fg-2);
+    }
 }

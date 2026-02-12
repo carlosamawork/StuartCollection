@@ -23,7 +23,7 @@ export async function getArtwork(slug: string) {
             featuredImage{
                 ${image}
             },
-            "details": {
+            "specs": {
                 themes[]->{
                     title,
                 },

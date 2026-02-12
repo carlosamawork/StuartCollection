@@ -53,7 +53,7 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     openGraph: {
       title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
       description: page.seo?.description || defaultSEO.description || siteDescription,
-      url: buildUrl(`/artworks/${slug}/`),
+      url: buildUrl(`/collection/${slug}/`),
       siteName: siteTitle,
       images: [
         {
@@ -84,7 +84,7 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     },
     icons: getFavicons(),
     alternates: {
-      canonical: buildUrl(`/artworks/${slug}/`),
+      canonical: buildUrl(`/collection/${slug}/`),
     },
     twitter: {
       card: 'summary_large_image',

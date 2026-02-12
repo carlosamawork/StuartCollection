@@ -2,14 +2,14 @@
 
 import {ButtonBaseProps} from '@/components/Common/ui/Buttons/types/types'
 import s from '../styles/Buttons.module.scss'
-import {getButtonClasses} from '@/components/Common/ui/Buttons/utils/getButtonClasses'
+import {getButtonStyleClasses} from '@/components/Common/ui/Buttons/utils/getButtonStyleClasses'
 
 interface ButtonProps extends ButtonBaseProps {
   onClick: () => void
 }
 
 export function Button({onClick, children, className, variant, color, size}: ButtonProps) {
-  const styleClasses = getButtonClasses({
+  const styleClasses = getButtonStyleClasses({
     s,
     variant,
     color,
