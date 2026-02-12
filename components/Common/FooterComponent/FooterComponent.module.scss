@@ -46,6 +46,57 @@
         }
     }
 
+    .gridLayout{
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 32px;
+        padding: 48px 0px;
+        color: var(--colors-foreground-fg-inverted-1);
+
+        a{
+            color: var(--colors-foreground-fg-inverted-1);
+        }
+
+        > div, h4{
+            grid-column: span 3;
+        }
+
+        h6, p{
+            margin-bottom: 8px;
+        }
+
+        ul{
+            li {
+                margin-bottom: 8px;
+            }
+        }
+
+        nav{
+            margin-bottom: 32px;
+            ul{
+                li a{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 8px;
+                }
+            }
+        }
+
+        
+
+        .newsletter{
+            grid-column: span 6;
+            p{
+                margin-bottom: 16px; 
+            }
+        }
+    }
+
+    .footerSectionContainer{
+        border-bottom: 1px solid var(--colors-foreground-fg-inverted-1);
+    }
+
     .footerBottom {
         padding: 48px 0;
         text-align: right;

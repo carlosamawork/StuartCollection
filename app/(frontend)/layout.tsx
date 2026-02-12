@@ -67,7 +67,7 @@ export default async function RootLayout({
           )}
           {/* Cookie Consent */}
 
-          <FooterComponent />
+          <FooterComponent data={footerData} />
         </WebProvider>
       </body>
     </html>
