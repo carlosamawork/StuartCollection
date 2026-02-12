@@ -18,6 +18,7 @@ import Hotjar from '@/components/Common/Analytics/hotjar';
 import { Roboto } from 'next/font/google'
 import { get } from 'http';
 import { getHeader } from '@/sanity/queries/common/header';
+import { getFooter } from '@/sanity/queries/common/footer';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -36,12 +37,13 @@ export default async function RootLayout({
 }) {
 
   const headerData = await getHeader();
+  const footerData = await getFooter();
 
   return (
     <html lang="en">
       <body className={roboto.className}>
         <RawHTML html="<!-- ----------------------------------------------------- -->
-        <!-- Code by Cacho Salvador, http://cachosalvador.com (2026) -->
+        <!-- Code by MGTZM Studio, http://magatzem.studio (2026) -->
         <!-- ----------------------------------------------------- -->" />
         <WebProvider>
           <HeaderComponent data={headerData} />
