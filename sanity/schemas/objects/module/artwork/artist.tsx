@@ -71,7 +71,7 @@ export default defineField({
     defineField({
       name: 'accordeon',
       title: 'Accordeon',
-      type: 'module.artwork.textAccordeon',
+      type: 'module.accordion',
     }),
   ],
   preview: {

@@ -1,6 +1,6 @@
-import {textAccordeonQuery} from './textAccordeon'
 import {image} from '../../fragments/image'
 import {artist} from '../../fragments/artist'
+import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
 
 export const artistQuery = `
     title,
@@ -20,6 +20,6 @@ export const artistQuery = `
         }
     },
     accordeon{
-        ${textAccordeonQuery}
+        ${accordeonQuery}
     },
 `

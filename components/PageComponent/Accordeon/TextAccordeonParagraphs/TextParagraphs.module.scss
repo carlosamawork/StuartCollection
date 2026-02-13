@@ -1,20 +1,20 @@
-.textParagraphs{
-    width:  100%;
+.textParagraphs {
+    width: 100%;
     margin-bottom: 24px;
 
-    &.fullWidth{
+    &.fullWidth {
         width: 100%;
     }
 
-    p{
+    p {
         margin-bottom: 16px;
 
-        strong{
+        strong {
             font-weight: 500;
         }
     }
 
-    ul{
+    ul {
         list-style-type: disc;
         padding-left: 20px;
     }

@@ -21,6 +21,7 @@ import SliderComponent from './Slider'
 import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
 import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
+import {HeroCover} from '@/components/Common/ui/HeroCover'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
@@ -47,18 +48,10 @@ export default function PageComponent({data}: {data: any}) {
   return (
     <div className={`${s.pageComponent}`}>
       <Container size="fullWidth">
-        {activeSection?.topImage && topImage && (
-          <div className={s.topImageContainer}>
-            <LazyImage
-              src={activeSection.topImage.imageUrl}
-              alt={activeSection.topImage.filename || 'Top Image'}
-              width={activeSection.topImage.metadata.dimensions.width}
-              height={activeSection.topImage.metadata.dimensions.height}
-              fill={true}
-              objectFit="cover"
-            />
-          </div>
-        )}
+        <HeroCover
+          imageSrc={topImage ? activeSection?.topImage : undefined}
+          height={`${(100 * 320) / 720}vh`}
+        />
       </Container>
       <Container>
         <div className={`${s.content} ${!data.asideMenu ? s.noAsideMenu : ''}`}>

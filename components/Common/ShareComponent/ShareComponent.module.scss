@@ -1,0 +1,11 @@
+.shareComponent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .icons {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+    }
+}

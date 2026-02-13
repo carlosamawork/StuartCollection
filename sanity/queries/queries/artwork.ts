@@ -3,7 +3,6 @@ import {client} from '..'
 import {seo} from '../fragments/seo'
 import {image} from '../fragments/image'
 import {location} from '../fragments/location'
-import {textAccordeonQuery} from '../modules/artwork/textAccordeon'
 import {artistQuery} from '../modules/artwork/artist'
 import {socialQuery} from '../modules/artwork/social'
 import {videosQuery} from '../modules/artwork/videos'
@@ -11,6 +10,7 @@ import {imagesQuery} from '../modules/artwork/images'
 import {visitQuery} from '../modules/artwork/visit'
 import {textParagraphsQuery} from '../modules/general/textParagraphs'
 import {iframQuery} from '../modules/general/iframe'
+import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
 
 export async function getArtwork(slug: string) {
   return client.fetch(
@@ -38,8 +38,8 @@ export async function getArtwork(slug: string) {
                 _type == "module.textParagraphs" => {
                     ${textParagraphsQuery}
                 },
-                _type == "module.artwork.textAccordeon" => {
-                    ${textAccordeonQuery}
+                _type == "module.accordion" => {
+                    ${accordeonQuery}
                 },
                 _type == "module.iframe" => {
                     ${iframQuery}

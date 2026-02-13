@@ -8,6 +8,8 @@ interface TagsProps {
 }
 
 export function Tags({tags}: TagsProps) {
+  if (!tags || tags.length === 0) return <></>
+
   return (
     <div className={s.tagsContainer}>
       {tags.map((tagProps, i) => (

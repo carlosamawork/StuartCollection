@@ -62,7 +62,7 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
           <div className={s.label}>Themes:</div>
           <div className={s.content}>
             <Tags
-              tags={data.specs.themes.map((theme, i) => ({
+              tags={data.specs.themes?.map((theme, i) => ({
                 label: theme.title,
               }))}
             />

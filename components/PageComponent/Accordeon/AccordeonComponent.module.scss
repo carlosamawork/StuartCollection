@@ -77,4 +77,16 @@
             }
         }
     }
+
+    &--small {
+        .accordeonItems {
+            .noTitle,
+            .withTitle {
+                summary {
+                    border-top: 1px solid var(--colors-foreground-fg-2);
+                    padding: 8px 0;
+                }
+            }
+        }
+    }
 }

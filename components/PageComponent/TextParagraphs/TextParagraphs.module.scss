@@ -9,7 +9,7 @@
 
     &.content {
         max-width: $max_page_width_sm;
-    }   
+    }
 
     p {
         margin-bottom: 16px;
@@ -19,7 +19,15 @@
         list-style-type: disc;
     }
 
-    a{
+    a {
         text-decoration: underline;
+    }
+
+    div > *:last-of-type {
+        margin-bottom: 0;
+    }
+
+    &--noMargin {
+        margin-bottom: 0;
     }
 }

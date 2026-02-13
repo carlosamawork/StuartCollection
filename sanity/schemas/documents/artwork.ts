@@ -117,9 +117,15 @@ export default defineField({
       title: 'Body (modules)',
       type: 'array',
       of: [
-        {type: 'module.textParagraphs'},
-        {type: 'module.artwork.textAccordeon'},
-        {type: 'module.iframe'},
+        {
+          type: 'module.textParagraphs',
+        },
+        {
+          type: 'module.accordion',
+        },
+        {
+          type: 'module.iframe',
+        },
       ],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
       group: 'editorial',
