@@ -2,23 +2,24 @@ import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
 import {image} from '../fragments/image'
-import {location} from '../fragments/location'
-import {artistQuery} from '../modules/artwork/artist'
-import {socialQuery} from '../modules/artwork/social'
-import {videosQuery} from '../modules/artwork/videos'
-import {imagesQuery} from '../modules/artwork/images'
-import {visitQuery} from '../modules/artwork/visit'
+import {location, LocationData} from '../fragments/location'
+import {artistSectionQuery, ArtworkArtistSectionData} from '../modules/artwork/artistSection'
+import {ArtworkSocialSectionData, socialSectionQuery} from '../modules/artwork/socialSection'
+import {ArtworkVideosSectionData, videosSectionQuery} from '../modules/artwork/videosSection'
+import {ArtworkImagesSectionData, imagesSectionQuery} from '../modules/artwork/imagesSection'
+import {ArtworkVisitSectionData, visitSectionQuery} from '../modules/artwork/visitSection'
 import {textParagraphsQuery} from '../modules/general/textParagraphs'
 import {iframQuery} from '../modules/general/iframe'
 import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
 
-export async function getArtwork(slug: string) {
+export async function getArtwork(slug: string): Promise<ArtworkData> {
   return client.fetch(
     groq`*[_type == "artwork" && slug.current == $slug][0]{
             title,
             "slug": slug.current,
             artists[]->{
                 name,
+                image
             },
             featuredImage{
                 ${image}
@@ -48,24 +49,45 @@ export async function getArtwork(slug: string) {
             "sections": sections[]{
                 _type,
                 _type == "module.artwork.images" => {
-                    ${imagesQuery}
+                    ${imagesSectionQuery}
                 },
                 _type == "module.artwork.artist" => {
-                    ${artistQuery}
+                    ${artistSectionQuery}
                 },
                 _type == "module.artwork.visit" => {
-                    ${visitQuery}
+                    ${visitSectionQuery}
                 },
                 _type == "module.artwork.videos" => {
-                    ${videosQuery}
+                    ${videosSectionQuery}
                 },
                 _type == "module.artwork.social" => {
-                    ${socialQuery}
+                    ${socialSectionQuery}
                 },
             },
         }`,
     {slug},
   )
+}
+
+export type ArtworkData = {
+  title: string
+  slug: string
+  artists: {name: string; slug: string; image: any}[]
+  featuredImage: any
+  specs: {
+    themes: {title: string}[]
+    year: number
+    visitDescription: any
+    location: LocationData
+  }
+  body_modules: any[]
+  sections: (
+    | ArtworkImagesSectionData
+    | ArtworkArtistSectionData
+    | ArtworkVisitSectionData
+    | ArtworkVideosSectionData
+    | ArtworkSocialSectionData
+  )[]
 }
 
 export async function getArtworkSEO(slug: string) {

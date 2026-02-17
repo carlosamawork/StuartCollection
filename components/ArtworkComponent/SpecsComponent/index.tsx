@@ -1,13 +1,11 @@
 'use client'
 
-import {ArtworkData} from '@/components/ArtworkComponent'
 import s from './SpecsComponent.module.scss'
 import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
-import TextBody from '@/components/Common/ui/TextBody'
-import {ButtonLink} from '@/components/Common/ui/Buttons/components/ButtonLink'
-import Image from 'next/image'
 import {Tags} from '@/components/Common/ui/Tags/Tags'
-import {useEffect, useState} from 'react'
+import {ArtworkData} from '@/sanity/queries/queries/artwork'
+import LocationGoogleLink from '@/components/ArtworkComponent/_shared/LocationGoogleLink'
+import LocationDescription from '@/components/ArtworkComponent/_shared/LocationDescription'
 
 export default function SpecsComponent({data}: {data: ArtworkData}) {
   return (
@@ -37,26 +35,14 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
         </div>
         <div className={s.item}>
           <div className={s.label}>Visit:</div>
-          <div className={s.content}>
-            <TextBody body={data.specs.visitDescription} size="sm" />
-            <ButtonLink href="// TO-DO">Sign up to visit</ButtonLink>
-          </div>
+          <LocationDescription
+            location={data.specs.location}
+            visitDescription={data.specs.visitDescription}
+          />
         </div>
         <div className={s.item}>
           <div className={s.label}>Location:</div>
-          <div className={s.content}>
-            <p>{data.specs.location.name}</p>
-            <a href="#visit" className={s.locationLink}>
-              <strong>View on Map </strong>
-              <Image
-                src="/assets/svg/arrow-down.svg"
-                alt="↓"
-                width={11}
-                height={11}
-                style={{width: 11, height: 11}}
-              />
-            </a>
-          </div>
+          <LocationGoogleLink location={data.specs.location} />
         </div>
         <div className={s.item}>
           <div className={s.label}>Themes:</div>

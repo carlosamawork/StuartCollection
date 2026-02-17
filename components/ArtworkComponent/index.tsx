@@ -4,8 +4,9 @@ import SpecsComponent from '@/components/ArtworkComponent/SpecsComponent'
 import Container from '@/components/Common/ui/Container'
 import {HeroCover} from '@/components/Common/ui/HeroCover'
 import ShareComponent from '@/components/Common/ShareComponent'
-import {BASE_URL, buildUrl} from '@/utils/seoHelper'
+import {buildUrl} from '@/utils/seoHelper'
 import ArtworkSections from '@/components/ArtworkComponent/ArtworkSections'
+import {ArtworkData} from '@/sanity/queries/queries/artwork'
 
 export default function ArtworkComponent({data}: {data: ArtworkData}) {
   return (
@@ -22,26 +23,14 @@ export default function ArtworkComponent({data}: {data: ArtworkData}) {
           <SpecsComponent data={data} />
           <article className={s.body}>
             <ArtworkBodyModules modules={data.body_modules} />
-            <ShareComponent url={buildUrl(`/collection/${data.slug}/`)} pageTitle={data.title} />
+            <ShareComponent
+              url={buildUrl(`/collection/artwork/${data.slug}/`)}
+              pageTitle={data.title}
+            />
           </article>
         </div>
       </Container>
       <ArtworkSections data={data} />
     </div>
   )
-}
-
-export type ArtworkData = {
-  title: string
-  slug: string
-  artists: {name: string}[]
-  featuredImage: any
-  specs: {
-    themes: {title: string}[]
-    year: number
-    visitDescription: any
-    location: {name: string; href: string; iframe: string}
-  }
-  body_modules: any[]
-  sections: any[]
 }

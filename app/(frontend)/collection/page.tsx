@@ -1,8 +1,8 @@
 import ArtworkComponent from '@/components/ArtworkComponent'
-import HomeComponent from '@/components/HomeComponent'
-import PageComponent from '@/components/PageComponent'
+import CollectionComponent from '@/components/CollectionComponent'
 import {getDefaultSEO} from '@/sanity/queries/common/defaultSEO'
 import {getArtwork, getArtworkSEO} from '@/sanity/queries/queries/artwork'
+import {getCollection, getCollectionSEO} from '@/sanity/queries/queries/collection'
 import {
   BASE_IMAGE_HEIGHT,
   BASE_IMAGE_URL,
@@ -18,7 +18,7 @@ export const revalidate = 1 // revalidate to work set to 1, then we change it to
 
 export async function generateMetadata({params}: {params: {slug: string}}) {
   const {slug} = await params
-  const page = await getArtworkSEO(slug)
+  const page = await getCollectionSEO()
   const defaultSEO = await getDefaultSEO()
 
   if (!page) {
@@ -53,7 +53,7 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     openGraph: {
       title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
       description: page.seo?.description || defaultSEO.description || siteDescription,
-      url: buildUrl(`/collection/${slug}/`),
+      url: buildUrl(`/collection/artwork/${slug}/`),
       siteName: siteTitle,
       images: [
         {
@@ -84,7 +84,7 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
     },
     icons: getFavicons(),
     alternates: {
-      canonical: buildUrl(`/collection/${slug}/`),
+      canonical: buildUrl(`/collection/artwork/${slug}/`),
     },
     twitter: {
       card: 'summary_large_image',
@@ -95,13 +95,12 @@ export async function generateMetadata({params}: {params: {slug: string}}) {
   }
 }
 
-export default async function Artwork({params}: {params: {slug: string}}) {
-  const {slug} = await params
-  const data = await getArtwork(slug)
+export default async function Collection() {
+  const data = await getCollection()
 
   return (
     <main>
-      <ArtworkComponent data={data} />
+      <CollectionComponent data={data} />
     </main>
   )
 }

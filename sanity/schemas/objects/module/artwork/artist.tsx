@@ -13,7 +13,7 @@ export default defineField({
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
-      initialValue: 'The Artist',
+      initialValue: 'The artist',
     }),
     // Body
     defineField({
@@ -80,7 +80,7 @@ export default defineField({
     },
     prepare({title}) {
       return {
-        title: `Section: ${title || 'The Artist(s)'}`,
+        title: `Section: ${title || 'The artist'}`,
       }
     },
   },

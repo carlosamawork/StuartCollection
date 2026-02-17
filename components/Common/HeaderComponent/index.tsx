@@ -7,12 +7,18 @@ import {motion, AnimatePresence} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {ButtonLink} from '@/components/Common/ui/Buttons/components/ButtonLink'
 import SubmenuComponent from './Submenu'
+import {usePathname} from 'next/navigation'
 
 export default function HeaderComponent({data}: any) {
+  const pathname = usePathname()
+
   const headerRef = useRef<HTMLElement>(null)
 
   const [activeItem, setActiveItem] = useState<any>(null)
   const [submenuOpen, setSubmenuOpen] = useState(false)
+
+  const isArtwork = pathname.includes('collection/artwork')
+  const backgroundColor = isArtwork ? '#E7ECF2' : undefined
 
   useEffect(() => {
     console.log(
@@ -196,6 +202,7 @@ export default function HeaderComponent({data}: any) {
         {submenuOpen && (
           <motion.div
             className={s.submenuHeader}
+            style={{backgroundColor}}
             initial={{opacity: 0, y: -8}}
             animate={{opacity: 1, y: 0}}
             exit={{opacity: 0, y: -8}}

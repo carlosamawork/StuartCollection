@@ -28,4 +28,10 @@
             @extend .p-small;
         }
     }
+
+    &--md {
+        p {
+            @extend .p-medium;
+        }
+    }
 }

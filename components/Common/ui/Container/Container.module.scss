@@ -1,20 +1,20 @@
 @use "@/styles/common/variables" as *;
 
 .container {
-    width: $max_page_width;
-    max-width: 100%;
+    width: 100%;
+    max-width: $max_page_width;
     padding: 0 32px;
     margin: 0 auto;
 }
 
 .containerSmall {
-    width: $max_page_width_sm;
-    max-width: 100%;
+    width: 100%;
+    max-width: $max_page_width_sm;
+    padding: 0 32px;
     margin: 0 auto;
 }
 
 .containerFullWidth {
-    max-width: 100%;
     width: 100%;
     padding: 0 32px;
     margin: 0 auto;

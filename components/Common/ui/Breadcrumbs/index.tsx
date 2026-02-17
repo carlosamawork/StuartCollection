@@ -30,7 +30,7 @@ export default function Breadcrumbs({breadcrumbs, showLastSlash = true}: Breadcr
 //   breadcrumbs={[
 //     { label: 'Home', href: '/' },
 //     { label: 'The Collection', href: '/collection' },
-//     { label: 'Artwork Title', href: '/collection/artwork-title' },
+//     { label: 'Artwork Title', href: '/collection/artwork/artwork-title' },
 //   ]}
 // />
 

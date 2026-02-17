@@ -15,16 +15,9 @@ import Analytics from '@/components/Common/Analytics/google'
 import FacebookPixel from '@/components/Common/Analytics/facebook'
 import PinterestTag from '@/components/Common/Analytics/pinterest'
 import Hotjar from '@/components/Common/Analytics/hotjar'
-import {Roboto} from 'next/font/google'
 import {get} from 'http'
 import {getHeader} from '@/sanity/queries/common/header'
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: ['100', '300', '400', '500', '700', '900'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-})
+import Body from '@/components/Common/ui/Body'
 
 const RawHTML = ({html}: any) => (
   <div className="credits" dangerouslySetInnerHTML={{__html: html}} />
@@ -35,7 +28,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
 
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <Body>
         <RawHTML
           html="<!-- ----------------------------------------------------- -->
         <!-- Code by Cacho Salvador, http://cachosalvador.com (2026) -->
@@ -73,7 +66,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             <FooterComponent />
           </div>
         </WebProvider>
-      </body>
+      </Body>
     </html>
   )
 }

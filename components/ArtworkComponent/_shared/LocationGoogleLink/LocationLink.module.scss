@@ -1,0 +1,30 @@
+@use "./styles/common/animations" as *;
+
+.component {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+
+    font-size: var(--font-size-font-size-p-small);
+    line-height: var(--line-height-line-height-p-small);
+
+    .link {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 4px;
+        width: 100%;
+
+        strong {
+            flex-shrink: 0;
+        }
+
+        &:hover {
+            img {
+                animation: MoveUpDown 1.3s linear infinite;
+            }
+        }
+    }
+}

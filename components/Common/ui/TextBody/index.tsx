@@ -4,7 +4,7 @@ import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 
 interface TextBodyProps {
   body: any
-  size?: 'default' | 'sm'
+  size?: 'default' | 'sm' | 'md'
 }
 
 export default function TextBody({body, size = 'default'}: TextBodyProps) {

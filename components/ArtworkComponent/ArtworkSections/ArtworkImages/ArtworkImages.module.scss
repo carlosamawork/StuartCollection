@@ -1,0 +1,41 @@
+$swiper_padding: 32px;
+
+.section {
+    padding-bottom: 56px;
+    overflow: hidden;
+
+    .topContent {
+        border-top: 1px solid var(--colors-foreground-fg-5);
+        padding-top: 56px;
+        overflow: hidden;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    .slider {
+        margin-left: $swiper_padding;
+        overflow: visible;
+    }
+
+    .slide {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        margin-right: $swiper_padding;
+
+        img {
+            border-radius: 8px;
+        }
+    }
+
+    :global {
+        .swiper-slide:last-of-type:after {
+            content: "";
+            width: $swiper_padding;
+        }
+    }
+}
