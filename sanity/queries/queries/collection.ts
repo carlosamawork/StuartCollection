@@ -1,17 +1,13 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
+import {artwork_thumbnail} from '@/sanity/queries/fragments/artwork_thumbnail'
 
-export async function getCollection() {
+export async function getCollection(): Promise<CollectionData> {
   return client.fetch(
     groq`{
         "artworks": *[_type == "artwork"]{
-            title,
-            "slug": slug.current,
-            "image": coalesce(thumbnail, featuredImage),
-            artists[]->{
-                name,
-            },
+            ${artwork_thumbnail}
         },
         "themes": *[_type == "theme"]{
             title,
@@ -46,6 +42,36 @@ export async function getCollection() {
     keywords
   }
 }`
+}
+
+export type CollectionData = {
+  artworks: CollectionArtworkData[]
+  themes: CollectionThemeData[]
+  locations: CollectionLocationData[]
+  artists: CollectionArtistData[]
+}
+
+type CollectionArtworkData = {
+  title: string
+  slug: string
+  image: any
+  artists: {name: string; slug: string}[]
+}
+
+type CollectionThemeData = {
+  title: string
+  slug: string
+  artworks: {slug: string}[]
+}
+
+type CollectionLocationData = {
+  name: string
+  slug: string
+}
+
+type CollectionArtistData = {
+  name: string
+  artworks: {slug: string}[]
 }
 
 export async function getCollectionSEO() {

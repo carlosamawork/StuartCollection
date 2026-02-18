@@ -49,7 +49,7 @@ export default function PageComponent({data}: {data: any}) {
     <div className={`${s.pageComponent}`}>
       <Container size="fullWidth">
         <HeroCover
-          imageSrc={topImage ? activeSection?.topImage : undefined}
+          image={topImage ? activeSection?.topImage : undefined}
           height={`${(100 * 320) / 720}vh`}
         />
       </Container>

@@ -18,13 +18,11 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
       />
       <div className={s.titleContainer}>
         <div className={s.artistContainer}>
-          {data.artists.map((artist: any, i: number, array: any[]) => {
-            return (
-              <h1 className={`${s.artist}`} key={i}>
-                {artist.name}
-              </h1>
-            )
-          })}
+          {data.artists.map((artist: any, i: number) => (
+            <h1 className={s.artist} key={i}>
+              {artist.name}
+            </h1>
+          ))}
         </div>
         <h1>{data.title}</h1>
       </div>

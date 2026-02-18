@@ -61,6 +61,13 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
+    // Featured
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      group: 'editorial',
+    }),
     // Year
     defineField({
       name: 'year',
@@ -95,13 +102,13 @@ export default defineField({
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
       group: 'specs',
     }),
-    // Featured Image
+    // Trails
     defineField({
-      name: 'featuredImage',
-      title: 'Featured Image',
-      type: 'image',
-      options: {hotspot: true},
-      group: 'editorial',
+      name: 'trails',
+      title: 'Trails',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'trail'}]}],
+      group: 'specs',
     }),
     // Thumbnail
     defineField({
@@ -109,6 +116,13 @@ export default defineField({
       title: 'Thumbnail',
       type: 'image',
       options: {hotspot: true},
+      group: 'editorial',
+    }),
+    // Hero
+    defineField({
+      name: 'hero',
+      title: 'Hero Cover',
+      type: 'module.artwork.hero',
       group: 'editorial',
     }),
     // Body blocks

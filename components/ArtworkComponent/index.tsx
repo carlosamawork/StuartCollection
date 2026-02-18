@@ -7,13 +7,14 @@ import ShareComponent from '@/components/Common/ShareComponent'
 import {buildUrl} from '@/utils/seoHelper'
 import ArtworkSections from '@/components/ArtworkComponent/ArtworkSections'
 import {ArtworkData} from '@/sanity/queries/queries/artwork'
+import RelatedArtworksComponent from '@/components/ArtworkComponent/RelatedArtworksComponent'
 
 export default function ArtworkComponent({data}: {data: ArtworkData}) {
   return (
     <div className={s.artworkComponent}>
       <Container size="fullWidth">
         <HeroCover
-          imageSrc={data.featuredImage}
+          {...data.hero}
           height={`85vh`}
           // height={`${(100 * (632 - 2 * 32)) / 720}vh`}
         />
@@ -31,6 +32,7 @@ export default function ArtworkComponent({data}: {data: ArtworkData}) {
         </div>
       </Container>
       <ArtworkSections data={data} />
+      <RelatedArtworksComponent data={data.related} />
     </div>
   )
 }

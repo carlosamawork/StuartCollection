@@ -84,6 +84,7 @@ import artworkVisit from './objects/module/artwork/visit'
 import artworkSocial from './objects/module/artwork/social'
 import artworkVideos from './objects/module/artwork/videos'
 import artworkImages from './objects/module/artwork/images'
+import artworkHero from './objects/module/artwork/hero'
 
 const objects = [
   footer,
@@ -127,6 +128,7 @@ const objects = [
   artworkSocial,
   artworkVideos,
   artworkImages,
+  artworkHero,
 ]
 
 export const schemaTypes = [
