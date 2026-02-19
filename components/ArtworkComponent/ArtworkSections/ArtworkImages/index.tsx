@@ -40,6 +40,7 @@ export default function ArtworkImages({section}: ArtworkImagesProps) {
 
           return (
             <Image
+              key={`image-${i}`}
               alt={sanitizeFilename(item.filename)}
               src={item.imageUrl}
               width={width}
