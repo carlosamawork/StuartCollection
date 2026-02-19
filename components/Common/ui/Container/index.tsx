@@ -5,17 +5,18 @@ import s from './Container.module.scss'
 interface ContainerProps {
   children: React.ReactNode
   className?: string
-  size?: 'small' | 'medium' | 'fullWidth'
+  variant?: 'small' | 'alignLeft' | 'fullWidth'
 }
 
-export default function Container({children, className, size}: ContainerProps) {
+export default function Container({children, className, variant}: ContainerProps) {
   const getClassName = () => {
-    switch (size) {
+    switch (variant) {
       case 'small':
         return s.containerSmall
       case 'fullWidth':
         return s.containerFullWidth
-      case 'medium':
+      case 'alignLeft':
+        return s.containerAlignLeft
       default:
         return s.container
     }

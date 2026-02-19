@@ -5,6 +5,7 @@ import s from './ArtworkSocial.module.scss'
 import Container from '@/components/Common/ui/Container'
 import TextBody from '@/components/Common/ui/TextBody'
 import Image from 'next/image'
+import LazyImage from '@/components/Common/LazyImage'
 
 export default function ArtworkSocial({section}: {section: ArtworkSocialSectionData}) {
   if (!section) return <></>
@@ -33,19 +34,14 @@ export default function ArtworkSocial({section}: {section: ArtworkSocialSectionD
         <div className={s.itemsContainer}>
           {section.items?.map((item, i) => (
             <a className={s.item} key={i} href={item.href}>
-              {/* <LazyImage
-                  src={image.imageUrl}
-                  alt={image.filename || 'Image'}
-                  width={280}
-                  height={280}
-                  objectFit="cover"
-                /> */}
               <div className={s.image}>
-                <Image
+                <LazyImage
                   src={item.image.imageUrl}
                   alt={item.image.filename || 'Image'}
+                  width={176}
+                  height={176}
+                  objectFit="cover"
                   fill
-                  style={{objectFit: 'cover'}}
                 />
               </div>
               <div className={s.caption}>

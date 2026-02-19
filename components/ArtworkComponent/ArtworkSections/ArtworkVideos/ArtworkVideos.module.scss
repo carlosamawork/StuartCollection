@@ -1,5 +1,7 @@
+@use "@/styles/common/variables" as *;
+
 $video_height: 506px;
-$swiper_padding: 32px;
+$swiper_spaceBetween: 32px;
 
 .section {
     padding-bottom: 56px;
@@ -26,14 +28,14 @@ $swiper_padding: 32px;
     }
 
     .slider {
-        margin-left: $swiper_padding;
+        margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         overflow: visible;
     }
 
     .slide {
         .videoCard {
-            width: calc($video_height * 16 / 9 + $swiper_padding);
-            padding-right: $swiper_padding;
+            width: calc($video_height * 16 / 9 + $swiper_spaceBetween);
+            padding-right: $swiper_spaceBetween;
 
             position: relative;
             display: flex;
@@ -46,13 +48,13 @@ $swiper_padding: 32px;
             border-radius: 8px;
             height: $video_height !important;
             width: calc($video_height * 16 / 9) !important;
-            margin-right: $swiper_padding;
+            margin-right: $swiper_spaceBetween;
         }
     }
 
     :global {
         .swiper-slide:last-of-type {
-            padding-right: $swiper_padding;
+            padding-right: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         }
     }
 }

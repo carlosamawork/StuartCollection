@@ -1,4 +1,6 @@
-$swiper_padding: 32px;
+@use "@/styles/common/variables" as *;
+
+$swiper_spaceBetween: 32px;
 
 .section {
     padding-bottom: 56px;
@@ -17,7 +19,7 @@ $swiper_padding: 32px;
     }
 
     .slider {
-        margin-left: $swiper_padding;
+        margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         overflow: visible;
     }
 
@@ -25,7 +27,7 @@ $swiper_padding: 32px;
         position: relative;
         display: flex;
         align-items: flex-start;
-        margin-right: $swiper_padding;
+        margin-right: $swiper_spaceBetween;
 
         img {
             border-radius: 8px;
@@ -35,7 +37,7 @@ $swiper_padding: 32px;
     :global {
         .swiper-slide:last-of-type:after {
             content: "";
-            width: $swiper_padding;
+            width: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         }
     }
 }

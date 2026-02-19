@@ -62,3 +62,5 @@ $gutter_d: 1rem;
 
 $max_page_width_sm: 592px;
 $max_page_width: 1587px;
+$min_page_padding: 32px;
+$page_additional_padding_for_max_page_width: max(calc((100dvw - $max_page_width) / 2), 0px);

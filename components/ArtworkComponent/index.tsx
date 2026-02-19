@@ -12,7 +12,7 @@ import RelatedArtworksComponent from '@/components/ArtworkComponent/RelatedArtwo
 export default function ArtworkComponent({data}: {data: ArtworkData}) {
   return (
     <div className={s.artworkComponent}>
-      <Container size="fullWidth">
+      <Container variant="fullWidth">
         <HeroCover
           {...data.hero}
           height={`85vh`}

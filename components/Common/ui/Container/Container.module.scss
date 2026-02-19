@@ -3,19 +3,25 @@
 .container {
     width: 100%;
     max-width: $max_page_width;
-    padding: 0 32px;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
 }
 
 .containerSmall {
     width: 100%;
     max-width: $max_page_width_sm;
-    padding: 0 32px;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
 }
 
 .containerFullWidth {
     width: 100%;
-    padding: 0 32px;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
+}
+
+.containerAlignLeft {
+    width: 100%;
+    margin-left: $page_additional_padding_for_max_page_width;
+    padding-left: $min_page_padding;
 }
