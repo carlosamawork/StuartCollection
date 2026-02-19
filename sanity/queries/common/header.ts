@@ -32,7 +32,6 @@ export const getHeader = async () => {
         connect,
         telephone,
         email
-
     }`
   )
 };

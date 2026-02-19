@@ -9,12 +9,27 @@ export default defineField({
     collapsible: true,
   },
   fields: [
+    defineField({
+      name: 'claim',
+      title: 'Claim',
+      type: 'string',
+    }),
     // Links
     defineField({
-      name: 'links',
+      name: 'linksPolicy',
       title: 'Links',
       type: 'array',
-      of: [{type: 'linkInternal'}, {type: 'linkExternal'}],
+      of: [{type: 'linkExternal'},],
+    }),
+    defineField({
+      name: 'titleNewsletter',
+      title: 'Title Newsletter',
+      type: 'string',
+    }),
+    defineField({
+      name: 'descriptionNewsletter',
+      title: 'Description Newsletter',
+      type: 'text',
     }),
     defineField({
       name: 'linksSocial',

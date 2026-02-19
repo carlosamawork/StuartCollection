@@ -18,6 +18,8 @@ import Hotjar from '@/components/Common/Analytics/hotjar'
 import {get} from 'http'
 import {getHeader} from '@/sanity/queries/common/header'
 import Body from '@/components/Common/ui/Body'
+import {Roboto} from 'next/font/google'
+import {getFooter} from '@/sanity/queries/common/footer'
 
 const RawHTML = ({html}: any) => (
   <div className="credits" dangerouslySetInnerHTML={{__html: html}} />
@@ -25,13 +27,14 @@ const RawHTML = ({html}: any) => (
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const headerData = await getHeader()
+  const footerData = await getFooter()
 
   return (
     <html lang="en">
       <Body>
         <RawHTML
           html="<!-- ----------------------------------------------------- -->
-        <!-- Code by Cacho Salvador, http://cachosalvador.com (2026) -->
+        <!-- Code by MGTZM Studio, http://magatzem.studio (2026) -->
         <!-- ----------------------------------------------------- -->"
         />
         <WebProvider>
@@ -63,7 +66,7 @@ export default async function RootLayout({children}: {children: React.ReactNode}
             )}
             {/* Cookie Consent */}
 
-            <FooterComponent />
+            <FooterComponent data={footerData} />
           </div>
         </WebProvider>
       </Body>

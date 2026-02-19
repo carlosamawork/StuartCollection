@@ -22,12 +22,13 @@ import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
 import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
 import {HeroCover} from '@/components/Common/ui/HeroCover'
+import {usePathname} from 'next/navigation'
 
 export default function PageComponent({data}: {data: any}) {
   const [activeSection, setActiveSection] = useState<any | null>(null)
   const [topImage, setTopImage] = useState(false)
   const [separatorsMenu, setSeparatorsMenu] = useState<any | null>(null)
-  console.log('PageComponent DATA', data)
+  const pathname = usePathname()
 
   useEffect(() => {
     const defaultModule =
@@ -36,6 +37,69 @@ export default function PageComponent({data}: {data: any}) {
     setActiveSection(defaultModule)
     setTopImage(!!defaultModule?.topImage)
   }, [data])
+
+  useEffect(() => {
+    if (!data?.modules?.length) return
+    if (typeof window === 'undefined') return
+
+    const resolveSectionFromHash = (id: string) => {
+      const direct = data.modules.find((m: any) => m.id === id)
+      if (direct) return {section: direct, innerId: id}
+
+      const parent = data.modules.find((section: any) =>
+        section?.modules?.some((mod: any) => {
+          if (mod._type === 'module.separator') return mod.anchorId === id || mod.id === id
+          return mod.id === id
+        }),
+      )
+      if (parent) return {section: parent, innerId: id}
+      return null
+    }
+
+    const openByHash = () => {
+      const id = window.location.hash.replace('#', '').trim()
+      if (!id) return
+
+      const resolved = resolveSectionFromHash(id)
+      if (!resolved) return
+
+      setActiveSection(resolved.section)
+      setTopImage(!!resolved.section?.topImage)
+    }
+
+    // 🔥 emite un evento cuando Next cambie la URL con pushState/replaceState
+    const origPush = history.pushState
+    const origReplace = history.replaceState
+
+    const notify = () => window.dispatchEvent(new Event('locationchange'))
+
+    history.pushState = function (this: History, ...args: Parameters<History['pushState']>) {
+      const ret = origPush.apply(this, args)
+      window.dispatchEvent(new Event('locationchange'))
+      return ret
+    }
+
+    history.replaceState = function (this: History, ...args: Parameters<History['replaceState']>) {
+      const ret = origReplace.apply(this, args)
+      window.dispatchEvent(new Event('locationchange'))
+      return ret
+    }
+
+    const onChange = () => openByHash()
+
+    openByHash()
+    window.addEventListener('hashchange', onChange)
+    window.addEventListener('popstate', onChange)
+    window.addEventListener('locationchange', onChange)
+
+    return () => {
+      window.removeEventListener('hashchange', onChange)
+      window.removeEventListener('popstate', onChange)
+      window.removeEventListener('locationchange', onChange)
+      history.pushState = origPush
+      history.replaceState = origReplace
+    }
+  }, [data, pathname])
 
   useEffect(() => {
     setSeparatorsMenu(
@@ -68,6 +132,7 @@ export default function PageComponent({data}: {data: any}) {
                           e.preventDefault()
                           setActiveSection(module)
                           setTopImage(!!module?.topImage)
+                          history.replaceState(null, '', `#${module.id}`)
                         }}
                       >
                         <p>{module.title}</p>
