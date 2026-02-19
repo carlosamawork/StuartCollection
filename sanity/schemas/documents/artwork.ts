@@ -15,7 +15,7 @@ export default defineField({
       title: 'Editorial',
     },
     {
-      name: 'details',
+      name: 'specs',
       title: 'Details',
     },
     {
@@ -61,13 +61,20 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
+    // Featured
+    defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      group: 'editorial',
+    }),
     // Year
     defineField({
       name: 'year',
       title: 'Year',
       type: 'number',
       validation: (Rule) => Rule.min(0).max(new Date().getFullYear()).required(),
-      group: 'details',
+      group: 'specs',
     }),
     // Visit
     defineField({
@@ -75,7 +82,7 @@ export default defineField({
       title: 'Visit Description',
       type: 'body.simpleText',
       validation: (Rule) => Rule.required(),
-      group: 'details',
+      group: 'specs',
     }),
     // Location
     defineField({
@@ -84,7 +91,7 @@ export default defineField({
       type: 'reference',
       to: [{type: 'location'}],
       validation: (Rule) => Rule.required(),
-      group: 'details',
+      group: 'specs',
     }),
     // Themes
     defineField({
@@ -93,15 +100,15 @@ export default defineField({
       type: 'array',
       of: [{type: 'reference', to: [{type: 'theme'}]}],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
-      group: 'details',
+      group: 'specs',
     }),
-    // Featured Image
+    // Trails
     defineField({
-      name: 'featuredImage',
-      title: 'Featured Image',
-      type: 'image',
-      options: {hotspot: true},
-      group: 'editorial',
+      name: 'trails',
+      title: 'Trails',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'trail'}]}],
+      group: 'specs',
     }),
     // Thumbnail
     defineField({
@@ -111,15 +118,28 @@ export default defineField({
       options: {hotspot: true},
       group: 'editorial',
     }),
+    // Hero
+    defineField({
+      name: 'hero',
+      title: 'Hero Cover',
+      type: 'module.artwork.hero',
+      group: 'editorial',
+    }),
     // Body blocks
     defineField({
       name: 'body',
       title: 'Body (modules)',
       type: 'array',
       of: [
-        {type: 'module.textParagraphs'},
-        {type: 'module.artwork.textAccordeon'},
-        {type: 'module.iframe'},
+        {
+          type: 'module.textParagraphs',
+        },
+        {
+          type: 'module.accordion',
+        },
+        {
+          type: 'module.iframe',
+        },
       ],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
       group: 'editorial',

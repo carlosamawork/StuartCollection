@@ -1,0 +1,60 @@
+@use "@/styles/common/variables" as *;
+
+$video_height: 506px;
+$swiper_spaceBetween: 32px;
+
+.section {
+    padding-bottom: 56px;
+    overflow: hidden;
+
+    .top {
+        border-top: 1px solid var(--colors-foreground-fg-5);
+        padding-top: 56px;
+        overflow: hidden;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        margin-bottom: 32px;
+
+        .topRight {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+
+            align-items: flex-end;
+            justify-items: flex-end;
+        }
+    }
+
+    .slider {
+        margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        overflow: visible;
+    }
+
+    .slide {
+        .videoCard {
+            width: calc($video_height * 16 / 9 + $swiper_spaceBetween);
+            padding-right: $swiper_spaceBetween;
+
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        iframe {
+            border-radius: 8px;
+            height: $video_height !important;
+            width: calc($video_height * 16 / 9) !important;
+            margin-right: $swiper_spaceBetween;
+        }
+    }
+
+    :global {
+        .swiper-slide:last-of-type {
+            padding-right: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        }
+    }
+}

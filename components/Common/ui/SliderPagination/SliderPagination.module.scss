@@ -1,0 +1,44 @@
+.sliderPagination {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+
+    .arrow {
+        appearance: none;
+        background: transparent;
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        line-height: 1;
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+    }
+
+    .dots {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+
+        :global {
+            .bullet {
+                width: 8px;
+                height: 8px;
+                border-radius: 999px;
+                border: 1px solid currentColor;
+                opacity: 0.5;
+                cursor: pointer;
+            }
+
+            .bulletActive {
+                opacity: 1;
+                background-color: currentColor;
+            }
+        }
+    }
+}

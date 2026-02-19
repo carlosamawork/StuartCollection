@@ -1,0 +1,56 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+
+    .image {
+        position: relative;
+        width: 280px;
+        height: 382px;
+
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        img {
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+    }
+
+    .titles {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .title {
+            text-align: center;
+        }
+
+        .artists {
+            .artist {
+                display: inline;
+            }
+
+            .artist::after {
+                content: "/";
+                padding: 0 0.4rem;
+            }
+
+            .artist:last-of-type::after {
+                display: none;
+            }
+        }
+    }
+
+    &:hover {
+        .image {
+            img {
+                border-radius: 16px;
+            }
+        }
+    }
+}

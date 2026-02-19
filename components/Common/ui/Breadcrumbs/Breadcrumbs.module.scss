@@ -1,0 +1,19 @@
+.breadcrumbs {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    .item {
+        font-size: var(--font-size-font-size-p-small);
+        line-height: var(--line-height-line-height-p-small);
+    }
+
+    .item::after {
+        content: "/";
+        padding: 0 0.5rem;
+    }
+
+    .item:not(.showLastSlash):last-of-type::after {
+        display: none;
+    }
+}

@@ -1,15 +1,13 @@
 'use client'
-import LazyVideo from '@/components/Common/LazyVideo'
 import s from './TextParagraphs.module.scss'
-import LazyImage from '@/components/Common/LazyImage'
 import {PortableText} from 'next-sanity'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
-import Link from 'next/link'
-import VideoEmbed from '@/components/Common/VideoEmbed'
 
-export default function TextParagraphsComponent({data}: {data: any}) {
+export default function TextParagraphsComponent({data, noMargin}: {data: any; noMargin?: boolean}) {
   return (
-    <div className={`${s.textParagraphs} ${s[data.width]}`}>
+    <div
+      className={`${s.textParagraphs} ${s[data.width]} ${s[noMargin ? 'textParagraphs--noMargin' : '']}`}
+    >
       <div className={s.bodyParagraphs}>
         {data.body &&
           data.body.map((textRow: any, index: number) => {

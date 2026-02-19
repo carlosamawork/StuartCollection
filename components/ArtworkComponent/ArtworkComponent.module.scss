@@ -1,0 +1,22 @@
+.artworkComponent {
+    padding: 32px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    .introSection {
+        padding: 24px 0 56px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+
+        .body {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+    }
+}

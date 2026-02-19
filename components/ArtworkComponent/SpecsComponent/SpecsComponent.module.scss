@@ -1,0 +1,59 @@
+.specsComponent {
+    display: flex;
+    flex-direction: column;
+
+    .titleContainer {
+        margin-top: 4px;
+        margin-bottom: 40px;
+    }
+
+    .artistContainer {
+        .artist {
+            display: inline;
+        }
+
+        .artist::after {
+            content: "/";
+            padding: 0 0.6rem;
+        }
+
+        .artist:last-of-type::after {
+            display: none;
+        }
+    }
+
+    .specsDetails {
+        display: flex;
+        flex-direction: column;
+        max-width: 280px;
+
+        .item {
+            display: grid;
+            grid-template-columns: 92px 1fr;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+            font-size: var(--font-size-font-size-p-small);
+            line-height: var(--line-height-line-height-p-small);
+
+            .label {
+                color: var(--colors-foreground-fg-3);
+            }
+
+            .content {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            padding: 16px 0;
+            border-bottom: 1px solid var(--colors-foreground-fg-5);
+        }
+
+        .item:last-of-type {
+            border-bottom: none;
+        }
+    }
+}

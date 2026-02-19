@@ -1,0 +1,23 @@
+.section {
+    border-top: 1px solid var(--colors-foreground-fg-5);
+    padding: 56px 0;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 46px;
+
+    .visitDetails {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .iFrame {
+        grid-column: span 2;
+        width: 100%;
+
+        iframe {
+            width: 100%;
+        }
+    }
+}

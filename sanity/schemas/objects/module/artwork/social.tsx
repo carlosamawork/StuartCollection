@@ -33,15 +33,9 @@ export default defineField({
           type: 'object',
           fields: [
             defineField({
-              name: 'type',
-              title: 'Type',
+              name: 'label',
+              title: 'Label',
               type: 'string',
-              options: {
-                list: [
-                  {title: 'Facebook', value: 'facebook'},
-                  {title: 'Instagram', value: 'instagram'},
-                ],
-              },
             }),
             defineField({
               name: 'href',

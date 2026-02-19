@@ -1,0 +1,37 @@
+@use "./styles/common/typography_import" as *;
+
+.text {
+    p {
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    *:last-child {
+        margin-bottom: 0;
+    }
+
+    &--default {
+        p {
+            @extend .p;
+        }
+    }
+
+    &--sm {
+        p {
+            @extend .p-small;
+        }
+    }
+
+    &--md {
+        p {
+            @extend .p-medium;
+        }
+    }
+}

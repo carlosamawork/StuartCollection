@@ -1,20 +1,27 @@
 @use "@/styles/common/variables" as *;
 
 .container {
-    width: $max_page_width;
-    max-width: 100%;
-    padding: 0 32px;
+    width: 100%;
+    max-width: $max_page_width;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
 }
 
 .containerSmall {
-    width: $max_page_width_sm;
-    max-width: 100%;
+    width: 100%;
+    max-width: $max_page_width_sm;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
 }
 
 .containerFullWidth {
-    max-width: 100%;
-    padding: 0 32px;
+    width: 100%;
+    padding: 0 $min_page_padding;
     margin: 0 auto;
+}
+
+.containerAlignLeft {
+    width: 100%;
+    margin-left: $page_additional_padding_for_max_page_width;
+    padding-left: $min_page_padding;
 }

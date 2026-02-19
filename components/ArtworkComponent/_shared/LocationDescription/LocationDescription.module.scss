@@ -1,0 +1,9 @@
+.component {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+
+    font-size: var(--font-size-font-size-p-small);
+    line-height: var(--line-height-line-height-p-small);
+}

@@ -1,0 +1,32 @@
+.tagsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+    min-width: 0;
+
+    .item {
+        flex-shrink: 1;
+    }
+}
+
+.tag {
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &--clickable:hover {
+        border-radius: 16px;
+    }
+
+    color: var(--colors-foreground-fg-1);
+    background-color: transparent;
+    border: 1px solid var(--colors-foreground-fg-5);
+
+    &--active {
+        color: var(--colors-foreground-fg-inverted-1);
+        background-color: var(--colors-foreground-fg-1);
+        border-color: var(--colors-foreground-fg-1);
+    }
+}

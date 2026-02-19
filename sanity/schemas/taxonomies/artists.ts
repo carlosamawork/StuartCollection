@@ -1,4 +1,5 @@
 import {defineField, defineType} from 'sanity'
+import {validateSlug} from '../../utils/validateSlug'
 
 // Install lucide.dev icons with "npm install lucide-react"
 import {UserIcon} from '@sanity/icons'
@@ -13,6 +14,13 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
+    }),
+    defineField({
+      name: 'slug',
+      type: 'slug',
+      options: {source: 'name'},
+      // @ts-ignore - TODO - fix this TS error
+      validation: validateSlug,
     }),
     defineField({
       name: 'image',

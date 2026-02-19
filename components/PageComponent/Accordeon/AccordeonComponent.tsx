@@ -1,23 +1,15 @@
 'use client'
-import LazyVideo from '@/components/Common/LazyVideo'
 import s from './AccordeonComponent.module.scss'
-import LazyImage from '@/components/Common/LazyImage'
-import {PortableText} from 'next-sanity'
-import {portableBodyComponents} from '@/utils/portableTextParagraphs'
-import Link from 'next/link'
-import VideoEmbed from '@/components/Common/VideoEmbed'
 import TitleParagraphsComponent from '../TitleParagraphs'
-import TextParagraphsComponent from './TextAccordeonParagraphs'
 import CalloutComponent from '../Callout'
 import SeparatorComponent from '../Separator'
 import TextAccordeonParagraphsComponent from './TextAccordeonParagraphs'
 import ImageComponent from '../Image'
 import JumbotronComponent from '../Jumbotron'
 
-export default function AccordeonComponent({data}: {data: any}) {
-  
-    return (
-    <div className={s.accordeon}>
+export default function AccordeonComponent({data, small}: {data: any; small?: boolean}) {
+  return (
+    <div className={`${s.accordeon} ${small ? s['accordeon--small'] : ''}`}>
       <div className={s.accordeonItems}>
         {data.items &&
           data.items.map((item: any, index: number) => {
@@ -28,7 +20,7 @@ export default function AccordeonComponent({data}: {data: any}) {
                 open={item.openByDefault}
               >
                 <summary className={s.accordeonItemSummary}>
-                  <h3>{item.label}</h3>
+                  {small ? <h5>{item.label}</h5> : <h3>{item.label}</h3>}
                   <span className={`${s.icon} ${data.fullWidth ? s.fullWidth : ''}`}>
                     <svg
                       className={s.iconClosed}
@@ -59,9 +51,16 @@ export default function AccordeonComponent({data}: {data: any}) {
                     item.content.map((mod: any, index: number) => {
                       return (
                         <div key={mod.id || index} className={s.moduleItem}>
-                          {mod._type === 'module.titleParagraphs' && <TitleParagraphsComponent data={mod} />}
+                          {mod._type === 'module.titleParagraphs' && (
+                            <TitleParagraphsComponent data={mod} />
+                          )}
                           {/* Render module content based on its type */}
-                          {mod._type === 'module.textParagraphs' && <TextAccordeonParagraphsComponent data={mod} fullWidth={mod.fullWidth} />}
+                          {mod._type === 'module.textParagraphs' && (
+                            <TextAccordeonParagraphsComponent
+                              data={mod}
+                              fullWidth={mod.fullWidth}
+                            />
+                          )}
                           {/* Add other module types as needed */}
                           {mod._type === 'module.callout' && <CalloutComponent data={mod} />}
                           {/* Add other module types as needed */}

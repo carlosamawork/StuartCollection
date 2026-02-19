@@ -9,95 +9,94 @@
 .italics,
 em,
 i {
-  font-style: italic;
-  font-weight: inherit;
+    font-style: italic;
+    font-weight: inherit;
 }
 
 a {
-  font-weight: inherit;
+    font-weight: inherit;
 }
 /*****************************************
 *****    GENERAL            **************
 ******************************************/
 
 %h1 {
-	font-size: var(--font-size-font-size-4xlarge);
+    font-size: var(--font-size-font-size-4xlarge);
     line-height: var(--line-height-line-height-4xlarge);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-4xlarge);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-4xlarge);
         line-height: var(--line-height-line-height-4xlarge);
         font-weight: 500;
-	}
+    }
 }
 
 %h2 {
-	font-size: var(--font-size-font-size-3xlarge);
-	line-height: var(--line-height-line-height-3xlarge);
+    font-size: var(--font-size-font-size-3xlarge);
+    line-height: var(--line-height-line-height-3xlarge);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-3xlarge);
-		line-height: var(--line-height-line-height-3xlarge);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-3xlarge);
+        line-height: var(--line-height-line-height-3xlarge);
         font-weight: 500;
-	}
+    }
 }
 
 %h3 {
-	font-size: var(--font-size-font-size-2xlarge);
-	line-height: var(--line-height-line-height-2xlarge);
+    font-size: var(--font-size-font-size-2xlarge);
+    line-height: var(--line-height-line-height-2xlarge);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-2xlarge);
-		line-height: var(--line-height-line-height-2xlarge);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-2xlarge);
+        line-height: var(--line-height-line-height-2xlarge);
         font-weight: 500;
-	}
+    }
 }
 
 %h4 {
-	font-size: var(--font-size-font-size-xlarge);
-	line-height: var(--line-height-line-height-xlarge);
+    font-size: var(--font-size-font-size-xlarge);
+    line-height: var(--line-height-line-height-xlarge);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-xlarge);
-		line-height: var(--line-height-line-height-xlarge);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-xlarge);
+        line-height: var(--line-height-line-height-xlarge);
         font-weight: 500;
-	}
+    }
 }
 
 %h5 {
-	font-size: var(--font-size-font-size-large);
-	line-height: var(--line-height-line-height-large);
+    font-size: var(--font-size-font-size-large);
+    line-height: var(--line-height-line-height-large);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-large);
-		line-height: var(--line-height-line-height-large);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-large);
+        line-height: var(--line-height-line-height-large);
         font-weight: 500;
-	}
+    }
 }
 
 %h6 {
-	font-size: var(--font-size-font-size-medium);
-	line-height: var(--line-height-line-height-medium);
+    font-size: var(--font-size-font-size-medium);
+    line-height: var(--line-height-line-height-medium);
     font-weight: 500;
-	@include media-breakpoint-up(md) {
-		font-size: var(--font-size-font-size-medium);
-		line-height: var(--line-height-line-height-medium);
+    @include media-breakpoint-up(md) {
+        font-size: var(--font-size-font-size-medium);
+        line-height: var(--line-height-line-height-medium);
         font-weight: 500;
-	}
+    }
 }
 
 %p {
-	font-size: font-size("sm", "mobile");
-	line-height: 1.2;
-	@include media-breakpoint-up(md) {
-		font-size: font-size("sm", "desktop");
-	}
+    font-size: font-size("sm", "mobile");
+    line-height: 1.2;
+    @include media-breakpoint-up(md) {
+        font-size: font-size("sm", "desktop");
+    }
 }
 
 /*****************************************
 *****    APPLY            **************
 ******************************************/
-
 
 h1,
 .h1 {
@@ -131,7 +130,7 @@ h6,
     @extend %h6;
 }
 
-p{
+p {
     @extend %p;
 }
 
@@ -150,7 +149,7 @@ small {
 }
 
 .font-md {
-	font-size: font-size("md", "mobile");
+    font-size: font-size("md", "mobile");
     @include media-breakpoint-up(md) {
         font-size: font-size("md", "desktop");
     }
@@ -174,29 +173,4 @@ small {
     @include media-breakpoint-up(md) {
         font-size: font-size("xxl", "desktop");
     }
-}
-
-.p{
-    font-size: var(--font-size-font-size-p);
-    line-height: var(--line-height-line-height-p);
-}
-
-.p-small{
-    font-size: var(--font-size-font-size-p-small);
-    line-height: var(--line-height-line-height-p-small);
-}
-
-.p-medium{
-    font-size: var(--font-size-font-size-medium);
-    line-height: var(--line-height-line-height-medium);
-}
-
-.p-large{
-    font-size: var(--font-size-font-size-large);
-    line-height: var(--line-height-line-height-large);
-}
-
-.p-xlarge{
-    font-size: var(--font-size-font-size-xlarge);
-    line-height: var(--line-height-line-height-xlarge);
 }

@@ -13,7 +13,7 @@ export default defineField({
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
-      initialValue: 'The Artist',
+      initialValue: 'The artist',
     }),
     // Body
     defineField({
@@ -53,6 +53,16 @@ export default defineField({
               options: {hotspot: true},
             },
           ],
+          validation: (Rule) =>
+            Rule.custom((value, context) => {
+              const {parent} = context
+              if (parent?.customizeArtistsImages) {
+                if (!value || value.length === 0) {
+                  return 'Please add at least one image or artist'
+                }
+              }
+              return true
+            }),
           hidden: ({parent}) => parent?.customizeArtistsImages !== true,
         }),
       ],
@@ -61,7 +71,7 @@ export default defineField({
     defineField({
       name: 'accordeon',
       title: 'Accordeon',
-      type: 'module.artwork.textAccordeon',
+      type: 'module.accordion',
     }),
   ],
   preview: {
@@ -70,7 +80,7 @@ export default defineField({
     },
     prepare({title}) {
       return {
-        title: `Section: ${title || 'The Artist(s)'}`,
+        title: `Section: ${title || 'The artist'}`,
       }
     },
   },

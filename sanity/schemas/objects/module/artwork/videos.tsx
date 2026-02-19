@@ -27,13 +27,25 @@ export default defineField({
       title: 'Videos',
       type: 'array',
       description: 'Copy/paste the Youtube or Vimeo video URLs you want to embed.',
+      icon: DocumentVideoIcon,
       of: [
-        {
+        defineField({
           name: 'item',
-          title: 'Video Embed (from URL)',
-          type: 'url',
-          icon: DocumentVideoIcon,
-        },
+          title: 'Item',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'videoUrl',
+              title: 'Video Embed (from URL)',
+              type: 'url',
+            }),
+            defineField({
+              name: 'title',
+              title: 'Caption',
+              type: 'string',
+            }),
+          ],
+        }),
       ],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
     }),

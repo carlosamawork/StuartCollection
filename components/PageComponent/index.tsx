@@ -20,6 +20,8 @@ import {m} from 'framer-motion'
 import SliderComponent from './Slider'
 import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
+import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
+import {HeroCover} from '@/components/Common/ui/HeroCover'
 import {usePathname} from 'next/navigation'
 
 export default function PageComponent({data}: {data: any}) {
@@ -71,19 +73,13 @@ export default function PageComponent({data}: {data: any}) {
 
     const notify = () => window.dispatchEvent(new Event('locationchange'))
 
-    history.pushState = function (
-      this: History,
-      ...args: Parameters<History['pushState']>
-    ) {
+    history.pushState = function (this: History, ...args: Parameters<History['pushState']>) {
       const ret = origPush.apply(this, args)
       window.dispatchEvent(new Event('locationchange'))
       return ret
     }
 
-    history.replaceState = function (
-      this: History,
-      ...args: Parameters<History['replaceState']>
-    ) {
+    history.replaceState = function (this: History, ...args: Parameters<History['replaceState']>) {
       const ret = origReplace.apply(this, args)
       window.dispatchEvent(new Event('locationchange'))
       return ret
@@ -115,19 +111,11 @@ export default function PageComponent({data}: {data: any}) {
 
   return (
     <div className={`${s.pageComponent}`}>
-      <Container size="fullWidth">
-        {activeSection?.topImage && topImage && (
-          <div className={s.topImageContainer}>
-            <LazyImage
-              src={activeSection.topImage.imageUrl}
-              alt={activeSection.topImage.filename || 'Top Image'}
-              width={activeSection.topImage.metadata.dimensions.width}
-              height={activeSection.topImage.metadata.dimensions.height}
-              fill={true}
-              objectFit="cover"
-            />
-          </div>
-        )}
+      <Container variant="fullWidth">
+        <HeroCover
+          image={topImage ? activeSection?.topImage : undefined}
+          height={`${(100 * 320) / 720}vh`}
+        />
       </Container>
       <Container>
         <div className={`${s.content} ${!data.asideMenu ? s.noAsideMenu : ''}`}>
@@ -171,10 +159,21 @@ export default function PageComponent({data}: {data: any}) {
           )}
 
           <article className={s.contentContainer}>
-            <div className={s.breadcrumbs}>
-              <Link href="/">Home</Link> / <a href={`/${data.slug}/`}>{data.title}</a> /{' '}
-              <Link href={`#${activeSection?.id || ''}`}>{activeSection?.title || 'Section'}</Link>
-            </div>
+            <Breadcrumbs
+              breadcrumbs={[
+                {label: 'Home', href: '/'},
+                {label: data.title, href: `/${data.slug}/`},
+                ...(activeSection?.title
+                  ? [
+                      {
+                        label: activeSection?.title,
+                        href: `#${activeSection?.id}`,
+                      },
+                    ]
+                  : []),
+              ]}
+              showLastSlash={false}
+            />
             <div className={s.moduleTitle}>
               <h1>{activeSection?.title}</h1>
               {separatorsMenu && separatorsMenu.length > 0 && (

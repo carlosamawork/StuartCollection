@@ -1,0 +1,43 @@
+@use "@/styles/common/variables" as *;
+
+$swiper_spaceBetween: 32px;
+
+.section {
+    padding-bottom: 56px;
+    overflow: hidden;
+
+    .topContent {
+        border-top: 1px solid var(--colors-foreground-fg-5);
+        padding-top: 56px;
+        overflow: hidden;
+
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 32px;
+    }
+
+    .slider {
+        margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        overflow: visible;
+    }
+
+    .slide {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        margin-right: $swiper_spaceBetween;
+
+        img {
+            border-radius: 8px;
+        }
+    }
+
+    :global {
+        .swiper-slide:last-of-type:after {
+            content: "";
+            width: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        }
+    }
+}
