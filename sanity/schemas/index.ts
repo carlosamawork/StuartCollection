@@ -54,7 +54,6 @@ import announcement from './objects/module/home/announcement'
 
 import links from './objects/global/links'
 import notFoundPage from './objects/global/notFoundPage'
-import heroPage from './objects/hero/page'
 import menu from './objects/global/menu'
 import seo from './objects/seo/seo'
 import seoHome from './objects/seo/home'
@@ -84,7 +83,10 @@ import artworkVisit from './objects/module/artwork/visit'
 import artworkSocial from './objects/module/artwork/social'
 import artworkVideos from './objects/module/artwork/videos'
 import artworkImages from './objects/module/artwork/images'
-import artworkHero from './objects/module/artwork/hero'
+
+// Hero
+import heroPage from './objects/hero/page'
+import heroGeneral from './objects/hero/general'
 
 const objects = [
   footer,
@@ -95,6 +97,7 @@ const objects = [
   notFoundPage,
   heroHome,
   heroPage,
+  heroGeneral,
   menu,
   seo,
   seoHome,
@@ -128,7 +131,6 @@ const objects = [
   artworkSocial,
   artworkVideos,
   artworkImages,
-  artworkHero,
 ]
 
 export const schemaTypes = [

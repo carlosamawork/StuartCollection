@@ -12,6 +12,7 @@ import {textParagraphsQuery} from '../modules/general/textParagraphs'
 import {iframQuery} from '../modules/general/iframe'
 import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
 import {artwork_thumbnail, ArtworkThumbnailData} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {hero_general, HeroGeneralData} from '@/sanity/queries/fragments/hero_general'
 
 export async function getArtwork(slug: string): Promise<ArtworkData> {
   return client.fetch(
@@ -30,13 +31,10 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                 visitDescription,
                 location->{
                     ${location}
+                    },
                 },
-            },
             hero{
-                image{
-                    ${image},
-                },
-                videoUrl,
+                ${hero_general}
             },
             "body_modules": body[]{
                 _type,
@@ -117,10 +115,7 @@ export type ArtworkData = {
     visitDescription: any
     location: LocationData
   }
-  hero: {
-    image: any
-    videoUrl: string
-  }
+  hero: HeroGeneralData
   body_modules: any[]
   sections: (
     | ArtworkImagesSectionData

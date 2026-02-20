@@ -105,7 +105,7 @@ export default defineField({
     // Thumbnail
     defineField({
       name: 'thumbnail',
-      title: 'Thumbnail',
+      title: 'Thumbnail image',
       type: 'image',
       options: {hotspot: true},
       group: 'editorial',
@@ -114,7 +114,7 @@ export default defineField({
     defineField({
       name: 'hero',
       title: 'Hero Cover',
-      type: 'module.artwork.hero',
+      type: 'hero.general',
       group: 'editorial',
     }),
     // Body blocks

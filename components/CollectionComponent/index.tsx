@@ -5,16 +5,18 @@ import {CollectionData} from '@/sanity/queries/queries/collection'
 import Link from 'next/link'
 
 export default function CollectionComponent({data}: {data: CollectionData}) {
-  const {artworks, themes, locations, artists} = data
+  const {artworks, themes, locations, artists, trails} = data
 
   return (
     <div>
       <ThemesSelectionComponent themes={themes} />
       <div>
-        <h5>List of locations</h5>
+        <h5>List of artworks</h5>
         <ul>
-          {locations.map((location) => (
-            <li key={location.slug}>{location.name}</li>
+          {artworks.map((artwork) => (
+            <li key={artwork.slug}>
+              <Link href={`/collection/artwork/${artwork.slug}`}>{artwork.title}</Link>
+            </li>
           ))}
         </ul>
       </div>
@@ -27,11 +29,24 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
         </ul>
       </div>
       <div>
-        <h5>List of artworks</h5>
+        <h5>List of locations</h5>
         <ul>
-          {artworks.map((artwork) => (
-            <li key={artwork.slug}>
-              <Link href={`/collection/artwork/${artwork.slug}`}>{artwork.title}</Link>
+          {locations.map((location) => (
+            <li key={location.slug}>{location.name}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h5>List of trails</h5>
+        <ul>
+          {trails.map(({slug, title, artworksCount}) => (
+            <li key={slug}>
+              <Link href={`/collection/trail/${slug}`}>
+                {title}
+                {' - '}
+                {artworksCount}
+                {' artworks'}
+              </Link>
             </li>
           ))}
         </ul>

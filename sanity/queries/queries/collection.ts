@@ -2,6 +2,7 @@ import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
 import {artwork_thumbnail} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {image} from '@/sanity/queries/fragments/image'
 
 export async function getCollection(): Promise<CollectionData> {
   return client.fetch(
@@ -27,6 +28,14 @@ export async function getCollection(): Promise<CollectionData> {
                 "slug": slug.current,
             }
         },
+        "trails": *[_type == "trail"]{
+            title,
+            "slug": slug.current,
+            "artworksCount": count(artworks),
+            thumbnail{
+                ${image}
+            }
+        },
     }`,
   )
 
@@ -49,6 +58,7 @@ export type CollectionData = {
   themes: CollectionThemeData[]
   locations: CollectionLocationData[]
   artists: CollectionArtistData[]
+  trails: CollectionTrailsData[]
 }
 
 type CollectionArtworkData = {
@@ -72,6 +82,13 @@ type CollectionLocationData = {
 type CollectionArtistData = {
   name: string
   artworks: {slug: string}[]
+}
+
+type CollectionTrailsData = {
+  title: string
+  slug: string
+  artworksCount: number
+  image: any
 }
 
 export async function getCollectionSEO() {
