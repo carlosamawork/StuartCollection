@@ -102,14 +102,6 @@ export default defineField({
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
       group: 'specs',
     }),
-    // Trails
-    defineField({
-      name: 'trails',
-      title: 'Trails',
-      type: 'array',
-      of: [{type: 'reference', to: [{type: 'trail'}]}],
-      group: 'specs',
-    }),
     // Thumbnail
     defineField({
       name: 'thumbnail',

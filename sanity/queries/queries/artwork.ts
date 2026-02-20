@@ -86,14 +86,21 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                     "matchCount": count(themes[@._ref in ^.^.themes[]._ref])
                 } | order(matchCount desc) [0...4], // Order by count and take top 4
                 "byTrail": *[
-                    _type == "artwork" && 
-                    _id != ^._id && 
-                    count(trails[@._ref in ^.^.trails[]._ref]) > 0
-                ] {
-                    ${artwork_thumbnail}    
-                    // Calculate match count for sorting
-                    "matchCount": count(trails[@._ref in ^.^.trails[]._ref])
-                } | order(matchCount desc) [0...4], // Order by count and take top 4
+                    _type == "artwork" &&
+                    _id != ^._id &&
+                    count(*[
+                        _type == "trail" &&
+                        references(^._id) &&
+                        references(^.^._id)
+                    ]) > 0
+                ]{
+                    ${artwork_thumbnail}
+                    "sharedTrailCount": count(*[
+                        _type == "trail" &&
+                        references(^._id) &&
+                        references(^.^._id)
+                    ])
+                } | order(sharedTrailCount desc) [0...4]
             }
         }`,
     {slug},
