@@ -1,10 +1,10 @@
 'use client'
 
-import s from './LocationLink.module.scss'
+import s from './FilterComponent.module.scss'
 import {LocationData} from '@/sanity/queries/fragments/location'
 import Icon from '@/components/Common/ui/Icon/Icon'
 
-export default function LocationGoogleLink({location}: {location: LocationData}) {
+export default function FilterComponent({location}: {location: LocationData}) {
   if (!location) return <></>
 
   return (
@@ -12,7 +12,7 @@ export default function LocationGoogleLink({location}: {location: LocationData})
       <p>{location.name}</p>
       <a href="#visit" className={s.link}>
         <strong>View on Map </strong>
-        <Icon name="arrow-down" alt={'↓'} size={16} />
+        <Icon name="filter" alt={'Filter Icon'} />
       </a>
     </div>
   )

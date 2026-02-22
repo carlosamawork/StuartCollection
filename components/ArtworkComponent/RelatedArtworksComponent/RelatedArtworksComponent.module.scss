@@ -7,6 +7,7 @@ $swiper_padding: 32px;
     .topContent {
         border-top: 1px solid var(--colors-foreground-fg-5);
         padding-top: 56px;
+        padding-bottom: 32px;
 
         display: flex;
         align-items: flex-end;
@@ -20,7 +21,7 @@ $swiper_padding: 32px;
             display: flex;
             flex-direction: row;
             align-items: flex-end;
-            gap: 10px;
+            gap: 3px;
 
             margin-bottom: 7px;
 
@@ -29,7 +30,7 @@ $swiper_padding: 32px;
             }
 
             img {
-                margin-bottom: 6px;
+                margin-bottom: 2px;
             }
         }
     }

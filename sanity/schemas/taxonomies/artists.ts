@@ -16,13 +16,6 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'slug',
-      type: 'slug',
-      options: {source: 'name'},
-      // @ts-ignore - TODO - fix this TS error
-      validation: validateSlug,
-    }),
-    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',

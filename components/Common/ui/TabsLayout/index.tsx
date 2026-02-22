@@ -8,7 +8,14 @@ export interface TabData {
   content: React.ReactNode
 }
 
-export default function TabsLayout({tabs}: {tabs: TabData[]}) {
+interface Props {
+  tabs: TabData[]
+  initialTab?: string
+  enableUrlHash?: boolean
+  paddingTop?: number
+}
+
+export default function TabsLayout({tabs, initialTab, enableUrlHash, paddingTop = 40}: Props) {
   const [activeIndex, setActiveIndex] = useState(0)
 
   if (!tabs || tabs.length === 0) return null
@@ -17,6 +24,7 @@ export default function TabsLayout({tabs}: {tabs: TabData[]}) {
     <div className={s.tabsLayout}>
       <div className={s.menu}>
         <div className={s.tabs}>
+          {initialTab && <span key="initial">{initialTab}</span>}
           {tabs.map((tab: any, index: number) => {
             const isActive = index === activeIndex
             return (
@@ -33,7 +41,7 @@ export default function TabsLayout({tabs}: {tabs: TabData[]}) {
           })}
         </div>
       </div>
-      <div className={s.content}>{tabs[activeIndex].content}</div>
+      <div style={{paddingTop}}>{tabs[activeIndex].content}</div>
     </div>
   )
 }

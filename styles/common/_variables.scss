@@ -35,6 +35,9 @@ $body-bg: $base;
 
 $c_menu: #fff;
 
+$missing_image_gradient:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 70.85%, rgba(0, 0, 0, 0.6) 100%), #c3c3c3;
+
 /**
  * Buttons
  */

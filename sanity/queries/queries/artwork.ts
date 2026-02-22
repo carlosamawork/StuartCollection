@@ -11,7 +11,7 @@ import {ArtworkVisitSectionData, visitSectionQuery} from '../modules/artwork/vis
 import {textParagraphsQuery} from '../modules/general/textParagraphs'
 import {iframQuery} from '../modules/general/iframe'
 import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
-import {artwork_thumbnail, ArtworkThumbnailData} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {artwork_card, ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
 import {hero_general, HeroGeneralData} from '@/sanity/queries/fragments/hero_general'
 
 export async function getArtwork(slug: string): Promise<ArtworkData> {
@@ -72,14 +72,14 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                     _id != ^._id && 
                     location._ref == ^.location._ref
                 ] {
-                    ${artwork_thumbnail}    
+                    ${artwork_card}    
                 } [0...4],
                 "byTheme": *[
                     _type == "artwork" && 
                     _id != ^._id && 
                     count(themes[@._ref in ^.^.themes[]._ref]) > 0
                 ] {
-                    ${artwork_thumbnail}    
+                    ${artwork_card}    
                     // Calculate match count for sorting
                     "matchCount": count(themes[@._ref in ^.^.themes[]._ref])
                 } | order(matchCount desc) [0...4], // Order by count and take top 4
@@ -92,7 +92,7 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                         references(^.^._id)
                     ]) > 0
                 ]{
-                    ${artwork_thumbnail}
+                    ${artwork_card}
                     "sharedTrailCount": count(*[
                         _type == "trail" &&
                         references(^._id) &&
@@ -108,7 +108,7 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
 export type ArtworkData = {
   title: string
   slug: string
-  artists: {name: string; slug: string; image: any}[]
+  artists: {name: string; image: any}[]
   specs: {
     themes: {title: string}[]
     year: number
@@ -125,9 +125,9 @@ export type ArtworkData = {
     | ArtworkSocialSectionData
   )[]
   related: {
-    byLocation: ArtworkThumbnailData[]
-    byTrail: ArtworkThumbnailData[]
-    byTheme: ArtworkThumbnailData[]
+    byLocation: ArtworkCardData[]
+    byTrail: ArtworkCardData[]
+    byTheme: ArtworkCardData[]
   }
 }
 

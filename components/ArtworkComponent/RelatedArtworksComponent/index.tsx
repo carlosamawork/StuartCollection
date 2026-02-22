@@ -1,12 +1,12 @@
 'use client'
 
-import ArtworkThumbnail from '@/components/Common/ArtworkThumbnail'
+import ArtworkCard from '@/components/Common/ArtworkCard'
 import Container from '@/components/Common/ui/Container'
 import {ArtworkData} from '@/sanity/queries/queries/artwork'
 import s from './RelatedArtworksComponent.module.scss'
 import Link from 'next/link'
-import Image from 'next/image'
 import TabsLayout from '@/components/Common/ui/TabsLayout'
+import Icon from '@/components/Common/ui/Icon/Icon'
 
 export default function RelatedArtworksComponent({data}: {data: ArtworkData['related']}) {
   if (!data) return <></>
@@ -17,14 +17,8 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
         <div className={s.topContent}>
           <h2>{'Related Artworks'}</h2>
           <Link className={s.link} href={'/collection/'}>
-            <strong>View all </strong>
-            <Image
-              src="/assets/svg/chevron-right.svg"
-              alt=">"
-              width={6.17}
-              height={10}
-              style={{width: 6.17, height: 10}}
-            />
+            <strong>View All</strong>
+            <Icon name="chevron-right" alt=">" />
           </Link>
         </div>
         <TabsLayout
@@ -36,7 +30,7 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
                   {data.byLocation && data.byLocation.length ? (
                     data.byLocation.map((artwork, i) => (
                       <li key={i}>
-                        <ArtworkThumbnail data={artwork} />
+                        <ArtworkCard data={artwork} />
                       </li>
                     ))
                   ) : (
@@ -52,7 +46,7 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
                   {data.byTheme && data.byTheme.length ? (
                     data.byTheme.map((artwork, i) => (
                       <li key={i}>
-                        <ArtworkThumbnail data={artwork} />
+                        <ArtworkCard data={artwork} />
                       </li>
                     ))
                   ) : (
@@ -68,7 +62,7 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
                   {data.byTrail && data.byTrail.length ? (
                     data.byTrail.map((artwork, i) => (
                       <li key={i}>
-                        <ArtworkThumbnail data={artwork} />
+                        <ArtworkCard data={artwork} />
                       </li>
                     ))
                   ) : (

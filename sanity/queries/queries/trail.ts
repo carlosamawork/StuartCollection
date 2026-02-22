@@ -1,7 +1,7 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
-import {artwork_thumbnail, ArtworkThumbnailData} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {artwork_card, ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
 import {iframQuery} from '@/sanity/queries/modules/general/iframe'
 import {hero_general, HeroGeneralData} from '@/sanity/queries/fragments/hero_general'
 
@@ -18,7 +18,7 @@ export async function getTrail(slug: string): Promise<TrailData> {
             ${iframQuery}
         },
         artworks[]->{
-            ${artwork_thumbnail}
+            ${artwork_card}
         },
       }`,
     {slug},
@@ -31,7 +31,7 @@ export type TrailData = {
   hero: HeroGeneralData
   body: any
   map: any
-  artworks: ArtworkThumbnailData[]
+  artworks: ArtworkCardData[]
 }
 
 export async function getTrailSEO(slug: string) {

@@ -7,13 +7,25 @@ interface HeroCoverProps {
   image?: any
   videoUrl?: string
   height?: string
+  paddingBottom?: string
 }
 
-export function HeroCover({image, videoUrl, height = '600px'}: HeroCoverProps) {
+export function HeroCover({
+  image,
+  videoUrl,
+  height = '600px',
+  paddingBottom = '56px',
+}: HeroCoverProps) {
   if (!image && !videoUrl) return null
 
   return (
-    <div className={s.heroCover} style={videoUrl ? {maxHeight: height} : {height}}>
+    <div
+      className={s.heroCover}
+      style={{
+        paddingBottom,
+        ...(videoUrl ? {maxHeight: height} : {height}),
+      }}
+    >
       {videoUrl ? (
         <LazyVideo src={videoUrl} alt={'Hero Video'} muted={true} autoplay={true} />
       ) : (
