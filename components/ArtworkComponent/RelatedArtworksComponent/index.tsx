@@ -6,7 +6,7 @@ import {ArtworkData} from '@/sanity/queries/queries/artwork'
 import s from './RelatedArtworksComponent.module.scss'
 import Link from 'next/link'
 import TabsLayout from '@/components/Common/ui/TabsLayout'
-import Icon from '@/components/Common/ui/Icon/Icon'
+import Icon from '@/components/Common/ui/Icon'
 
 export default function RelatedArtworksComponent({data}: {data: ArtworkData['related']}) {
   if (!data) return <></>
@@ -18,7 +18,7 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
           <h2>{'Related Artworks'}</h2>
           <Link className={s.link} href={'/collection/'}>
             <strong>View All</strong>
-            <Icon name="chevron-right" alt=">" />
+            <Icon name="chevronRight" alt=">" />
           </Link>
         </div>
         <TabsLayout

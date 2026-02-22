@@ -78,11 +78,11 @@ export const useSort = <CardObject extends object>({
     setSortOrder((previousValue) => (previousValue === 'asc' ? 'desc' : 'asc'))
   }
 
-  const sortComponentOptions = sortBy.map(({label, key, sortLabels}) => {
+  const sortComponentOptions = sortBy.map(({label, key, sortLabels, defaultSortOrder}) => {
     return {
       label,
       key,
-      sortLabel: sortLabels[selectedSortOrder],
+      sortLabel: sortLabels[selectedSortKey === key ? selectedSortOrder : defaultSortOrder],
       toggleOrder: toggleSortOrder,
     }
   })

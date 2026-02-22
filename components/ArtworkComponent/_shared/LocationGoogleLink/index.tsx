@@ -2,7 +2,7 @@
 
 import s from './LocationLink.module.scss'
 import {LocationData} from '@/sanity/queries/fragments/location'
-import Icon from '@/components/Common/ui/Icon/Icon'
+import Icon from '@/components/Common/ui/Icon'
 
 export default function LocationGoogleLink({location}: {location: LocationData}) {
   if (!location) return <></>
@@ -12,7 +12,7 @@ export default function LocationGoogleLink({location}: {location: LocationData})
       <p>{location.name}</p>
       <a href="#visit" className={s.link}>
         <strong>View on Map </strong>
-        <Icon name="arrow-down" alt={'↓'} size={16} />
+        <Icon name="arrowDown" alt={'↓'} size={16} />
       </a>
     </div>
   )

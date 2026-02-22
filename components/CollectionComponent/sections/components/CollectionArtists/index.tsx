@@ -30,11 +30,13 @@ export default function CollectionArtists({artists}: Props) {
 
   return (
     <div className={s.section}>
-      <SortComponent
-        sortOptions={sortComponentOptions}
-        selectedSortKey={selectedSortKey}
-        setSelectedSortKey={setSelectedSortKey}
-      />
+      <div className={s.top}>
+        <SortComponent
+          sortOptions={sortComponentOptions}
+          selectedSortKey={selectedSortKey}
+          setSelectedSortKey={setSelectedSortKey}
+        />
+      </div>
       <ul className={s.grid}>
         {artistsSorted && artistsSorted.length ? (
           artistsSorted.map((artist, i) => (

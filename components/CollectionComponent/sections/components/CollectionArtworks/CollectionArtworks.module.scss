@@ -1,4 +1,16 @@
 .section {
+    width: 100%;
+
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        & > * {
+            flex-shrink: 0;
+        }
+    }
+
     .artworksGrid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;

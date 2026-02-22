@@ -49,12 +49,14 @@ export default function CollectionArtworks({themes, artworks}: Props) {
 
   return (
     <div className={s.section}>
-      <Tags tags={themeTags} />
-      <SortComponent
-        sortOptions={sortComponentOptions}
-        selectedSortKey={selectedSortKey}
-        setSelectedSortKey={setSelectedSortKey}
-      />
+      <div className={s.top}>
+        <Tags tags={themeTags} />
+        <SortComponent
+          sortOptions={sortComponentOptions}
+          selectedSortKey={selectedSortKey}
+          setSelectedSortKey={setSelectedSortKey}
+        />
+      </div>
       <ul className={s.artworksGrid}>
         {artworksFilteredAndSorted && artworksFilteredAndSorted.length ? (
           artworksFilteredAndSorted.map((artwork, i) => (

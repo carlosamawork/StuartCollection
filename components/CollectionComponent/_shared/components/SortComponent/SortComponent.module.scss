@@ -1,8 +1,11 @@
 .component {
+    position: relative;
+
     display: flex;
     flex-direction: row;
     gap: 4px;
     align-items: center;
+    width: max-content;
 
     & > * {
         flex-shrink: 0;
@@ -15,12 +18,60 @@
         gap: 4px;
         padding: 8px 0 8px 8px;
 
-        .label {
+        .sortLabel {
             margin-top: 1.5px;
+            color: var(--colors-foreground-fg-3);
+        }
+
+        svg {
+            color: var(--colors-foreground-fg-3);
+            fill: var(--colors-foreground-fg-3);
         }
 
         & > * {
             flex-shrink: 0;
+        }
+    }
+
+    .selector {
+        position: absolute;
+        width: max-content;
+        top: calc(100% + 8px);
+        padding: 8px 0;
+        border-radius: 8px;
+        background-color: var(--colors-background-bg-white);
+
+        z-index: 10;
+
+        border: 1px solid var(--colors-foreground-fg-1);
+
+        label {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+
+            padding: 8px 16px;
+
+            & > * {
+                flex-shrink: 0;
+            }
+
+            .labelContent {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 4px;
+
+                p {
+                    padding-top: 1.5px;
+                    color: var(--colors-foreground-fg-3);
+                }
+
+                & > * {
+                    flex-shrink: 0;
+                }
+            }
         }
     }
 }
