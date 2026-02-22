@@ -16,12 +16,14 @@ interface Props<CardObject extends object> {
   sortOptions: SortComponentOption<CardObject>[]
   selectedSortKey: keyof CardObject
   setSelectedSortKey: Dispatch<SetStateAction<keyof CardObject>>
+  alignRight?: boolean
 }
 
 export default function SortComponent<CardObject extends object>({
   sortOptions,
   selectedSortKey,
   setSelectedSortKey,
+  alignRight,
 }: Props<CardObject>) {
   const [showSelector, setShowSelector] = useState<boolean>(false)
 
@@ -39,21 +41,25 @@ export default function SortComponent<CardObject extends object>({
         <Icon name="sort" alt="↑↓" />
       </button>
       <p className="p">{'Sort by'}</p>
-      <button className={s.button} onClick={() => toggleShowSelector()}>
-        <p className="p">
-          <strong>{label}</strong>
-        </p>
-        <p className={`${s.sortLabel} p-small`}>{sortLabel}</p>
-        <Icon name="chevronDown" alt="⌄" />
-      </button>
-      {showSelector && (
-        <SortOptionSelector
-          sortOptions={sortOptions}
-          selectedSortKey={selectedSortKey}
-          setSelectedSortKey={setSelectedSortKey}
-          setShowSelector={setShowSelector}
-        />
-      )}
+      <div className={s.buttonContainer}>
+        <button className={s.button} onClick={() => toggleShowSelector()}>
+          <p className="p">
+            <strong>{label}</strong>
+          </p>
+          <p className={`${s.sortLabel} p-small`}>{sortLabel}</p>
+          <Icon name="chevronDown" alt="⌄" />
+        </button>
+        {showSelector && (
+          <div className={s.selectorContainer} style={alignRight ? {right: 0} : {left: 0}}>
+            <SortOptionSelector
+              sortOptions={sortOptions}
+              selectedSortKey={selectedSortKey}
+              setSelectedSortKey={setSelectedSortKey}
+              setShowSelector={setShowSelector}
+            />
+          </div>
+        )}
+      </div>
     </div>
   )
 }

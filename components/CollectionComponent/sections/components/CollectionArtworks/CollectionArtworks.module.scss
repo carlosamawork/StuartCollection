@@ -11,12 +11,7 @@
         }
     }
 
-    .artworksGrid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 32px;
-
-        min-height: 437px;
-        margin-top: 40px;
+    .artworks {
+        margin-top: 56px;
     }
 }

@@ -34,12 +34,7 @@ $swiper_padding: 32px;
         }
     }
 
-    .artworkGrid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        gap: 32px;
-
+    .artworks {
         margin-top: 40px;
-        min-height: 437px;
     }
 }

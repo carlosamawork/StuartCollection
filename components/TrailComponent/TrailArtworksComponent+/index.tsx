@@ -1,11 +1,11 @@
 'use client'
 
-import ArtworkCard from '@/components/Common/ArtworkCard'
 import Container from '@/components/Common/ui/Container'
 import s from './TrailArtworksComponent.module.scss'
 import Link from 'next/link'
 import {ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
 import Icon from '@/components/Common/ui/Icon'
+import ArtworksGrid from '@/components/Common/ArtworksGrid'
 
 export default function TrailArtworksComponent({data}: {data: ArtworkCardData[]}) {
   if (!data) return <></>
@@ -20,17 +20,9 @@ export default function TrailArtworksComponent({data}: {data: ArtworkCardData[]}
             <Icon name={'chevronRight'} alt={'>'} />
           </Link>
         </div>
-        <ul className={s.artworkGrid}>
-          {data && data.length ? (
-            data.map((artwork, i) => (
-              <li key={i}>
-                <ArtworkCard data={artwork} />
-              </li>
-            ))
-          ) : (
-            <p>{'No artworks found.'}</p>
-          )}
-        </ul>
+        <div className={s.artworks}>
+          <ArtworksGrid data={data} />
+        </div>
       </Container>
     </div>
   )

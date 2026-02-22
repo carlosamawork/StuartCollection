@@ -35,11 +35,19 @@ export default function useThemesSelection(availableThemes: CollectionThemeData[
   }
 
   const allThemesIds = themeTags.map((theme) => theme.value)
-  const activeThemesIds = themeTags.filter((theme) => theme.active).map((theme) => theme.value)
+  const activeThemes = themeTags.filter((theme) => theme.active)
+
+  const selectedThemesList = activeThemes.reduce(
+    (acc, theme) => (acc === '' ? theme.label : `${acc}, ${theme.label}`),
+    '',
+  )
+
+  const activeThemesIds = activeThemes.map((theme) => theme.value)
   const selectedThemesIds = activeThemesIds.length === 0 ? allThemesIds : activeThemesIds
 
   return {
     themeTags,
     selectedThemesIds,
+    selectedThemesList,
   }
 }
