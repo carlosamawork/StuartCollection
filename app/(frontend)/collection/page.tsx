@@ -13,6 +13,8 @@ import {
   siteDescription,
   siteTitle,
 } from '@/utils/seoHelper'
+import { Suspense } from "react";
+
 
 export const revalidate = 1 // revalidate to work set to 1, then we change it to 10
 
@@ -99,8 +101,10 @@ export default async function Collection() {
   const data = await getCollection()
 
   return (
-    <main>
-      <CollectionComponent data={data} />
-    </main>
+    <Suspense fallback={false}>
+      <main>
+        <CollectionComponent data={data} />
+      </main>
+    </Suspense>
   )
 }
