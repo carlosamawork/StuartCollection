@@ -1,24 +1,27 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
-import {artwork_thumbnail} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {artwork_card, ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
+import {image} from '@/sanity/queries/fragments/image'
+import {iframQuery} from '@/sanity/queries/modules/general/iframe'
 
 export async function getCollection(): Promise<CollectionData> {
   return client.fetch(
     groq`{
         "artworks": *[_type == "artwork"]{
-            ${artwork_thumbnail}
+            ${artwork_card}
+            "themesIds": themes[]->_id,
+            year
         },
         "themes": *[_type == "theme"]{
             title,
-            "slug": slug.current,
-            "artworks": *[_type == "artwork" && references(^._id)]{
-                "slug": slug.current,
-            }
+            _id,
         },
         "locations": *[_type == "location"]{
-            name,
-            "slug": slug.current,
+            title,
+            iframe{
+              ${iframQuery}
+            }
         },
         "artists": *[_type == "artist"]{
             name,
@@ -27,21 +30,16 @@ export async function getCollection(): Promise<CollectionData> {
                 "slug": slug.current,
             }
         },
+        "trails": *[_type == "trail"]{
+            title,
+            "slug": slug.current,
+            "artworksCount": count(artworks),
+            "image": coalesce(thumbnail, hero.image){
+                ${image}
+            },
+        },
     }`,
   )
-
-  const combinedQuery = groq`{
-  "posts": *[_type == "post"][0...10] {
-    title,
-    slug,
-    publishedAt
-  },
-  "siteSettings": *[_type == "siteSettings"][0] {
-    title,
-    description,
-    keywords
-  }
-}`
 }
 
 export type CollectionData = {
@@ -49,29 +47,34 @@ export type CollectionData = {
   themes: CollectionThemeData[]
   locations: CollectionLocationData[]
   artists: CollectionArtistData[]
+  trails: CollectionTrailData[]
 }
 
-type CollectionArtworkData = {
+export type CollectionArtworkData = ArtworkCardData & {
+  themesIds: string[]
+  year: number
+}
+
+export type CollectionThemeData = {
+  title: string
+  _id: string
+}
+
+export type CollectionLocationData = {
+  title: string
+  iframe: any
+}
+
+export type CollectionArtistData = {
+  name: string
+  artworks: {title: string; slug: string}[]
+}
+
+export type CollectionTrailData = {
   title: string
   slug: string
+  artworksCount: number
   image: any
-  artists: {name: string; slug: string}[]
-}
-
-type CollectionThemeData = {
-  title: string
-  slug: string
-  artworks: {slug: string}[]
-}
-
-type CollectionLocationData = {
-  name: string
-  slug: string
-}
-
-type CollectionArtistData = {
-  name: string
-  artworks: {slug: string}[]
 }
 
 export async function getCollectionSEO() {

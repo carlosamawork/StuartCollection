@@ -1,5 +1,5 @@
-import { groq } from 'next-sanity'
-import { client } from '../index'
+import {groq} from 'next-sanity'
+import {client} from '../index'
 
 export const getFooter = async () => {
   return client.fetch(groq`
@@ -52,14 +52,26 @@ export const getFooter = async () => {
         }
       },
 
-      "theCollection": *[_type == "page" && slug.current == "the-collection"][0]{
-        "slug": slug.current,
-        "sections": modules[]{
-          _type == "module.section" => {
-            title,
-            id
+      "theCollection": {
+        "slug": "collection",
+        "sections": [
+          {
+            "id": "artworks",
+            "title": "Artworks",
+          },
+          {
+            "id": "artists",
+            "title": "Artists",
+          },
+          {
+            "id": "locations",
+            "title": "Locations",
+          },
+          {
+            "id": "trails",
+            "title": "Trails",
           }
-        }
+        ]
       }
     }
   `)

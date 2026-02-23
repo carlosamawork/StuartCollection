@@ -1,41 +1,57 @@
 'use client'
 
-import ThemesSelectionComponent from '@/components/CollectionComponent/ThemesSelectionComponent'
 import {CollectionData} from '@/sanity/queries/queries/collection'
-import Link from 'next/link'
+import s from './CollectionComponent.module.scss'
+import Container from '@/components/Common/ui/Container'
+import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
+import TabsLayout from '@/components/Common/ui/TabsLayout'
+import CollectionArtworks from '@/components/CollectionComponent/sections/components/CollectionArtworks'
+import CollectionTrails from '@/components/CollectionComponent/sections/components/CollectionTrails'
+import CollectionLocations from '@/components/CollectionComponent/sections/components/CollectionLocations'
+import CollectionArtists from '@/components/CollectionComponent/sections/components/CollectionArtists'
 
 export default function CollectionComponent({data}: {data: CollectionData}) {
-  const {artworks, themes, locations, artists} = data
+  if (!data) return <></>
+
+  const {artworks, themes, locations, artists, trails} = data
 
   return (
-    <div>
-      <ThemesSelectionComponent themes={themes} />
-      <div>
-        <h5>List of locations</h5>
-        <ul>
-          {locations.map((location) => (
-            <li key={location.slug}>{location.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h5>List of artists</h5>
-        <ul>
-          {artists.map((artist) => (
-            <li key={artist.name}>{artist.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h5>List of artworks</h5>
-        <ul>
-          {artworks.map((artwork) => (
-            <li key={artwork.slug}>
-              <Link href={`/collection/artwork/${artwork.slug}`}>{artwork.title}</Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className={s.component}>
+      <Container>
+        <div className={s.top}>
+          <Breadcrumbs breadcrumbs={[{label: 'Home', href: '/'}]} />
+          <h1>{'The Collection'}</h1>
+        </div>
+        <article className={s.article}>
+          <TabsLayout
+            label="Explore by"
+            enableUrlHashInteraction
+            paddingTop={8}
+            tabs={[
+              {
+                label: 'Artworks',
+                content: <CollectionArtworks artworks={artworks} themes={themes} />,
+                id: 'artworks',
+              },
+              {
+                label: 'Artists',
+                content: <CollectionArtists artists={artists} />,
+                id: 'artists',
+              },
+              {
+                label: 'Locations',
+                content: <CollectionLocations locations={locations} />,
+                id: 'locations',
+              },
+              {
+                label: 'Trails',
+                content: <CollectionTrails trails={trails} />,
+                id: 'trails',
+              },
+            ]}
+          />
+        </article>
+      </Container>
     </div>
   )
 }

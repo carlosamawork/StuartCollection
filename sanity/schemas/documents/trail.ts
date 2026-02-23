@@ -37,12 +37,11 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
-    // Hero Image
+    // Hero
     defineField({
-      name: 'heroImage',
-      title: 'Hero Image',
-      type: 'image',
-      options: {hotspot: true},
+      name: 'hero',
+      title: 'Hero Cover',
+      type: 'hero.general',
       group: 'editorial',
     }),
     // Body
@@ -50,6 +49,14 @@ export default defineField({
       name: 'body',
       title: 'Body',
       type: 'body.paragraphs',
+      group: 'editorial',
+    }),
+    // Thumbnail
+    defineField({
+      name: 'thumbnail',
+      title: 'Thumbnail image',
+      type: 'image',
+      options: {hotspot: true},
       group: 'editorial',
     }),
     // Map

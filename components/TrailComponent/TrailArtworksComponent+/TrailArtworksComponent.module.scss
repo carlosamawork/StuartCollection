@@ -1,0 +1,40 @@
+$swiper_padding: 32px;
+
+.section {
+    padding-bottom: 56px;
+    width: 100%;
+
+    .topContent {
+        border-top: 1px solid var(--colors-foreground-fg-5);
+        padding-top: 56px;
+
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+
+        h2 {
+            flex-shrink: 0;
+        }
+
+        .link {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            gap: 10px;
+
+            margin-bottom: 7px;
+
+            strong {
+                flex-shrink: 0;
+            }
+
+            img {
+                margin-bottom: 6px;
+            }
+        }
+    }
+
+    .artworks {
+        margin-top: 40px;
+    }
+}

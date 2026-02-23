@@ -14,7 +14,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        gap: 4px;
+        gap: 2px;
         width: 100%;
 
         strong {
@@ -23,7 +23,7 @@
 
         &:hover {
             img {
-                animation: MoveUpDown 1.3s linear infinite;
+                animation: MoveUpDown 1.3s ease-in-out infinite;
             }
         }
     }

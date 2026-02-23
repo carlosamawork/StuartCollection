@@ -1,12 +1,17 @@
 .tabsLayout {
     .menu {
-        margin-top: 32px;
-        margin-bottom: 40px;
         .tabs {
             display: flex;
             gap: 16px;
+            align-items: center;
+
             padding-bottom: 10px;
             border-bottom: 1px solid var(--colors-background-bg-navy-strong);
+
+            span {
+                font-size: var(--font-size-font-size-p-small);
+                line-height: var(--line-height-line-height-p-small);
+            }
 
             button {
                 font-size: var(--font-size-font-size-large);

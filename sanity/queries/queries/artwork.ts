@@ -11,7 +11,8 @@ import {ArtworkVisitSectionData, visitSectionQuery} from '../modules/artwork/vis
 import {textParagraphsQuery} from '../modules/general/textParagraphs'
 import {iframQuery} from '../modules/general/iframe'
 import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
-import {artwork_thumbnail, ArtworkThumbnailData} from '@/sanity/queries/fragments/artwork_thumbnail'
+import {artwork_card, ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
+import {hero_general, HeroGeneralData} from '@/sanity/queries/fragments/hero_general'
 
 export async function getArtwork(slug: string): Promise<ArtworkData> {
   return client.fetch(
@@ -30,13 +31,10 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                 visitDescription,
                 location->{
                     ${location}
+                    },
                 },
-            },
             hero{
-                image{
-                    ${image},
-                },
-                videoUrl,
+                ${hero_general}
             },
             "body_modules": body[]{
                 _type,
@@ -74,26 +72,33 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                     _id != ^._id && 
                     location._ref == ^.location._ref
                 ] {
-                    ${artwork_thumbnail}    
+                    ${artwork_card}    
                 } [0...4],
                 "byTheme": *[
                     _type == "artwork" && 
                     _id != ^._id && 
                     count(themes[@._ref in ^.^.themes[]._ref]) > 0
                 ] {
-                    ${artwork_thumbnail}    
+                    ${artwork_card}    
                     // Calculate match count for sorting
                     "matchCount": count(themes[@._ref in ^.^.themes[]._ref])
                 } | order(matchCount desc) [0...4], // Order by count and take top 4
                 "byTrail": *[
-                    _type == "artwork" && 
-                    _id != ^._id && 
-                    count(trails[@._ref in ^.^.trails[]._ref]) > 0
-                ] {
-                    ${artwork_thumbnail}    
-                    // Calculate match count for sorting
-                    "matchCount": count(trails[@._ref in ^.^.trails[]._ref])
-                } | order(matchCount desc) [0...4], // Order by count and take top 4
+                    _type == "artwork" &&
+                    _id != ^._id &&
+                    count(*[
+                        _type == "trail" &&
+                        references(^._id) &&
+                        references(^.^._id)
+                    ]) > 0
+                ]{
+                    ${artwork_card}
+                    "sharedTrailCount": count(*[
+                        _type == "trail" &&
+                        references(^._id) &&
+                        references(^.^._id)
+                    ])
+                } | order(sharedTrailCount desc) [0...4]
             }
         }`,
     {slug},
@@ -103,17 +108,14 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
 export type ArtworkData = {
   title: string
   slug: string
-  artists: {name: string; slug: string; image: any}[]
+  artists: {name: string; image: any}[]
   specs: {
     themes: {title: string}[]
     year: number
     visitDescription: any
     location: LocationData
   }
-  hero: {
-    image: any
-    videoUrl: string
-  }
+  hero: HeroGeneralData
   body_modules: any[]
   sections: (
     | ArtworkImagesSectionData
@@ -123,9 +125,9 @@ export type ArtworkData = {
     | ArtworkSocialSectionData
   )[]
   related: {
-    byLocation: ArtworkThumbnailData[]
-    byTrail: ArtworkThumbnailData[]
-    byTheme: ArtworkThumbnailData[]
+    byLocation: ArtworkCardData[]
+    byTrail: ArtworkCardData[]
+    byTheme: ArtworkCardData[]
   }
 }
 

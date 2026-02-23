@@ -1,8 +1,8 @@
 'use client'
 
 import s from './LocationLink.module.scss'
-import Image from 'next/image'
 import {LocationData} from '@/sanity/queries/fragments/location'
+import Icon from '@/components/Common/ui/Icon'
 
 export default function LocationGoogleLink({location}: {location: LocationData}) {
   if (!location) return <></>
@@ -12,13 +12,7 @@ export default function LocationGoogleLink({location}: {location: LocationData})
       <p>{location.name}</p>
       <a href="#visit" className={s.link}>
         <strong>View on Map </strong>
-        <Image
-          src="/assets/svg/arrow-down.svg"
-          alt="↓"
-          width={11}
-          height={11}
-          style={{width: 11, height: 11}}
-        />
+        <Icon name="arrowDown" alt={'↓'} size={16} />
       </a>
     </div>
   )

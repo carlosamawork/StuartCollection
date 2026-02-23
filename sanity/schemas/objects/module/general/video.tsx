@@ -40,7 +40,7 @@ export default defineField({
     }),
     defineField({
       name: 'image',
-      title: 'Thumbnail',
+      title: 'Thumbnail image',
       type: 'image',
       options: {hotspot: true},
       hidden: ({parent}) => parent?.type !== 'internal-video',

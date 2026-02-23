@@ -1,0 +1,53 @@
+@use "@/styles/common/variables" as *;
+
+.section {
+    .top {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 32px;
+
+        margin-top: 16px;
+
+        .card {
+            width: 100%;
+            min-height: 100px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            transition: all 0.3s ease;
+
+            overflow: hidden;
+            position: relative;
+
+            .artistName {
+                font-weight: var(--font-weight-regular);
+            }
+
+            .artworkList {
+                text-align: center;
+
+                .artwork {
+                    display: inline;
+                }
+
+                .artwork::after {
+                    content: "/";
+                    padding: 0 0.6rem;
+                }
+
+                .artwork:last-of-type::after {
+                    display: none;
+                }
+            }
+        }
+    }
+}

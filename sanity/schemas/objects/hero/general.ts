@@ -1,7 +1,7 @@
 import {defineField} from 'sanity'
 
 export default defineField({
-  name: 'module.artwork.hero',
+  name: 'hero.general',
   title: 'Hero',
   type: 'object',
   fields: [

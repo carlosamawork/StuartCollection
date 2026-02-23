@@ -1,9 +1,9 @@
 import {image} from '@/sanity/queries/fragments/image'
 
-export const artwork_thumbnail = `
+export const artwork_card = `
     title,
     "slug": slug.current,
-    "image": coalesce(thumbnail, featuredImage){
+    "image": coalesce(thumbnail, hero.image){
         ${image}
     },
     artists[]->{
@@ -11,7 +11,7 @@ export const artwork_thumbnail = `
     },
 `
 
-export type ArtworkThumbnailData = {
+export type ArtworkCardData = {
   title: string
   slug: string
   image: any
