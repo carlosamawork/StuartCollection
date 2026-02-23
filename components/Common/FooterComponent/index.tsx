@@ -10,7 +10,6 @@ import {ButtonLink} from '../ui/Buttons/components/ButtonLink'
 
 export default function FooterComponent({data}: any) {
   const footerRef = useRef<HTMLElement>(null)
-  console.log(data)
 
   return (
     <motion.footer

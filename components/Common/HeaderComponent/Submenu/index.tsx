@@ -9,7 +9,6 @@ import VideoEmbed from '@/components/Common/VideoEmbed'
 import Container from '../../ui/Container'
 
 export default function SubmenuComponent({data, additionalContent}: {data: any, additionalContent: any}) {
-  console.log('Submenu data:', data) // Log the submenu data to check its structure and content
   
   return (
     <>

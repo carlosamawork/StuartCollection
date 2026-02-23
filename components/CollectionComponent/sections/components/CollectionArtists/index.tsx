@@ -35,7 +35,7 @@ export default function CollectionArtists({artists}: Props) {
       <ul className={s.grid}>
         {artistsSorted && artistsSorted.length ? (
           artistsSorted.map((artist, i) => (
-            <li key={i}>
+            <li key={`artist-sorted-card-${i}`}>
               <ArtistCard artist={artist} />
             </li>
           ))
@@ -55,7 +55,7 @@ const ArtistCard = ({artist}: {artist: CollectionArtistData}) => {
       <h5 className={`${s.artistName} p-xlarge`}>{name}</h5>
       <p className={s.artworkList}>
         {artworks.map((artwork: any, i: number) => (
-          <Link href={`/collection/artwork/${artwork.slug}`} className={s.artwork}>
+          <Link key={`artwork-card-${i}`} href={`/collection/artwork/${artwork.slug}`} className={s.artwork}>
             {artwork.title}
           </Link>
         ))}
