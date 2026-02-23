@@ -5,17 +5,17 @@ import s from './SortComponent.module.scss'
 import Icon from '@/components/Common/ui/Icon'
 import {useIsMobileDevice} from '@/utils/isMobileClient'
 
-export type SortComponentOption<CardObject extends object> = {
+type SortOption<CardObject extends object> = {
   label: string
   key: keyof CardObject // key in the CardObject that should be used for sorting
   sortLabel: string
   toggleOrder: () => void
 }
 
-interface Props<CardObject extends object> {
-  sortOptions: SortComponentOption<CardObject>[]
+export interface SortComponentProps<CardObject extends object> {
+  sortOptions: SortOption<CardObject>[]
   selectedSortKey: keyof CardObject
-  setSelectedSortKey: Dispatch<SetStateAction<keyof CardObject>>
+  setSelectedSortKey: (key: keyof CardObject) => void
   alignRight?: boolean
 }
 
@@ -24,7 +24,7 @@ export default function SortComponent<CardObject extends object>({
   selectedSortKey,
   setSelectedSortKey,
   alignRight,
-}: Props<CardObject>) {
+}: SortComponentProps<CardObject>) {
   const [showSelector, setShowSelector] = useState<boolean>(false)
 
   const selectedOption = sortOptions.find(({key}) => key === selectedSortKey) ?? sortOptions[0]
@@ -69,7 +69,9 @@ const SortOptionSelector = <CardObject extends object>({
   selectedSortKey,
   setSelectedSortKey,
   setShowSelector,
-}: Props<CardObject> & {setShowSelector: Dispatch<SetStateAction<boolean>>}) => {
+}: SortComponentProps<CardObject> & {
+  setShowSelector: Dispatch<SetStateAction<boolean>>
+}) => {
   const isMobile = useIsMobileDevice()
   const ref = useRef<null | HTMLUListElement>(null)
 

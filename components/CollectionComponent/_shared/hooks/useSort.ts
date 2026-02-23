@@ -1,5 +1,5 @@
-import {SortComponentOption} from '@/components/CollectionComponent/_shared/components/SortComponent'
-import {Dispatch, SetStateAction, useEffect, useMemo, useState} from 'react'
+import {SortComponentProps} from '@/components/CollectionComponent/_shared/components/SortComponent'
+import {useState} from 'react'
 
 type SortOrder = 'asc' | 'desc'
 
@@ -12,49 +12,40 @@ type SortBy<CardObject extends object> = {
 
 interface UseSortProps<CardObject extends object> {
   sortBy: SortBy<CardObject>[]
-  initialSortKey: keyof CardObject
 }
 
 interface UseSortReturnType<CardObject extends object> {
-  sortComponentOptions: SortComponentOption<CardObject>[]
+  sortComponentProps: SortComponentProps<CardObject>
   getSorted: (cards: CardObject[]) => CardObject[]
   selectedSortOrder: SortOrder
-  selectedSortKey: keyof CardObject
-  setSelectedSortKey: Dispatch<SetStateAction<keyof CardObject>>
 }
 
 export const useSort = <CardObject extends object>({
   sortBy,
-  initialSortKey,
 }: UseSortProps<CardObject>): UseSortReturnType<CardObject> => {
-  const [selectedSortKey, setSelectedSortKey] = useState<keyof CardObject>(initialSortKey)
-
-  const selectedSortOption = useMemo<SortBy<CardObject>>(
-    () => sortBy.find((option) => option.key === selectedSortKey) ?? sortBy[0],
-    [selectedSortKey],
+  const [currentOptionIndex, setCurrentOptionIndex] = useState<number>(0)
+  const [orderSelection, setOrderSelection] = useState<SortOrder[]>(
+    sortBy.map(({defaultSortOrder}) => defaultSortOrder),
   )
 
-  const [selectedSortOrder, setSortOrder] = useState<SortOrder>(selectedSortOption.defaultSortOrder)
-
-  const resetSortOrder = () => {
-    setSortOrder(selectedSortOption.defaultSortOrder)
+  const selectedSortKey = sortBy[currentOptionIndex].key
+  const setSelectedSortKey = (key: keyof CardObject) => {
+    const newKeyIndex = sortBy.findIndex((option) => option.key === key)
+    setCurrentOptionIndex(newKeyIndex)
   }
-
-  useEffect(() => {
-    resetSortOrder()
-  }, [selectedSortKey])
+  const selectedSortOrder = orderSelection[currentOptionIndex]
 
   const getSorted = (cards: CardObject[]) => {
     return cards.sort((a, b) => {
       let valueA = a[selectedSortKey] as string | number
       let valueB = b[selectedSortKey] as string | number
 
-      if (typeof a[selectedSortKey] === 'string') {
-        valueA = (valueA as string).toUpperCase()
+      if (typeof valueA === 'string') {
+        valueA = valueA.toUpperCase()
         valueB = (valueB as string).toUpperCase()
       }
 
-      if (selectedSortOrder === 'asc') {
+      if (orderSelection[currentOptionIndex] === 'asc') {
         if (valueA < valueB) {
           return -1
         }
@@ -74,24 +65,30 @@ export const useSort = <CardObject extends object>({
     })
   }
 
-  const toggleSortOrder = () => {
-    setSortOrder((previousValue) => (previousValue === 'asc' ? 'desc' : 'asc'))
+  const toggleSortOrder = (i: number) => {
+    setOrderSelection((previousSelection) => {
+      let newSelection = [...previousSelection]
+      newSelection[i] = previousSelection[i] === 'asc' ? 'desc' : 'asc'
+      return newSelection
+    })
   }
 
-  const sortComponentOptions = sortBy.map(({label, key, sortLabels, defaultSortOrder}) => {
+  const sortOptions = sortBy.map(({label, key, sortLabels}, i) => {
     return {
       label,
       key,
-      sortLabel: sortLabels[selectedSortKey === key ? selectedSortOrder : defaultSortOrder],
-      toggleOrder: toggleSortOrder,
+      sortLabel: sortLabels[orderSelection[i]],
+      toggleOrder: () => toggleSortOrder(i),
     }
   })
 
   return {
-    sortComponentOptions,
+    sortComponentProps: {
+      sortOptions,
+      selectedSortKey,
+      setSelectedSortKey,
+    },
     getSorted,
     selectedSortOrder,
-    selectedSortKey,
-    setSelectedSortKey,
   }
 }

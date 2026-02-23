@@ -24,14 +24,16 @@ export default function FilterComponent({themeTags, selectedThemesIds, selectedT
 
   return (
     <div className={s.component}>
-      <Icon name="filter" alt="Filter Icon" />
+      <button onClick={() => toggleShowSelector()}>
+        <Icon name="filter" alt="Filter Icon" />
+      </button>
       <p className="p">{'Filter by'}</p>
       <div className={s.buttonContainer}>
         <button className={s.button} onClick={() => toggleShowSelector()}>
           <p className="p">
             <strong>{'Themes'}</strong>
           </p>
-          <p className={`${s.sortLabel} p-small`}>{selectedThemesList}</p>
+          {selectedThemesList && <p className={`${s.sortLabel} p-small`}>{selectedThemesList}</p>}
           <Icon name="chevronDown" alt="⌄" />
         </button>
         {showSelector && (

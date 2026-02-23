@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function CollectionArtists({artists}: Props) {
-  const {sortComponentOptions, getSorted, selectedSortKey, setSelectedSortKey} = useSort({
+  const {sortComponentProps, getSorted} = useSort({
     sortBy: [
       {
         label: 'Name',
@@ -23,7 +23,6 @@ export default function CollectionArtists({artists}: Props) {
         defaultSortOrder: 'asc',
       },
     ],
-    initialSortKey: 'name',
   })
 
   const artistsSorted = getSorted(artists) as CollectionArtistData[]
@@ -31,11 +30,7 @@ export default function CollectionArtists({artists}: Props) {
   return (
     <div className={s.section}>
       <div className={s.top}>
-        <SortComponent
-          sortOptions={sortComponentOptions}
-          selectedSortKey={selectedSortKey}
-          setSelectedSortKey={setSelectedSortKey}
-        />
+        <SortComponent {...sortComponentProps} />
       </div>
       <ul className={s.grid}>
         {artistsSorted && artistsSorted.length ? (

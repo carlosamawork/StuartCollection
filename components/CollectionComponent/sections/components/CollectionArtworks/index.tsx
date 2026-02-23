@@ -18,48 +18,46 @@ interface Props {
 export default function CollectionArtworks({themes, artworks}: Props) {
   const themeSelection = useThemesSelection(themes)
 
-  const {sortComponentOptions, getSorted, selectedSortOrder, selectedSortKey, setSelectedSortKey} =
-    useSort({
-      sortBy: [
-        {
-          label: 'Name',
-          key: 'title',
-          sortLabels: {
-            ['asc']: 'A → Z',
-            ['desc']: 'Z → A',
-          },
-          defaultSortOrder: 'asc',
+  const {sortComponentProps, getSorted, selectedSortOrder} = useSort({
+    sortBy: [
+      {
+        label: 'Name',
+        key: 'title',
+        sortLabels: {
+          ['asc']: 'A → Z',
+          ['desc']: 'Z → A',
         },
-        {
-          label: 'Year',
-          key: 'year',
-          sortLabels: {
-            ['asc']: 'Oldest First',
-            ['desc']: 'Newest First',
-          },
-          defaultSortOrder: 'desc',
+        defaultSortOrder: 'asc',
+      },
+      {
+        label: 'Year',
+        key: 'year',
+        sortLabels: {
+          ['asc']: 'Oldest First',
+          ['desc']: 'Newest First',
         },
-      ],
-      initialSortKey: 'title',
-    })
+        defaultSortOrder: 'desc',
+      },
+    ],
+  })
 
   const artworksFilteredAndSorted = useMemo(() => {
     const artworksFilteredByTheme = artworks?.filter(
       filterByThemeId(themeSelection.selectedThemesIds),
     )
     return getSorted([...artworksFilteredByTheme]) as CollectionArtworkData[]
-  }, [artworks, themeSelection.selectedThemesIds, selectedSortOrder, selectedSortKey])
+  }, [
+    artworks,
+    themeSelection.selectedThemesIds,
+    selectedSortOrder,
+    sortComponentProps.selectedSortKey,
+  ])
 
   return (
     <div className={s.section}>
       <div className={s.top}>
         <FilterComponent {...themeSelection} />
-        <SortComponent
-          sortOptions={sortComponentOptions}
-          selectedSortKey={selectedSortKey}
-          setSelectedSortKey={setSelectedSortKey}
-          alignRight
-        />
+        <SortComponent {...sortComponentProps} alignRight />
       </div>
       <div className={s.artworks}>
         <ArtworksGrid data={artworksFilteredAndSorted} />
