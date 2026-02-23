@@ -13,27 +13,27 @@ type SortOption<CardObject extends object> = {
 }
 
 export interface SortComponentProps<CardObject extends object> {
-  sortOptions: SortOption<CardObject>[]
-  selectedSortKey: keyof CardObject
-  setSelectedSortKey: (key: keyof CardObject) => void
+  options: SortOption<CardObject>[]
+  currentOptionKey: keyof CardObject
+  setCurrentOptionKey: (key: keyof CardObject) => void
   alignRight?: boolean
 }
 
 export default function SortComponent<CardObject extends object>({
-  sortOptions,
-  selectedSortKey,
-  setSelectedSortKey,
+  options,
+  currentOptionKey,
+  setCurrentOptionKey,
   alignRight,
 }: SortComponentProps<CardObject>) {
   const [showSelector, setShowSelector] = useState<boolean>(false)
 
-  const selectedOption = sortOptions.find(({key}) => key === selectedSortKey) ?? sortOptions[0]
+  const currentOption = options.find(({key}) => key === currentOptionKey) ?? options[0]
 
   const toggleShowSelector = () => {
     setShowSelector((v) => !v)
   }
 
-  const {label, sortLabel, toggleOrder} = selectedOption
+  const {label, sortLabel, toggleOrder} = currentOption
 
   return (
     <div className={s.component}>
@@ -52,9 +52,9 @@ export default function SortComponent<CardObject extends object>({
         {showSelector && (
           <div className={s.selectorContainer} style={alignRight ? {right: 0} : {left: 0}}>
             <SortOptionSelector
-              sortOptions={sortOptions}
-              selectedSortKey={selectedSortKey}
-              setSelectedSortKey={setSelectedSortKey}
+              options={options}
+              currentOptionKey={currentOptionKey}
+              setCurrentOptionKey={setCurrentOptionKey}
               setShowSelector={setShowSelector}
             />
           </div>
@@ -65,9 +65,9 @@ export default function SortComponent<CardObject extends object>({
 }
 
 const SortOptionSelector = <CardObject extends object>({
-  sortOptions,
-  selectedSortKey,
-  setSelectedSortKey,
+  options,
+  currentOptionKey,
+  setCurrentOptionKey,
   setShowSelector,
 }: SortComponentProps<CardObject> & {
   setShowSelector: Dispatch<SetStateAction<boolean>>
@@ -83,11 +83,11 @@ const SortOptionSelector = <CardObject extends object>({
   // Close Selector when user mouse selects an option in Mobile
   useEffect(() => {
     isMobile && setShowSelector(false)
-  }, [selectedSortKey])
+  }, [currentOptionKey])
 
   return (
     <ul className={s.selector} ref={ref}>
-      {sortOptions?.map(({label, sortLabel, toggleOrder, key}, i) => {
+      {options?.map(({label, sortLabel, toggleOrder, key}, i) => {
         return (
           <li key={i}>
             <label>
@@ -95,9 +95,9 @@ const SortOptionSelector = <CardObject extends object>({
                 type="radio"
                 name="sortOrder"
                 value={key as string | number}
-                checked={selectedSortKey === key}
+                checked={currentOptionKey === key}
                 onChange={(e) => {
-                  setSelectedSortKey(e.target.value as keyof CardObject)
+                  setCurrentOptionKey(e.target.value as keyof CardObject)
                 }}
               />
               <div className={s.labelContent}>

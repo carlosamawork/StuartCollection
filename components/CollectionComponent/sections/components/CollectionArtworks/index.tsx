@@ -18,7 +18,7 @@ interface Props {
 export default function CollectionArtworks({themes, artworks}: Props) {
   const themeSelection = useThemesSelection(themes)
 
-  const {sortComponentProps, getSorted, selectedSortOrder} = useSort({
+  const {sortComponentProps, getSorted} = useSort({
     sortBy: [
       {
         label: 'Name',
@@ -41,17 +41,10 @@ export default function CollectionArtworks({themes, artworks}: Props) {
     ],
   })
 
-  const artworksFilteredAndSorted = useMemo(() => {
-    const artworksFilteredByTheme = artworks?.filter(
-      filterByThemeId(themeSelection.selectedThemesIds),
-    )
-    return getSorted([...artworksFilteredByTheme]) as CollectionArtworkData[]
-  }, [
-    artworks,
-    themeSelection.selectedThemesIds,
-    selectedSortOrder,
-    sortComponentProps.selectedSortKey,
-  ])
+  const artworksFilteredByTheme = useMemo(
+    () => artworks?.filter(filterByThemeId(themeSelection.selectedThemesIds)),
+    [artworks, themeSelection.selectedThemesIds],
+  )
 
   return (
     <div className={s.section}>
@@ -60,7 +53,7 @@ export default function CollectionArtworks({themes, artworks}: Props) {
         <SortComponent {...sortComponentProps} alignRight />
       </div>
       <div className={s.artworks}>
-        <ArtworksGrid data={artworksFilteredAndSorted} />
+        <ArtworksGrid data={getSorted(artworksFilteredByTheme) as CollectionArtworkData[]} />
       </div>
     </div>
   )
