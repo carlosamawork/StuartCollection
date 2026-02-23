@@ -20,6 +20,7 @@
             h1 {
                 margin: 0;
                 flex-shrink: 0;
+                max-width: 600px;
             }
         }
     }
@@ -39,7 +40,7 @@
         }
 
         .iframe {
-            padding-top: 56px;
+            padding: 56px 0;
             border-top: 1px solid var(--colors-neutrals-warmgray-base);
 
             iframe {

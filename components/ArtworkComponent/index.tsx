@@ -17,7 +17,7 @@ export default function ArtworkComponent({data}: {data: ArtworkData}) {
           {...data.hero}
           height={`85vh`}
           // height={`${(100 * (632 - 2 * 32)) / 720}vh`}
-          paddingBottom="32px"
+          marginBottom="32px"
         />
       </Container>
       <Container>

@@ -7,14 +7,14 @@ interface HeroCoverProps {
   image?: any
   videoUrl?: string
   height?: string
-  paddingBottom?: string
+  marginBottom?: string
 }
 
 export function HeroCover({
   image,
   videoUrl,
   height = '600px',
-  paddingBottom = '56px',
+  marginBottom = '56px',
 }: HeroCoverProps) {
   if (!image && !videoUrl) return null
 
@@ -22,7 +22,7 @@ export function HeroCover({
     <div
       className={s.heroCover}
       style={{
-        paddingBottom,
+        marginBottom,
         ...(videoUrl ? {maxHeight: height} : {height}),
       }}
     >
