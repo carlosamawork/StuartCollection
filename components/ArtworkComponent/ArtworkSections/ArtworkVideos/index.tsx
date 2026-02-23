@@ -16,8 +16,8 @@ export default function ArtworkVideos({section}: {section: ArtworkVideosSectionD
 
   if (!section) return <></>
 
-  const SlidesComponent = section.items.map((item) => (
-    <div className={s.videoCard}>
+  const SlidesComponent = section.items.map((item: any, i: number) => (
+    <div className={s.videoCard} key={`video-${i}`}>
       <VideoEmbed url={item.videoUrl} />
       <p className="p-small">{item.title}</p>
     </div>
