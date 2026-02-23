@@ -15,17 +15,17 @@ export default defineType({
       title: 'Name',
       type: 'string',
     }),
-    defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
-      options: {hotspot: true},
-    }),
+    // defineField({
+    //   name: 'image',
+    //   title: 'Image',
+    //   type: 'image',
+    //   options: {hotspot: true},
+    // }),
   ],
   // Customize the preview so parents are visualized in the studio
   preview: {
     select: {
-      media: 'image',
+      // media: 'image',
       title: 'name',
     },
   },
