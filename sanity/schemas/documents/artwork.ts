@@ -61,13 +61,6 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
-    // Featured
-    defineField({
-      name: 'featured',
-      title: 'Featured',
-      type: 'boolean',
-      group: 'editorial',
-    }),
     // Year
     defineField({
       name: 'year',

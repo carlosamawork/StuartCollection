@@ -19,7 +19,7 @@ export default function ArtworkArtist({section}: ArtworkArtistProps) {
       <div className={s.section}>
         <h2>{section.title}</h2>
         <div className={s.imageContainer}>
-          {section.images?.map((image, i) => (
+          {/* {section.images?.map((image, i) => (
             <div className={s.image} key={i}>
               <LazyImage
                 src={image.imageUrl}
@@ -30,7 +30,19 @@ export default function ArtworkArtist({section}: ArtworkArtistProps) {
                 fill
               />
             </div>
-          ))}
+          ))} */}
+          {section.image && (
+            <div className={s.image}>
+              <LazyImage
+                src={section.image.imageUrl}
+                alt={section.image.filename || 'Image'}
+                width={280}
+                height={280}
+                objectFit="cover"
+                fill
+              />
+            </div>
+          )}
         </div>
         <div>
           <TextBody body={section.text} />

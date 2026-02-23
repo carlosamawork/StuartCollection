@@ -1,47 +1,38 @@
 import {useCallback, useEffect, useState} from 'react'
+import {useRouter, usePathname, useSearchParams} from 'next/navigation'
 
 export function useUrlHash(): UseUrlHashReturn {
-  const [hash, setHashState] = useState<string | null>(null)
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
+  const [hash, setHash] = useState<string | null>(null)
+
+  // Se ejecuta cada vez que Next cambia la URL
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const readHash = () => {
-      const currentHash = window.location.hash.replace(/^#/, '')
-      setHashState(currentHash)
-    }
+    const newHash = window.location.hash.replace(/^#/, '')
+    if (newHash === hash) return
 
-    // Leer hash inicial
-    readHash()
+    setHash(newHash)
+  }, [pathname, searchParams])
 
-    // Escuchar cambios en el hash
-    window.addEventListener('hashchange', readHash)
+  const setUrlHash = useCallback(
+    (value: string) => {
+      const cleanValue = value.replace(/^#/, '')
+      if (cleanValue === hash) return
 
-    return () => {
-      window.removeEventListener('hashchange', readHash)
-    }
-  }, [])
+      const query = searchParams.toString()
+      const url = `${pathname}${query ? `?${query}` : ''}${cleanValue ? `#${cleanValue}` : ''}`
 
-  const setHash = useCallback((value: string) => {
-    if (typeof window === 'undefined') return
+      router.push(url)
+      setHash(cleanValue)
+    },
+    [router, pathname, searchParams],
+  )
 
-    const cleanValue = value.replace(/^#/, '')
-    const newHash = cleanValue ? `#${cleanValue}` : ''
-
-    // 1️⃣ Actualizamos state inmediatamente
-    setHashState(cleanValue)
-
-    // 2️⃣ Actualizamos URL
-    if (newHash) {
-      window.location.hash = newHash
-    } else {
-      // Quitar hash completamente sin recargar
-      const {pathname, search} = window.location
-      window.history.replaceState(null, '', pathname + search)
-    }
-  }, [])
-
-  return {hash, setHash}
+  return {hash, setHash: setUrlHash}
 }
 
 type UseUrlHashReturn = {

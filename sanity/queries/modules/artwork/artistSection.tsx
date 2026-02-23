@@ -4,20 +4,8 @@ import {accordeonQuery} from '@/sanity/queries/modules/general/accordeon'
 export const artistSectionQuery = `
     title,
     text,
-    images.customizeArtistsImages == true => {
-        "images": images.images[]{
-            _type == "artist" => @->image{
-                ${image}
-            },
-            _type == "image" => {
-                ${image}
-            }, 
-        },
-    },
-    images.customizeArtistsImages == false => {
-        "images": ^.artists[]->image{
-            ${image}
-        }
+    image{
+        ${image}
     },
     accordeon{
         ${accordeonQuery}
@@ -27,6 +15,23 @@ export const artistSectionQuery = `
 export type ArtworkArtistSectionData = {
   title: string
   text: any
-  images: any[]
+  //   images: any[]
+  image: any
   accordeon: any[]
 }
+
+// images.customizeArtistsImages == true => {
+//     "images": images.images[]{
+//         _type == "artist" => @->image{
+//             ${image}
+//         },
+//         _type == "image" => {
+//             ${image}
+//         },
+//     },
+// },
+// images.customizeArtistsImages == false => {
+//     "images": ^.artists[]->image{
+//         ${image}
+//     }
+// },

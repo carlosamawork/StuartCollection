@@ -13,7 +13,7 @@ export default function ArtworkCard({data}: Props) {
   if (!data) return <></>
 
   const isImageVertical =
-    data.image.metadata.dimensions.height >= data.image.metadata.dimensions.width
+    data.image.metadata.dimensions.height > data.image.metadata.dimensions.width
 
   return (
     <Link className={s.card} href={`/collection/artwork/${data.slug}`}>
