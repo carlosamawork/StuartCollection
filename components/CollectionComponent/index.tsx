@@ -24,25 +24,29 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
         </div>
         <article className={s.article}>
           <TabsLayout
-            initialTab="Explore by"
-            enableUrlHash
+            label="Explore by"
+            enableUrlHashInteraction
             paddingTop={8}
             tabs={[
               {
                 label: 'Artworks',
                 content: <CollectionArtworks artworks={artworks} themes={themes} />,
+                id: 'artworks',
               },
               {
                 label: 'Artists',
                 content: <CollectionArtists artists={artists} />,
+                id: 'artists',
               },
               {
                 label: 'Locations',
                 content: <CollectionLocations locations={locations} />,
+                id: 'locations',
               },
               {
                 label: 'Trails',
                 content: <CollectionTrails trails={trails} />,
+                id: 'trails',
               },
             ]}
           />
