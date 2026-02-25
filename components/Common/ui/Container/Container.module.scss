@@ -1,10 +1,15 @@
 @use "@/styles/common/variables" as *;
+@use "./styles/mixins/breakpoints" as *;
 
 .container {
     width: 100%;
     max-width: $max_page_width;
     padding: 0 $min_page_padding;
     margin: 0 auto;
+
+    @include media-breakpoint-down(md) {
+        padding: 0 $min_page_padding_m;
+    }
 }
 
 .containerSmall {
@@ -12,12 +17,20 @@
     max-width: $max_page_width_sm;
     padding: 0 $min_page_padding;
     margin: 0 auto;
+
+    @include media-breakpoint-down(md) {
+        padding: 0 $min_page_padding_m;
+    }
 }
 
 .containerFullWidth {
     width: 100%;
     padding: 0 $min_page_padding;
     margin: 0 auto;
+
+    @include media-breakpoint-down(md) {
+        padding: 0 $min_page_padding_m;
+    }
 }
 
 .containerAlignLeft {

@@ -7,7 +7,7 @@ import {getButtonStyleClasses} from '@/components/Common/ui/Buttons/utils/getBut
 
 interface ButtonLinkProps extends ButtonBaseProps {
   href: string
-  target: string
+  target?: string
 }
 
 export function ButtonLink({

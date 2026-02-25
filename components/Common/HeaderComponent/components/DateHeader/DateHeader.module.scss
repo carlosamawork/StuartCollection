@@ -1,0 +1,10 @@
+.dateHeader {
+    padding-left: 32px;
+    padding-right: 32px;
+    border-left: 1px solid var(--colors-foreground-fg-1);
+
+    p {
+        font-size: var(--font-size-font-size-p-small);
+        font-weight: 300;
+    }
+}
