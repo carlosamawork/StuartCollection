@@ -77,6 +77,14 @@ export default defineField({
       validation: (Rule) => Rule.required(),
       group: 'specs',
     }),
+    // Visit Signup Link
+    defineField({
+      name: 'signupLink',
+      title: 'Visit Signup Link',
+      type: 'url',
+      validation: (Rule) => Rule.uri({allowRelative: true, scheme: ['http', 'https']}),
+      group: 'specs',
+    }),
     // Location
     defineField({
       name: 'location',

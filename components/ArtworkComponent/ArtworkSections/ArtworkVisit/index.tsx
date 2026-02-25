@@ -22,6 +22,7 @@ export default function ArtworkVisit({section}: ArtworkVisitProps) {
           <LocationDescription
             location={section.location}
             visitDescription={section.visitDescription}
+            signupLink={section.signupLink}
           />
           <LocationGoogleLink location={section.location} />
         </div>

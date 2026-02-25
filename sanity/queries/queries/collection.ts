@@ -38,6 +38,24 @@ export async function getCollection(): Promise<CollectionData> {
                 ${image}
             },
         },
+         "sections": [
+          {
+            "id": "artworks",
+            "title": "Artworks",
+          },
+          {
+            "id": "artists",
+            "title": "Artists",
+          },
+          {
+            "id": "locations",
+            "title": "Locations",
+          },
+          {
+            "id": "trails",
+            "title": "Trails",
+          }
+        ]
     }`,
   )
 }
@@ -48,6 +66,7 @@ export type CollectionData = {
   locations: CollectionLocationData[]
   artists: CollectionArtistData[]
   trails: CollectionTrailData[]
+  sections: {id: string; title: string}[]
 }
 
 export type CollectionArtworkData = ArtworkCardData & {

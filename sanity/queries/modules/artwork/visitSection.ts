@@ -5,11 +5,13 @@ export const visitSectionQuery = `
     "location": ^.location->{
         ${location}
     },
-    "visitDescription": ^.visitDescription
+    "visitDescription": ^.visitDescription,
+    "signupLink": ^.signupLink
 `
 
 export type ArtworkVisitSectionData = {
   title: string
   location: LocationData
   visitDescription: any
+  signupLink: string
 }

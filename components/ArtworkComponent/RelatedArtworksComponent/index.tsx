@@ -23,18 +23,30 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
         </div>
         <TabsLayout
           tabs={[
-            {
-              label: 'Location',
-              content: <ArtworksGrid data={data.byLocation} />,
-            },
-            {
-              label: 'Theme',
-              content: <ArtworksGrid data={data.byTheme} />,
-            },
-            {
-              label: 'Trail',
-              content: <ArtworksGrid data={data.byTrail} />,
-            },
+            ...(data.byLocation && data.byLocation.length > 0
+              ? [
+                  {
+                    label: 'Location',
+                    content: <ArtworksGrid data={data.byLocation} />,
+                  },
+                ]
+              : []),
+            ...(data.byTheme && data.byTheme.length > 0
+              ? [
+                  {
+                    label: 'Theme',
+                    content: <ArtworksGrid data={data.byTheme} />,
+                  },
+                ]
+              : []),
+            ...(data.byTrail && data.byTrail.length > 0
+              ? [
+                  {
+                    label: 'Trail',
+                    content: <ArtworksGrid data={data.byTrail} />,
+                  },
+                ]
+              : []),
           ]}
         />
       </Container>

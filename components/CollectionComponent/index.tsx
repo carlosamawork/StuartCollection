@@ -9,17 +9,36 @@ import CollectionArtworks from '@/components/CollectionComponent/sections/compon
 import CollectionTrails from '@/components/CollectionComponent/sections/components/CollectionTrails'
 import CollectionLocations from '@/components/CollectionComponent/sections/components/CollectionLocations'
 import CollectionArtists from '@/components/CollectionComponent/sections/components/CollectionArtists'
+import {useUrlHash} from '@/hooks/useUrlHash'
 
 export default function CollectionComponent({data}: {data: CollectionData}) {
+  const {hash} = useUrlHash()
+
   if (!data) return <></>
 
-  const {artworks, themes, locations, artists, trails} = data
+  const {artworks, themes, locations, artists, trails, sections} = data
+
+  const currentSection = sections.find((section) => section.id === hash)
 
   return (
     <div className={s.component}>
       <Container>
         <div className={s.top}>
-          <Breadcrumbs breadcrumbs={[{label: 'Home', href: '/'}]} />
+          <Breadcrumbs
+            breadcrumbs={[
+              {label: 'Home', href: '/'},
+              {label: 'The Collection', href: `/collection/`},
+              ...(hash
+                ? [
+                    {
+                      label: currentSection ? currentSection.title : '',
+                      href: `#${hash}`,
+                    },
+                  ]
+                : []),
+            ]}
+            showLastSlash={false}
+          />
           <h1>{'The Collection'}</h1>
         </div>
         <article className={s.article}>

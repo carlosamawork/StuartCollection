@@ -12,26 +12,24 @@ interface Props {
 export default function ArtworkCard({data}: Props) {
   if (!data) return <></>
 
-  const isImageVertical =
-    data.image.metadata.dimensions.height > data.image.metadata.dimensions.width
+  const isImageHorizontal =
+    data.image.metadata.dimensions.height < data.image.metadata.dimensions.width
 
   return (
     <Link className={s.card} href={`/collection/artwork/${data.slug}`}>
-      <div className={s.image}>
-        {data.image?.imageUrl && (
-          <LazyImage
-            src={data.image.imageUrl}
-            alt={data.image.filename || 'Top Image'}
-            width={data.image.metadata.dimensions.width}
-            height={data.image.metadata.dimensions.height}
-            {...(isImageVertical
-              ? {
-                  fill: true,
-                  objectFit: 'cover',
-                }
-              : {})}
-          />
-        )}
+      <div className={s.imageContainer}>
+        <div className={`${s.image} ${isImageHorizontal ? s['image--h'] : ''}`}>
+          {data.image?.imageUrl && (
+            <LazyImage
+              src={data.image.imageUrl}
+              alt={data.image.filename || 'Top Image'}
+              width={data.image.metadata.dimensions.width}
+              height={data.image.metadata.dimensions.height}
+              fill
+              objectFit="cover"
+            />
+          )}
+        </div>
       </div>
       <div className={s.titles}>
         <p className={`${s.title} p-medium`}>{data.title}</p>

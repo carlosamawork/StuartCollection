@@ -29,6 +29,7 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                 },
                 year,
                 visitDescription,
+                signupLink,
                 location->{
                     ${location}
                     },
@@ -113,6 +114,7 @@ export type ArtworkData = {
     themes: {title: string}[]
     year: number
     visitDescription: any
+    signupLink: string
     location: LocationData
   }
   hero: HeroGeneralData
