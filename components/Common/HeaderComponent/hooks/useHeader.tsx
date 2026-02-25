@@ -10,6 +10,7 @@ export default function useHeader({data}: any) {
 
   const [activeItem, setActiveItem] = useState<any>(null)
   const [submenuOpen, setSubmenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isArtwork = pathname.includes('collection/artwork')
   const backgroundColor = isArtwork ? '#E7ECF2' : undefined
@@ -24,6 +25,10 @@ export default function useHeader({data}: any) {
     setActiveItem(null)
   }
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((value) => !value)
+  }
+
   return {
     headerRef,
     activeItem,
@@ -32,5 +37,7 @@ export default function useHeader({data}: any) {
     setSubmenuOpen,
     openSubmenu,
     closeSubmenu,
+    mobileMenuOpen,
+    toggleMobileMenu,
   }
 }

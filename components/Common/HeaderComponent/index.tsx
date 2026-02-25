@@ -11,6 +11,7 @@ import SvgLogoUcSanDiego from '@/components/Common/HeaderComponent/components/Sv
 import Menu from '@/components/Common/HeaderComponent/components/Menu'
 import DateHeader from '@/components/Common/HeaderComponent/components/DateHeader'
 import {useEffect} from 'react'
+import Hamburger from '@/components/Common/HeaderComponent/components/Hamburger'
 
 export default function HeaderComponent({data}: any) {
   const {
@@ -21,6 +22,8 @@ export default function HeaderComponent({data}: any) {
     setSubmenuOpen,
     openSubmenu,
     closeSubmenu,
+    mobileMenuOpen,
+    toggleMobileMenu,
   } = useHeader({data})
 
   useEffect(() => {
@@ -48,14 +51,19 @@ export default function HeaderComponent({data}: any) {
             <div className={s.logo}>
               <Link href="/">STUART COLLECTION</Link>
             </div>
-            <div className={s.logoSanDiego}>
-              <Link
-                href="https://stuartcollection.ucsd.edu/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <SvgLogoUcSanDiego />
-              </Link>
+            <div className={s.right}>
+              <div className={s.logoSanDiego}>
+                <Link
+                  href="https://stuartcollection.ucsd.edu/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SvgLogoUcSanDiego />
+                </Link>
+              </div>
+              <div className="mobile_visible">
+                <Hamburger onClick={toggleMobileMenu} open={mobileMenuOpen} />
+              </div>
             </div>
           </div>
         </Container>

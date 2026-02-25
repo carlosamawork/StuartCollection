@@ -29,6 +29,13 @@
             }
         }
 
+        .right {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            align-items: center;
+        }
+
         .logoSanDiego {
             svg {
                 width: 169px;
