@@ -51,6 +51,10 @@
     .menuHeaderContainer {
         padding: 12px 0px;
         border-bottom: 1px solid var(--colors-foreground-fg-1);
+
+        @media(max-width: 768px) {
+            display: none;
+        }
     }
 
     .menuHeader {

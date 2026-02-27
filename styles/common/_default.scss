@@ -127,4 +127,15 @@ img {
 .list-bullet--level-3 { padding-left: 3.25rem; }
 
 /* muy típico: los <p> dentro de <li> meten márgenes raros */
+.desktopOnly{
+	@media(max-width: 768px) {
+		display: none !important;
+	}
+}
+
+.mobileOnly{
+	@media(min-width: 769px) {
+		display: none !important;
+	}
+}
 

@@ -35,14 +35,24 @@
 
         &.columns2 {
             grid-template-columns: repeat(2, 1fr);
+
+            @media(max-width: 768px) {
+                grid-template-columns: 100%;
+            }
         }
 
         &.columns3 {
             grid-template-columns: repeat(3, 1fr);
+            @media(max-width: 768px) {
+                grid-template-columns: 100%;
+            }
         }
 
         &.columns4 {
             grid-template-columns: repeat(4, 1fr);
+            @media(max-width: 768px) {
+                grid-template-columns: 100%;
+            }
         }
 
         .pressItem {
@@ -64,12 +74,14 @@
             .itemTitle {
                 margin: 0 0 8px 0;
                 font-size: var(--font-size-font-size-medium);
+                line-height: var(--line-height-line-height-medium);
                 font-weight: 500;
             }
 
             .itemPublication {
                 margin: 0 0 16px 0;
                 font-size: var(--font-size-font-size-p);
+                line-height: var(--line-height-line-height-p);
                 font-weight: 300;
             }
 

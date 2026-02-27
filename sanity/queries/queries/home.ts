@@ -50,10 +50,10 @@ export async function getHome() {
                             slug{
                                 current
                             },
-                            featuredImage{
+                            thumbnail{
                                 ${image}
                             },
-                            body
+                            visitDescription
                         }
                     },
                     _type == 'module.press' => {

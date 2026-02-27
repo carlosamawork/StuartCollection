@@ -48,6 +48,10 @@ function applySecondClasses(swiper: any, total: number, s: Record<string, string
 export default function FeaturedSliderComponent({data}: {data: any}) {
   const uid = useId()
   const swiperRef = useRef<SwiperType | null>(null)
+
+  const dotsDesktopRef = useRef<HTMLDivElement | null>(null)
+  const dotsMobileRef = useRef<HTMLDivElement | null>(null)
+
   const prevClass = `featuredPrev_${uid.replace(/:/g, '')}`
   const nextClass = `featuredNext_${uid.replace(/:/g, '')}`
   const paginationClass = `featuredPagination_${uid.replace(/:/g, '')}`
@@ -59,7 +63,7 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
           {data.title && <h2 className={s.title}>{data.title}</h2>}
 
           {/* Arrows + dots fuera del Swiper */}
-          <div className={s.arrowsAndDots}>
+          <div className={`${s.arrowsAndDots} desktopOnly`}>
             <button className={`${s.arrow} ${s.prev} ${prevClass}`} aria-label="Previous slide">
               <svg
                 width="8"
@@ -72,7 +76,7 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
               </svg>
             </button>
 
-            <div className={`${s.dots} ${paginationClass}`} />
+            <div className={`${s.dots} ${paginationClass}`} ref={dotsDesktopRef}/>
 
             <button className={`${s.arrow} ${s.next} ${nextClass}`} aria-label="Next slide">
               <svg
@@ -98,14 +102,14 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
           centeredSlides
           loop={true} // si hay pocas slides, mejor no forzar loop
           speed={700}
-          slidesPerView={3.5} // mobile con "peek"
-          spaceBetween={0}
+          slidesPerView={1.2} // mobile con "peek"
+          spaceBetween={32}
           navigation={{
             prevEl: `.${prevClass}`,
             nextEl: `.${nextClass}`,
           }}
           pagination={{
-            el: `.${paginationClass}`,
+            el: dotsDesktopRef.current, // 👈 solo uno (el “source of truth”)
             clickable: true,
             bulletClass: s.bullet,
             bulletActiveClass: s.bulletActive,
@@ -118,18 +122,37 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
           onSwiper={(swiper) => {
             swiperRef.current = swiper
 
-            const run = () => applySecondClasses(swiper, data.slides.length, s)
+            const syncDots = () => {
+              const src = dotsDesktopRef.current
+              const dst = dotsMobileRef.current
+              if (!src || !dst) return
+              dst.innerHTML = src.innerHTML
+            }
 
-            // ✅ el más fiable para loop
-            swiper.on('realIndexChange', () => requestAnimationFrame(run))
+            // montar paginación cuando ya hay DOM
+            swiper.params.pagination = {
+              ...(swiper.params.pagination as any),
+              el: dotsDesktopRef.current,
+            }
+            swiper.pagination.init()
+            swiper.pagination.render()
+            swiper.pagination.update()
 
-            // ✅ por si vienes de drag o animaciones largas
-            swiper.on('slideChangeTransitionEnd', () => requestAnimationFrame(run))
+            // sincroniza el segundo contenedor
+            requestAnimationFrame(syncDots)
 
-            // inicial
-            requestAnimationFrame(run)
+            swiper.on('paginationUpdate', () => requestAnimationFrame(syncDots))
+            swiper.on('realIndexChange', () => requestAnimationFrame(syncDots))
+            swiper.on('slideChangeTransitionEnd', () => requestAnimationFrame(syncDots))
           }}
           className={s.swiper}
+          breakpoints={{
+            768: {
+              slidesPerView: 3.5,
+              spaceBetween: 0,
+            }
+          }
+          }
         >
           {data?.slides?.map((slide: any, index: number) => (
             <SwiperSlide key={index} className={s.swiperSlide}>
@@ -179,6 +202,36 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
           ))}
         </Swiper>
       </div>
+      <div className={`${s.arrowsAndDots} mobileOnly`}>
+            <button className={`${s.arrow} ${s.prev} ${prevClass}`} aria-label="Previous slide">
+              <svg
+                width="8"
+                height="12"
+                viewBox="0 0 8 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M7.41 10.59L2.83 6L7.41 1.41L6 0L0 6L6 12L7.41 10.59Z" fill="#272728" />
+              </svg>
+            </button>
+
+            <div className={`${s.dots} ${paginationClass}`} ref={dotsMobileRef}/>
+
+            <button className={`${s.arrow} ${s.next} ${nextClass}`} aria-label="Next slide">
+              <svg
+                width="8"
+                height="12"
+                viewBox="0 0 8 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0 1.41L4.58 6L4.0127e-07 10.59L1.41 12L7.41 6L1.41 0L0 1.41Z"
+                  fill="#272728"
+                />
+              </svg>
+            </button>
+          </div>
     </div>
   )
 }

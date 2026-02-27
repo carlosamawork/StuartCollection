@@ -5,15 +5,27 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
 
+        @media(max-width: 768px) {
+            grid-template-columns: 100%;
+        }
+
         .titleCollection {
             position: sticky;
             top: 56px;
             align-self: start;
 
+            @media(max-width: 768px) {
+                position: static;
+                margin-bottom: 16px;
+            }
+
             h2 {
                 margin: 0;
                 font-size: var(--font-size-font-size-3xlarge);
                 font-weight: 500;
+                @media(max-width: 768px) {
+                    margin-bottom: 16px;
+                }
             }
 
             .subtitle {
@@ -25,6 +37,9 @@
         }
 
         .artwork {
+            p:first-child{
+                display: block;
+            }
             h3 {
                 margin: 32px 0 16px 0;
                 font-size: var(--font-size-font-size-large);
