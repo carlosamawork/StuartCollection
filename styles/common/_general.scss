@@ -1,13 +1,9 @@
-//
-// ---> Not used
-//
-
+@use "../common/variables" as *;
+@use "../mixins/breakpoints" as *;
 
 // /*****************************************
 // *****    FADEIN       **************
 // ******************************************/
-// @use "../common/variables" as *;
-// @use "../mixins/breakpoints" as *;
 
 // .fadeInElement,
 // .fadeInListEntry {
@@ -17,20 +13,20 @@
 // *****    PAGE GENERAL       **************
 // ******************************************/
 
-// /*****************************************
-// *****    HELPERS Desk/Mobile      ********
-// ******************************************/
-// .desktop_visible {
-//     display: none;
-//     @include media-breakpoint-up(md) {
-//         display: inline-block;
-//     }
-// }
-// .mobile_visible {
-//     @include media-breakpoint-up(md) {
-//         display: none;
-//     }
-// }
+/*****************************************
+*****    HELPERS Desk/Mobile      ********
+******************************************/
+.desktop_visible {
+    display: none;
+    @include media-breakpoint-up(md) {
+        display: inline-block;
+    }
+}
+.mobile_visible {
+    @include media-breakpoint-up(md) {
+        display: none;
+    }
+}
 
 // /*****************************************
 // *****    BUTTONS            **************

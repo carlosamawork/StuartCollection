@@ -1,0 +1,31 @@
+.mainNav {
+    padding-right: 32px;
+
+    ul {
+        display: flex;
+        gap: 32px;
+        justify-content: space-between;
+        align-items: center;
+
+        li {
+            font-size: var(--font-size-font-size-p);
+            font-weight: 300;
+        }
+
+        .linkInternal {
+            a {
+                display: flex;
+                align-items: baseline;
+                gap: 4px;
+
+                svg {
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover svg {
+                    transform: rotate(180deg);
+                }
+            }
+        }
+    }
+}
