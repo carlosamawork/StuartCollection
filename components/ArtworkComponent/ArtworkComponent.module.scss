@@ -13,6 +13,10 @@
         grid-template-columns: 1fr 1fr;
         gap: 32px;
 
+        .leftStickyContainer {
+            height: 100%;
+        }
+
         .body {
             display: flex;
             flex-direction: column;

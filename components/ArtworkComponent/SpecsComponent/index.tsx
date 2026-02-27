@@ -36,6 +36,7 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
           <LocationDescription
             location={data.specs.location}
             visitDescription={data.specs.visitDescription}
+            signupLink={data.specs.signupLink}
           />
         </div>
         <div className={s.item}>

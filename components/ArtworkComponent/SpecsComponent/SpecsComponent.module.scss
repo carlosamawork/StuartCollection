@@ -1,6 +1,11 @@
+@use "@/styles/common/variables" as *;
+
 .specsComponent {
     display: flex;
     flex-direction: column;
+
+    position: sticky;
+    top: $min_page_padding;
 
     .titleContainer {
         margin-top: 4px;

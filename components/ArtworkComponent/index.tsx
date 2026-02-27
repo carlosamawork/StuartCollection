@@ -22,7 +22,9 @@ export default function ArtworkComponent({data}: {data: ArtworkData}) {
       </Container>
       <Container>
         <div className={s.introSection}>
-          <SpecsComponent data={data} />
+          <div className={s.leftStickyContainer}>
+            <SpecsComponent data={data} />
+          </div>
           <article className={s.body}>
             <ArtworkBodyModules modules={data.body_modules} />
             <ShareComponent

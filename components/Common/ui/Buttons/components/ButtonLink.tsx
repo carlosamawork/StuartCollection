@@ -7,9 +7,18 @@ import {getButtonStyleClasses} from '@/components/Common/ui/Buttons/utils/getBut
 
 interface ButtonLinkProps extends ButtonBaseProps {
   href: string
+  target: string
 }
 
-export function ButtonLink({href, children, className, variant, color, size}: ButtonLinkProps) {
+export function ButtonLink({
+  href,
+  target,
+  children,
+  className,
+  variant,
+  color,
+  size,
+}: ButtonLinkProps) {
   const styleClasses = getButtonStyleClasses({
     s,
     variant,
@@ -18,7 +27,7 @@ export function ButtonLink({href, children, className, variant, color, size}: Bu
   })
 
   return (
-    <Link href={href} className={s.link}>
+    <Link href={href} className={s.link} target={target}>
       <div className={`${s.button} ${styleClasses} ${className ?? ''}`}>{children}</div>
     </Link>
   )
