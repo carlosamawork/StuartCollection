@@ -29,10 +29,12 @@ export default function HeaderComponent({data}: any) {
   useEffect(() => {
     console.log(
       '<!-- ----------------------------------------------------- -->\n' +
-        '<!-- Code by Carlos Salvador, http://cachosalvador.com (2025)                   -->\n' +
+        '<!-- Code by MGTZM Studios, http://magatzem.studio (2026) -->\n' +
         '<!-- ----------------------------------------------------- -->',
     )
   }, [])
+
+  console.log(data)
 
   return (
     <motion.header
@@ -72,7 +74,7 @@ export default function HeaderComponent({data}: any) {
       <div className={s.menuHeaderContainer}>
         <Container className={s.menuHeader}>
           <Menu openSubmenu={openSubmenu} links={data?.menu?.links} />
-          <DateHeader />
+          <DateHeader data={data.openingHours}/>
           <ButtonLink href="/support-us" size="lg">
             Support
           </ButtonLink>

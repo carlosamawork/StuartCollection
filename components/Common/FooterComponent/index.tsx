@@ -10,7 +10,7 @@ import {ButtonLink} from '../ui/Buttons/components/ButtonLink'
 
 export default function FooterComponent({data}: any) {
   const footerRef = useRef<HTMLElement>(null)
-
+  console.log('Footer data:', data) // Debugging line to check the structure of the data
   return (
     <motion.footer
       className={`${s.footer}`}
@@ -228,7 +228,7 @@ export default function FooterComponent({data}: any) {
                 <ul>
                   {data?.support.sections?.map((section: any, index: number) => (
                     <li key={index} className={s.section}>
-                      <Link href={'/' + data.slug + '#' + section.id} className={s.sectionLink}>
+                      <Link href={'/' + data.support.slug + '#' + section.id} className={s.sectionLink}>
                         <span>{section.title}</span>
                         <svg
                           width="7"
