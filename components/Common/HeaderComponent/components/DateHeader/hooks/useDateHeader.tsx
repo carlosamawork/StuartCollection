@@ -46,10 +46,12 @@ export default function useDateHeader({data}: any) {
   const [tempF, setTempF] = useState<number | null>(null)
   const [tempLoading, setTempLoading] = useState(true)
 
-  const hours: DayHours[] = data?.hours ?? data?.openingHours ?? [] // <-- ajusta aquí
+  const hours: DayHours[] = data ?? [] // <-- ajusta aquí
 
   const today = useMemo(() => {
     const todayName = getWeekdayInTimeZone(SAN_DIEGO_TZ) // "Monday"...
+    console.log('Today in San Diego:', todayName)
+
     const todayHours = hours.find((h) => h.day === todayName) ?? null
 
     const open = todayHours?.open ?? null

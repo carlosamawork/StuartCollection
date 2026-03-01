@@ -8,6 +8,8 @@ import Link from 'next/link'
 import Container from '@/components/Common/ui/Container'
 
 export default function CollectionComponent({data}: {data: any}) {
+
+  console.log('CollectionComponent data:', data)
   return (
     <Container>
       <div className={s.collection}>
@@ -58,24 +60,24 @@ export default function CollectionComponent({data}: {data: any}) {
             )}
             <div className={s.artwork}>
               <h3>{data.featuredArtwork.title}</h3>
-              {data.featuredArtwork && data.featuredArtwork.featuredImage && (
+              {data.featuredArtwork && data.featuredArtwork.thumbnail && (
                 <div className={s.artworkImage}>
                   <LazyImage
-                    src={data.featuredArtwork.featuredImage.imageUrl}
+                    src={data.featuredArtwork.thumbnail.imageUrl}
                     alt={
-                      data.featuredArtwork.featuredImage.alt ||
+                      data.featuredArtwork.thumbnail.alt ||
                       data.featuredArtwork.title ||
                       'Featured Artwork Image'
                     }
-                    width={data.featuredArtwork.featuredImage.metadata.dimensions.width}
-                    height={data.featuredArtwork.featuredImage.metadata.dimensions.height}
-                    filename={data.featuredArtwork.featuredImage.filename}
+                    width={data.featuredArtwork.thumbnail.metadata.dimensions.width}
+                    height={data.featuredArtwork.thumbnail.metadata.dimensions.height}
+                    filename={data.featuredArtwork.thumbnail.filename}
                   />
                 </div>
               )}
               <div className={s.artworkInfo}>
-                {data.featuredArtwork.body &&
-                  data.featuredArtwork.body.map((textRow: any, index: number) => {
+                {data.featuredArtwork.visitDescription &&
+                  data.featuredArtwork.visitDescription.map((textRow: any, index: number) => {
                     return (
                       <PortableText
                         key={textRow._key}

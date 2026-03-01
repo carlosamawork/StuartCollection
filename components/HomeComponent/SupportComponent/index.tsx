@@ -23,6 +23,7 @@ export default function SupportComponent({data}: {data: any}) {
                   width={data.image.metadata.dimensions.width}
                   height={data.image.metadata.dimensions.height}
                   fill={true}
+                  objectFit='cover'
                 />
               )}
               <div className={s.supportText}>
