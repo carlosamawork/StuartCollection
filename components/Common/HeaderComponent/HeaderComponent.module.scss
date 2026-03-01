@@ -7,7 +7,11 @@
         border-bottom: 1px solid var(--colors-foreground-fg-1);
 
         @include media-breakpoint-down(md) {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
             padding: 16px 0 18px;
+            height: $header_top_height_m;
         }
     }
 
@@ -48,9 +52,27 @@
         }
     }
 
+    .mobileMenuContainer {
+        display: none;
+
+        @include media-breakpoint-down(md) {
+            display: block;
+        }
+    }
+
     .menuHeaderContainer {
         padding: 12px 0px;
         border-bottom: 1px solid var(--colors-foreground-fg-1);
+
+        @include media-breakpoint-down(md) {
+            display: none;
+        }
+    }
+
+    .dateHeaderContainer {
+        padding-left: 32px;
+        padding-right: 32px;
+        border-left: 1px solid var(--colors-foreground-fg-1);
     }
 
     .menuHeader {

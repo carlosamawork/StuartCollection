@@ -2,6 +2,7 @@
 *******************    DEFAULTS                             *************************
 *************************************************************************************/
 @use "../common/variables" as *;
+@use "../mixins/breakpoints" as *;
 
 * {
     box-sizing: border-box;
@@ -134,3 +135,10 @@ img {
 }
 
 /* muy típico: los <p> dentro de <li> meten márgenes raros */
+
+/* añadir espacio para el headerTop si es que es fijo */
+main {
+    @include media-breakpoint-down(md) {
+        margin-top: $header_top_height_m;
+    }
+}

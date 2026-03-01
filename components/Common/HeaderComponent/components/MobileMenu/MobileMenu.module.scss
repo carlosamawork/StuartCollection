@@ -1,0 +1,68 @@
+@use "./styles/common/variables.scss" as *;
+
+.container {
+    position: fixed;
+    top: $header_top_height_m;
+    height: calc(100dvh - $header_top_height_m);
+    width: 100%;
+    overflow: scroll;
+    z-index: 1000;
+
+    .mobileMenu {
+        display: flex;
+        flex-direction: column;
+        gap: 58px;
+        height: 100%;
+
+        .top {
+            display: flex;
+            flex-direction: row;
+            gap: 24px;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 16px 0;
+        }
+
+        .section {
+            margin-bottom: 8px;
+            a {
+                display: grid;
+                grid-template-columns: 1fr auto;
+                align-content: center;
+                gap: 8px;
+
+                svg {
+                    align-self: center;
+                }
+
+                &:active {
+                    color: var(--colors-foreground-fg-4);
+
+                    svg {
+                        path {
+                            fill: var(--colors-foreground-fg-4);
+                        }
+                    }
+                }
+            }
+        }
+
+        .additionalData {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            .contactInfo {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                padding: 16px 0;
+
+                a:active {
+                    color: var(--colors-foreground-fg-4);
+                }
+            }
+        }
+    }
+}

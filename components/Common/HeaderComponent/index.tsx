@@ -12,6 +12,7 @@ import Menu from '@/components/Common/HeaderComponent/components/Menu'
 import DateHeader from '@/components/Common/HeaderComponent/components/DateHeader'
 import {useEffect} from 'react'
 import Hamburger from '@/components/Common/HeaderComponent/components/Hamburger'
+import MobileMenu from '@/components/Common/HeaderComponent/components/MobileMenu'
 
 export default function HeaderComponent({data}: any) {
   const {
@@ -24,6 +25,7 @@ export default function HeaderComponent({data}: any) {
     closeSubmenu,
     mobileMenuOpen,
     toggleMobileMenu,
+    closeMobileMenu,
   } = useHeader({data})
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export default function HeaderComponent({data}: any) {
       onMouseLeave={closeSubmenu}
     >
       {/* ... top header igual ... */}
-      <div className={s.topHeaderContainer}>
+      <div className={s.topHeaderContainer} style={{backgroundColor}}>
         <Container>
           <div className={s.topHeader}>
             <div className={s.logo}>
@@ -69,10 +71,21 @@ export default function HeaderComponent({data}: any) {
         </Container>
       </div>
 
+      <div className={s.mobileMenuContainer}>
+        <MobileMenu
+          data={data}
+          isOpen={mobileMenuOpen}
+          close={closeMobileMenu}
+          backgroundColor={backgroundColor}
+        />
+      </div>
+
       <div className={s.menuHeaderContainer}>
         <Container className={s.menuHeader}>
           <Menu openSubmenu={openSubmenu} links={data?.menu?.links} />
-          <DateHeader />
+          <div className={s.dateHeaderContainer}>
+            <DateHeader />
+          </div>
           <ButtonLink href="/support-us" size="lg">
             Support
           </ButtonLink>
