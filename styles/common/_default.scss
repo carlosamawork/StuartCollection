@@ -4,127 +4,133 @@
 @use "../common/variables" as *;
 
 * {
-	box-sizing: border-box;
-	font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-tap-highlight-color: var(--colors-foreground-fg-1);
-	-webkit-tap-highlight-color: transparent;
-	font-weight: 300;
+    box-sizing: border-box;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: var(--colors-foreground-fg-1);
+    -webkit-tap-highlight-color: transparent;
+    font-weight: 300;
 }
 
 html,
 body {
-	font-family: $font-family-base;
-	font-size: $font-size-base;
-	line-height: $line-height-base;
-	color: var(--colors-foreground-fg-1);
-	background-color: $body-bg;
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    color: var(--colors-foreground-fg-1);
+    background-color: $body-bg;
 
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 
-	width: 100%;
-	min-height: 100%;
-	height: auto;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
 
-	position: relative;
+    position: relative;
 
-	font-weight: 300;
-	overscroll-behavior: none;
-	scroll-behavior: smooth;
+    font-weight: 300;
+    overscroll-behavior: none;
+    scroll-behavior: smooth;
 }
 
 ::selection {
-	background: $highlight;
-	color: #fff;
-	text-shadow: none;
+    background: $highlight;
+    color: #fff;
+    text-shadow: none;
 }
 
 ::-moz-selection {
-	background: $highlight;
-	color: #fff;
-	text-shadow: none;
+    background: $highlight;
+    color: #fff;
+    text-shadow: none;
 }
 
 ::-webkit-selection {
-	background: $highlight;
-	color: #fff;
-	text-shadow: none;
+    background: $highlight;
+    color: #fff;
+    text-shadow: none;
 }
 
 ul {
-	// margin: 0;
-	// padding: 0;
-	// li {
-	// 	list-style: none;
-	// 	margin: 0;
-	// 	padding: 0;
-	// }
+    // margin: 0;
+    // padding: 0;
+    // li {
+    // 	list-style: none;
+    // 	margin: 0;
+    // 	padding: 0;
+    // }
 }
 
 a {
-	display: inline-block;
+    display: inline-block;
 
     &:link,
-	&:visited,
-	&:active {
-		color: black;
-		text-decoration: none;
-	}
+    &:visited,
+    &:active {
+        color: black;
+        text-decoration: none;
+    }
 
-	&:hover {
-		text-decoration: none;
-	}
+    &:hover,
+    &:focus {
+        text-decoration: none;
+    }
 }
 
 b,
 strong {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 img {
-	display: block;
+    display: block;
 
-	width: 100%;
-	height: auto;
-	transition: all $transition-duration ease-in-out;
-	&.lazy {
-		opacity: 0;
-		&.loaded {
-			opacity: 1;
-		}
-	}
+    width: 100%;
+    height: auto;
+    transition: all $transition-duration ease-in-out;
+    &.lazy {
+        opacity: 0;
+        &.loaded {
+            opacity: 1;
+        }
+    }
 }
 
-.ctaButton{
-	a{
-		padding: 8px 16px;
-	}
+.ctaButton {
+    a {
+        padding: 8px 16px;
+    }
 }
 
-.cta-button{
-	padding: 8px 16px;
-	background-color: black;
-	color: white !important;
-	border-radius: 8px;
-	margin: 16px 0;
+.cta-button {
+    padding: 8px 16px;
+    background-color: black;
+    color: white !important;
+    border-radius: 8px;
+    margin: 16px 0;
 }
 
 .list-bullet {
-  list-style: disc;
-  padding-left: 1.25rem;
+    list-style: disc;
+    padding-left: 1.25rem;
 }
 
 .list-bullet .list-bullet {
-  list-style: circle;      // opcional: se ve claro el subnivel
+    list-style: circle; // opcional: se ve claro el subnivel
 }
 
 /* niveles (si quieres controlar fino) */
-.list-bullet--level-1 { padding-left: 1.25rem; }
-.list-bullet--level-2 { padding-left: 2.25rem; }
-.list-bullet--level-3 { padding-left: 3.25rem; }
+.list-bullet--level-1 {
+    padding-left: 1.25rem;
+}
+.list-bullet--level-2 {
+    padding-left: 2.25rem;
+}
+.list-bullet--level-3 {
+    padding-left: 3.25rem;
+}
 
 /* muy típico: los <p> dentro de <li> meten márgenes raros */
-

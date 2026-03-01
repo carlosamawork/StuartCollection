@@ -1,5 +1,4 @@
 .visit {
-
     .visitContent {
         padding: 56px 0;
         border-top: 1px solid var(--colors-foreground-fg-3);
@@ -40,7 +39,8 @@
                     font-weight: 500;
                 }
 
-                a:hover {
+                a:hover,
+                a:focus {
                     border-radius: 16px;
                 }
             }

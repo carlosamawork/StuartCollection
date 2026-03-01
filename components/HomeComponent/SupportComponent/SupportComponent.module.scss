@@ -53,7 +53,8 @@
                     font-weight: 500;
                 }
 
-                a:hover {
+                a:hover,
+                a:focus {
                     border-radius: 16px;
                 }
             }
