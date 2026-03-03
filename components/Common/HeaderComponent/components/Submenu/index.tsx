@@ -4,6 +4,7 @@ import {PortableText} from 'next-sanity'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 import Link from 'next/link'
 import Container from '../../../ui/Container'
+import DirectionsComponent from '@/components/Common/DirectionsComponent/DirectionsComponent'
 
 export default function SubmenuComponent({
   data,
@@ -79,18 +80,10 @@ export default function SubmenuComponent({
                 </div>
                 <div className={s.element}>
                   <h6>Directions</h6>
-                  <div className={s.directionsContent}>
-                    {additionalContent.directions &&
-                      additionalContent.directions.map((textRow: any, index: number) => {
-                        return (
-                          <PortableText
-                            key={textRow._key}
-                            value={[textRow]}
-                            components={portableBodyComponents()}
-                          />
-                        )
-                      })}
-                  </div>
+                  <DirectionsComponent
+                    directions={additionalContent.directions}
+                    googleMapsUrl={additionalContent.googleMapsUrl}
+                  />
                 </div>
               </>
             )}

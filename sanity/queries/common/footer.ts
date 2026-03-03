@@ -18,6 +18,7 @@ export const getFooter = async () => {
         close
       },
       directions,
+      googleMapsUrl,
       connect,
       telephone,
       email,

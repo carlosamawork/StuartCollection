@@ -1,5 +1,5 @@
-import { groq } from 'next-sanity';
-import { client }from '../index';
+import {groq} from 'next-sanity'
+import {client} from '../index'
 
 export const getHeader = async () => {
   return client.fetch(
@@ -29,9 +29,10 @@ export const getHeader = async () => {
           close
         },
         directions,
+        googleMapsUrl,
         connect,
         telephone,
         email
-    }`
+    }`,
   )
-};
+}

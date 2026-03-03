@@ -21,7 +21,8 @@
             flex-shrink: 0;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
             img {
                 animation: MoveUpDown 1.3s ease-in-out infinite;
             }

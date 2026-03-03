@@ -42,7 +42,8 @@
                 color: var(--colors-foreground-fg-inverted-1);
             }
 
-            &:hover {
+            &:hover,
+            &:focus {
                 border-radius: 16px;
             }
         }

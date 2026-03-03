@@ -1,41 +1,41 @@
-.personDetailModal{
+.personDetailModal {
     padding: 32px 24px;
     border-top: 1px solid var(--colors-foreground-fg-1);
     border-bottom: 1px solid var(--colors-foreground-fg-1);
 
-    .closeButton{
+    .closeButton {
         margin-left: auto;
         margin-bottom: 8px;
         display: block;
     }
 
-    .personDetail{
+    .personDetail {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 32px;
 
-        .personDetailHeader{
+        .personDetailHeader {
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding-right: 32px;
 
-            .personDetailText{
-                h2{
+            .personDetailText {
+                h2 {
                     font-size: var(--font-size-font-size-medium);
                     margin: 0;
                     font-weight: 500;
                     margin: 0 0 8px;
                 }
 
-                p{
+                p {
                     margin: 0 0 8px;
                     font-size: var(--font-size-font-size-p);
                 }
             }
         }
 
-        .personDetailImage{
+        .personDetailImage {
             grid-column: span 1;
             aspect-ratio: 200 / 258;
             border-radius: 4px;
@@ -43,43 +43,42 @@
             position: relative;
         }
 
-        .personDetailInfo{
+        .personDetailInfo {
             grid-column: span 2;
             align-self: end;
 
-            h2{
+            h2 {
                 font-size: var(--font-size-font-size-2xlarge);
                 margin: 0;
                 font-weight: 500;
             }
 
-            .personDetailBio{
+            .personDetailBio {
                 margin-top: 16px;
-                p{
+                p {
                     margin-bottom: 16px;
                     line-height: var(--line-height-line-height-large);
                 }
             }
         }
     }
-
 }
 
-.people{
+.people {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 32px;
     margin-top: 24px;
 
-    .personCard{
+    .personCard {
         padding: 16px;
         border: 1px solid transparent;
         cursor: pointer;
 
-        &:hover{
+        &:hover,
+        &:focus {
             border: 1px solid var(--colors-foreground-fg-1);
             border-radius: 8px;
-
         }
 
         &.active {
@@ -87,7 +86,7 @@
             border-radius: 8px;
         }
 
-        .personImage{
+        .personImage {
             width: 100%;
             aspect-ratio: 237 / 286;
 
@@ -96,16 +95,16 @@
             position: relative;
         }
 
-        .personInfo{
+        .personInfo {
             margin-top: 8px;
 
-            .personNameRole{
+            .personNameRole {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
             }
 
-            h3{
+            h3 {
                 font-size: var(--font-size-font-size-medium);
                 margin: 0;
                 font-weight: 500;

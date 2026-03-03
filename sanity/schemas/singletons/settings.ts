@@ -38,33 +38,42 @@ export default defineType({
       name: 'hours',
       title: 'Opening hours',
       type: 'array',
-      of: [{
-        type: 'object',
-        name: 'hoursItem',
-        fields: [
-          defineField({
-            name: 'day',
-            title: 'Day',
-            type: 'string',
-          }),
-          defineField({
-            name: 'open',
-            title: 'Open',
-            type: 'string',
-          }),
-          defineField({
-            name: 'close',
-            title: 'Close',
-            type: 'string',
-          }),
-        ],
-      }],
+      of: [
+        {
+          type: 'object',
+          name: 'hoursItem',
+          fields: [
+            defineField({
+              name: 'day',
+              title: 'Day',
+              type: 'string',
+            }),
+            defineField({
+              name: 'open',
+              title: 'Open',
+              type: 'string',
+            }),
+            defineField({
+              name: 'close',
+              title: 'Close',
+              type: 'string',
+            }),
+          ],
+        },
+      ],
       group: 'navigation',
     }),
     defineField({
       name: 'directions',
       title: 'Directions',
       type: 'body.paragraphs',
+      group: 'navigation',
+    }),
+    defineField({
+      name: 'googleMapsUrl',
+      title: 'Google Maps URL',
+      type: 'url',
+      validation: (Rule) => Rule.required().uri({scheme: ['http', 'https']}),
       group: 'navigation',
     }),
     defineField({

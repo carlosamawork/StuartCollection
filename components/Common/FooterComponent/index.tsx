@@ -7,6 +7,7 @@ import {motion} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 import {ButtonLink} from '../ui/Buttons/components/ButtonLink'
+import DirectionsComponent from '@/components/Common/DirectionsComponent/DirectionsComponent'
 
 export default function FooterComponent({data}: any) {
   const footerRef = useRef<HTMLElement>(null)
@@ -105,16 +106,10 @@ export default function FooterComponent({data}: any) {
             </h4>
             <div>
               <h6>Directions</h6>
-              {data.directions &&
-                data.directions.map((textRow: any, index: number) => {
-                  return (
-                    <PortableText
-                      key={textRow._key}
-                      value={[textRow]}
-                      components={portableBodyComponents()}
-                    />
-                  )
-                })}
+              <DirectionsComponent
+                directions={data.directions}
+                googleMapsUrl={data.googleMapsUrl}
+              />
             </div>
             <div>
               <h6>Opening Hours</h6>

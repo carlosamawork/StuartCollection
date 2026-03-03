@@ -39,7 +39,8 @@
                         transition: fill 0.3s ease;
                     }
 
-                    &:hover {
+                    &:hover,
+                    &:focus {
                         p {
                             color: var(--colors-foreground-fg-4);
                         }
