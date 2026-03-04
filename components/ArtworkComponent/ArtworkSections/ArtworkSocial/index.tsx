@@ -33,7 +33,7 @@ export default function ArtworkSocial({section}: {section: ArtworkSocialSectionD
         </div>
         <div className={s.itemsContainer}>
           {section.items?.map((item, i) => (
-            <a className={s.item} key={i} href={item.href}>
+            <a className={s.item} key={i} href={item.href} target="_blank">
               <div className={s.image}>
                 <LazyImage
                   src={item.image.imageUrl}

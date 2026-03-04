@@ -15,6 +15,7 @@ interface Props {
   label?: string
   paddingTop?: number
   enableUrlHashInteraction?: boolean
+  addPaddingToNav?: boolean
 }
 
 export default function TabsLayout({
@@ -22,6 +23,7 @@ export default function TabsLayout({
   label,
   paddingTop = 40,
   enableUrlHashInteraction,
+  addPaddingToNav,
 }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(enableUrlHashInteraction ? null : 0)
   const {hash, setHash} = useUrlHash()
@@ -54,7 +56,7 @@ export default function TabsLayout({
 
   return (
     <div className={s.tabsLayout}>
-      <div className={s.menu}>
+      <nav className={`${s.nav} ${addPaddingToNav ? s.container : ''}`}>
         <div className={s.tabs}>
           {label && <span key="initial">{label}</span>}
           {tabs.map((tab: any, index: number) => {
@@ -72,8 +74,10 @@ export default function TabsLayout({
             )
           })}
         </div>
+      </nav>
+      <div className={addPaddingToNav ? s.container : ''} style={{paddingTop}}>
+        {tabs[activeIndex].content}
       </div>
-      <div style={{paddingTop}}>{tabs[activeIndex].content}</div>
     </div>
   )
 }

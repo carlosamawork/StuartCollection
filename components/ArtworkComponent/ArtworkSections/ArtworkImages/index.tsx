@@ -8,15 +8,19 @@ import Container from '@/components/Common/ui/Container'
 import {ArtworkImagesSectionData} from '@/sanity/queries/modules/artwork/imagesSection'
 import {useId} from 'react'
 import SliderPagination from '@/components/Common/ui/SliderPagination'
+import {useIsMobileDevice} from '@/utils/isMobileClient'
 
 interface ArtworkImagesProps {
   section: ArtworkImagesSectionData
 }
 
 const TARGET_HEIGHT = 491 // PX
+const TARGET_HEIGHT_M = 203 // PX
 
 export default function ArtworkImages({section}: ArtworkImagesProps) {
+  const isMobile = useIsMobileDevice()
   const uid = useId()
+
   const id = uid.replace(/:/g, '')
 
   if (!section) return <></>
@@ -26,7 +30,6 @@ export default function ArtworkImages({section}: ArtworkImagesProps) {
       <Container>
         <div className={s.topContent}>
           <h2>{section.title}</h2>
-          <SliderPagination id={id} />
         </div>
       </Container>
       <Slider
@@ -34,9 +37,8 @@ export default function ArtworkImages({section}: ArtworkImagesProps) {
         containerClassName={s.slider}
         slideClassName={s.slide}
         slides={section.items.map((item, i, arr) => {
-          const height = TARGET_HEIGHT
+          const height = isMobile ? TARGET_HEIGHT_M : TARGET_HEIGHT
           const width = getImageWidth(item.metadata.dimensions, height)
-          const isLastSlide = i === arr.length - 1
 
           return (
             <Image
@@ -66,6 +68,9 @@ export default function ArtworkImages({section}: ArtworkImagesProps) {
           // autoHeight: false,
         }}
       />
+      <div className={s.pagination}>
+        <SliderPagination id={id} />
+      </div>
     </div>
   )
 }

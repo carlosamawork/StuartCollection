@@ -14,8 +14,8 @@ export default function TrailComponent({data}: {data: TrailData}) {
 
   return (
     <div className={s.component}>
-      <Container variant="fullWidth">
-        <HeroCover {...data.hero} height={`${(100 * 320) / 720}vh`} />
+      <Container className={s.hero}>
+        <HeroCover {...data.hero} flat />
       </Container>
       <Container>
         <div className={s.top}>

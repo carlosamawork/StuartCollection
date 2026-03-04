@@ -1,14 +1,38 @@
-.grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 32px;
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
 
-    min-height: 437px;
+$height: 437px;
+$width_m: calc(100dvw * 280 / 412);
+$height_m: calc(100dvw * 382 / 412);
+
+.grid {
+    min-height: $height;
 
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
 
     & > * {
         flex: 0 0 calc(25% - 32px * 3 / 4); /* 4 columnas iguales */
+    }
+
+    @include media-breakpoint-down(md) {
+        min-height: $height_m;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+
+        & > * {
+            flex: 0 0 $width_m;
+        }
+    }
+
+    &.container {
+        padding: 0 $min_page_padding;
+
+        @include media-breakpoint-down(md) {
+            padding: 0 $min_page_padding_m;
+        }
     }
 }

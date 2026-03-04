@@ -1,5 +1,5 @@
 @use "@/styles/common/variables" as *;
-@use "./styles/mixins/breakpoints" as *;
+@use "@/styles/mixins/breakpoints" as *;
 
 .container {
     width: 100%;
@@ -37,4 +37,8 @@
     width: 100%;
     margin-left: $page_additional_padding_for_max_page_width;
     padding-left: $min_page_padding;
+
+    @include media-breakpoint-down(md) {
+        padding-left: $min_page_padding_m;
+    }
 }

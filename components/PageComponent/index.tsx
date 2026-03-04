@@ -110,12 +110,9 @@ export default function PageComponent({data}: {data: any}) {
   }, [activeSection])
 
   return (
-    <div className={`${s.pageComponent}`}>
-      <Container variant="fullWidth">
-        <HeroCover
-          image={topImage ? activeSection?.topImage : undefined}
-          height={`${(100 * 320) / 720}vh`}
-        />
+    <div className={s.pageComponent}>
+      <Container className={s.hero}>
+        <HeroCover image={topImage ? activeSection?.topImage : undefined} flat />
       </Container>
       <Container>
         <div className={`${s.content} ${!data.asideMenu ? s.noAsideMenu : ''}`}>

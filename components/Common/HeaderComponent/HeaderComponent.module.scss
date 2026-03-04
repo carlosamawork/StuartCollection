@@ -2,6 +2,12 @@
 @use "./styles/mixins/breakpoints.scss" as *;
 
 .header {
+    height: $header_top_height;
+
+    @include media-breakpoint-down(md) {
+        height: unset;
+    }
+
     .topHeaderContainer {
         padding: 24px 0;
         border-bottom: 1px solid var(--colors-foreground-fg-1);

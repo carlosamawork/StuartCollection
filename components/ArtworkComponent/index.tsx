@@ -12,13 +12,8 @@ import RelatedArtworksComponent from '@/components/ArtworkComponent/RelatedArtwo
 export default function ArtworkComponent({data}: {data: ArtworkData}) {
   return (
     <div className={s.artworkComponent}>
-      <Container variant="fullWidth">
-        <HeroCover
-          {...data.hero}
-          height={`85vh`}
-          // height={`${(100 * (632 - 2 * 32)) / 720}vh`}
-          marginBottom="32px"
-        />
+      <Container className={s.hero}>
+        <HeroCover {...data.hero} />
       </Container>
       <Container>
         <div className={s.introSection}>

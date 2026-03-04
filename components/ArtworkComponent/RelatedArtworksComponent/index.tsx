@@ -3,12 +3,14 @@
 import Container from '@/components/Common/ui/Container'
 import {ArtworkData} from '@/sanity/queries/queries/artwork'
 import s from './RelatedArtworksComponent.module.scss'
-import Link from 'next/link'
 import TabsLayout from '@/components/Common/ui/TabsLayout'
-import Icon from '@/components/Common/ui/Icon'
 import ArtworksGrid from '@/components/Common/ArtworksGrid'
+import LinkChevron from '@/components/Common/ui/LinkChevron'
+import {useIsMobileDevice} from '@/utils/isMobileClient'
 
 export default function RelatedArtworksComponent({data}: {data: ArtworkData['related']}) {
+  const isMobile = useIsMobileDevice()
+
   if (!data) return <></>
 
   return (
@@ -16,18 +18,17 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
       <Container>
         <div className={s.topContent}>
           <h2>{'Related Artworks'}</h2>
-          <Link className={s.link} href={'/collection/'}>
-            <strong>View All</strong>
-            <Icon name="chevronRight" alt=">" />
-          </Link>
+          <LinkChevron label={'View All'} href={'/collection/'} />
         </div>
+      </Container>
+      <div className={s.tabs}>
         <TabsLayout
           tabs={[
             ...(data.byLocation && data.byLocation.length > 0
               ? [
                   {
                     label: 'Location',
-                    content: <ArtworksGrid data={data.byLocation} />,
+                    content: <ArtworksGrid data={data.byLocation} addPadding={isMobile} />,
                   },
                 ]
               : []),
@@ -35,7 +36,7 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
               ? [
                   {
                     label: 'Theme',
-                    content: <ArtworksGrid data={data.byTheme} />,
+                    content: <ArtworksGrid data={data.byTheme} addPadding={isMobile} />,
                   },
                 ]
               : []),
@@ -43,13 +44,14 @@ export default function RelatedArtworksComponent({data}: {data: ArtworkData['rel
               ? [
                   {
                     label: 'Trail',
-                    content: <ArtworksGrid data={data.byTrail} />,
+                    content: <ArtworksGrid data={data.byTrail} addPadding={isMobile} />,
                   },
                 ]
               : []),
           ]}
+          addPaddingToNav={isMobile}
         />
-      </Container>
+      </div>
     </div>
   )
 }

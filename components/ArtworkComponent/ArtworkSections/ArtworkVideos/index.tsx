@@ -28,9 +28,9 @@ export default function ArtworkVideos({section}: {section: ArtworkVideosSectionD
       <Container>
         <div className={s.top}>
           <h2>{section.title}</h2>
-          <div className={s.topRight}>
+          <div className={s.description}>
             <p className="p-small">{section.description}</p>
-            <SliderPagination id={id} />
+            <div></div>
           </div>
         </div>
       </Container>
@@ -49,6 +49,9 @@ export default function ArtworkVideos({section}: {section: ArtworkVideosSectionD
           // autoHeight: false,
         }}
       />
+      <div className={s.pagination}>
+        <SliderPagination id={id} />
+      </div>
     </div>
   )
 }

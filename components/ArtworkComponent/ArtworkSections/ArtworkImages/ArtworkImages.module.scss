@@ -1,26 +1,26 @@
 @use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
 
 $swiper_spaceBetween: 32px;
+$swiper_spaceBetween_m: 16px;
 
 .section {
     padding-bottom: 56px;
     overflow: hidden;
+    position: relative;
 
     .topContent {
         border-top: 1px solid var(--colors-foreground-fg-5);
-        padding-top: 56px;
-        overflow: hidden;
-
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 32px;
+        padding: 56px 0 32px;
     }
 
     .slider {
         margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         overflow: visible;
+
+        @include media-breakpoint-down(md) {
+            margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding_m);
+        }
     }
 
     .slide {
@@ -28,6 +28,10 @@ $swiper_spaceBetween: 32px;
         display: flex;
         align-items: flex-start;
         margin-right: $swiper_spaceBetween;
+
+        @include media-breakpoint-down(md) {
+            margin-right: $swiper_spaceBetween_m;
+        }
 
         img {
             border-radius: 8px;
@@ -38,6 +42,29 @@ $swiper_spaceBetween: 32px;
         .swiper-slide:last-of-type:after {
             content: "";
             width: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+
+            @include media-breakpoint-down(md) {
+                width: calc($page_additional_padding_for_max_page_width + $min_page_padding_m);
+            }
+        }
+    }
+
+    .pagination {
+        position: absolute;
+        top: 56px;
+        right: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        left: 170px;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 52px;
+
+        @include media-breakpoint-down(md) {
+            position: static;
+            margin: 32px 0;
+            height: unset;
+            justify-content: center;
         }
     }
 }

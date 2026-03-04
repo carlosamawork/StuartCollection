@@ -15,23 +15,6 @@ $swiper_padding: 32px;
         h2 {
             flex-shrink: 0;
         }
-
-        .link {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            gap: 10px;
-
-            margin-bottom: 7px;
-
-            strong {
-                flex-shrink: 0;
-            }
-
-            img {
-                margin-bottom: 6px;
-            }
-        }
     }
 
     .artworks {

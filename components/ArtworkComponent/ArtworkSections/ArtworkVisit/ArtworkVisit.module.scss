@@ -1,3 +1,7 @@
+@use "@/styles/mixins/breakpoints" as *;
+
+$height_map_m: calc(100dvh * 600 / 732);
+
 .section {
     border-top: 1px solid var(--colors-foreground-fg-5);
     padding: 56px 0;
@@ -6,18 +10,39 @@
     grid-template-columns: 1fr 1fr;
     gap: 32px 46px;
 
+    @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr;
+    }
+
     .visitDetails {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 32px;
+
+        & > * {
+            max-width: 284px;
+        }
+
+        @include media-breakpoint-down(md) {
+            grid-template-columns: 1fr;
+        }
     }
 
     .iFrame {
         grid-column: span 2;
         width: 100%;
 
+        @include media-breakpoint-down(md) {
+            grid-column: span 1;
+        }
+
         iframe {
             width: 100%;
+            border-radius: 16px;
+
+            @include media-breakpoint-down(md) {
+                height: $height_map_m;
+            }
         }
     }
 }

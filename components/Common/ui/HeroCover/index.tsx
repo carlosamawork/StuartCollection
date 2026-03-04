@@ -6,25 +6,15 @@ import LazyVideo from '@/components/Common/LazyVideo'
 interface HeroCoverProps {
   image?: any
   videoUrl?: string
-  height?: string
-  marginBottom?: string
+  flat?: boolean
 }
 
-export function HeroCover({
-  image,
-  videoUrl,
-  height = '600px',
-  marginBottom = '56px',
-}: HeroCoverProps) {
+export function HeroCover({image, videoUrl, flat}: HeroCoverProps) {
   if (!image && !videoUrl) return null
 
   return (
     <div
-      className={s.heroCover}
-      style={{
-        marginBottom,
-        ...(videoUrl ? {maxHeight: height} : {height}),
-      }}
+      className={`${s.heroCover} ${flat && videoUrl ? s['heroCover--flatVideo'] : flat ? s['heroCover--flat'] : videoUrl ? s['heroCover--fullHeightVideo'] : s['heroCover--fullHeight']}`}
     >
       {videoUrl ? (
         <LazyVideo src={videoUrl} alt={'Hero Video'} muted={true} autoplay={true} />

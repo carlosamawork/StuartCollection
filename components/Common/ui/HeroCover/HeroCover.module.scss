@@ -1,11 +1,51 @@
+@use "./styles/common/variables.scss" as *;
+@use "./styles/mixins/breakpoints.scss" as *;
+
+$height_flat: calc(100dvh * 320 / 720);
+$height_flat_m: calc(100dvh * 220 / 732);
+$height_full_height: calc(100dvh - $header_top_height - 2 * $min_page_padding);
+$height_full_height_m: calc(100dvh - $header_top_height_m - 2 * $min_page_padding_m);
+
 .heroCover {
     width: 100%;
     position: relative;
     overflow: hidden;
-    border-radius: 16px;
 
     video,
     img {
         width: 100%;
+        border-radius: 16px;
+    }
+
+    &--flat {
+        height: $height_flat;
+
+        @include media-breakpoint-down(md) {
+            height: $height_flat_m;
+        }
+    }
+
+    &--flatVideo {
+        max-height: $height_flat;
+
+        @include media-breakpoint-down(md) {
+            max-height: $height_flat_m;
+        }
+    }
+
+    &--fullHeight {
+        height: $height_full_height;
+
+        @include media-breakpoint-down(md) {
+            height: $height_full_height_m;
+        }
+    }
+
+    &--fullHeightVideo {
+        max-height: $height_full_height;
+
+        @include media-breakpoint-down(md) {
+            max-height: $height_full_height_m;
+        }
     }
 }
