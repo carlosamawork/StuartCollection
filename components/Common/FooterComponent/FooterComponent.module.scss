@@ -1,15 +1,26 @@
-@use "./styles/common/variables.scss" as *;
-@use "./styles/mixins/breakpoints.scss" as *;
+@use "@/styles/common/variables.scss" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
 
 .footer {
     background-color: var(--colors-background-bg-navy-strong);
     color: var(--colors-foreground-fg-inverted-1);
+
+    .container {
+        @include media-breakpoint-down(md) {
+            padding-left: 32px;
+            padding-right: 32px;
+        }
+    }
 
     .topHeader {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 40px 0 64px;
+
+        @include media-breakpoint-down(md) {
+            align-items: flex-end;
+        }
 
         .logo {
             font-size: var(--font-size-font-size-medium);
@@ -21,12 +32,23 @@
                 color: var(--colors-foreground-fg-inverted-1);
                 text-decoration: none;
             }
+
+            @include media-breakpoint-down(md) {
+                font-size: var(--font-size-font-size-p);
+                line-height: var(--line-height-line-height-p);
+                max-width: 8em;
+            }
         }
 
         .logoSanDiego {
             svg {
                 width: 169px;
                 height: auto;
+                color: var(--colors-foreground-fg-inverted-1);
+
+                @include media-breakpoint-down(md) {
+                    width: 126px;
+                }
             }
         }
     }
@@ -46,35 +68,46 @@
         }
     }
 
-    .gridLayout{
+    .gridLayout {
         display: grid;
         grid-template-columns: repeat(12, 1fr);
         gap: 32px;
         padding: 48px 0px;
         color: var(--colors-foreground-fg-inverted-1);
 
-        a{
+        @include media-breakpoint-down(md) {
+            grid-template-columns: 1fr;
+        }
+
+        a {
             color: var(--colors-foreground-fg-inverted-1);
         }
 
-        > div, h4{
+        > div,
+        h4 {
             grid-column: span 3;
         }
 
-        h6, p{
+        h6,
+        p {
             margin-bottom: 8px;
         }
 
-        ul{
+        ul {
             li {
                 margin-bottom: 8px;
             }
         }
 
-        nav{
+        nav {
             margin-bottom: 32px;
-            ul{
-                li a{
+
+            @include media-breakpoint-down(md) {
+                margin-bottom: 0;
+            }
+
+            ul {
+                li a {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
@@ -83,23 +116,42 @@
             }
         }
 
-        
-
-        .newsletter{
+        .newsletter {
             grid-column: span 6;
-            p{
-                margin-bottom: 16px; 
+            p {
+                margin-bottom: 16px;
+            }
+        }
+
+        &.contact {
+            @include media-breakpoint-down(md) {
+                > div,
+                h4 {
+                    grid-column: span 1;
+                }
+
+                .content {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 32px;
+                }
             }
         }
     }
 
-    .footerSectionContainer{
+    .footerSectionContainer {
         border-bottom: 1px solid var(--colors-foreground-fg-inverted-1);
     }
 
     .footerBottom {
         padding: 48px 0;
         text-align: right;
+
+        @include media-breakpoint-down(md) {
+            text-align: left;
+        }
 
         p {
             font-size: var(--font-size-font-size-p);
