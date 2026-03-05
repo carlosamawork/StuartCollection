@@ -1,8 +1,8 @@
 @use "@/styles/common/variables" as *;
 @use "@/styles/mixins/breakpoints.scss" as *;
 
-$width_m: calc(100dvw * 280 / 412);
-$height_m: calc(100dvw * 382 / 412);
+$height_m: min(calc(100dvw * 382 / 412), calc($available_height_m - 60px));
+$width_m: calc($height_m * 280 / 382);
 
 .grid {
     display: flex;
@@ -14,11 +14,14 @@ $height_m: calc(100dvw * 382 / 412);
         flex: 0 0 calc(25% - 32px * 3 / 4); /* 4 columnas iguales */
     }
 
-    @include media-breakpoint-down(sm) {
-        min-height: $height_m;
+    @include media-breakpoint-down(md) {
         flex-wrap: nowrap;
         overflow-x: auto;
         justify-content: flex-start;
+    }
+
+    @include media-breakpoint-down(sm) {
+        min-height: $height_m;
 
         & > * {
             flex: 0 0 $width_m;

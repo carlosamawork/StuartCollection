@@ -1,4 +1,4 @@
-$swiper_padding: 32px;
+@use "@/styles/mixins/breakpoints.scss" as *;
 
 .section {
     padding-bottom: 56px;
@@ -10,7 +10,8 @@ $swiper_padding: 32px;
 
         display: flex;
         align-items: flex-end;
-        gap: 16px;
+        flex-wrap: wrap;
+        gap: 0 16px;
 
         h2 {
             flex-shrink: 0;

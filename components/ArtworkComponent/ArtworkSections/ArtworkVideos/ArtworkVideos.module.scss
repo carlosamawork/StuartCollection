@@ -1,13 +1,10 @@
 @use "@/styles/common/variables" as *;
 @use "@/styles/mixins/breakpoints" as *;
 
-$video_height: min(506px, calc(100dvh - $header_top_height_m - 2 * $min_page_padding_m - 100px));
+$video_height: min(506px, calc($available_height_m - 100px));
 $video_width: min(calc($video_height * 16 / 9), calc(100dvw - 2 * $min_page_padding));
 
-$video_height_sm: min(
-    calc(100dvh * 179 / 732),
-    calc(100dvh - $header_top_height_m - 2 * $min_page_padding - 50px)
-);
+$video_height_sm: min(calc(100dvh * 179 / 732), calc($available_height_m - 100px));
 $video_width_sm: min(calc($video_height_sm * 320 / 179), calc(100dvw - 2 * $min_page_padding_m));
 
 $swiper_spaceBetween: 32px;

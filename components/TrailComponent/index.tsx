@@ -28,10 +28,12 @@ export default function TrailComponent({data}: {data: TrailData}) {
           />
           <div className={s.title}>
             <h1>{data.title}</h1>
-            <ShareComponent
-              url={buildUrl(`/collection/trail/${data.slug}/`)}
-              pageTitle={data.title}
-            />
+            <div className={s.shareDesktop}>
+              <ShareComponent
+                url={buildUrl(`/collection/trail/${data.slug}/`)}
+                pageTitle={data.title}
+              />
+            </div>
           </div>
         </div>
         <article className={s.article}>
@@ -39,6 +41,12 @@ export default function TrailComponent({data}: {data: TrailData}) {
             <div className={s.text}>
               <div className={s.textInner}>
                 <TextBody body={data.body} />
+              </div>
+              <div className={s.shareMobile}>
+                <ShareComponent
+                  url={buildUrl(`/collection/trail/${data.slug}/`)}
+                  pageTitle={data.title}
+                />
               </div>
             </div>
           )}

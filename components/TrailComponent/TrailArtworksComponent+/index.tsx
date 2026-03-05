@@ -16,10 +16,10 @@ export default function TrailArtworksComponent({data}: {data: ArtworkCardData[]}
           <h2>{'Artworks in this Trail'}</h2>
           <LinkChevron label={'All Trails'} href={'/collection/#trails'} />
         </div>
-        <div className={s.artworks}>
-          <ArtworksGrid data={data} />
-        </div>
       </Container>
+      <div className={s.artworks}>
+        <ArtworksGrid data={data} addPadding={true} />
+      </div>
     </div>
   )
 }

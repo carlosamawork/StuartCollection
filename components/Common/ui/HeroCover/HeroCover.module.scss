@@ -3,8 +3,8 @@
 
 $height_flat: calc(100dvh * 320 / 720);
 $height_flat_m: calc(100dvh * 220 / 732);
-$height_full_height: calc(100dvh - $header_top_height - 2 * $min_page_padding);
-$height_full_height_m: calc(100dvh - $header_top_height_m - 2 * $min_page_padding_m);
+$height_full_height: $available_height;
+$height_full_height_m: $available_height_m;
 
 .heroCover {
     width: 100%;
