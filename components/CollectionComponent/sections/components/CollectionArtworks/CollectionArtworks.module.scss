@@ -1,3 +1,6 @@
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
+
 .section {
     width: 100%;
 
@@ -9,9 +12,26 @@
         & > * {
             flex-shrink: 0;
         }
+
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 
     .artworks {
         margin-top: 56px;
+
+        &.container {
+            width: 100%;
+            max-width: $max_page_width;
+            padding: 0 $min_page_padding;
+            margin-left: auto;
+            margin-right: auto;
+
+            @include media-breakpoint-down(md) {
+                padding: 0 $min_page_padding_m;
+            }
+        }
     }
 }

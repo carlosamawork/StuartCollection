@@ -1,9 +1,13 @@
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
+
 .component {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
     gap: 4px;
     align-items: center;
     width: max-content;
+    max-width: 100%;
 
     & > * {
         flex-shrink: 0;
@@ -13,8 +17,8 @@
         position: relative;
 
         .button {
-            display: flex;
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
             gap: 4px;
             padding: 8px 0 8px 8px;
@@ -22,6 +26,10 @@
             .sortLabel {
                 margin-top: 1.5px;
                 color: var(--colors-foreground-fg-3);
+
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             svg {

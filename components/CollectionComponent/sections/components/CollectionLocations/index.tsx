@@ -5,6 +5,7 @@ import s from './CollectionLocations.module.scss'
 import IframeComponent from '@/components/PageComponent/Iframe'
 import Image from 'next/image'
 import LazyImage from '@/components/Common/LazyImage'
+import Container from '@/components/Common/ui/Container'
 
 interface Props {
   locations: CollectionLocationData[]
@@ -12,9 +13,10 @@ interface Props {
 
 export default function CollectionLocations({locations}: Props) {
   return (
-    <div className={s.section}>
-      <ul className={s.grid}>
-        {/* {locations && locations.length ? (
+    <Container>
+      <div className={s.section}>
+        <ul className={s.grid}>
+          {/* {locations && locations.length ? (
           locations.map((location, i) => (
             <li key={i}>
               <LocationCard location={location} />
@@ -23,9 +25,10 @@ export default function CollectionLocations({locations}: Props) {
         ) : (
           <p>{'No locations found.'}</p>
         )} */}
-        <LazyImage src="/locations.png" width={1500} height={1000} />
-      </ul>
-    </div>
+          <LazyImage src="/locations.png" width={1500} height={1000} />
+        </ul>
+      </div>
+    </Container>
   )
 }
 
