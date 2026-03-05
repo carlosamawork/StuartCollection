@@ -9,7 +9,7 @@ import LinkChevron from '@/components/Common/ui/LinkChevron'
 import {useIsMobileDevice} from '@/utils/isMobileClient'
 
 export default function RelatedArtworksComponent({data}: {data: ArtworkData['related']}) {
-  const isMobile = useIsMobileDevice()
+  const isMobile = useIsMobileDevice(992)
 
   if (!data) return <></>
 

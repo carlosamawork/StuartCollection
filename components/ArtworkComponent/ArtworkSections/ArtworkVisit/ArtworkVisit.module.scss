@@ -10,7 +10,7 @@ $height_map_m: calc(100dvh * 600 / 732);
     grid-template-columns: 1fr 1fr;
     gap: 32px 46px;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
         grid-template-columns: 1fr;
     }
 
@@ -23,7 +23,7 @@ $height_map_m: calc(100dvh * 600 / 732);
             max-width: 284px;
         }
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
             grid-template-columns: 1fr;
         }
     }
@@ -32,7 +32,7 @@ $height_map_m: calc(100dvh * 600 / 732);
         grid-column: span 2;
         width: 100%;
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
             grid-column: span 1;
         }
 

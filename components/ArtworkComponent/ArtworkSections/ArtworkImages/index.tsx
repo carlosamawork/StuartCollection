@@ -18,7 +18,7 @@ const TARGET_HEIGHT = 491 // PX
 const TARGET_HEIGHT_M = 203 // PX
 
 export default function ArtworkImages({section}: ArtworkImagesProps) {
-  const isMobile = useIsMobileDevice()
+  const isMobile = useIsMobileDevice(992)
   const uid = useId()
 
   const id = uid.replace(/:/g, '')

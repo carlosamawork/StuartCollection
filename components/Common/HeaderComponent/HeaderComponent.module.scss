@@ -56,6 +56,14 @@
                 }
             }
         }
+
+        .hamburger {
+            display: none;
+
+            @include media-breakpoint-down(md) {
+                display: block;
+            }
+        }
     }
 
     .mobileMenuContainer {

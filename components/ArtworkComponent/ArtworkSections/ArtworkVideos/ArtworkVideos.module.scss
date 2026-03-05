@@ -1,13 +1,17 @@
 @use "@/styles/common/variables" as *;
 @use "@/styles/mixins/breakpoints" as *;
 
-$video_height: 506px;
-$video_height_m: calc(100dvh * 179 / 732);
+$video_height: min(506px, calc(100dvh - $header_top_height_m - 2 * $min_page_padding_m - 100px));
 $video_width: min(calc($video_height * 16 / 9), calc(100dvw - 2 * $min_page_padding));
-$video_width_m: min(calc($video_height_m * 320 / 179), calc(100dvw - 2 * $min_page_padding_m));
+
+$video_height_sm: min(
+    calc(100dvh * 179 / 732),
+    calc(100dvh - $header_top_height_m - 2 * $min_page_padding - 50px)
+);
+$video_width_sm: min(calc($video_height_sm * 320 / 179), calc(100dvw - 2 * $min_page_padding_m));
 
 $swiper_spaceBetween: 32px;
-$swiper_spaceBetween_m: 16px;
+$swiper_spaceBetween_md: 16px;
 
 .section {
     padding-bottom: 56px;
@@ -24,7 +28,7 @@ $swiper_spaceBetween_m: 16px;
         gap: 24px;
         margin-bottom: 32px;
 
-        @include media-breakpoint-down(md) {
+        @include media-breakpoint-down(sm) {
             grid-template-columns: 1fr;
         }
 
@@ -62,8 +66,12 @@ $swiper_spaceBetween_m: 16px;
             padding-right: $swiper_spaceBetween;
 
             @include media-breakpoint-down(md) {
-                width: calc($video_width_m + $swiper_spaceBetween_m);
-                padding-right: $swiper_spaceBetween_m;
+                width: calc($video_width + $swiper_spaceBetween_md);
+                padding-right: $swiper_spaceBetween_md;
+            }
+
+            @include media-breakpoint-down(sm) {
+                width: calc($video_width_sm + $swiper_spaceBetween_md);
             }
 
             position: relative;
@@ -80,9 +88,12 @@ $swiper_spaceBetween_m: 16px;
             margin-right: $swiper_spaceBetween;
 
             @include media-breakpoint-down(md) {
-                height: $video_height_m !important;
-                width: $video_width_m !important;
-                margin-right: $swiper_spaceBetween_m;
+                margin-right: $swiper_spaceBetween_md;
+            }
+
+            @include media-breakpoint-down(sm) {
+                height: $video_height_sm !important;
+                width: $video_width_sm !important;
             }
         }
     }
