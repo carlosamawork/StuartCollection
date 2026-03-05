@@ -76,7 +76,13 @@
         color: var(--colors-foreground-fg-inverted-1);
 
         @include media-breakpoint-down(md) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 64px;
+        }
+
+        @include media-breakpoint-down(sm) {
             grid-template-columns: 1fr;
+            gap: 32px;
         }
 
         a {
@@ -86,6 +92,13 @@
         > div,
         h4 {
             grid-column: span 3;
+        }
+
+        @include media-breakpoint-down(md) {
+            > div,
+            h4 {
+                grid-column: span 1;
+            }
         }
 
         h6,
@@ -123,7 +136,50 @@
             }
         }
 
+        &.visiting {
+            @include media-breakpoint-down(md) {
+                *:nth-child(1) {
+                    grid-column: span 2;
+                }
+                *:nth-child(2) {
+                    grid-column-start: 2;
+                    order: 4;
+                }
+                *:nth-child(3) {
+                    grid-column-start: 2;
+                    order: 5;
+                }
+            }
+            @include media-breakpoint-down(sm) {
+                *:nth-child(1n) {
+                    grid-column: span 1;
+                    order: unset;
+                }
+            }
+        }
+
+        &.collection {
+            @include media-breakpoint-down(md) {
+                *:nth-child(1) {
+                    grid-column: span 2;
+                }
+                *:nth-child(4) {
+                    grid-column-start: 2;
+                }
+            }
+            @include media-breakpoint-down(sm) {
+                *:nth-child(1n) {
+                    grid-column: span 1;
+                    order: unset;
+                }
+            }
+        }
+
         &.contact {
+            nav {
+                width: 100%;
+            }
+
             @include media-breakpoint-down(md) {
                 > div,
                 h4 {
@@ -136,6 +192,16 @@
                     justify-content: flex-start;
                     align-items: flex-start;
                     gap: 32px;
+                }
+
+                *:nth-child(1) {
+                    grid-column: span 2;
+                }
+            }
+
+            @include media-breakpoint-down(sm) {
+                *:nth-child(1) {
+                    grid-column: span 1;
                 }
             }
         }

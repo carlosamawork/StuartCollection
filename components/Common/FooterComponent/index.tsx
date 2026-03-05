@@ -46,7 +46,7 @@ export default function FooterComponent({data}: any) {
       </div>
       <div className={s.footerSectionContainer}>
         <Container className={s.container}>
-          <div className={s.gridLayout}>
+          <div className={`${s.gridLayout} ${s.visiting}`}>
             <h4>
               Visiting<br></br>Information
             </h4>
@@ -103,7 +103,7 @@ export default function FooterComponent({data}: any) {
       </div>
       <div className={s.footerSectionContainer}>
         <Container className={s.container}>
-          <div className={s.gridLayout}>
+          <div className={`${s.gridLayout} ${s.collection}`}>
             <h4>
               The Stuart<br></br>Collection
             </h4>
