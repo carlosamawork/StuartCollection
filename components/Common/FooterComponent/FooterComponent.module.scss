@@ -6,7 +6,9 @@
     color: var(--colors-foreground-fg-inverted-1);
 
     .container {
-        @include media-breakpoint-down(md) {
+        padding-left: 16px;
+        padding-right: 16px;
+        @include media-breakpoint-up(md) {
             padding-left: 32px;
             padding-right: 32px;
         }

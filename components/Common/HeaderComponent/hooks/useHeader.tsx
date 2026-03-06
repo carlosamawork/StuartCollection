@@ -13,7 +13,7 @@ export default function useHeader({data}: any) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const isArtwork = pathname.includes('collection/artwork')
-  const backgroundColor = isArtwork ? '#E7ECF2' : 'rgba(247, 242, 234, 1)'
+  const backgroundColor = isArtwork ? '#E7ECF2' : '#fff'
 
   const openSubmenu = (item: any) => {
     setActiveItem(item)
