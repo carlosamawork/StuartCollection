@@ -4,6 +4,7 @@ import {CollectionTrailData} from '@/sanity/queries/queries/collection'
 import s from './CollectionTrails.module.scss'
 import Link from 'next/link'
 import LazyImage from '@/components/Common/LazyImage'
+import Container from '@/components/Common/ui/Container'
 
 interface Props {
   trails: CollectionTrailData[]
@@ -11,19 +12,21 @@ interface Props {
 
 export default function CollectionTrails({trails}: Props) {
   return (
-    <div className={s.section}>
-      <ul className={s.grid}>
-        {trails && trails.length ? (
-          trails.map((trail, i) => (
-            <li key={i}>
-              <TrailCard trail={trail} />
-            </li>
-          ))
-        ) : (
-          <p>{'No trails found.'}</p>
-        )}
-      </ul>
-    </div>
+    <Container>
+      <div className={s.section}>
+        <ul className={s.grid}>
+          {trails && trails.length ? (
+            trails.map((trail, i) => (
+              <li key={i}>
+                <TrailCard trail={trail} />
+              </li>
+            ))
+          ) : (
+            <p>{'No trails found.'}</p>
+          )}
+        </ul>
+      </div>
+    </Container>
   )
 }
 

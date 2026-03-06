@@ -2,10 +2,9 @@
 
 import Container from '@/components/Common/ui/Container'
 import s from './TrailArtworksComponent.module.scss'
-import Link from 'next/link'
 import {ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
-import Icon from '@/components/Common/ui/Icon'
 import ArtworksGrid from '@/components/Common/ArtworksGrid'
+import LinkChevron from '@/components/Common/ui/LinkChevron'
 
 export default function TrailArtworksComponent({data}: {data: ArtworkCardData[]}) {
   if (!data) return <></>
@@ -15,15 +14,12 @@ export default function TrailArtworksComponent({data}: {data: ArtworkCardData[]}
       <Container>
         <div className={s.topContent}>
           <h2>{'Artworks in this Trail'}</h2>
-          <Link className={s.link} href={'/collection/#trails'}>
-            <strong>All Trails </strong>
-            <Icon name={'chevronRight'} alt={'>'} />
-          </Link>
-        </div>
-        <div className={s.artworks}>
-          <ArtworksGrid data={data} />
+          <LinkChevron label={'All Trails'} href={'/collection/#trails'} />
         </div>
       </Container>
+      <div className={s.artworks}>
+        <ArtworksGrid data={data} addPadding={true} />
+      </div>
     </div>
   )
 }

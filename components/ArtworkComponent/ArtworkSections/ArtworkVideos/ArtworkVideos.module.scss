@@ -1,11 +1,19 @@
 @use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
 
-$video_height: 506px;
+$video_height: min(506px, calc($available_height_m - 100px));
+$video_width: min(calc($video_height * 16 / 9), calc(100dvw - 2 * $min_page_padding));
+
+$video_height_sm: min(calc(100dvh * 179 / 732), calc($available_height_m - 100px));
+$video_width_sm: min(calc($video_height_sm * 320 / 179), calc(100dvw - 2 * $min_page_padding_m));
+
 $swiper_spaceBetween: 32px;
+$swiper_spaceBetween_md: 16px;
 
 .section {
     padding-bottom: 56px;
     overflow: hidden;
+    position: relative;
 
     .top {
         border-top: 1px solid var(--colors-foreground-fg-5);
@@ -17,25 +25,51 @@ $swiper_spaceBetween: 32px;
         gap: 24px;
         margin-bottom: 32px;
 
-        .topRight {
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+        }
+
+        .description {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 24px;
 
             align-items: flex-end;
-            justify-items: flex-end;
+            justify-items: flex-start;
+
+            & > * {
+                max-width: 284px;
+            }
+
+            @include media-breakpoint-down(md) {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
     }
 
     .slider {
         margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding);
         overflow: visible;
+
+        @include media-breakpoint-down(md) {
+            margin-left: calc($page_additional_padding_for_max_page_width + $min_page_padding_m);
+        }
     }
 
     .slide {
         .videoCard {
-            width: calc($video_height * 16 / 9 + $swiper_spaceBetween);
+            width: calc($video_width + $swiper_spaceBetween);
             padding-right: $swiper_spaceBetween;
+
+            @include media-breakpoint-down(md) {
+                width: calc($video_width + $swiper_spaceBetween_md);
+                padding-right: $swiper_spaceBetween_md;
+            }
+
+            @include media-breakpoint-down(sm) {
+                width: calc($video_width_sm + $swiper_spaceBetween_md);
+            }
 
             position: relative;
             display: flex;
@@ -47,14 +81,48 @@ $swiper_spaceBetween: 32px;
         iframe {
             border-radius: 8px;
             height: $video_height !important;
-            width: calc($video_height * 16 / 9) !important;
+            width: $video_width !important;
             margin-right: $swiper_spaceBetween;
+
+            @include media-breakpoint-down(md) {
+                margin-right: $swiper_spaceBetween_md;
+            }
+
+            @include media-breakpoint-down(sm) {
+                height: $video_height_sm !important;
+                width: $video_width_sm !important;
+            }
         }
     }
 
     :global {
         .swiper-slide:last-of-type {
             padding-right: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+
+            @include media-breakpoint-down(md) {
+                padding-right: calc(
+                    $page_additional_padding_for_max_page_width + $min_page_padding_m
+                );
+            }
+        }
+    }
+
+    .pagination {
+        position: absolute;
+        top: 56px;
+        right: calc($page_additional_padding_for_max_page_width + $min_page_padding);
+        left: 170px;
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 52px;
+
+        @include media-breakpoint-down(md) {
+            position: static;
+            margin: 32px 0;
+            height: unset;
+            justify-content: center;
         }
     }
 }

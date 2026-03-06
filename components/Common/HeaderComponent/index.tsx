@@ -65,7 +65,7 @@ export default function HeaderComponent({data}: any) {
                   <SvgLogoUcSanDiego />
                 </Link>
               </div>
-              <div className="mobile_visible">
+              <div className={s.hamburger}>
                 <Hamburger onClick={toggleMobileMenu} open={mobileMenuOpen} />
               </div>
             </div>

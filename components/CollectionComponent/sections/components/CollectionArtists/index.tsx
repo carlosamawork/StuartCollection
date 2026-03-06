@@ -5,6 +5,7 @@ import s from './CollectionArtists.module.scss'
 import Link from 'next/link'
 import SortComponent from '@/components/CollectionComponent/_shared/components/SortComponent'
 import {useSort} from '@/components/CollectionComponent/_shared/hooks/useSort'
+import Container from '@/components/Common/ui/Container'
 
 interface Props {
   artists: CollectionArtistData[]
@@ -28,22 +29,24 @@ export default function CollectionArtists({artists}: Props) {
   const artistsSorted = getSorted(artists) as CollectionArtistData[]
 
   return (
-    <div className={s.section}>
-      <div className={s.top}>
-        <SortComponent {...sortComponentProps} />
+    <Container>
+      <div className={s.section}>
+        <div className={s.top}>
+          <SortComponent {...sortComponentProps} />
+        </div>
+        <ul className={s.grid}>
+          {artistsSorted && artistsSorted.length ? (
+            artistsSorted.map((artist, i) => (
+              <li key={`artist-sorted-card-${i}`}>
+                <ArtistCard artist={artist} />
+              </li>
+            ))
+          ) : (
+            <p>{'No artists found.'}</p>
+          )}
+        </ul>
       </div>
-      <ul className={s.grid}>
-        {artistsSorted && artistsSorted.length ? (
-          artistsSorted.map((artist, i) => (
-            <li key={`artist-sorted-card-${i}`}>
-              <ArtistCard artist={artist} />
-            </li>
-          ))
-        ) : (
-          <p>{'No artists found.'}</p>
-        )}
-      </ul>
-    </div>
+    </Container>
   )
 }
 
@@ -55,7 +58,11 @@ const ArtistCard = ({artist}: {artist: CollectionArtistData}) => {
       <h5 className={`${s.artistName} p-xlarge`}>{name}</h5>
       <p className={s.artworkList}>
         {artworks.map((artwork: any, i: number) => (
-          <Link key={`artwork-card-${i}`} href={`/collection/artwork/${artwork.slug}`} className={s.artwork}>
+          <Link
+            key={`artwork-card-${i}`}
+            href={`/collection/artwork/${artwork.slug}`}
+            className={s.artwork}
+          >
             {artwork.title}
           </Link>
         ))}

@@ -3,7 +3,7 @@ import s from './DirectionsComponent.module.scss'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 import Icon from '@/components/Common/ui/Icon'
 
-export default function DirectionsComponent({directions, googleMapsUrl}: any) {
+export default function DirectionsComponent({directions, googleMapsUrl, strong}: any) {
   return (
     <div className={s.component}>
       {directions &&
@@ -17,7 +17,7 @@ export default function DirectionsComponent({directions, googleMapsUrl}: any) {
           )
         })}
       <a href={googleMapsUrl} target="_blank" className={s.link}>
-        {'View on Google Maps'}
+        {strong ? <strong> {'View on Google Maps'}</strong> : 'View on Google Maps'}
         <Icon name="externalLink" />
       </a>
     </div>

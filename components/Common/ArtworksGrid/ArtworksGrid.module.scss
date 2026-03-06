@@ -1,14 +1,38 @@
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
+
+$height_m: min(calc(100dvw * 382 / 412), calc($available_height_m - 60px));
+$width_m: calc($height_m * 280 / 382);
+
 .grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 32px;
-
-    min-height: 437px;
-
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
 
     & > * {
         flex: 0 0 calc(25% - 32px * 3 / 4); /* 4 columnas iguales */
+    }
+
+    @include media-breakpoint-down(md) {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+    }
+
+    @include media-breakpoint-down(sm) {
+        min-height: $height_m;
+
+        & > * {
+            flex: 0 0 $width_m;
+        }
+    }
+
+    &.container {
+        padding: 0 $min_page_padding;
+
+        @include media-breakpoint-down(md) {
+            padding: 0 $min_page_padding_m;
+        }
     }
 }

@@ -6,11 +6,12 @@ import ArtworkCard from '@/components/Common/ArtworkCard'
 
 interface Props {
   data: ArtworkCardData[]
+  addPadding?: boolean
 }
 
-export default function ArtworksGrid({data}: Props) {
+export default function ArtworksGrid({data, addPadding}: Props) {
   return (
-    <ul className={s.grid}>
+    <ul className={`${s.grid} ${addPadding ? s.container : ''}`}>
       {data && data.length ? (
         data.map((artwork, i) => (
           <li key={i}>

@@ -1,7 +1,13 @@
-@use "./styles/common/variables.scss" as *;
-@use "./styles/mixins/breakpoints.scss" as *;
+@use "@/styles/common/variables.scss" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
 
 .header {
+    height: $header_top_height;
+
+    @include media-breakpoint-down(md) {
+        height: unset;
+    }
+
     .topHeaderContainer {
         padding: 24px 0;
         border-bottom: 1px solid var(--colors-foreground-fg-1);
@@ -48,6 +54,14 @@
                 @include media-breakpoint-down(md) {
                     width: 126px;
                 }
+            }
+        }
+
+        .hamburger {
+            display: none;
+
+            @include media-breakpoint-down(md) {
+                display: block;
             }
         }
     }

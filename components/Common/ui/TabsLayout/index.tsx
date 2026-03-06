@@ -15,6 +15,8 @@ interface Props {
   label?: string
   paddingTop?: number
   enableUrlHashInteraction?: boolean
+  addPaddingToNav?: boolean
+  fullLine?: boolean
 }
 
 export default function TabsLayout({
@@ -22,6 +24,8 @@ export default function TabsLayout({
   label,
   paddingTop = 40,
   enableUrlHashInteraction,
+  addPaddingToNav,
+  fullLine,
 }: Props) {
   const [activeIndex, setActiveIndex] = useState<number | null>(enableUrlHashInteraction ? null : 0)
   const {hash, setHash} = useUrlHash()
@@ -54,24 +58,26 @@ export default function TabsLayout({
 
   return (
     <div className={s.tabsLayout}>
-      <div className={s.menu}>
-        <div className={s.tabs}>
+      <div className={addPaddingToNav ? s.container : ''}>
+        <nav className={`${s.nav} ${fullLine ? s.fullLine : ''}`}>
           {label && <span key="initial">{label}</span>}
-          {tabs.map((tab: any, index: number) => {
-            const isActive = index === activeIndex
-            return (
-              <button
-                key={index}
-                type="button"
-                className={isActive ? s.active : ''}
-                onClick={() => setActiveIndex(index)}
-                aria-current={isActive ? 'page' : undefined}
-              >
-                {tab.label}
-              </button>
-            )
-          })}
-        </div>
+          <div className={s.tabs}>
+            {tabs.map((tab: any, index: number) => {
+              const isActive = index === activeIndex
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  className={isActive ? s.active : ''}
+                  onClick={() => setActiveIndex(index)}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {tab.label}
+                </button>
+              )
+            })}
+          </div>
+        </nav>
       </div>
       <div style={{paddingTop}}>{tabs[activeIndex].content}</div>
     </div>
