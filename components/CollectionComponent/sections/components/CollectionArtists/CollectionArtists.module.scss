@@ -1,4 +1,5 @@
 @use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
 
 .section {
     .top {
@@ -12,11 +13,17 @@
         grid-template-columns: 1fr 1fr 1fr;
         gap: 32px;
 
+        @include media-breakpoint-down(sm) {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
         margin-top: 16px;
 
         .card {
             width: 100%;
             min-height: 100px;
+            padding: 8px 32px;
 
             display: flex;
             flex-direction: column;

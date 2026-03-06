@@ -1,6 +1,10 @@
 .pageComponent {
     padding: 32px 0;
 
+    .hero {
+        padding-bottom: 56px;
+    }
+
     .content {
         margin-top: 56px;
         display: grid;

@@ -1,0 +1,16 @@
+.link {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 3px;
+
+    margin-bottom: 7px;
+
+    strong {
+        flex-shrink: 0;
+    }
+
+    img {
+        margin-bottom: 2px;
+    }
+}

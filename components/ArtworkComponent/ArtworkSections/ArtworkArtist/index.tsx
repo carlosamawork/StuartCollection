@@ -17,7 +17,7 @@ export default function ArtworkArtist({section}: ArtworkArtistProps) {
   return (
     <Container>
       <div className={s.section}>
-        <h2>{section.title}</h2>
+        <h2 className={s.title}>{section.title}</h2>
         <div className={s.imageContainer}>
           {/* {section.images?.map((image, i) => (
             <div className={s.image} key={i}>
@@ -44,7 +44,7 @@ export default function ArtworkArtist({section}: ArtworkArtistProps) {
             </div>
           )}
         </div>
-        <div>
+        <div className={s.text}>
           <TextBody body={section.text} />
         </div>
         <div>{section.accordeon && <AccordeonComponent data={section.accordeon} small />}</div>

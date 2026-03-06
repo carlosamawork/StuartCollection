@@ -1,3 +1,6 @@
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints" as *;
+
 .section {
     border-top: 1px solid var(--colors-foreground-fg-5);
     padding: 56px 0;
@@ -5,6 +8,14 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 32px 46px;
+
+    @include media-breakpoint-down(md) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include media-breakpoint-down(sm) {
+        grid-template-columns: 1fr;
+    }
 
     .left {
         display: flex;
@@ -38,13 +49,24 @@
         $gap_v: 16px;
         $gap_h: 32px;
 
+        $gap_m: 16px;
+        $item_size_md: calc(
+            (50dvw - $min_page_padding_m) / 3 - 0.5 * 16px - $gap_m * 2 / 3
+        ); /* 3 columnas iguales */
+        $grid_size_sm: calc(100dvw - $min_page_padding_m * 2);
+        $item_size_sm: calc(0.3333 * $grid_size_sm - $gap_m * 2 / 3); /* 3 columnas iguales */
+
         display: flex;
         width: calc(3 * $item_size + 2 * $gap_h);
-        grid-template-columns: repeat(3, $item_size);
         flex-direction: row;
         justify-content: flex-end;
         flex-wrap: wrap;
         gap: $gap_v $gap_h;
+
+        @include media-breakpoint-down(md) {
+            width: 100%;
+            gap: $gap_m;
+        }
 
         .item {
             display: flex;
@@ -52,12 +74,45 @@
             gap: 4px;
             width: $item_size;
 
+            @include media-breakpoint-down(md) {
+                width: $item_size_md;
+            }
+
+            @include media-breakpoint-down(sm) {
+                width: $item_size_sm;
+            }
+
             .image {
                 position: relative;
                 width: $item_size;
                 height: $item_size;
                 border-radius: 8px;
+                transition: all 0.3s ease;
                 overflow: hidden;
+
+                @include media-breakpoint-down(md) {
+                    width: $item_size_md;
+                    height: $item_size_md;
+                }
+
+                @include media-breakpoint-down(sm) {
+                    width: $item_size_sm;
+                    height: $item_size_sm;
+                }
+            }
+
+            @include media-breakpoint-down(md) {
+                .caption p {
+                    font-size: var(--font-size-font-size-caption);
+                    line-height: var(--line-height-line-height-caption);
+                }
+            }
+
+            &:hover,
+            &:focus {
+                .image {
+                    border-radius: 16px;
+                }
             }
         }
     }

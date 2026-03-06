@@ -24,7 +24,7 @@ export default function ArtworkVisit({section}: ArtworkVisitProps) {
             visitDescription={section.visitDescription}
             signupLink={section.signupLink}
           />
-          <LocationGoogleLink location={section.location} />
+          <LocationGoogleLink location={section.location} showLabel />
         </div>
         <div className={s.iFrame}>
           <IframeComponent data={section.location.iframe} />

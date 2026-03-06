@@ -1,10 +1,25 @@
+@use "@/styles/common/variables.scss" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
+
 .artworkComponent {
-    padding: 32px 0;
+    padding: $min_page_padding 0;
+
+    @include media-breakpoint-down(md) {
+        padding: $min_page_padding_m 0;
+    }
 
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+
+    .hero {
+        padding-bottom: 32px;
+
+        @include media-breakpoint-down(md) {
+            padding-bottom: 0;
+        }
+    }
 
     .introSection {
         padding: 24px 0 56px;
@@ -12,6 +27,11 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 32px;
+
+        @include media-breakpoint-down(md) {
+            padding: 32px 0 56px;
+            grid-template-columns: 1fr;
+        }
 
         .leftStickyContainer {
             height: 100%;
