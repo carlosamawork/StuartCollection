@@ -11,6 +11,10 @@
         grid-template-columns: auto 1fr;
         gap: 32px;
 
+        @media(max-width: 991px) {
+            grid-template-columns: 1fr;
+        }
+
         &.noAsideMenu {
             grid-template-columns: 1fr;
         }
@@ -19,9 +23,19 @@
     .asideMenuContainer {
         width: 312px;
 
+        @media(max-width: 991px) {
+            width: 100%;
+            order: 2;
+        }
+
         .menuNav {
             position: sticky;
             top: 56px;
+
+            @media(max-width: 991px) {
+                position: static;
+                top: auto;
+            }
 
             .menuList {
                 list-style: none;
