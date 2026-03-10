@@ -22,7 +22,7 @@ export default function ArtworkCard({data}: Props) {
           {data.image?.imageUrl && (
             <LazyImage
               src={data.image.imageUrl}
-              alt={data.image.filename || 'Top Image'}
+              alt={data.image.filename || 'Artwork Thumbnail'}
               width={data.image.metadata.dimensions.width}
               height={data.image.metadata.dimensions.height}
               fill

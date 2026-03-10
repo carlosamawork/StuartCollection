@@ -8,6 +8,7 @@ import {location, LocationData} from '@/sanity/queries/fragments/location'
 export async function getCollection(): Promise<CollectionData> {
   return client.fetch(
     groq`{
+        "copys": *[_type == "settings"][0].collection,
         "artworks": *[_type == "artwork"]{
             ${artwork_card}
             "themesIds": themes[]->_id,
@@ -16,6 +17,7 @@ export async function getCollection(): Promise<CollectionData> {
             summary,
             locations[]->{
               _id,
+              ${location}
             },
         },
         "themes": *[_type == "theme"]{
@@ -67,6 +69,10 @@ export async function getCollection(): Promise<CollectionData> {
 }
 
 export type CollectionData = {
+  copys: {
+    locationsText: string
+    locationsTitle: any
+  }
   artworks: CollectionArtworkData[]
   themes: CollectionThemeData[]
   locations: CollectionLocationData[]
@@ -80,7 +86,7 @@ export type CollectionArtworkData = ArtworkCardData & {
   year: number
   _id: string
   summary: any
-  locations: {_id: string}[]
+  locations: ({_id: string} & LocationData)[]
 }
 
 export type CollectionThemeData = {

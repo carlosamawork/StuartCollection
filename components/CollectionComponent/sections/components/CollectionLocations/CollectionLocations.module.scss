@@ -1,8 +1,18 @@
 .section {
     padding-top: 24px;
 
-    .card {
-        display: block;
-        width: 100%;
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        max-height: 600px;
+
+        aside {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .map {
+            height: 100%;
+        }
     }
 }

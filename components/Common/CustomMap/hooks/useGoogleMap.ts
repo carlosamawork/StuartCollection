@@ -1,12 +1,25 @@
-import {RefObject, useId} from 'react'
+import {RefObject, useEffect, useId, useState} from 'react'
 import {setOptions, importLibrary} from '@googlemaps/js-api-loader'
 import {CustomMapProps} from '@/components/Common/CustomMap/CustomMap'
 
-export default function useGoogleMap({locations, showNumbers, showTrail, onClick}: CustomMapProps) {
+export default function useGoogleMap({
+  locations,
+  showNumbers,
+  showTrail,
+  onClick,
+  centerOnClick,
+  mapCenter,
+}: CustomMapProps) {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
 
+  const [map, setMap] = useState<google.maps.Map | null>(null)
   const uid = useId()
   const mapId = `map_${uid}`
+
+  useEffect(() => {
+    if (!mapCenter || !map) return
+    map.panTo(mapCenter)
+  }, [mapCenter])
 
   async function initMap(mapRef: RefObject<HTMLDivElement | null>) {
     if (!mapRef.current) return
@@ -17,8 +30,11 @@ export default function useGoogleMap({locations, showNumbers, showTrail, onClick
       v: 'weekly',
     })
 
-    // Create map
+    // Import libraries
     const {Map} = await importLibrary('maps')
+    const {AdvancedMarkerElement} = await importLibrary('marker')
+
+    // Create map
     const map = new Map(mapRef.current, {
       center: new google.maps.LatLng(locations[0].lat, locations[0].lng),
       zoom: 18,
@@ -27,74 +43,72 @@ export default function useGoogleMap({locations, showNumbers, showTrail, onClick
       disableDefaultUI: true, // This hides all default controls
     })
 
+    // Create a new bounds object
+    const bounds = new google.maps.LatLngBounds()
+
     // Create markers
-    const {AdvancedMarkerElement} = await importLibrary('marker')
+    const markers: any[] = []
+
     locations.forEach(({index, isExterior, lat, lng}) => {
+      const position = new google.maps.LatLng(lat, lng)
+
       // Create a DOM element from your SVG string
       const svgElement = document.createElement('div')
       svgElement.innerHTML = pinString(showNumbers ? index.toString() : '', isExterior)
+      svgElement.style.transform = 'translateY(50%)'
 
       // Create the AdvancedMarkerElement with the custom SVG content
       const marker = new AdvancedMarkerElement({
         map,
-        position: new google.maps.LatLng(lat, lng),
+        position,
         content: svgElement,
         title: 'Clickable Marker', // Title is used for accessibility and hover text
         gmpClickable: !!onClick,
       })
 
+      markers.push(marker)
+
+      // Extend the bounds to include the marker's position
+      bounds.extend(position)
+
       // Add the click event listener
       onClick &&
         marker.addListener('gmp-click', (event: any) => {
+          centerOnClick && map.panTo(position) // Animates the center to the marker's position
           onClick(index)
         })
     })
 
     // Create trail
     if (showTrail && locations.length > 1) {
-      const {DirectionsService, DirectionsRenderer} = await importLibrary('routes')
+      markers.forEach((marker, i, array) => {
+        if (i === array.length - 1) return
 
-      const directionsService = new DirectionsService()
+        const nextMarker = array[i + 1]
 
-      const directionsRenderer = new DirectionsRenderer({
-        map,
-        suppressMarkers: true, // usamos tus markers custom
-        polylineOptions: {
+        // Define the path for the polyline using the markers' positions
+        const flightPath = [marker.position, nextMarker.position]
+
+        // Create the polyline object and add it to the map
+        const polyline = new google.maps.Polyline({
+          path: flightPath,
+          geodesic: true, // Set to true for a curved line over a large distance
           strokeColor: '#000000',
-          strokeOpacity: 0.9,
+          strokeOpacity: 0.4,
           strokeWeight: 4,
-        },
+        })
+
+        // Render the polyline on the map
+        polyline.setMap(map)
       })
-
-      const origin = {
-        lat: locations[0].lat,
-        lng: locations[0].lng,
-      }
-
-      const destination = {
-        lat: locations[locations.length - 1].lat,
-        lng: locations[locations.length - 1].lng,
-      }
-
-      const waypoints = locations.slice(1, -1).map((loc) => ({
-        location: {lat: loc.lat, lng: loc.lng},
-      }))
-
-      directionsService.route(
-        {
-          origin,
-          destination,
-          waypoints,
-          travelMode: google.maps.TravelMode.WALKING,
-          optimizeWaypoints: false,
-        },
-        (result, status) => {
-          if (status === 'OK' && result) {
-            directionsRenderer.setDirections(result)
-          }
-        },
-      )
     }
+
+    // Fit the map to the bounds of all markers
+    map.fitBounds(bounds)
+    map.setZoom(map.getZoom() ?? 18 + 1)
+
+    // Save map for external interaction with mapCenter
+    setMap(map)
   }
 
   return {
@@ -105,11 +119,11 @@ export default function useGoogleMap({locations, showNumbers, showTrail, onClick
 // exteriores = redonda negra, numero en blanco
 // interiores = redonda blanca, numero en negro
 
-const pinString = (text: string, isExterior: boolean) => `
+export const pinString = (text: string, isExterior: boolean) => `
   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="32" height="32" rx="16" fill="${isExterior ? 'black' : 'white'}"/>
     <rect x="1" y="1" width="32" height="32" rx="16" stroke="${isExterior ? 'white' : 'black'}" stroke-width="2"/>
-    <text x="50%" y="50%" font-size="14" fill="${isExterior ? 'white' : 'black'}" text-anchor="middle" dy=".3em" font-family="Arial">
+    <text x="50%" y="50%" font-size="14" font-weight="600" fill="${isExterior ? 'white' : 'black'}" text-anchor="middle" dy=".3em" font-family="Arial">
       ${text}
     </text>
   </svg>

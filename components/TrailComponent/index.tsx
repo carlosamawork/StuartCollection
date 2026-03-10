@@ -7,10 +7,13 @@ import {buildUrl} from '@/utils/seoHelper'
 import {TrailData} from '@/sanity/queries/queries/trail'
 import TextBody from '@/components/Common/ui/TextBody'
 import TrailArtworksComponent from '@/components/TrailComponent/TrailArtworksComponent+'
-import IframeComponent from '@/components/PageComponent/Iframe'
+import CustomMap from '@/components/Common/CustomMap/CustomMap'
+import {LocationsMap} from '@/utils/Locations.map'
 
 export default function TrailComponent({data}: {data: TrailData}) {
   if (!data) return <></>
+
+  console.log(getLocations(data))
 
   return (
     <div className={s.component}>
@@ -50,10 +53,35 @@ export default function TrailComponent({data}: {data: TrailData}) {
               </div>
             </div>
           )}
-          {/* // TODO ADD MAP */}
+          <div className={s.mapContainer}>
+            <div className={s.map}>
+              <CustomMap locations={getLocations(data)} showTrail showNumbers />
+            </div>
+          </div>
         </article>
       </Container>
       <TrailArtworksComponent data={data.artworks} />
     </div>
   )
+}
+
+const getLocations = (data: TrailData) => {
+  let counter = 0
+
+  return data.artworks.flatMap((artwork) => {
+    const artworkLocations = [
+      ...artwork.locations.map((location, i, array) => {
+        const coordinates = {...LocationsMap.toCoordinates(location, counter)}
+        console.log(artwork.title, coordinates, array)
+        if (i + 1 !== array.length) {
+          console.log('add counter inside', counter)
+          counter++
+        }
+        return coordinates
+      }),
+    ]
+    console.log('add counter outside')
+    counter++
+    return artworkLocations
+  })
 }

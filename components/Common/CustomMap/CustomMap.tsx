@@ -13,20 +13,18 @@ export type CustomMapProps = {
   showNumbers?: boolean
   showTrail?: boolean
   onClick?: (index: number) => void
+  centerOnClick?: boolean
+  mapCenter?: google.maps.LatLng | null
 }
 
-export default function CustomMap(props: CustomMapProps) {
+export default function CustomMap({...props}: CustomMapProps) {
   const {initMap} = useGoogleMap(props)
 
-  const mapRef = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (!mapRef.current) {
-      return
-    }
-
     initMap(mapRef).catch(console.error)
-  }, [props, mapRef.current])
+  }, [])
 
   return <div ref={mapRef} style={{width: '100%', height: '100%'}} />
 }
