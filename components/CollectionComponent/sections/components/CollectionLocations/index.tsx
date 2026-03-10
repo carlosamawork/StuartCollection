@@ -2,14 +2,14 @@
 
 import {CollectionLocationData} from '@/sanity/queries/queries/collection'
 import s from './CollectionLocations.module.scss'
-import IframeComponent from '@/components/PageComponent/Iframe'
-import Image from 'next/image'
 import LazyImage from '@/components/Common/LazyImage'
 import Container from '@/components/Common/ui/Container'
 
 interface Props {
   locations: CollectionLocationData[]
 }
+
+// TODO
 
 export default function CollectionLocations({locations}: Props) {
   return (
@@ -32,12 +32,12 @@ export default function CollectionLocations({locations}: Props) {
   )
 }
 
-const LocationCard = ({location}: {location: CollectionLocationData}) => {
-  if (!location.iframe) return <></>
+// const LocationCard = ({location}: {location: CollectionLocationData}) => {
+//   if (!location.iframe) return <></>
 
-  return (
-    <div className={s.card}>
-      <IframeComponent data={location.iframe} />
-    </div>
-  )
-}
+//   return (
+//     <div className={s.card}>
+//       <IframeComponent data={location.iframe} />
+//     </div>
+//   )
+// }

@@ -50,11 +50,7 @@ export default function TrailComponent({data}: {data: TrailData}) {
               </div>
             </div>
           )}
-          {data.map && (
-            <div className={s.iframe}>
-              <IframeComponent data={data.map} />
-            </div>
-          )}
+          {/* // TODO ADD MAP */}
         </article>
       </Container>
       <TrailArtworksComponent data={data.artworks} />

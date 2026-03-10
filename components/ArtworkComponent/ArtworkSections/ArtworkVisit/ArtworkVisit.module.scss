@@ -1,6 +1,8 @@
+@use "@/styles/common/variables.scss" as *;
 @use "@/styles/mixins/breakpoints" as *;
 
-$height_map_m: calc(100dvh * 600 / 732);
+$height_map: min(calc(100dvh * 619 / 720), $available_height);
+$height_map_m: min(calc(100dvh * 600 / 732), $available_height_m);
 
 .section {
     border-top: 1px solid var(--colors-foreground-fg-5);
@@ -28,21 +30,19 @@ $height_map_m: calc(100dvh * 600 / 732);
         }
     }
 
-    .iFrame {
+    .map {
         grid-column: span 2;
         width: 100%;
+        height: $height_map;
+        border-radius: 16px;
+        overflow: hidden;
+
+        @include media-breakpoint-down(md) {
+            height: $height_map_m;
+        }
 
         @include media-breakpoint-down(sm) {
             grid-column: span 1;
-        }
-
-        iframe {
-            width: 100%;
-            border-radius: 16px;
-
-            @include media-breakpoint-down(md) {
-                height: $height_map_m;
-            }
         }
     }
 }

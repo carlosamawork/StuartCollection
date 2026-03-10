@@ -59,17 +59,11 @@ export default defineField({
       options: {hotspot: true},
       group: 'editorial',
     }),
-    // Map
-    defineField({
-      name: 'map',
-      title: 'Map',
-      type: 'module.iframe',
-      group: 'editorial',
-    }),
     // Artworks
     defineField({
       name: 'artworks',
       title: 'Artworks',
+      description: 'Order the artworks according to trail order',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'artwork'}]}],
       validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
