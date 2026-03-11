@@ -1,3 +1,83 @@
 .card {
-    // TODO
+    border-top: 1px solid #f4e9d0;
+
+    display: grid;
+    grid-template-columns: 1fr 94px;
+    gap: 8px;
+    width: 100%;
+    padding: 16px 24px;
+
+    cursor: pointer;
+    transition: all 0.1s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: #f4e9d0;
+    }
+
+    .left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .artistsContainer {
+            flex-grow: 1;
+
+            .artist {
+                display: inline;
+                color: var(--colors-foreground-fg-3);
+                font-size: var(--font-size-font-size-p-small);
+                line-height: var(--line-height-line-height-p-small);
+            }
+
+            .artist::after {
+                content: "/";
+                padding: 0 0.6rem;
+            }
+
+            .artist:last-of-type::after {
+                display: none;
+            }
+        }
+
+        .locationsContainer {
+            margin-top: 4px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 4px;
+
+            .location svg {
+                width: 24px;
+                height: 24px;
+
+                text {
+                    font-size: calc(var(--font-size-font-size-p-small) / 0.75);
+                    line-height: var(--line-height-line-height-p-small);
+                    font-weight: 500;
+                }
+
+                border-radius: 100%;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    outline: 1px var(--colors-foreground-fg-3) dashed;
+                    outline-offset: 2px;
+                }
+            }
+        }
+    }
+
+    .imageContainer {
+        .image {
+            position: relative;
+            width: 94px;
+            height: 94px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+    }
 }

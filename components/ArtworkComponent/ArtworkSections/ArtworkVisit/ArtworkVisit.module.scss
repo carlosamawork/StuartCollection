@@ -44,5 +44,13 @@ $height_map_m: min(calc(100dvh * 600 / 732), $available_height_m);
         @include media-breakpoint-down(sm) {
             grid-column: span 1;
         }
+
+        svg {
+            text {
+                font-size: var(--font-size-font-size-p-small);
+                line-height: var(--line-height-line-height-p-small);
+                font-weight: 500;
+            }
+        }
     }
 }

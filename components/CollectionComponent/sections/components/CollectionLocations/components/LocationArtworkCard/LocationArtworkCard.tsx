@@ -42,8 +42,8 @@ export default function LocationArtworkCard({artwork, locationsPins}: LocationAr
               alt={artwork.image.filename || 'Artwork Thumbnail'}
               width={artwork.image.metadata.dimensions.width}
               height={artwork.image.metadata.dimensions.height}
-              // fill
-              // objectFit="cover"
+              fill
+              objectFit="cover"
             />
           )}
         </div>
@@ -55,7 +55,7 @@ export default function LocationArtworkCard({artwork, locationsPins}: LocationAr
 const LocationPinComponent = ({index, isExterior, onClick}: LocationPin) => {
   return (
     <button onClick={onClick}>
-      <div dangerouslySetInnerHTML={{__html: pinString(index.toString(), isExterior)}} />
+      <div dangerouslySetInnerHTML={{__html: pinString(index.toString(), isExterior, true)}} />
     </button>
   )
 }

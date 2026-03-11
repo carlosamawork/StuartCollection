@@ -3,16 +3,41 @@
 
     .grid {
         display: grid;
-        grid-template-columns: 1fr 3fr;
+        grid-template-columns: max(25%, 340px) 1fr;
         max-height: 600px;
+        overflow: hidden;
+        border-radius: 16px;
+        border: var(--colors-foreground-fg-1) 1px solid;
 
         aside {
             max-height: 600px;
             overflow-y: auto;
+
+            .intro {
+                padding: 24px 24px 16px 24px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .artworks {
+                button {
+                    width: 100%;
+                }
+            }
         }
 
         .map {
             height: 100%;
+
+            svg {
+                text {
+                    font-size: var(--font-size-font-size-p-small);
+                    line-height: var(--line-height-line-height-p-small);
+                    font-weight: 500;
+                }
+            }
         }
     }
 }

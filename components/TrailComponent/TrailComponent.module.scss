@@ -66,6 +66,14 @@
             @include media-breakpoint-down(md) {
                 height: $available_height_m;
             }
+
+            svg {
+                text {
+                    font-size: var(--font-size-font-size-p-small);
+                    line-height: var(--line-height-line-height-p-small);
+                    font-weight: 500;
+                }
+            }
         }
     }
 

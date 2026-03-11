@@ -119,11 +119,11 @@ export default function useGoogleMap({
 // exteriores = redonda negra, numero en blanco
 // interiores = redonda blanca, numero en negro
 
-export const pinString = (text: string, isExterior: boolean) => `
+export const pinString = (text: string, isExterior: boolean, forceBlackCircle?: boolean) => `
   <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="32" height="32" rx="16" fill="${isExterior ? 'black' : 'white'}"/>
-    <rect x="1" y="1" width="32" height="32" rx="16" stroke="${isExterior ? 'white' : 'black'}" stroke-width="2"/>
-    <text x="50%" y="50%" font-size="14" font-weight="600" fill="${isExterior ? 'white' : 'black'}" text-anchor="middle" dy=".3em" font-family="Arial">
+    <rect x="1" y="1" width="32" height="32" rx="16" stroke="${isExterior && !forceBlackCircle ? 'white' : 'black'}" stroke-width="2"/>
+    <text x="50%" y="50%" fill="${isExterior ? 'white' : 'black'}" text-anchor="middle" dy=".3em">
       ${text}
     </text>
   </svg>

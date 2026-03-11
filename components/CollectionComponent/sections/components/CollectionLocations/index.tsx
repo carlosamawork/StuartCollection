@@ -22,62 +22,67 @@ interface Props {
 
 export default function CollectionLocations({artworks, locations, copys}: Props) {
   const [mapCenter, setMapCenter] = useState<google.maps.LatLng | null>(null)
-  const [showArtworkDetail, setShowArtworDetail] = useState<number | null>(null)
+  const [showArtworkDetail, setShowArtworkDetail] = useState<number | null>(null)
   const scrollableItemsRef = useRef({})
 
   const scrollToItem = (id: string) => {
     scrollableItemsRef.current[id]?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start',
+      block: 'nearest', // Scrolls only enough to bring into view
+      inline: 'start',
     })
   }
 
   const handleClickBack = () => {
-    setShowArtworDetail(null)
+    setShowArtworkDetail(null)
   }
 
   const mapLocations = locations.map(LocationsMap.toCoordinates)
   const locationsIds = locations.map((location) => location._id)
 
+  const ArtworkList = (
+    <>
+      <div className={s.intro}>
+        <h4>{copys.locationsTitle}</h4>
+        <TextBody body={copys.locationsText} />
+      </div>
+
+      <ul className={s.artworks}>
+        {artworks.map((artwork, i) => (
+          <li key={artwork._id} ref={(el) => (scrollableItemsRef.current[artwork._id] = el)}>
+            <div onClick={() => setShowArtworkDetail(i)}>
+              <LocationArtworkCard
+                artwork={artwork}
+                locationsPins={artwork.locations.map((location) => ({
+                  index: locationsIds.findIndex((_id) => _id === location._id) + 1,
+                  isExterior: location.isExterior,
+                  onClick: (event) => {
+                    event.stopPropagation()
+                    setMapCenter(
+                      new google.maps.LatLng(location.geopoint.lat, location.geopoint.lng),
+                    )
+                  },
+                }))}
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+
+  const ArtworkDetail = (
+    <LocationArtworkDetails
+      artwork={artworks[showArtworkDetail as number]}
+      handleClickBack={handleClickBack}
+    />
+  )
+
   return (
     <Container>
       <div className={s.section}>
         <div className={s.grid}>
-          {showArtworkDetail ? (
-            <LocationArtworkDetails
-              artwork={artworks[showArtworkDetail]}
-              handleClickBack={handleClickBack}
-            />
-          ) : (
-            <aside>
-              <h2>{copys.locationsTitle}</h2>
-              <TextBody body={copys.locationsText} />
-              <ul className={s.artworks}>
-                {artworks.map((artwork, i) => (
-                  <li
-                    key={artwork._id}
-                    ref={(el) => (scrollableItemsRef.current[artwork._id] = el)}
-                  >
-                    <button onClick={() => setShowArtworDetail(i)}>
-                      <LocationArtworkCard
-                        artwork={artwork}
-                        locationsPins={artwork.locations.map((location) => ({
-                          index: locationsIds.findIndex((_id) => _id === location._id) + 1,
-                          isExterior: location.isExterior,
-                          onClick: (event) => {
-                            event.stopPropagation()
-                            setMapCenter(
-                              new google.maps.LatLng(location.geopoint.lat, location.geopoint.lng),
-                            )
-                          },
-                        }))}
-                      />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </aside>
-          )}
+          <aside>{showArtworkDetail === null ? ArtworkList : ArtworkDetail}</aside>
           <div className={s.map}>
             <CustomMap
               locations={mapLocations}
