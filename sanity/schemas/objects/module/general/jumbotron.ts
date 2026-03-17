@@ -50,7 +50,7 @@ export default defineField({
       options: {
         layout: 'radio',
         list: [
-          {title: 'Blue', value: 'blue'},
+          {title: 'Light Gray', value: 'gray'},
           {title: 'Dark blue', value: 'darkBlue'},
           {title: 'Yellow', value: 'yellow'},
           {title: 'Cream', value: 'cream'},

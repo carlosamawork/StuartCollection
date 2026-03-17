@@ -44,7 +44,7 @@ export default function SubmenuComponent({
             </nav>
           </div>
           <div className={s.submenuAdditionalContent}>
-            {data.title === 'About' && (
+            {data?.title === 'About' && (
               <div className={s.element}>
                 <h6>Connect</h6>
                 <div className={s.connectContent}>
@@ -61,7 +61,7 @@ export default function SubmenuComponent({
                 </div>
               </div>
             )}
-            {data.title === 'Visit' && (
+            {data?.title === 'Visit' && (
               <>
                 <div className={s.element}>
                   <h6>Opening Hours</h6>
