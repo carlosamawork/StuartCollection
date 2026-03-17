@@ -15,13 +15,20 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs({breadcrumbs, showLastSlash = true}: BreadcrumbsProps) {
   return (
-    <div className={s.breadcrumbs}>
-      {breadcrumbs.map((breadcrumb, index) => (
-        <span className={`${s.item} ${showLastSlash ? s.showLastSlash : ''}`} key={index}>
-          <Link href={breadcrumb.href}>{breadcrumb.label}</Link>
-        </span>
-      ))}
-    </div>
+    <nav aria-label="Breadcrumb" className={s.breadcrumbs}>
+      <ol>
+        {breadcrumbs.map((breadcrumb, index) => {
+          const isLast = index === breadcrumbs.length - 1
+          return (
+            <li className={`${s.item} ${showLastSlash ? s.showLastSlash : ''}`} key={index}>
+              <Link href={breadcrumb.href} aria-current={isLast ? 'page' : undefined}>
+                {breadcrumb.label}
+              </Link>
+            </li>
+          )
+        })}
+      </ol>
+    </nav>
   )
 }
 

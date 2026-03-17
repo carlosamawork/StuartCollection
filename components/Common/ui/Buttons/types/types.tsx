@@ -8,4 +8,5 @@ export interface ButtonBaseProps {
   color?: ButtonColor
   variant?: ButtonVariant
   className?: string
+  'aria-label'?: string
 }

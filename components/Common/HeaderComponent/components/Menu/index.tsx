@@ -3,9 +3,9 @@
 import Link from 'next/link'
 import s from './Menu.module.scss'
 
-export default function Menu({openSubmenu, links}: any) {
+export default function Menu({openSubmenu, closeSubmenu, links}: any) {
   return (
-    <nav className={s.mainNav}>
+    <nav className={s.mainNav} onKeyDown={(e) => e.key === 'Escape' && closeSubmenu?.()}>
       <ul>
         {links?.map((link: any, index: number) => {
           const label = link.title || link.reference?.title || 'Untitled'
@@ -17,8 +17,13 @@ export default function Menu({openSubmenu, links}: any) {
 
           if (link._type === 'linkInternal') {
             return (
-              <li key={index} onMouseEnter={() => openSubmenu(link)} className={s.linkInternal}>
-                <Link href={`/${link.slug}`}>
+              <li
+                key={index}
+                onMouseEnter={() => openSubmenu(link)}
+                onFocus={() => openSubmenu(link)}
+                className={s.linkInternal}
+              >
+                <Link href={`/${link.slug}`} aria-haspopup={hasSubmenu ? 'true' : undefined}>
                   {label}
                   <svg
                     width="10"

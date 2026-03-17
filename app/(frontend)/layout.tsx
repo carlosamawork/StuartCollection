@@ -46,8 +46,13 @@ export default async function RootLayout({children}: {children: React.ReactNode}
               flexDirection: 'column',
             }}
           >
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
             <HeaderComponent data={headerData} />
-            <div style={{flexGrow: 1}}>{children}</div>
+            <div id="main-content" tabIndex={-1} style={{flexGrow: 1}}>
+              {children}
+            </div>
 
             {/* Cookie Consent */}
             <CookieConsent />

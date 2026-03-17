@@ -1,25 +1,83 @@
 'use client'
 
 import s from './MobileMenu.module.scss'
-import {motion, AnimatePresence} from 'framer-motion'
+import {motion, AnimatePresence, useReducedMotion} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {ButtonLink} from '@/components/Common/ui/Buttons/components/ButtonLink'
 import DateHeader from '@/components/Common/HeaderComponent/components/DateHeader'
 import AccordeonComponent from '@/components/PageComponent/Accordeon/AccordeonComponent'
 import Link from 'next/link'
 import DirectionsComponent from '@/components/Common/DirectionsComponent/DirectionsComponent'
+import {useEffect, useRef} from 'react'
+
+const FOCUSABLE_SELECTORS =
+  'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
 
 export default function MobileMenu({data, isOpen, close, backgroundColor}: any) {
+  const shouldReduceMotion = useReducedMotion()
+  const containerRef = useRef<HTMLDivElement>(null)
+  const previousFocusRef = useRef<Element | null>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement
+      const firstFocusable = containerRef.current?.querySelector<HTMLElement>(FOCUSABLE_SELECTORS)
+      firstFocusable?.focus()
+    } else {
+      ;(previousFocusRef.current as HTMLElement)?.focus()
+    }
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        close()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const container = containerRef.current
+      if (!container) return
+      const focusable = Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS))
+      if (focusable.length === 0) return
+
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, close])
+
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
+          ref={containerRef}
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
           className={s.container}
           style={{backgroundColor}}
-          initial={{opacity: 0, y: -8}}
+          initial={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
           animate={{opacity: 1, y: 0}}
-          exit={{opacity: 0, y: -8}}
-          transition={{duration: 0.2}}
+          exit={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
+          transition={shouldReduceMotion ? {duration: 0} : {duration: 0.2}}
         >
           <Container className={s.mobileMenu}>
             <div className={s.top}>

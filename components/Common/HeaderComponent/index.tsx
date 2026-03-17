@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import s from './HeaderComponent.module.scss'
-import {motion, AnimatePresence} from 'framer-motion'
+import {motion, AnimatePresence, useReducedMotion} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {ButtonLink} from '@/components/Common/ui/Buttons/components/ButtonLink'
 import SubmenuComponent from './components/Submenu'
@@ -15,6 +15,7 @@ import Hamburger from '@/components/Common/HeaderComponent/components/Hamburger'
 import MobileMenu from '@/components/Common/HeaderComponent/components/MobileMenu'
 
 export default function HeaderComponent({data}: any) {
+  const shouldReduceMotion = useReducedMotion()
   const {
     headerRef,
     activeItem,
@@ -42,9 +43,9 @@ export default function HeaderComponent({data}: any) {
     <motion.header
       className={s.header}
       ref={headerRef}
-      initial={{opacity: 0}}
+      initial={shouldReduceMotion ? false : {opacity: 0}}
       animate={{opacity: 1}}
-      transition={{duration: 0.3, delay: 0.5}}
+      transition={shouldReduceMotion ? {duration: 0} : {duration: 0.3, delay: 0.5}}
       // ✅ al salir de TODO el header (menu + submenu), cerramos
       onMouseLeave={closeSubmenu}
     >
@@ -61,8 +62,9 @@ export default function HeaderComponent({data}: any) {
                   href="https://stuartcollection.ucsd.edu/"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="UC San Diego – Stuart Collection website (opens in new tab)"
                 >
-                  <SvgLogoUcSanDiego />
+                  <SvgLogoUcSanDiego aria-hidden="true" />
                 </Link>
               </div>
               <div className={s.hamburger}>
@@ -84,11 +86,11 @@ export default function HeaderComponent({data}: any) {
 
       <div className={s.menuHeaderContainer}>
         <Container className={s.menuHeader}>
-          <Menu openSubmenu={openSubmenu} links={data?.menu?.links} />
+          <Menu openSubmenu={openSubmenu} closeSubmenu={closeSubmenu} links={data?.menu?.links} />
           <div className={s.dateHeaderContainer}>
             <DateHeader data={data.openingHours} />
           </div>
-          <ButtonLink href="/support-us" size="lg">
+          <ButtonLink href="/support-us" size="lg" aria-label="Support the Stuart Collection">
             Support
           </ButtonLink>
         </Container>
@@ -100,10 +102,10 @@ export default function HeaderComponent({data}: any) {
           <motion.div
             className={s.submenuHeader}
             style={{backgroundColor}}
-            initial={{opacity: 0, y: -8}}
+            initial={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
             animate={{opacity: 1, y: 0}}
-            exit={{opacity: 0, y: -8}}
-            transition={{duration: 0.2}}
+            exit={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
+            transition={shouldReduceMotion ? {duration: 0} : {duration: 0.2}}
             // ✅ mantener abierto mientras estás encima del submenu
             onMouseEnter={() => setSubmenuOpen(true)}
           >

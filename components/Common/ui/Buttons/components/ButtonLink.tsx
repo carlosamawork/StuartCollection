@@ -18,6 +18,7 @@ export function ButtonLink({
   variant,
   color,
   size,
+  'aria-label': ariaLabel,
 }: ButtonLinkProps) {
   const styleClasses = getButtonStyleClasses({
     s,
@@ -27,7 +28,7 @@ export function ButtonLink({
   })
 
   return (
-    <Link href={href} className={s.link} target={target}>
+    <Link href={href} className={s.link} target={target} aria-label={ariaLabel}>
       <div className={`${s.button} ${styleClasses} ${className ?? ''}`}>{children}</div>
     </Link>
   )

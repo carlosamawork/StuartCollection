@@ -3,7 +3,7 @@ import React, {useRef} from 'react'
 import s from './FooterComponent.module.scss' // Adjust the path as necessary
 import {PortableText} from '@portabletext/react'
 import Link from 'next/link'
-import {motion} from 'framer-motion'
+import {motion, useReducedMotion} from 'framer-motion'
 import Container from '@/components/Common/ui/Container'
 import {portableBodyComponents} from '@/utils/portableTextParagraphs'
 import {ButtonLink} from '../ui/Buttons/components/ButtonLink'
@@ -11,15 +11,16 @@ import DirectionsComponent from '@/components/Common/DirectionsComponent/Directi
 import SvgLogoUcSanDiego from '@/components/Common/HeaderComponent/components/SvgLogoUcSanDiego'
 
 export default function FooterComponent({data}: any) {
+  const shouldReduceMotion = useReducedMotion()
   const footerRef = useRef<HTMLElement>(null)
   console.log('Footer data:', data) // Debugging line to check the structure of the data
   return (
     <motion.footer
       className={`${s.footer}`}
       ref={footerRef}
-      initial={{opacity: 0}}
+      initial={shouldReduceMotion ? false : {opacity: 0}}
       animate={{opacity: 1}}
-      transition={{duration: 0.3, delay: 0.5}}
+      transition={shouldReduceMotion ? {duration: 0} : {duration: 0.3, delay: 0.5}}
     >
       <Container className={s.container}>
         <div className={s.topHeader}>
@@ -31,8 +32,9 @@ export default function FooterComponent({data}: any) {
               href="https://stuartcollection.ucsd.edu/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="UC San Diego – Stuart Collection website (opens in new tab)"
             >
-              <SvgLogoUcSanDiego />
+              <SvgLogoUcSanDiego aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -250,7 +252,7 @@ export default function FooterComponent({data}: any) {
                 <p>{data.footer.descriptionNewsletter}</p>
               </div>
               <div className={s.buttonWrapper}>
-                <ButtonLink href="#newsletter" className={s.button} size={`sm`} color={`inverted`}>
+                <ButtonLink href="#newsletter" className={s.button} size={`sm`} color={`inverted`} aria-label="Sign up for the Stuart Collection newsletter">
                   Sign Up Now
                 </ButtonLink>
               </div>

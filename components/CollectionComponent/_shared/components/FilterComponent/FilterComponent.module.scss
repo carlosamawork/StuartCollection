@@ -13,6 +13,15 @@
         flex-shrink: 0;
     }
 
+    // Target size mínimo WCAG 2.5.5 (AAA) para botones de ícono
+    & > button {
+        min-width: 44px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .buttonContainer {
         position: relative;
 

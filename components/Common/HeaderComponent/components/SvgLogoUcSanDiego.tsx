@@ -1,4 +1,6 @@
-export default function SvgLogoUcSanDiego() {
+import {SVGProps} from 'react'
+
+export default function SvgLogoUcSanDiego(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="169"
@@ -6,6 +8,7 @@ export default function SvgLogoUcSanDiego() {
       viewBox="0 0 169 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      {...props}
     >
       <path
         d="M20.323 16.4765C20.323 21.4278 19.6016 25.1922 12.0787 25.1922C4.55574 25.1922 3.43865 21.5791 3.43865 16.4765V4.43291C3.43865 1.72164 2.28083 1.47145 0.291016 1.47145V0.75H9.79793V1.47145C7.84883 1.47145 6.65029 1.72164 6.65029 4.43873V16.4765C6.65029 20.1653 7.5172 23.7784 12.2183 23.7784C17.4314 23.7784 18.2576 20.7762 18.2576 16.4765V4.43291C18.2576 1.72164 17.0648 1.46564 15.1157 1.46564V0.75H23.4648V1.47145C21.475 1.47145 20.3172 1.72164 20.3172 4.43873V16.4765H20.323Z"

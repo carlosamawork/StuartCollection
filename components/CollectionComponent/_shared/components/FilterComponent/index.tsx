@@ -23,8 +23,8 @@ export default function FilterComponent({themeTags, selectedThemesIds, selectedT
 
   return (
     <div className={s.component}>
-      <button onClick={() => toggleShowSelector()}>
-        <Icon name="filter" alt="Filter Icon" />
+      <button onClick={() => toggleShowSelector()} aria-label="Filter artworks">
+        <Icon name="filter" alt="" />
       </button>
       <p className="p">{'Filter by'}</p>
       <div className={s.buttonContainer}>

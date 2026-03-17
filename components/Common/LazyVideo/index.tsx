@@ -174,9 +174,14 @@ export default function LazyVideo({
     console.log('❌ onError fired', e);
   };
 
-  // Autoplay cuando ya está cargado
+  // Autoplay cuando ya está cargado (respeta prefers-reduced-motion)
   useEffect(() => {
     if (!autoplay) return;
+    const prefersReducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const video = videoRef.current;
     if (!video) return;
 
@@ -222,7 +227,7 @@ export default function LazyVideo({
             // pero dejarlo aquí no molesta para MP4
             src={!isHlsSource(videoSrc) ? videoSrc : undefined}
             data-src={src}
-            autoPlay={true}
+            autoPlay={autoplay}
             muted={muted || autoplay}
             loop={true}
             playsInline

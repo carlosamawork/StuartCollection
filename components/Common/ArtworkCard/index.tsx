@@ -15,8 +15,13 @@ export default function ArtworkCard({data}: Props) {
   const isImageHorizontal =
     data.image.metadata.dimensions.height < data.image.metadata.dimensions.width
 
+  const artistNames = data.artists.map((a) => a.name).join(', ')
+  const ariaLabel = artistNames
+    ? `View artwork: ${data.title} by ${artistNames}`
+    : `View artwork: ${data.title}`
+
   return (
-    <Link className={s.card} href={`/collection/artwork/${data.slug}`}>
+    <Link className={s.card} href={`/collection/artwork/${data.slug}`} aria-label={ariaLabel}>
       <div className={s.imageContainer}>
         <div className={`${s.image} ${isImageHorizontal ? s['image--h'] : ''}`}>
           {data.image?.imageUrl && (

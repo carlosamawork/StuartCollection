@@ -48,9 +48,12 @@ export default function NewsletterComponent({ data, type = "banner" }: { data: a
             </div>
             <div className={s.newsletterFormContainer}>
                 <form className={s.newsletterForm} onSubmit={subscribeUser}>
-                    <input type="text" name={"firstName"} placeholder="NAME" required value={firstName} onChange={e => setFirstName(e.target.value)} />
-                    <input type="text" name={"lastName"} placeholder="SURNAME" required value={lastName} onChange={e => setLastName(e.target.value)} />
-                    <input type="email" name={"email"} placeholder="EMAIL" required value={email} onChange={e => setEmail(e.target.value)} />
+                    <label htmlFor="firstName" className={s.srOnly}>Name</label>
+                    <input id="firstName" type="text" name={"firstName"} placeholder="NAME" required autoComplete="given-name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                    <label htmlFor="lastName" className={s.srOnly}>Surname</label>
+                    <input id="lastName" type="text" name={"lastName"} placeholder="SURNAME" required autoComplete="family-name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                    <label htmlFor="email" className={s.srOnly}>Email address</label>
+                    <input id="email" type="email" name={"email"} placeholder="EMAIL" required autoComplete="email" value={email} onChange={e => setEmail(e.target.value)} />
                     <div className={s.consent}>
                         <div className={s.checkboxWrp}>
                             <input type="checkbox" id={"consent"} name={"consent"} required checked={consent} onChange={e => setConsent(e.target.checked)} />
@@ -58,7 +61,9 @@ export default function NewsletterComponent({ data, type = "banner" }: { data: a
                         <label htmlFor="consent">By accepting, I confirm that I am over 18 years old and that I accept the <Link href="/legal/#terms-conditions">Terms and Conditions</Link>*.</label>
                     </div>
                     <button type="submit">Subscribe</button>
-                    <div className={s.answer}>{result && result.status == 200 ? <p className={s.success}>{"You’re suscribed, thank you!"}</p> : result && result.status == 400 ? <p className={s.error}>{"You’re already subscribed!"}</p> : errors ? <p className={s.error} data-text={errors.email || errors.consent}>{errors.email || errors.consent}</p> : undefined}</div>
+                    <div className={s.answer} role="status" aria-live="polite">
+                      {result && result.status == 200 ? <p className={s.success}>{"You’re subscribed, thank you!"}</p> : result && result.status == 400 ? <p className={s.error} role="alert">{"You’re already subscribed!"}</p> : errors ? <p className={s.error} role="alert">{errors.email || errors.consent}</p> : undefined}
+                    </div>
 
                 </form>
                 <p>*Around the World Art S.L. is responsible for the processing of your personal data, which will be handled for the purpose of sending you our newsletter and communications about our activity/project. You can exercise your data protection rights by emailing info@the99.art.</p>
