@@ -2,7 +2,7 @@ import {location, LocationData} from '../../fragments/location'
 
 export const visitSectionQuery = `
     title,
-    "location": ^.location->{
+    "locations": ^.locations[]->{
         ${location}
     },
     "visitDescription": ^.visitDescription,
@@ -11,7 +11,7 @@ export const visitSectionQuery = `
 
 export type ArtworkVisitSectionData = {
   title: string
-  location: LocationData
+  locations: LocationData[]
   visitDescription: any
   signupLink: string
 }

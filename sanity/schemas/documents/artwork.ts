@@ -61,6 +61,15 @@ export default defineField({
       validation: validateSlug,
       group: 'editorial',
     }),
+    // Summary
+    defineField({
+      name: 'summary',
+      title: 'Summary',
+      description: 'Short description used in Locations map',
+      type: 'body.simpleText',
+      validation: (Rule) => Rule.required(),
+      group: 'editorial',
+    }),
     // Year
     defineField({
       name: 'year',
@@ -87,11 +96,12 @@ export default defineField({
     }),
     // Location
     defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'reference',
-      to: [{type: 'location'}],
-      validation: (Rule) => Rule.required(),
+      name: 'locations',
+      title: 'Location(s)',
+      description: 'Order the locations in the suggested visiting order',
+      type: 'array',
+      of: [{type: 'reference', to: [{type: 'location'}]}],
+      validation: (Rule) => Rule.min(1).error('Add at least 1 item'),
       group: 'specs',
     }),
     // Themes

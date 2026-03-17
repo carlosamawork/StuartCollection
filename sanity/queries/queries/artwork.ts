@@ -1,7 +1,6 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
-import {image} from '../fragments/image'
 import {location, LocationData} from '../fragments/location'
 import {artistSectionQuery, ArtworkArtistSectionData} from '../modules/artwork/artistSection'
 import {ArtworkSocialSectionData, socialSectionQuery} from '../modules/artwork/socialSection'
@@ -30,7 +29,7 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                 year,
                 visitDescription,
                 signupLink,
-                location->{
+                locations[]->{
                     ${location}
                     },
                 },
@@ -71,9 +70,11 @@ export async function getArtwork(slug: string): Promise<ArtworkData> {
                 "byLocation": *[
                     _type == "artwork" && 
                     _id != ^._id && 
-                    location._ref == ^.location._ref
+                    count(locations[@._ref in ^.^.locations[]._ref]) > 0
                 ] {
                     ${artwork_card}    
+                    // Calculate match count for sorting
+                    "matchCount": count(locations[@._ref in ^.^.locations[]._ref])
                 } [0...4],
                 "byTheme": *[
                     _type == "artwork" && 
@@ -115,17 +116,17 @@ export type ArtworkData = {
     year: number
     visitDescription: any
     signupLink: string
-    location: LocationData
+    locations: LocationData[]
   }
   hero: HeroGeneralData
   body_modules: any[]
-  sections: (
+  sections: ({_type: string} & (
     | ArtworkImagesSectionData
     | ArtworkArtistSectionData
     | ArtworkVisitSectionData
     | ArtworkVideosSectionData
     | ArtworkSocialSectionData
-  )[]
+  ))[]
   related: {
     byLocation: ArtworkCardData[]
     byTrail: ArtworkCardData[]

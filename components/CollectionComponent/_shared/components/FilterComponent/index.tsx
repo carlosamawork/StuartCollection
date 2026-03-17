@@ -1,7 +1,6 @@
 'use client'
 
 import s from './FilterComponent.module.scss'
-import {LocationData} from '@/sanity/queries/fragments/location'
 import Icon from '@/components/Common/ui/Icon'
 import {ComponentProps, Dispatch, SetStateAction, useEffect, useRef, useState} from 'react'
 import {Tags} from '@/components/Common/ui/Tags/Tags'

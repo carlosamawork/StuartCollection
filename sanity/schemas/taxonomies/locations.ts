@@ -1,5 +1,4 @@
 import {defineField, defineType} from 'sanity'
-import {validateSlug} from '../../utils/validateSlug'
 
 // Install lucide.dev icons with "npm install lucide-react"
 import {PinIcon} from '@sanity/icons'
@@ -14,17 +13,19 @@ export default defineType({
       name: 'name',
       title: 'Name',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'href',
-      title: 'Google Maps Link',
-      type: 'url',
-      validation: (Rule) => Rule.uri({allowRelative: false, scheme: ['http', 'https']}),
+      name: 'geopoint',
+      title: 'Geopoint',
+      type: 'geopoint',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'iframe',
-      title: 'Map Iframe',
-      type: 'module.iframe',
+      name: 'isExterior',
+      title: 'Is Location Exterior?',
+      type: 'boolean',
+      validation: (Rule) => Rule.required(),
     }),
   ],
   // Customize the preview so parents are visualized in the studio

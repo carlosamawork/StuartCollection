@@ -7,10 +7,10 @@ import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
 import TabsLayout from '@/components/Common/ui/TabsLayout'
 import CollectionArtworks from '@/components/CollectionComponent/sections/components/CollectionArtworks'
 import CollectionTrails from '@/components/CollectionComponent/sections/components/CollectionTrails'
-import CollectionLocations from '@/components/CollectionComponent/sections/components/CollectionLocations'
 import CollectionArtists from '@/components/CollectionComponent/sections/components/CollectionArtists'
 import {useUrlHash} from '@/hooks/useUrlHash'
 import {useIsMobileDevice} from '@/utils/isMobileClient'
+import CollectionLocations from '@/components/CollectionComponent/sections/components/CollectionLocations'
 
 export default function CollectionComponent({data}: {data: CollectionData}) {
   const {hash} = useUrlHash()
@@ -18,7 +18,7 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
 
   if (!data) return <></>
 
-  const {artworks, themes, locations, artists, trails, sections} = data
+  const {artworks, themes, locations, artists, trails, sections, copys} = data
 
   const currentSection = sections.find((section) => section.id === hash)
 
@@ -64,7 +64,9 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
             },
             {
               label: 'Locations',
-              content: <CollectionLocations locations={locations} />,
+              content: (
+                <CollectionLocations locations={locations} artworks={artworks} copys={copys} />
+              ),
               id: 'locations',
             },
             {

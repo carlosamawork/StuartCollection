@@ -8,8 +8,8 @@ import Link from 'next/link'
 import Container from '@/components/Common/ui/Container'
 
 export default function CollectionComponent({data}: {data: any}) {
-
   console.log('CollectionComponent data:', data)
+
   return (
     <Container>
       <div className={s.collection}>
@@ -88,7 +88,9 @@ export default function CollectionComponent({data}: {data: any}) {
                   })}
               </div>
               <div className={`ctaButton ${s.ctaButton}`}>
-                <Link href={`/artwork/${data.featuredArtwork.slug.current}`}>View Artwork</Link>
+                <Link href={`/collection/artwork/${data.featuredArtwork.slug.current}`}>
+                  View Artwork
+                </Link>
               </div>
             </div>
           </div>

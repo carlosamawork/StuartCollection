@@ -8,6 +8,10 @@ import LocationGoogleLink from '@/components/ArtworkComponent/_shared/LocationGo
 import LocationDescription from '@/components/ArtworkComponent/_shared/LocationDescription'
 
 export default function SpecsComponent({data}: {data: ArtworkData}) {
+  const hasVisitSeciton = !!data.sections.find(
+    (section) => section._type === 'module.artwork.visit',
+  )
+
   return (
     <aside className={s.specsComponent}>
       <Breadcrumbs
@@ -34,14 +38,16 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
         <div className={s.item}>
           <div className={s.label}>Visit:</div>
           <LocationDescription
-            location={data.specs.location}
             visitDescription={data.specs.visitDescription}
             signupLink={data.specs.signupLink}
           />
         </div>
         <div className={s.item}>
           <div className={s.label}>Location:</div>
-          <LocationGoogleLink location={data.specs.location} />
+          <LocationGoogleLink
+            locations={data.specs.locations}
+            hash={hasVisitSeciton ? 'visit' : undefined}
+          />
         </div>
         <div className={s.item}>
           <div className={s.label}>Themes:</div>

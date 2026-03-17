@@ -1,11 +1,15 @@
 export const location = `
     name,
-    href,
-    iframe,
+    geopoint,
+    isExterior,
 `
 
 export type LocationData = {
   name: string
-  href: string
-  iframe: string
+  geopoint: {
+    lat: number
+    lng: number
+    alt: number
+  }
+  isExterior: boolean
 }

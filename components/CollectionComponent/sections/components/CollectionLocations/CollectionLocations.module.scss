@@ -1,8 +1,64 @@
-.section {
-    padding-top: 24px;
+@use "@/styles/common/variables" as *;
+@use "@/styles/mixins/breakpoints.scss" as *;
 
-    .card {
-        display: block;
-        width: 100%;
+.section {
+    padding-top: calc($min_page_padding - 8px);
+
+    @include media-breakpoint-down(md) {
+        padding-top: calc($min_page_padding_m - 8px);
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: max(25%, 340px) 1fr;
+        height: 600px;
+        overflow: hidden;
+        border-radius: 16px;
+        border: var(--colors-foreground-fg-1) 1px solid;
+
+        @include media-breakpoint-down(md) {
+            height: unset;
+            grid-template-columns: 1fr;
+        }
+
+        aside {
+            max-height: 100%;
+            overflow-y: auto;
+
+            @include media-breakpoint-down(md) {
+                height: 560px;
+            }
+
+            .intro {
+                padding: 24px 24px 16px 24px;
+
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .artworks {
+                button {
+                    width: 100%;
+                }
+            }
+        }
+
+        .map {
+            height: 100%;
+
+            @include media-breakpoint-down(md) {
+                order: -1;
+                aspect-ratio: 1;
+            }
+
+            svg {
+                text {
+                    font-size: var(--font-size-font-size-p-small);
+                    line-height: var(--line-height-line-height-p-small);
+                    font-weight: 500;
+                }
+            }
+        }
     }
 }

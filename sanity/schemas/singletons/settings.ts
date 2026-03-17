@@ -22,6 +22,10 @@ export default defineType({
       title: '404 page',
     },
     {
+      name: 'collection',
+      title: 'The Collection page',
+    },
+    {
       name: 'seo',
       title: 'SEO',
     },
@@ -100,6 +104,25 @@ export default defineType({
       title: 'Footer',
       type: 'footerSettings',
       group: 'navigation',
+    }),
+    // The Collection page
+    defineField({
+      name: 'collection',
+      title: 'The Collection page',
+      type: 'object',
+      group: 'collection',
+      fields: [
+        defineField({
+          name: 'locationsTitle',
+          title: 'Locations (title)',
+          type: 'string',
+        }),
+        defineField({
+          name: 'locationsText',
+          title: 'Locations (text)',
+          type: 'body.paragraphs',
+        }),
+      ],
     }),
     // Not found page
     defineField({
