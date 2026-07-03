@@ -25,7 +25,6 @@ export default defineType({
       name: 'isExterior',
       title: 'Is Location Exterior?',
       type: 'boolean',
-      validation: (Rule) => Rule.required(),
     }),
   ],
   // Customize the preview so parents are visualized in the studio

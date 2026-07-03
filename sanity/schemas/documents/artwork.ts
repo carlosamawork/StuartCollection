@@ -83,7 +83,6 @@ export default defineField({
       name: 'visitDescription',
       title: 'Visit Description',
       type: 'body.simpleText',
-      validation: (Rule) => Rule.required(),
       group: 'specs',
     }),
     // Visit Signup Link

@@ -31,34 +31,34 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
         <h1>{data.title}</h1>
       </div>
       <div className={s.specsDetails}>
-        <div className={s.item}>
+        {data.specs.year && <div className={s.item}>
           <div className={s.label}>Year:</div>
           <div className={s.content}>{data.specs.year}</div>
-        </div>
-        <div className={s.item}>
+        </div>}
+        {(data.specs.visitDescription || data.specs.signupLink) && <div className={s.item}>
           <div className={s.label}>Visit:</div>
           <LocationDescription
             visitDescription={data.specs.visitDescription}
             signupLink={data.specs.signupLink}
           />
-        </div>
-        <div className={s.item}>
+        </div>}
+        {data.specs.locations && data.specs.locations.length > 0 && <div className={s.item}>
           <div className={s.label}>Location:</div>
           <LocationGoogleLink
             locations={data.specs.locations}
             hash={hasVisitSeciton ? 'visit' : undefined}
           />
-        </div>
-        <div className={s.item}>
+        </div>}
+        {data.specs.themes && data.specs.themes.length > 0 && <div className={s.item}>
           <div className={s.label}>Themes:</div>
           <div className={s.content}>
             <Tags
-              tags={data.specs.themes?.map((theme, i) => ({
+              tags={data.specs.themes.map((theme) => ({
                 label: theme.title,
               }))}
             />
           </div>
-        </div>
+        </div>}
       </div>
     </aside>
   )
