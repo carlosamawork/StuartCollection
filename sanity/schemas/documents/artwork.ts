@@ -170,15 +170,16 @@ export default defineField({
   ],
   preview: {
     select: {
-      active: 'active',
+      thumbnail: 'thumbnail',
+      heroImage: 'hero.image',
       seoImage: 'seo.image',
       title: 'title',
     },
     prepare(selection) {
-      const {seoImage, title} = selection
+      const {thumbnail, heroImage, seoImage, title} = selection
 
       return {
-        media: seoImage,
+        media: thumbnail ?? heroImage ?? seoImage,
         title,
       }
     },

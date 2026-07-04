@@ -12,10 +12,12 @@ interface Props {
 export default function ArtworkCard({data}: Props) {
   if (!data) return <></>
 
+  const hasImage = Boolean(data.image?.imageUrl)
   const isImageHorizontal =
-    data.image.metadata.dimensions.height < data.image.metadata.dimensions.width
+    hasImage && data.image.metadata?.dimensions?.height < data.image.metadata?.dimensions?.width
 
-  const artistNames = data.artists.map((a) => a.name).join(', ')
+  const artists = data.artists ?? []
+  const artistNames = artists.map((a) => a.name).join(', ')
   const ariaLabel = artistNames
     ? `View artwork: ${data.title} by ${artistNames}`
     : `View artwork: ${data.title}`
@@ -23,8 +25,8 @@ export default function ArtworkCard({data}: Props) {
   return (
     <Link className={s.card} href={`/collection/artwork/${data.slug}`} aria-label={ariaLabel}>
       <div className={s.imageContainer}>
-        <div className={`${s.image} ${isImageHorizontal ? s['image--h'] : ''}`}>
-          {data.image?.imageUrl && (
+        {hasImage && (
+          <div className={`${s.image} ${isImageHorizontal ? s['image--h'] : ''}`}>
             <LazyImage
               src={data.image.imageUrl}
               alt={data.image.filename || 'Artwork Thumbnail'}
@@ -33,13 +35,13 @@ export default function ArtworkCard({data}: Props) {
               fill
               objectFit="cover"
             />
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className={s.titles}>
         <p className={`${s.title} p-medium`}>{data.title}</p>
         <p className={`${s.artists} p-small`}>
-          {data.artists.map((artist, i) => (
+          {artists.map((artist, i) => (
             <span key={i} className={s.artist}>
               {artist.name}
             </span>

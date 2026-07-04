@@ -1,7 +1,14 @@
 .breadcrumbs {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+    ol {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
     .item {
         font-size: var(--font-size-font-size-p-small);
