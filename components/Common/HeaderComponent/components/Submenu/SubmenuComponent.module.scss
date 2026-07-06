@@ -8,6 +8,14 @@
     justify-content: space-between;
     color: var(--colors-foreground-fg-inverted-1);
 
+    // El global de _default.scss pinta a:link/:visited/:active en negro;
+    // hace falta la misma especificidad para que hereden el blanco del panel
+    a:link,
+    a:visited,
+    a:active {
+        color: var(--colors-foreground-fg-inverted-1);
+    }
+
     .submenuContent{
         width: 280px;
 
@@ -65,6 +73,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     color: var(--colors-foreground-fg-inverted-1);
+
+    a:link,
+    a:visited,
+    a:active {
+        color: var(--colors-foreground-fg-inverted-1);
+    }
 
     p{
         padding: 16px;

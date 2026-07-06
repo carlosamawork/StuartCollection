@@ -1,4 +1,10 @@
+@use "../../../styles/mixins/breakpoints" as *;
+
 .callOut{
     padding-left: 80px;
     margin-bottom: 24px;
+
+    @include media-breakpoint-down(md) {
+        padding-left: 0;
+    }
 }
