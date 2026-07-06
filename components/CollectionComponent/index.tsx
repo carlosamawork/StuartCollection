@@ -20,7 +20,12 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
 
   const {artworks, themes, locations, artists, trails, sections, copys} = data
 
-  const currentSection = sections.find((section) => section.id === hash)
+  const hasTrails = (trails?.length ?? 0) > 0
+  const visibleSections = hasTrails
+    ? sections
+    : sections.filter((section) => section.id !== 'trails')
+
+  const currentSection = visibleSections.find((section) => section.id === hash)
 
   return (
     <div className={s.component}>
@@ -69,11 +74,15 @@ export default function CollectionComponent({data}: {data: CollectionData}) {
               ),
               id: 'locations',
             },
-            {
-              label: 'Trails',
-              content: <CollectionTrails trails={trails} />,
-              id: 'trails',
-            },
+            ...(hasTrails
+              ? [
+                  {
+                    label: 'Trails',
+                    content: <CollectionTrails trails={trails} />,
+                    id: 'trails',
+                  },
+                ]
+              : []),
           ]}
         />
       </article>
