@@ -109,6 +109,10 @@
                     margin: 0;
                 }
             }
+
+            &.noImage .tileContent {
+                width: 100%;
+            }
         }
     }
 

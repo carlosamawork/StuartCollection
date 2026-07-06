@@ -33,7 +33,10 @@ export default function TileGroupComponent({ data }: { data: any }) {
         className={`${data.layout === 'list' ? s.tileList : s.tileGrid} ${s[`col-${data.columns}`]}`}
       >
         {pageTiles.map((tile: any, index: number) => (
-          <div key={tile._key || index} className={s.tileItem}>
+          <div
+            key={tile._key || index}
+            className={`${s.tileItem} ${!tile.image ? s.noImage : ''}`}
+          >
             <Link href={tile.link ? tile.link : '#'} className={s.tileLink}>
               {tile.image && (
                 <div className={s.tileImage}>
