@@ -90,6 +90,34 @@ export default defineField({
             },
           },
         }),
+
+        defineField({
+          name: 'tileArtwork',
+          title: 'Artwork tile',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'artwork',
+              title: 'Artwork',
+              type: 'reference',
+              to: [{type: 'artwork'}],
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              title: 'artwork.title',
+              media: 'artwork.thumbnail',
+            },
+            prepare({title, media}) {
+              return {
+                title: title || 'Artwork tile',
+                subtitle: 'Artwork',
+                media,
+              }
+            },
+          },
+        }),
       ],
     }),
 
