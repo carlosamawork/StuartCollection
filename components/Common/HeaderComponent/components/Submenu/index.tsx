@@ -34,7 +34,7 @@ export default function SubmenuComponent({
                       >
                         <path
                           d="M0 1.175L3.81667 5L3.34392e-07 8.825L1.175 10L6.175 5L1.175 0L0 1.175Z"
-                          fill="#747678"
+                          fill="currentColor"
                         />
                       </svg>
                     </Link>

@@ -6,6 +6,7 @@
     padding: 40px 0px;
     display: flex;
     justify-content: space-between;
+    color: var(--colors-foreground-fg-inverted-1);
 
     .submenuContent{
         width: 280px;
@@ -56,13 +57,14 @@
 }
 
 .submenuBottom{
-    border-top: 1px solid var(--colors-foreground-fg-1);
+    border-top: 1px solid var(--colors-foreground-fg-inverted-1);
 }
 
 .contactInfo{
-    
+
     display: grid;
     grid-template-columns: 1fr 1fr;
+    color: var(--colors-foreground-fg-inverted-1);
 
     p{
         padding: 16px;
@@ -70,7 +72,7 @@
     }
 
     p:first-child{
-        border-right: 1px solid var(--colors-foreground-fg-1);
+        border-right: 1px solid var(--colors-foreground-fg-inverted-1);
     }
 
 }

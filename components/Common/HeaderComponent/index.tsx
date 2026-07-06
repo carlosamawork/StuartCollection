@@ -101,7 +101,6 @@ export default function HeaderComponent({data}: any) {
         {submenuOpen && (
           <motion.div
             className={s.submenuHeader}
-            style={{backgroundColor}}
             initial={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
             animate={{opacity: 1, y: 0}}
             exit={shouldReduceMotion ? {opacity: 0} : {opacity: 0, y: -8}}
