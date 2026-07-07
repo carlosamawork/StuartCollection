@@ -170,6 +170,7 @@ export default function FeaturedSliderComponent({data}: {data: any}) {
                       width={slide.image.metadata.dimensions.width}
                       height={slide.image.metadata.dimensions.height}
                       fill={true}
+                      objectFit="cover"
                     />
                   </div>
 

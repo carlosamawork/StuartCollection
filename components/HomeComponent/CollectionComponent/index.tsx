@@ -8,7 +8,6 @@ import Link from 'next/link'
 import Container from '@/components/Common/ui/Container'
 
 export default function CollectionComponent({data}: {data: any}) {
-  console.log('CollectionComponent data:', data)
 
   return (
     <Container>
