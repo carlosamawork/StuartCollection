@@ -23,6 +23,8 @@ export default defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
+      description: 'Social share image (og:image). Recommended 1200×630px minimum.',
+      options: {hotspot: true},
     }),
   ],
 })

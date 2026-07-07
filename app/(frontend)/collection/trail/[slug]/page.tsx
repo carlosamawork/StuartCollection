@@ -1,104 +1,60 @@
 import TrailComponent from '@/components/TrailComponent'
 import {getDefaultSEO} from '@/sanity/queries/common/defaultSEO'
-import {getTrail, getTrailSEO} from '@/sanity/queries/queries/trail'
-import {
-  BASE_IMAGE_HEIGHT,
-  BASE_IMAGE_URL,
-  BASE_IMAGE_WIDTH,
-  BASE_URL,
-  buildUrl,
-  getFavicons,
-  siteDescription,
-  siteTitle,
-} from '@/utils/seoHelper'
+import {getTrail, getTrailSEO, getTrailSlugs} from '@/sanity/queries/queries/trail'
+import {notFound} from 'next/navigation'
+import {buildPageMetadata, jsonLdScript} from '@/utils/metadata'
+import {buildUrl} from '@/utils/seoHelper'
 
-export const revalidate = 1 // revalidate to work set to 1, then we change it to 10
+export const revalidate = 60
 
-export async function generateMetadata({params}: {params: {slug: string}}) {
-  const {slug} = await params
-  const page = await getTrailSEO(slug)
-  const defaultSEO = await getDefaultSEO()
-
-  if (!page) {
-    return {
-      metadataBase: BASE_URL,
-      title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
-      description: defaultSEO.description || siteDescription,
-      robots: {
-        index: false,
-        follow: true,
-        nocache: false,
-        googleBot: {
-          index: false,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-      alternates: {
-        canonical: BASE_URL.origin,
-      },
-    }
-  }
-
-  return {
-    metadataBase: BASE_URL,
-    title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
-    description: page.seo?.description || defaultSEO.description || siteDescription,
-    generator: 'Next.js',
-    applicationName: 'Stuart Collection by Cacho Salvador',
-    openGraph: {
-      title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
-      description: page.seo?.description || defaultSEO.description || siteDescription,
-      url: buildUrl(`/collection/artwork/${slug}/`),
-      siteName: siteTitle,
-      images: [
-        {
-          url: page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
-          width:
-            page.seo?.image?.metadata?.dimensions?.width ||
-            defaultSEO.image?.metadata?.dimensions?.width ||
-            BASE_IMAGE_WIDTH,
-          height:
-            page.seo?.image?.metadata?.dimensions?.height ||
-            defaultSEO.image?.metadata?.dimensions?.height ||
-            BASE_IMAGE_HEIGHT,
-        },
-      ],
-      type: 'website',
-    },
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    icons: getFavicons(),
-    alternates: {
-      canonical: buildUrl(`/collection/trail/${slug}/`),
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${page.seo?.title || defaultSEO.title || siteTitle}`,
-      description: page.seo?.description || defaultSEO.description || siteDescription,
-      images: [page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL],
-    },
-  }
+export async function generateStaticParams() {
+  const slugs = await getTrailSlugs()
+  return slugs.map(({slug}) => ({slug}))
 }
 
-export default async function Trail({params}: {params: {slug: string}}) {
+export async function generateMetadata({params}: {params: Promise<{slug: string}>}) {
+  const {slug} = await params
+  const [page, defaultSEO] = await Promise.all([getTrailSEO(slug), getDefaultSEO()])
+
+  return buildPageMetadata({
+    seo: {
+      ...page?.seo,
+      image: page?.seo?.image?.imageUrl ? page.seo.image : page?.image,
+    },
+    defaultSeo: defaultSEO?.seo,
+    pageTitle: page?.title,
+    path: `/collection/trail/${slug}/`,
+    index: !!page,
+  })
+}
+
+export default async function Trail({params}: {params: Promise<{slug: string}>}) {
   const {slug} = await params
   const data = await getTrail(slug)
 
+  if (!data) notFound()
+
+  const trailSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: data.title,
+    url: buildUrl(`/collection/trail/${slug}/`),
+    itemListElement: (data.artworks || [])
+      .filter((artwork) => artwork.slug)
+      .map((artwork, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: artwork.title,
+        url: buildUrl(`/collection/artwork/${artwork.slug}/`),
+      })),
+  }
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: jsonLdScript(trailSchema)}}
+      />
       <TrailComponent data={data} />
     </main>
   )

@@ -1,11 +1,11 @@
-// lib/constants.js
+// 🧭 Base URL — set NEXT_PUBLIC_SITE_URL per environment (production/staging)
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://stuartcollection.ucsd.edu'
 
-// 🧭 Determine the base URL depending on the environment
-export const BASE_URL = new URL(
-	process.env.NODE_ENV === "production"
-		? "https://www.ama.work"
-		: "https://staging.ama.work"
-);
+export const BASE_URL = new URL(SITE_URL)
+
+if (process.env.NODE_ENV !== 'production' && !process.env.NEXT_PUBLIC_SITE_URL) {
+	console.warn('[seoHelper] NEXT_PUBLIC_SITE_URL is not set — falling back to', SITE_URL)
+}
 
 // 🧱 Helper function for consistent URL creation
 export const buildUrl = (path = "/") => new URL(path, BASE_URL).toString();
@@ -13,15 +13,20 @@ export const buildUrl = (path = "/") => new URL(path, BASE_URL).toString();
 // 🌍 Global site metadata
 export const siteTitle = "Stuart Collection";
 export const siteDescription =
-	"Stuart Collection";
+	"The Stuart Collection commissions site-specific artworks by leading contemporary artists across the University of California San Diego campus, free and open to all.";
+
+// 🏷️ "Page | Site" title — avoids "Stuart Collection | Stuart Collection" duplicates
+export const buildTitle = (pageTitle?: string | null) =>
+	pageTitle && pageTitle !== siteTitle ? `${pageTitle} | ${siteTitle}` : siteTitle;
 
 // 🔗 Social & canonical links
-export const linkInstagram = "https://www.instagram.com/";
+export const linkInstagram = "https://www.instagram.com/stuartcollection/";
 export const canonicalHome = buildUrl("/");
 
 
 // 🖼️ Images & favicons
-export const BASE_IMAGE_URL = buildUrl("/images/cc_ama_fbshare_1200x800.jpg");
+// Last-resort OG image — add this file to /public/images before launch
+export const BASE_IMAGE_URL = buildUrl("/images/og-default.jpg");
 export const BASE_IMAGE_WIDTH = 1200;
 export const BASE_IMAGE_HEIGHT = 800;
 

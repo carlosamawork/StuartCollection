@@ -24,9 +24,30 @@ export async function getPage(slug: string) {
 export async function getPageSEO(slug: string) {
     return client.fetch(
         groq`*[_type == "page" && slug.current == $slug][0]{
+                title,
+                asideMenu,
+                "sections": modules[]{ id, title },
                 seo{
                     ${seo}
                 }
             }`,{ slug }
+    )
+}
+
+export async function getPageSlugs(): Promise<{slug: string}[]> {
+    return client.fetch(
+        groq`*[_type == "page" && defined(slug.current)]{
+                "slug": slug.current
+            }`
+    )
+}
+
+// Solo páginas con asideMenu tienen secciones navegables con URL propia
+export async function getPageSectionParams(): Promise<{slug: string; sections: string[]}[]> {
+    return client.fetch(
+        groq`*[_type == "page" && defined(slug.current) && asideMenu == true]{
+                "slug": slug.current,
+                "sections": modules[defined(id)].id
+            }`
     )
 }

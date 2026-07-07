@@ -1,6 +1,7 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
 import {seo} from '../fragments/seo'
+import {image} from '../fragments/image'
 import {location, LocationData} from '../fragments/location'
 import {artistSectionQuery, ArtworkArtistSectionData} from '../modules/artwork/artistSection'
 import {ArtworkSocialSectionData, socialSectionQuery} from '../modules/artwork/socialSection'
@@ -137,10 +138,24 @@ export type ArtworkData = {
 export async function getArtworkSEO(slug: string) {
   return client.fetch(
     groq`*[_type == "artwork" && slug.current == $slug][0]{
+                title,
+                "summary": pt::text(summary),
+                "artists": artists[]->name,
+                "image": coalesce(thumbnail, hero.image){
+                    ${image}
+                },
                 seo{
                     ${seo}
                 }
             }`,
     {slug},
+  )
+}
+
+export async function getArtworkSlugs(): Promise<{slug: string}[]> {
+  return client.fetch(
+    groq`*[_type == "artwork" && defined(slug.current)]{
+            "slug": slug.current
+        }`,
   )
 }

@@ -23,9 +23,9 @@ export default function SpecsComponent({data}: {data: ArtworkData}) {
       <div className={s.titleContainer}>
         <div className={s.artistContainer}>
           {data.artists.map((artist: any, i: number) => (
-            <h1 className={s.artist} key={i}>
+            <p className={`h1 ${s.artist}`} key={i}>
               {artist.name}
-            </h1>
+            </p>
           ))}
         </div>
         <h1>{data.title}</h1>

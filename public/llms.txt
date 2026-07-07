@@ -1,0 +1,23 @@
+# Stuart Collection
+
+> Site-specific artworks by leading contemporary artists, commissioned for the campus of the University of California San Diego (UCSD), La Jolla, California. Free and open to the public.
+
+The Stuart Collection enriches the UC San Diego campus through commissioned site-specific sculptures and installations by some of the most significant artists of our time. Each work is conceived for its particular location on campus, and the collection as a whole can be visited freely, on foot, at any time.
+
+## Main sections
+
+- [Home](/): Introduction to the Stuart Collection, featured artworks and visiting information
+- [The Collection](/collection/): Complete catalogue of artworks, browsable by artwork, artist, location and trail
+- [Artwork pages](/collection/artwork/): One page per commissioned artwork, with artist, year, location, description, images and visiting details
+- [Trails](/collection/trail/): Curated walking routes connecting several artworks across campus
+
+## About the content
+
+- **Primary language:** English
+- **Subject:** Public art, contemporary sculpture, site-specific installations, campus art collection
+- **Content type:** Artwork catalogue pages, artist information, visiting information, curated walking trails
+- **Authorship:** Stuart Collection, University of California San Diego
+
+## Usage
+
+Content from this site may be indexed by AI crawlers to improve the accuracy of answers about the Stuart Collection, its artworks and artists. Standard site terms of use apply.

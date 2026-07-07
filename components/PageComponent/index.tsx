@@ -22,21 +22,33 @@ import MediaListComponent from './MediaList'
 import TabsComponent from './Tabs'
 import Breadcrumbs from '@/components/Common/ui/Breadcrumbs'
 import {HeroCover} from '@/components/Common/ui/HeroCover'
-import {usePathname} from 'next/navigation'
+import {usePathname, useRouter} from 'next/navigation'
 
-export default function PageComponent({data}: {data: any}) {
-  const [activeSection, setActiveSection] = useState<any | null>(null)
-  const [topImage, setTopImage] = useState(false)
+export default function PageComponent({
+  data,
+  activeSectionId,
+}: {
+  data: any
+  activeSectionId?: string
+}) {
+  // Resuelta de forma síncrona para que la sección llegue renderizada en el HTML del servidor
+  const resolveSection = () =>
+    (activeSectionId && data?.modules?.find((m: any) => m.id === activeSectionId)) ||
+    data?.modules?.find((m: any) => m.defaultOpen === true) ||
+    data?.modules?.[0] ||
+    null
+
+  const [activeSection, setActiveSection] = useState<any | null>(resolveSection)
+  const [topImage, setTopImage] = useState(!!resolveSection()?.topImage)
   const [separatorsMenu, setSeparatorsMenu] = useState<any | null>(null)
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
-    const defaultModule =
-      data?.modules?.find((m: any) => m.defaultOpen === true) || data?.modules?.[0] || null
-
-    setActiveSection(defaultModule)
-    setTopImage(!!defaultModule?.topImage)
-  }, [data])
+    const section = resolveSection()
+    setActiveSection(section)
+    setTopImage(!!section?.topImage)
+  }, [data, activeSectionId])
 
   useEffect(() => {
     if (!data?.modules?.length) return
@@ -62,6 +74,19 @@ export default function PageComponent({data}: {data: any}) {
 
       const resolved = resolveSectionFromHash(id)
       if (!resolved) return
+
+      // Con asideMenu cada sección tiene URL propia: los hashes legacy
+      // (/media/#press) se convierten en navegación real para no fragmentar el SEO
+      if (data.asideMenu && data.slug) {
+        const targetPath = `/${data.slug}/${resolved.section.id}`
+        const currentPath = window.location.pathname.replace(/\/$/, '')
+        if (currentPath !== targetPath) {
+          const suffix = resolved.innerId !== resolved.section.id ? `#${resolved.innerId}` : ''
+          router.replace(`${targetPath}/${suffix}`)
+        }
+        // Si ya estamos en la sección, el scroll al anchor interno lo hace el navegador
+        return
+      }
 
       setActiveSection(resolved.section)
       setTopImage(!!resolved.section?.topImage)
@@ -109,6 +134,8 @@ export default function PageComponent({data}: {data: any}) {
     )
   }, [activeSection])
 
+  if (!data) return <></>
+
   return (
     <div className={s.pageComponent}>
       <Container className={s.hero}>
@@ -123,14 +150,8 @@ export default function PageComponent({data}: {data: any}) {
                   {data.modules?.map((module: any, index: number) => (
                     <li key={module.id || index}>
                       <Link
-                        href={`#${module.id}`}
+                        href={`/${data.slug}/${module.id}/`}
                         className={`${activeSection?.id === module.id ? s.active : ''} ${s.menuLink}`}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setActiveSection(module)
-                          setTopImage(!!module?.topImage)
-                          history.replaceState(null, '', `#${module.id}`)
-                        }}
                       >
                         <p>{module.title}</p>
                         <svg
@@ -164,7 +185,9 @@ export default function PageComponent({data}: {data: any}) {
                   ? [
                       {
                         label: activeSection?.title,
-                        href: `#${activeSection?.id}`,
+                        href: data.asideMenu
+                          ? `/${data.slug}/${activeSection?.id}/`
+                          : `#${activeSection?.id}`,
                       },
                     ]
                   : []),

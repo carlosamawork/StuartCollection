@@ -15,15 +15,40 @@ import Analytics from '@/components/Common/Analytics/google'
 import FacebookPixel from '@/components/Common/Analytics/facebook'
 import PinterestTag from '@/components/Common/Analytics/pinterest'
 import Hotjar from '@/components/Common/Analytics/hotjar'
-import {get} from 'http'
 import {getHeader} from '@/sanity/queries/common/header'
 import Body from '@/components/Common/ui/Body'
-import {Roboto} from 'next/font/google'
 import {getFooter} from '@/sanity/queries/common/footer'
+import type {Viewport} from 'next'
+import {jsonLdScript} from '@/utils/metadata'
+import {BASE_URL, BASE_IMAGE_URL, linkInstagram, siteDescription, siteTitle} from '@/utils/seoHelper'
 
 const RawHTML = ({html}: any) => (
   <div className="credits" dangerouslySetInnerHTML={{__html: html}} />
 )
+
+export const viewport: Viewport = {
+  themeColor: '#ffffff',
+}
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteTitle,
+  url: BASE_URL.origin,
+  description: siteDescription,
+  logo: BASE_IMAGE_URL,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'La Jolla',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+  parentOrganization: {
+    '@type': 'CollegeOrUniversity',
+    name: 'University of California San Diego',
+  },
+  sameAs: [linkInstagram],
+}
 
 export default async function RootLayout({children}: {children: React.ReactNode}) {
   const headerData = await getHeader()
@@ -32,6 +57,10 @@ export default async function RootLayout({children}: {children: React.ReactNode}
   return (
     <html lang="en">
       <Body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: jsonLdScript(organizationSchema)}}
+        />
         <RawHTML
           html="<!-- ----------------------------------------------------- -->
         <!-- Code by MGTZM Studio, http://magatzem.studio (2026) -->

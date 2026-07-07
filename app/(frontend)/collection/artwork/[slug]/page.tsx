@@ -1,106 +1,78 @@
 import ArtworkComponent from '@/components/ArtworkComponent'
-import HomeComponent from '@/components/HomeComponent'
-import PageComponent from '@/components/PageComponent'
 import {getDefaultSEO} from '@/sanity/queries/common/defaultSEO'
-import {getArtwork, getArtworkSEO} from '@/sanity/queries/queries/artwork'
-import {
-  BASE_IMAGE_HEIGHT,
-  BASE_IMAGE_URL,
-  BASE_IMAGE_WIDTH,
-  BASE_URL,
-  buildUrl,
-  getFavicons,
-  siteDescription,
-  siteTitle,
-} from '@/utils/seoHelper'
+import {getArtwork, getArtworkSEO, getArtworkSlugs} from '@/sanity/queries/queries/artwork'
+import {notFound} from 'next/navigation'
+import {buildPageMetadata, jsonLdScript} from '@/utils/metadata'
+import {buildUrl, siteTitle} from '@/utils/seoHelper'
 
-export const revalidate = 1 // revalidate to work set to 1, then we change it to 10
+export const revalidate = 60
 
-export async function generateMetadata({params}: {params: {slug: string}}) {
-  const {slug} = await params
-  const page = await getArtworkSEO(slug)
-  const defaultSEO = await getDefaultSEO()
-
-  if (!page) {
-    return {
-      metadataBase: BASE_URL,
-      title: `Stuart Collection | ${defaultSEO.title || siteTitle}`,
-      description: defaultSEO.description || siteDescription,
-      robots: {
-        index: false,
-        follow: true,
-        nocache: false,
-        googleBot: {
-          index: false,
-          follow: true,
-          'max-video-preview': -1,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-        },
-      },
-      alternates: {
-        canonical: BASE_URL.origin,
-      },
-    }
-  }
-
-  return {
-    metadataBase: BASE_URL,
-    title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
-    description: page.seo?.description || defaultSEO.description || siteDescription,
-    generator: 'Next.js',
-    applicationName: 'Stuart Collection by Cacho Salvador',
-    openGraph: {
-      title: `Stuart Collection | ${page.seo?.title || defaultSEO.title || siteTitle}`,
-      description: page.seo?.description || defaultSEO.description || siteDescription,
-      url: buildUrl(`/collection/artwork/${slug}/`),
-      siteName: siteTitle,
-      images: [
-        {
-          url: page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL,
-          width:
-            page.seo?.image?.metadata?.dimensions?.width ||
-            defaultSEO.image?.metadata?.dimensions?.width ||
-            BASE_IMAGE_WIDTH,
-          height:
-            page.seo?.image?.metadata?.dimensions?.height ||
-            defaultSEO.image?.metadata?.dimensions?.height ||
-            BASE_IMAGE_HEIGHT,
-        },
-      ],
-      type: 'website',
-    },
-    robots: {
-      index: true,
-      follow: true,
-      nocache: false,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    icons: getFavicons(),
-    alternates: {
-      canonical: buildUrl(`/collection/artwork/${slug}/`),
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${page.seo?.title || defaultSEO.title || siteTitle}`,
-      description: page.seo?.description || defaultSEO.description || siteDescription,
-      images: [page.seo?.image?.imageUrl || defaultSEO.image?.imageUrl || BASE_IMAGE_URL],
-    },
-  }
+export async function generateStaticParams() {
+  const slugs = await getArtworkSlugs()
+  return slugs.map(({slug}) => ({slug}))
 }
 
-export default async function Artwork({params}: {params: {slug: string}}) {
+export async function generateMetadata({params}: {params: Promise<{slug: string}>}) {
+  const {slug} = await params
+  const [page, defaultSEO] = await Promise.all([getArtworkSEO(slug), getDefaultSEO()])
+
+  const artistNames = page?.artists?.filter(Boolean).join(', ')
+
+  return buildPageMetadata({
+    seo: {
+      ...page?.seo,
+      image: page?.seo?.image?.imageUrl ? page.seo.image : page?.image,
+    },
+    defaultSeo: defaultSEO?.seo,
+    pageTitle: page?.title && artistNames ? `${page.title} — ${artistNames}` : page?.title,
+    pageDescription: page?.summary,
+    path: `/collection/artwork/${slug}/`,
+    index: !!page,
+    type: 'article',
+  })
+}
+
+export default async function Artwork({params}: {params: Promise<{slug: string}>}) {
   const {slug} = await params
   const data = await getArtwork(slug)
 
+  if (!data) notFound()
+
+  const artworkSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'VisualArtwork',
+    name: data.title,
+    url: buildUrl(`/collection/artwork/${slug}/`),
+    ...(data.artists?.length > 0 && {
+      creator: data.artists.map((artist: {name: string}) => ({
+        '@type': 'Person',
+        name: artist.name,
+      })),
+    }),
+    ...(data.specs?.year && {dateCreated: String(data.specs.year)}),
+    isPartOf: {
+      '@type': 'Collection',
+      name: siteTitle,
+      url: buildUrl('/collection/'),
+    },
+    locationCreated: {
+      '@type': 'Place',
+      name: 'University of California San Diego',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'La Jolla',
+        addressRegion: 'CA',
+        addressCountry: 'US',
+      },
+    },
+  }
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{__html: jsonLdScript(artworkSchema)}}
+      />
       <ArtworkComponent data={data} />
     </main>
   )

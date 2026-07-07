@@ -1,6 +1,5 @@
 import {groq} from 'next-sanity'
 import {client} from '..'
-import {seo} from '../fragments/seo'
 import {artwork_card, ArtworkCardData} from '@/sanity/queries/fragments/artwork_card'
 import {image} from '@/sanity/queries/fragments/image'
 import {location, LocationData} from '@/sanity/queries/fragments/location'
@@ -111,12 +110,3 @@ export type CollectionTrailData = {
   image: any
 }
 
-export async function getCollectionSEO() {
-  return client.fetch(
-    groq`*[_type == "artwork"][0]{
-          seo{
-              ${seo}
-          }
-      }`,
-  )
-}

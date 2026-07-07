@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import s from "./LazyImage.module.scss";
 import { urlFor } from "@/sanity/queries";
 import { sanitizeFilename } from "@/utils/sanitizeFilename";
+import { siteTitle } from "@/utils/seoHelper";
 
 interface LazyImageProps {
     alt?: string;
@@ -88,9 +89,9 @@ export default function LazyImage({
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
                         "@type": "ImageObject",
-                        "name": alt ? alt : filename ? sanitizeFilename(filename) : "Conti, Cert.",
-                        "caption": alt ? alt : filename ? sanitizeFilename(filename) : "Conti, Cert.",
-                        "description": alt ? alt : filename ? sanitizeFilename(filename) : "Conti, Cert.",
+                        "name": alt ? alt : filename ? sanitizeFilename(filename) : siteTitle,
+                        "caption": alt ? alt : filename ? sanitizeFilename(filename) : siteTitle,
+                        "description": alt ? alt : filename ? sanitizeFilename(filename) : siteTitle,
                         "url": src,
                         "contentUrl": src,
                         "thumbnailUrl": src,
