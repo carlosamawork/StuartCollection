@@ -6,14 +6,14 @@
     padding: 40px 0px;
     display: flex;
     justify-content: space-between;
-    color: var(--colors-foreground-fg-inverted-1);
+    color: var(--colors-foreground-fg-1);
 
     // El global de _default.scss pinta a:link/:visited/:active en negro;
-    // hace falta la misma especificidad para que hereden el blanco del panel
+    // hace falta la misma especificidad para que hereden el color del panel
     a:link,
     a:visited,
     a:active {
-        color: var(--colors-foreground-fg-inverted-1);
+        color: var(--colors-foreground-fg-1);
     }
 
     .submenuContent{
@@ -65,19 +65,19 @@
 }
 
 .submenuBottom{
-    border-top: 1px solid var(--colors-foreground-fg-inverted-1);
+    border-top: 1px solid var(--colors-foreground-fg-1);
 }
 
 .contactInfo{
 
     display: grid;
     grid-template-columns: 1fr 1fr;
-    color: var(--colors-foreground-fg-inverted-1);
+    color: var(--colors-foreground-fg-1);
 
     a:link,
     a:visited,
     a:active {
-        color: var(--colors-foreground-fg-inverted-1);
+        color: var(--colors-foreground-fg-1);
     }
 
     p{
@@ -86,7 +86,7 @@
     }
 
     p:first-child{
-        border-right: 1px solid var(--colors-foreground-fg-inverted-1);
+        border-right: 1px solid var(--colors-foreground-fg-1);
     }
 
 }

@@ -93,7 +93,8 @@ export default function MobileMenu({data, isOpen, close, backgroundColor}: any) 
               data={{
                 items:
                   data?.menu?.links?.map((link, i) => {
-                    const isExternalLink = !!link.url
+                    // Un link externo con sections (Collection) se comporta como interno: acordeón
+                    const isExternalLink = !!link.url && !link.sections?.length
 
                     return {
                       key: i,

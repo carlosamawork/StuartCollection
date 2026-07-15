@@ -65,18 +65,7 @@ export default function SubmenuComponent({
               <>
                 <div className={s.element}>
                   <h6>Opening Hours</h6>
-                  <ul>
-                    {additionalContent.openingHours &&
-                      additionalContent.openingHours.map((hour: any, index: number) => (
-                        <li key={index}>
-                          <span>{hour.day}:</span>{' '}
-                          <span>
-                            {hour.open}
-                            {hour.close && ' - ' + hour.close}
-                          </span>
-                        </li>
-                      ))}
-                  </ul>
+                  <p>Open 24/7</p>
                 </div>
                 <div className={s.element}>
                   <h6>Directions</h6>

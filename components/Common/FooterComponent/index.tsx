@@ -62,18 +62,7 @@ export default function FooterComponent({data}: any) {
             </div>
             <div>
               <h6>Opening Hours</h6>
-              <ul>
-                {data.openingHours &&
-                  data.openingHours.map((hour: any, index: number) => (
-                    <li key={index}>
-                      <span>{hour.day}:</span>{' '}
-                      <span>
-                        {hour.open}
-                        {hour.close && ' - ' + hour.close}
-                      </span>
-                    </li>
-                  ))}
-              </ul>
+              <p>Open 24/7</p>
             </div>
             <div>
               <nav className={s.sectionsWrapper}>

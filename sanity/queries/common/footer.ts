@@ -12,11 +12,6 @@ export const getFooter = async () => {
         titleNewsletter,
         descriptionNewsletter
       },
-      "openingHours": hours[]{
-        day,
-        open,
-        close
-      },
       directions,
       googleMapsUrl,
       connect,

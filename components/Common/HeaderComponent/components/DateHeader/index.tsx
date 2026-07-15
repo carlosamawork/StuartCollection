@@ -3,16 +3,16 @@
 import useDateHeader from '@/components/Common/HeaderComponent/components/DateHeader/hooks/useDateHeader'
 import s from './DateHeader.module.scss'
 
-export default function DateHeader({data}: any) {
-  const {tempF, tempLoading, today} = useDateHeader({data})
+export default function DateHeader() {
+  const {tempF, tempLoading} = useDateHeader()
 
   return (
     <div className={s.dateHeader}>
       <p>
-        <strong>{today.isOpen ? 'Open today' : 'Closed today'}</strong>
+        <strong>Open 24/7</strong>
       </p>
       <p>
-        {today.timeLabel}
+        La Jolla
         {' | '}
         {tempLoading ? '—' : tempF == null ? '—' : `${Math.round(tempF)}ºF`}
       </p>

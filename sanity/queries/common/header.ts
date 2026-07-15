@@ -19,14 +19,22 @@ export const getHeader = async () => {
             _type == "linkExternal" => {
               title,
               url,
-              newWindow
+              newWindow,
+              // El link a /collection es externo (la ruta no es un doc "page"),
+              // pero debe desplegar las mismas secciones que los tabs de la página
+              url == "/collection" => {
+                "slug": "collection",
+                "sections": [
+                  {"id": "artworks", "title": "Artworks"},
+                  {"id": "artists", "title": "Artists"},
+                  {"id": "locations", "title": "Locations"}
+                ] + select(
+                  count(*[_type == "trail"]) > 0 => [{"id": "trails", "title": "Trails"}],
+                  []
+                )
+              }
             }
           }
-        },
-        "openingHours": hours[]{
-          day,
-          open,
-          close
         },
         directions,
         googleMapsUrl,

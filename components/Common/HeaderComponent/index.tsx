@@ -37,8 +37,6 @@ export default function HeaderComponent({data}: any) {
     )
   }, [])
 
-  console.log(data)
-
   return (
     <motion.header
       className={s.header}
@@ -88,7 +86,7 @@ export default function HeaderComponent({data}: any) {
         <Container className={s.menuHeader}>
           <Menu openSubmenu={openSubmenu} closeSubmenu={closeSubmenu} links={data?.menu?.links} />
           <div className={s.dateHeaderContainer}>
-            <DateHeader data={data.openingHours} />
+            <DateHeader />
           </div>
           <ButtonLink href="/support-us" size="lg" aria-label="Support the Stuart Collection">
             Support
